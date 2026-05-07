@@ -1,10 +1,17 @@
+import 'package:flowery/config/api/api_keys.dart';
+import 'package:flowery/config/di/injectable_config.dart';
 import 'package:flowery/config/helpers/regex.dart';
+import 'package:flowery/config/helpers/shared_pref.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flowery/core/widgets/custom_text_field.dart';
+import 'package:flowery/features/login/presentation/view_model/cubit/login_view_model.dart';
+import 'package:flowery/features/login/presentation/view_model/events/login_events.dart';
+import 'package:flowery/features/login/presentation/view_model/states/login_states.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -24,6 +31,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // Remember me
   bool? rememberMeChecker = false;
+
+  // View Model
+  final LoginViewModel viewModel = getIt.get<LoginViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -107,13 +117,47 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
 
                 // Login button
-                ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      context.pushNamed(AppRoutes.home);
-                    }
-                  },
-                  child: Text(titles.login),
+                BlocProvider<LoginViewModel>(
+                  create: (context) => viewModel,
+                  child: BlocConsumer<LoginViewModel, LoginStates>(
+                    listener: (context, state) {
+                      if (state is LoginSuccess) {
+
+                        // Save remember me flag value
+                        getIt<SharedPrefHelper>().saveData(
+                          key: Apikeys.userId,
+                          val: rememberMeChecker.toString(),
+                        );
+
+                        // Navigate to home
+                        context.pushNamed(AppRoutes.home);
+                      }
+
+                      if (state is LoginError) {
+                        ScaffoldMessenger.of(
+                          context,
+                        ).showSnackBar(SnackBar(content: Text(state.message)));
+                      }
+                    },
+                    builder: (BuildContext context, LoginStates state) {
+                      if (state is LoginLoading) {
+                        return CircularProgressIndicator();
+                      }
+
+                      return ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            viewModel.doEvent(
+                              LoginUserEvent(),
+                              emailController.text,
+                              passwordController.text,
+                            );
+                          }
+                        },
+                        child: Text(titles.login),
+                      );
+                    },
+                  ),
                 ),
 
                 const SizedBox(height: 10),
