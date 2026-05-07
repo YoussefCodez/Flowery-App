@@ -56,6 +56,14 @@ abstract class AppTheme {
         decorationColor: AppColors.primaryColor,
         decorationThickness: 1.w,
       ),
+      labelLarge: TextStyle(
+        fontWeight: .w500,
+        fontSize: 20.sp,
+        color: AppColors.primaryColor,
+        decoration: TextDecoration.underline,
+        decorationColor: AppColors.primaryColor,
+        decorationThickness: 1.w,
+      ),
     ),
     switchTheme: SwitchThemeData(
       thumbColor: WidgetStateProperty.resolveWith<Color?>((states) {
