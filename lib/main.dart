@@ -6,7 +6,6 @@ import 'package:flowery/config/helpers/shared_pref.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_generator.dart';
-import 'package:flowery/config/user_helper/user_helper.dart';
 import 'package:flowery/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,8 +27,9 @@ class FloweryApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isRememberMe = getIt<SharedPrefHelper>().getData(key: Apikeys.userId);
-
+    final isRememberMe =
+        getIt<SharedPrefHelper>().getData(key: Apikeys.userId) as String?;
+    
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
@@ -45,9 +45,9 @@ class FloweryApp extends StatelessWidget {
               onGenerateRoute: RouteGenerator.getRoute,
               debugShowCheckedModeBanner: false,
               theme: AppTheme.lightTheme,
-              initialRoute: isRememberMe.toString() == "false"
-                  ? AppRoutes.login
-                  : AppRoutes.home,
+              initialRoute: isRememberMe == "true"
+                  ? AppRoutes.home
+                  : AppRoutes.login,
             );
           },
         );

@@ -13,11 +13,11 @@ class LoginViewModel extends Cubit<LoginStates> {
   void doEvent(LoginEvents event, String email, String password) {
     switch (event) {
       case LoginUserEvent():
-        loginEvent(email, password);
+        _loginUserEvent(email, password);
     }
   }
 
-  Future<void> loginEvent(String email, String password) async {
+  Future<void> _loginUserEvent(String email, String password) async {
     emit(LoginLoading());
 
     final response = await _loginUseCase.call(email, password);
