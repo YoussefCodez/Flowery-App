@@ -102,6 +102,7 @@ class _ResetNewPasswordViewState extends State<ResetNewPasswordView> {
                           Validations.validatePassword(context, value),
                     ),
 
+
                     SizedBox(height: 22.h),
 
                     CustomTextFormField(
