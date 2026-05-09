@@ -194,4 +194,43 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get an_error_occurred => 'حدث خطأ';
+
+  @override
+  String get enterFirstName => 'ادخل الاسم الاول';
+
+  @override
+  String get firstName => 'الاسم الاول';
+
+  @override
+  String get enterLastName => 'ادخل الاسم الاخير';
+
+  @override
+  String get lastName => 'الاسم الاخير';
+
+  @override
+  String get enterYourEmail => 'ادخل ايميلك';
+
+  @override
+  String get enterPassword => 'ادخل الرقم السري';
+
+  @override
+  String get enterPhoneNumber => 'ادخل رقم الهاتف';
+
+  @override
+  String get phoneNumber => 'رقم الهاتف';
+
+  @override
+  String get gender => 'الجنس';
+
+  @override
+  String get female => 'انثي';
+
+  @override
+  String get male => 'رجل';
+
+  @override
+  String get creatingAccountAgreement => 'بإنشاء حساب، فإنك توافق على شروطنا';
+
+  @override
+  String get termsAndConditions => 'الشروط والأحكام';
 }
