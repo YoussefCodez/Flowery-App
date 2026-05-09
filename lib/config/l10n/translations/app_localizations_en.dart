@@ -197,4 +197,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get an_error_occurred => 'An error occurred';
+
+  @override
+  String get forget_password => 'Forget password';
+
+  @override
+  String get please_enter_your_email_associated_to_your_account =>
+      'Please enter your email associated with your account';
+
+  @override
+  String get enter_your_email => 'Enter your email';
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String get email_verification => 'Email verification';
+
+  @override
+  String get please_enter_your_code_that_send_to_your_email_address =>
+      'Please enter the code sent to your email address';
+
+  @override
+  String get didnt_receive_code => 'Didn\'t receive the code?';
+
+  @override
+  String get resend => 'Resend';
+
+  @override
+  String get reset_password => 'Reset password';
+
+  @override
+  String get password_must_not_be_empty =>
+      'Password must not be empty and must contain at least 6 characters, one uppercase letter, and one number';
+
+  @override
+  String get enter_your_password => 'Enter your password';
+
+  @override
+  String get new_password => 'New password';
+
+  @override
+  String get invalid_code => 'Invalid code, please try again';
 }

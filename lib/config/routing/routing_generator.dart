@@ -1,10 +1,42 @@
 import 'package:flowery/features/login/presentation/screens/login_screen.dart';
+import 'package:flowery/featuers/forget_password/presentation/screens/forget_password_view.dart';
+import 'package:flowery/featuers/forget_password/presentation/view_model/cubit/forget_password_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../featuers/forget_password/presentation/screens/email_verification_view.dart';
+import '../../featuers/forget_password/presentation/screens/reset_new_password_view.dart';
 import 'app_routes.dart';
 
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
+      case AppRoutes.forgetPassword:
+        // ForgetPasswordView owns the Cubit — it creates it internally.
+        return MaterialPageRoute(
+          builder: (_) => const ForgetPasswordView(),
+        );
+
+      case AppRoutes.emailVerification:
+        // The Cubit is passed as an argument from ForgetPasswordView's listener.
+        // BlocProvider.value shares the existing instance without taking ownership
+        // (it won't close the Cubit when this route is popped).
+        final cubit = settings.arguments as ForgetPasswordViewModel;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider.value(
+            value: cubit,
+            child: const EmailVerificationView(),
+          ),
+        );
+
+      case AppRoutes.resetPassword:
+        final cubit = settings.arguments as ForgetPasswordViewModel;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider.value(
+            value: cubit,
+            child: ResetNewPasswordView(),
+          ),
+        );
+
       case AppRoutes.login:
         return MaterialPageRoute(builder: (_) => LoginScreen());
       default:

@@ -63,5 +63,18 @@
   "login_success": "تم تسجيل الدخول بنجاح",
   "register_success": "تم التسجيل بنجاح",
   "connectButton": "ربط",
-  "an_error_occurred": "حدث خطأ"
+  "an_error_occurred": "حدث خطأ",
+  "forget_password": "نسيت كلمة المرور",
+  "please_enter_your_email_associated_to_your_account": "من فضلك أدخل البريد الإلكتروني المرتبط بحسابك",
+  "enter_your_email": "أدخل بريدك الإلكتروني",
+  "confirm": "تأكيد",
+  "email_verification": "التحقق من البريد الإلكتروني",
+  "please_enter_your_code_that_send_to_your_email_address": "من فضلك أدخل الكود المرسل إلى بريدك الإلكتروني",
+  "didnt_receive_code": "لم تستلم الكود؟",
+  "resend": "إعادة الإرسال",
+  "reset_password": "إعادة تعيين كلمة المرور",
+  "password_must_not_be_empty": "يجب ألا تكون كلمة المرور فارغة وأن تحتوي على 6 أحرف وحرف كبير ورقم واحد على الأقل",
+  "enter_your_password": "أدخل كلمة المرور",
+  "new_password": "كلمة المرور الجديدة",
+  "invalid_code": "الكود غير صحيح، يرجى المحاولة مرة أخرى"
 }
