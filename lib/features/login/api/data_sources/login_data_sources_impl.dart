@@ -25,7 +25,9 @@ class LoginDataSourcesImpl implements LoginDataSourcesContract {
       return Success<LoginResponseModel>(data: response);
     } on DioException catch (e) {
       return Error<LoginResponseModel>(
-        exception: e.response!.data[LoginValues.error],
+        exception: Exception(
+          e.response?.data[LoginValues.error],
+        ),
       );
     }
   }

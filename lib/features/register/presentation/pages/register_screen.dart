@@ -126,6 +126,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 children: [
                   Expanded(
                     child: MainTextField(
+                      obscureText: true,
                       hintText: localizations.enterPassword,
                       labelText: localizations.password,
                       controller: _passwordCont,
@@ -134,6 +135,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   const SizedBox(width: 12),
                   Expanded(
                     child: MainTextField(
+                      obscureText: true,
                       hintText: localizations.confirm_password,
                       labelText: localizations.confirm_password,
                       controller: _confirmPasswordCont,

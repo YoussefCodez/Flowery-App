@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flowery/config/base_response/base_response.dart';
 import 'package:flowery/features/register/api/api_client/register_api_client.dart';
 import 'package:flowery/features/register/data/data_sources/register_data_source.dart';
@@ -18,12 +19,10 @@ class RegisterDataSourceImpl implements RegisterDataSource {
     try {
       final response = await registerApiClient.register(request);
 
-      return Success<RegisterResponseModel>(
-        data: response,
-      );
-    } catch (e) {
+      return Success<RegisterResponseModel>(data: response);
+    } on DioException catch (e) {
       return Error<RegisterResponseModel>(
-        exception: Exception(e.toString()),
+        exception: Exception(e.response?.data["error"]),
       );
     }
   }

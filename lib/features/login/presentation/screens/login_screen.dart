@@ -1,5 +1,6 @@
 import 'package:flowery/config/api/api_keys.dart';
 import 'package:flowery/config/di/injectable_config.dart';
+import 'package:flowery/config/general_cubit/local_cubit.dart';
 import 'package:flowery/config/helpers/regex.dart';
 import 'package:flowery/config/helpers/shared_pref.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
@@ -35,6 +36,9 @@ class _LoginScreenState extends State<LoginScreen> {
   // View Model
   final LoginViewModel viewModel = getIt.get<LoginViewModel>();
 
+  // Temp Localization
+  bool isArabic = false;
+  
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -179,8 +183,30 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     const SizedBox(width: 2),
-                    Text(titles.sign_up, style: theme.textTheme.labelMedium),
+                    InkWell(
+                      onTap: () {
+                        context.pushNamed(AppRoutes.register);
+                      },
+                      child: Text(
+                        titles.sign_up,
+                        style: theme.textTheme.labelMedium,
+                      ),
+                    ),
                   ],
+                ),
+
+                // Switch button for testing
+                Switch(
+                  thumbIcon: WidgetStateProperty.all(
+                    Icon(Icons.translate, color: AppColors.primaryColor),
+                  ),
+                  value: isArabic,
+                  onChanged: (value) {
+                    setState(() {
+                      isArabic = value;
+                      context.read<LocaleThemeCubit>().changeLocale();
+                    });
+                  },
                 ),
               ],
             ),

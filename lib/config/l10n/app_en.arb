@@ -76,9 +76,7 @@
   "female": "Female",
   "male": "Male",
   "creatingAccountAgreement": "Creating an account, you agree to our",
-  "termsAndConditions": "Terms&Conditions"
-  }
-  "an_error_occurred": "An error occurred",
+  "termsAndConditions": "Terms&Conditions",
   "forget_password": "Forget password",
   "please_enter_your_email_associated_to_your_account": "Please enter your email associated with your account",
   "enter_your_email": "Enter your email",

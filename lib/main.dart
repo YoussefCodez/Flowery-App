@@ -18,7 +18,7 @@ import 'config/routing/app_routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-    Bloc.observer = MyBlocObserver();
+  Bloc.observer = MyBlocObserver();
   await configureDependencies();
   runApp(
     BlocProvider(
@@ -35,7 +35,7 @@ class FloweryApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final isRememberMe =
         getIt<SharedPrefHelper>().getData(key: Apikeys.userId) as String?;
-    
+
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
@@ -51,11 +51,9 @@ class FloweryApp extends StatelessWidget {
               onGenerateRoute: RouteGenerator.getRoute,
               debugShowCheckedModeBanner: false,
               theme: AppTheme.lightTheme,
-              home: const RegisterScreen(),
               //  darkTheme: AppTheme.darkTheme,
               // themeMode: state.themeMode,
-              //  initialRoute: Routes.splashRoute,
-              initialRoute: isRememberMe == "false"
+              initialRoute: isRememberMe == "true"
                   ? AppRoutes.home
                   : AppRoutes.login,
             );
@@ -65,4 +63,3 @@ class FloweryApp extends StatelessWidget {
     );
   }
 }
-

@@ -76,8 +76,7 @@
   "female": "انثي",
   "male": "رجل",
   "creatingAccountAgreement": "بإنشاء حساب، فإنك توافق على شروطنا",
-  "termsAndConditions": "الشروط والأحكام"
-  "an_error_occurred": "حدث خطأ",
+  "termsAndConditions": "الشروط والأحكام",
   "forget_password": "نسيت كلمة المرور",
   "please_enter_your_email_associated_to_your_account": "من فضلك أدخل البريد الإلكتروني المرتبط بحسابك",
   "enter_your_email": "أدخل بريدك الإلكتروني",
