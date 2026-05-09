@@ -1,4 +1,4 @@
-import 'package:flowery/featuers/forget_password/data/model/response_model/forget_password_response.dart';
+import 'package:flowery/features/forget_password/data/model/response_model/forget_password_response.dart';
 
 import '../../../../config/base_response/base_response.dart';
 import '../model/reqest_models/forget_password_request.dart';

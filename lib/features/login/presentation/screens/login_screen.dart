@@ -107,10 +107,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ],
                     ),
-                    Text(
-                      titles.forget_password_ques,
-                      style: theme.textTheme.labelSmall!.copyWith(
-                        fontSize: 12.sp,
+                    InkWell(
+                      onTap: () {
+                        context.pushNamed(AppRoutes.forgetPassword);
+                      },
+                      child: Text(
+                        titles.forget_password_ques,
+                        style: theme.textTheme.labelSmall!.copyWith(
+                          fontSize: 12.sp,
+                        ),
                       ),
                     ),
                   ],
@@ -122,7 +127,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: BlocConsumer<LoginViewModel, LoginStates>(
                     listener: (context, state) {
                       if (state is LoginSuccess) {
-
                         // Save remember me flag value
                         getIt<SharedPrefHelper>().saveData(
                           key: Apikeys.userId,

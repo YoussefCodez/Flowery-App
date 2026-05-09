@@ -12,6 +12,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get login => 'تسجيل الدخول';
 
   @override
+  String get remember_me => 'تذكرني';
+
+  @override
+  String get sign_up => 'انشاء حساب';
+
+  @override
+  String get enter_your_email => 'أدخل بريدك الإلكتروني';
+
+  @override
+  String get enter_your_password => 'أدخل كلمة المرور';
+
+  @override
   String get name_is_required => 'الاسم مطلوب!';
 
   @override
@@ -203,9 +215,6 @@ class AppLocalizationsAr extends AppLocalizations {
       'من فضلك أدخل البريد الإلكتروني المرتبط بحسابك';
 
   @override
-  String get enter_your_email => 'أدخل بريدك الإلكتروني';
-
-  @override
   String get confirm => 'تأكيد';
 
   @override
@@ -227,9 +236,6 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get password_must_not_be_empty =>
       'يجب ألا تكون كلمة المرور فارغة وأن تحتوي على 6 أحرف وحرف كبير ورقم واحد على الأقل';
-
-  @override
-  String get enter_your_password => 'أدخل كلمة المرور';
 
   @override
   String get new_password => 'كلمة المرور الجديدة';

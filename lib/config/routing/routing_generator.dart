@@ -1,10 +1,10 @@
 import 'package:flowery/features/login/presentation/screens/login_screen.dart';
-import 'package:flowery/featuers/forget_password/presentation/screens/forget_password_view.dart';
-import 'package:flowery/featuers/forget_password/presentation/view_model/cubit/forget_password_view_model.dart';
+import 'package:flowery/features/forget_password/presentation/screens/forget_password_view.dart';
+import 'package:flowery/features/forget_password/presentation/view_model/cubit/forget_password_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../featuers/forget_password/presentation/screens/email_verification_view.dart';
-import '../../featuers/forget_password/presentation/screens/reset_new_password_view.dart';
+import '../../features/forget_password/presentation/screens/email_verification_view.dart';
+import '../../features/forget_password/presentation/screens/reset_new_password_view.dart';
 import 'app_routes.dart';
 
 class RouteGenerator {

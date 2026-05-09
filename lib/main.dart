@@ -47,10 +47,9 @@ class FloweryApp extends StatelessWidget {
               supportedLocales: AppLocalizations.supportedLocales,
               locale: state.locale,
               onGenerateRoute: RouteGenerator.getRoute,
-              initialRoute: AppRoutes.forgetPassword,
               debugShowCheckedModeBanner: false,
               theme: AppTheme.lightTheme,
-              initialRoute: isRememberMe == "true"
+              initialRoute: isRememberMe == "false"
                   ? AppRoutes.home
                   : AppRoutes.login,
             );
