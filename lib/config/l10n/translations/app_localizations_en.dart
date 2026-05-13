@@ -12,6 +12,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get login => 'Login';
 
   @override
+  String get remember_me => 'Remember me';
+
+  @override
+  String get sign_up => 'Sign Up';
+
+  @override
+  String get enter_your_email => 'Enter your email';
+
+  @override
+  String get enter_your_password => 'Enter your password';
+
+  @override
   String get name_is_required => 'Name is required!';
 
   @override
@@ -21,7 +33,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get email_is_required => 'Email is required!';
 
   @override
-  String get email_is_not_valid => 'This email is not valid';
+  String get email_is_not_valid => 'This Email is not valid';
 
   @override
   String get password_is_required => 'Password is required!';
