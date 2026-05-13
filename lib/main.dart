@@ -29,7 +29,7 @@ class FloweryApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final isRememberMe =
         getIt<SharedPrefHelper>().getData(key: Apikeys.userId) as String?;
-    
+
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,

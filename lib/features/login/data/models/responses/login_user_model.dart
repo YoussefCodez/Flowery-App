@@ -6,27 +6,27 @@ part 'login_user_model.g.dart';
 @JsonSerializable()
 class LoginUserModel {
   @JsonKey(name: LoginValues.id)
-  String id;
+  String? id;
   @JsonKey(name: LoginValues.firstName)
-  String firstName;
+  String? firstName;
   @JsonKey(name: LoginValues.lastName)
-  String lastName;
+  String? lastName;
   @JsonKey(name: LoginValues.email)
-  String email;
+  String? email;
   @JsonKey(name: LoginValues.gender)
-  String gender;
+  String? gender;
   @JsonKey(name: LoginValues.phone)
-  String phone;
+  String? phone;
   @JsonKey(name: LoginValues.photo)
-  String photo;
+  String? photo;
   @JsonKey(name: LoginValues.role)
-  String role;
+  String? role;
   @JsonKey(name: LoginValues.wishlist)
-  List<dynamic> wishlist;
+  List<dynamic>? wishlist;
   @JsonKey(name: LoginValues.addresses)
-  List<dynamic> addresses;
+  List<dynamic>? addresses;
   @JsonKey(name: LoginValues.createdAt)
-  DateTime createdAt;
+  DateTime? createdAt;
 
   LoginUserModel({
     required this.id,
@@ -49,13 +49,13 @@ class LoginUserModel {
 
   LoginUserEntity toDomain() {
   return LoginUserEntity(
-    id: id,
-    firstName: firstName,
-    lastName: lastName,
-    email: email,
-    gender: gender,
-    phone: phone,
-    photo: photo,
+    id: id ?? "",
+    firstName: firstName ?? "",
+    lastName: lastName ?? "",
+    email: email ?? "",
+    gender: gender ?? "",
+    phone: phone ?? "",
+    photo: photo ?? "",
   );
 }
 }

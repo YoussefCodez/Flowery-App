@@ -15,6 +15,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginScreen extends StatefulWidget {
+  // Constructor
   const LoginScreen({super.key});
 
   @override
@@ -22,6 +23,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  // Theme & Localization
+  late ThemeData theme;
+  late AppLocalizations titles;
+
   // Fields
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -32,156 +37,182 @@ class _LoginScreenState extends State<LoginScreen> {
   // Remember me
   bool? rememberMeChecker = false;
 
-  // View Model
-  final LoginViewModel viewModel = getIt.get<LoginViewModel>();
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    theme = Theme.of(context);
+    titles = AppLocalizations.of(context)!;
+  }
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final titles = AppLocalizations.of(context)!;
-    return ScreenUtilInit(
-      designSize: Size(375, 812),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(titles.login, style: theme.textTheme.labelLarge),
-          titleSpacing: 0.0,
-          leading: SizedBox(),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                // Email TextField
-                MainTextField(
-                  hintText: titles.enter_your_email,
-                  labelText: titles.email,
-                  controller: emailController,
-                  validator: (value) {
-                    if (!AppRegExp.isEmailValid(value!)) {
-                      return titles.email_is_not_valid;
-                    }
-                    return null;
-                  },
-                ),
-
-                const SizedBox(height: 20),
-
-                // Password TextField
-                MainTextField(
-                  hintText: titles.enter_your_password,
-                  labelText: titles.password,
-                  controller: passwordController,
-                  obscureText: true,
-                  validator: (value) {
-                    if (!AppRegExp.isPasswordValid(value!)) {
-                      return titles.password_is_not_valid;
-                    }
-                    return null;
-                  },
-                ),
-
-                const SizedBox(height: 10),
-
-                // Remember me & Forget password
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: rememberMeChecker,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              rememberMeChecker = value;
-                            });
-                          },
-                        ),
-                        Text(
-                          titles.remember_me,
-                          style: theme.textTheme.labelSmall!.copyWith(
-                            fontSize: 13.sp,
-                            decoration: TextDecoration.none,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      titles.forget_password_ques,
-                      style: theme.textTheme.labelSmall!.copyWith(
-                        fontSize: 12.sp,
+    return BlocProvider<LoginViewModel>(
+      create: (context) => getIt.get<LoginViewModel>(),
+      child: Builder(
+        builder: (context) {
+          return ScreenUtilInit(
+            designSize: Size(375, 812),
+            child: Scaffold(
+              appBar: AppBar(
+                title: Text(titles.login, style: theme.textTheme.labelLarge),
+                titleSpacing: 0.0,
+                leading: SizedBox(),
+              ),
+              body: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      // Email TextField
+                      MainTextField(
+                        hintText: titles.enter_your_email,
+                        labelText: titles.email,
+                        controller: emailController,
+                        validator: (value) {
+                          if (!AppRegExp.isEmailValid(value!)) {
+                            return titles.email_is_not_valid;
+                          }
+                          return null;
+                        },
                       ),
-                    ),
-                  ],
-                ),
 
-                // Login button
-                BlocProvider<LoginViewModel>(
-                  create: (context) => viewModel,
-                  child: BlocConsumer<LoginViewModel, LoginStates>(
-                    listener: (context, state) {
-                      if (state is LoginSuccess) {
+                      const SizedBox(height: 20),
 
-                        // Save remember me flag value
-                        getIt<SharedPrefHelper>().saveData(
-                          key: Apikeys.userId,
-                          val: rememberMeChecker.toString(),
-                        );
+                      // Password TextField
+                      MainTextField(
+                        hintText: titles.enter_your_password,
+                        labelText: titles.password,
+                        controller: passwordController,
+                        obscureText: true,
+                        validator: (value) {
+                          if (!AppRegExp.isPasswordValid(value!)) {
+                            return titles.password_is_not_valid;
+                          }
+                          return null;
+                        },
+                      ),
 
-                        // Navigate to home
-                        context.pushNamed(AppRoutes.home);
-                      }
+                      const SizedBox(height: 10),
 
-                      if (state is LoginError) {
-                        ScaffoldMessenger.of(
-                          context,
-                        ).showSnackBar(SnackBar(content: Text(state.message)));
-                      }
-                    },
-                    builder: (BuildContext context, LoginStates state) {
-                      if (state is LoginLoading) {
-                        return CircularProgressIndicator();
-                      }
+                      // Remember me & Forget password
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              BlocBuilder<LoginViewModel, LoginStates>(
+                                builder: (context, state) {
+                                  if (state is LoginInitState) {
+                                    // Updating/Listening the rememberMeChecker from the state managment
+                                    rememberMeChecker = state.rememberMe;
+                                  }
 
-                      return ElevatedButton(
+                                  return Checkbox(
+                                    value: rememberMeChecker,
+                                    onChanged: (value) {
+                                      context.read<LoginViewModel>().doEvent(
+                                        ToggleRememberMeEvent(),
+                                        currentBooleanRememberMe: value,
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                              Text(
+                                titles.remember_me,
+                                style: theme.textTheme.labelSmall!.copyWith(
+                                  fontSize: 13.sp,
+                                  decoration: TextDecoration.none,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            titles.forget_password_ques,
+                            style: theme.textTheme.labelSmall!.copyWith(
+                              fontSize: 12.sp,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      // Login button
+                      ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            viewModel.doEvent(
+                            context.read<LoginViewModel>().doEvent(
                               LoginUserEvent(),
-                              emailController.text,
-                              passwordController.text,
+                              email: emailController.text,
+                              password: passwordController.text,
                             );
                           }
                         },
-                        child: Text(titles.login),
-                      );
-                    },
+                        child: BlocConsumer<LoginViewModel, LoginStates>(
+                          builder: (BuildContext context, LoginStates state) {
+                            if (state is LoginLoadingState) {
+                              return SizedBox(
+                                height: 20.h,
+                                width: 20.w,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  color: AppColors.whiteColor,
+                                ),
+                              );
+                            }
+
+                            return Text(titles.login);
+                          },
+                          listener: (context, state) {
+                            if (state is LoginSuccessState) {
+                              // Save remember me flag value
+                              getIt<SharedPrefHelper>().saveData(
+                                key: Apikeys.userId,
+                                val: rememberMeChecker.toString(),
+                              );
+
+                              // Navigate to home
+                              context.pushNamed(AppRoutes.home);
+                            }
+
+                            if (state is LoginErrorState) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text(state.message)),
+                              );
+                            }
+                          },
+                        ),
+                      ),
+
+                      const SizedBox(height: 10),
+
+                      // Sign up
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            titles.don_t_have_an_account,
+                            style: theme.textTheme.labelMedium!.copyWith(
+                              color: AppColors.blackColor,
+                              decoration: TextDecoration.none,
+                              fontWeight: .w500,
+                            ),
+                          ),
+                          const SizedBox(width: 2),
+                          Text(
+                            titles.sign_up,
+                            style: theme.textTheme.labelMedium,
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-
-                const SizedBox(height: 10),
-
-                // Sign up
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      titles.don_t_have_an_account,
-                      style: theme.textTheme.labelMedium!.copyWith(
-                        color: AppColors.blackColor,
-                        decoration: TextDecoration.none,
-                        fontWeight: .w500,
-                      ),
-                    ),
-                    const SizedBox(width: 2),
-                    Text(titles.sign_up, style: theme.textTheme.labelMedium),
-                  ],
-                ),
-              ],
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

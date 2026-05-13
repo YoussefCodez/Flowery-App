@@ -2,16 +2,20 @@ import 'package:flowery/features/login/domain/entities/login_user_entity.dart';
 
 sealed class LoginStates {}
 
-class LoginInit extends LoginStates {}
+class LoginInitState extends LoginStates {
+  bool rememberMe;
 
-class LoginLoading extends LoginStates {}
-
-class LoginSuccess extends LoginStates {
-  final LoginUserEntity user;
-  LoginSuccess(this.user);
+  LoginInitState({this.rememberMe = false});
 }
 
-class LoginError extends LoginStates {
+class LoginLoadingState extends LoginStates {}
+
+class LoginSuccessState extends LoginStates {
+  final LoginUserEntity user;
+  LoginSuccessState(this.user);
+}
+
+class LoginErrorState extends LoginStates {
   final String message;
-  LoginError(this.message);
+  LoginErrorState(this.message);
 }

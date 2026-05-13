@@ -8,24 +8,30 @@ import 'package:injectable/injectable.dart';
 @injectable
 class LoginViewModel extends Cubit<LoginStates> {
   final LoginUseCase _loginUseCase;
-  LoginViewModel(this._loginUseCase) : super(LoginInit());
+  LoginViewModel(this._loginUseCase) : super(LoginInitState());
 
-  void doEvent(LoginEvents event, String email, String password) {
+  void doEvent(LoginEvents event, {String? email, String? password, bool? currentBooleanRememberMe}) {
     switch (event) {
       case LoginUserEvent():
-        _loginUserEvent(email, password);
+        _loginUserEvent(email!, password!);
+      case ToggleRememberMeEvent():
+        _toggleRememberMe(currentBooleanRememberMe!);
     }
   }
 
   Future<void> _loginUserEvent(String email, String password) async {
-    emit(LoginLoading());
+    emit(LoginLoadingState());
 
     final response = await _loginUseCase.call(email, password);
     switch (response) {
       case Success():
-        emit(LoginSuccess(response.data!));
+        emit(LoginSuccessState(response.data!));
       case Error():
-        emit(LoginError(response.exception.toString()));
+        emit(LoginErrorState(response.exception.toString()));
     }
+  }
+
+  void _toggleRememberMe(bool currentBooleanRememberMe) {
+    emit(LoginInitState(rememberMe: currentBooleanRememberMe));
   }
 }
