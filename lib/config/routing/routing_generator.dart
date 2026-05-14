@@ -1,12 +1,14 @@
+import 'package:flowery/config/routing/app_routes.dart';
+import 'package:flowery/features/presentation/screens/best_seller_screen.dart';
 import 'package:flutter/material.dart';
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     try {
       switch (settings.name) {
-        // case AppRoutes.login:
-        //   return MaterialPageRoute(
-        //     builder: (_) => const LoginScreen(),
-        //   );
+        case AppRoutes.bestSeller:
+          return MaterialPageRoute(
+            builder: (_) => const BestSellerScreen(),
+          );
 
         default:
           return unDefinedRoute();
