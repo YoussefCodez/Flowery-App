@@ -1,5 +1,6 @@
 
 
+import 'package:flowery/features/categories/presentation/screens/categories_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'app_routes.dart';
@@ -9,6 +10,8 @@ class RouteGenerator {
     switch (settings.name) {
       // case AppRoutes.login:
       //   return MaterialPageRoute(builder: (_) => const LoginScreen());
+      case AppRoutes.categories:
+        return MaterialPageRoute(builder: (_) => const CategoriesScreen());
       default:
         return unDefinedRoute();
     }
