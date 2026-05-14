@@ -488,6 +488,7 @@ abstract class AppLocalizations {
   /// **'An error occurred'**
   String get an_error_occurred;
 
+<<<<<<< HEAD
   /// No description provided for @enterFirstName.
   ///
   /// In en, this message translates to:
@@ -631,6 +632,25 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Invalid code, please try again'**
   String get invalid_code;
+=======
+  /// No description provided for @occasion.
+  ///
+  /// In en, this message translates to:
+  /// **'Occasion'**
+  String get occasion;
+
+  /// No description provided for @best_seller_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Bloom with our exquisite best sellers'**
+  String get best_seller_title;
+
+  /// No description provided for @no_products.
+  ///
+  /// In en, this message translates to:
+  /// **'No Products'**
+  String get no_products;
+>>>>>>> feature/occasions
 }
 
 class _AppLocalizationsDelegate

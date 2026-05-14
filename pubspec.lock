@@ -51,10 +51,14 @@ packages:
     version: "9.2.0"
   bloc_test:
 <<<<<<< HEAD
+<<<<<<< HEAD
     dependency: "direct dev"
 =======
     dependency: "direct main"
 >>>>>>> origin/login-feature
+=======
+    dependency: "direct main"
+>>>>>>> feature/occasions
     description:
       name: bloc_test
       sha256: "1dd549e58be35148bc22a9135962106aa29334bc1e3f285994946a1057b29d7b"
@@ -762,6 +766,7 @@ packages:
     source: hosted
     version: "2.0.0"
 <<<<<<< HEAD
+<<<<<<< HEAD
   mockito:
     dependency: "direct dev"
     description:
@@ -776,6 +781,10 @@ packages:
   mocktail:
     dependency: "direct main"
 >>>>>>> origin/login-feature
+=======
+  mocktail:
+    dependency: "direct main"
+>>>>>>> feature/occasions
     description:
       name: mocktail
       sha256: "5e1bf53cc7baa8062a33b84424deb61513858ea05c601b8509e683815b5914aa"
