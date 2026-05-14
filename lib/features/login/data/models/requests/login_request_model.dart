@@ -12,9 +12,9 @@ String loginRequestModelToJson(LoginRequestModel data) =>
 @JsonSerializable()
 class LoginRequestModel {
   @JsonKey(name: LoginValues.email)
-  String email;
+  String? email;
   @JsonKey(name: LoginValues.password)
-  String password;
+  String? password;
 
   LoginRequestModel({required this.email, required this.password});
 

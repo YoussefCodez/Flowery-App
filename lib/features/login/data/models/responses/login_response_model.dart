@@ -13,11 +13,11 @@ String loginResponseModelToJson(LoginResponseModel data) =>
 @JsonSerializable()
 class LoginResponseModel {
   @JsonKey(name: LoginValues.message)
-  String message;
+  String? message;
   @JsonKey(name: LoginValues.user)
-  LoginUserModel user;
+  LoginUserModel? user;
   @JsonKey(name: LoginValues.token)
-  String token;
+  String? token;
 
   LoginResponseModel({
     required this.message,

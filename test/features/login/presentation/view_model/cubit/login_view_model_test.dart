@@ -19,7 +19,6 @@ void main() {
     viewModel = LoginViewModel(mockLoginUseCase);
   });
 
-
   blocTest<LoginViewModel, LoginStates>(
     "Login View Model when login succeeds",
     // Arrange
@@ -43,11 +42,15 @@ void main() {
 
     // Act
     act: (viewModel) {
-      viewModel.doEvent(LoginUserEvent(), "ahmed@gmail.com", "123qweASD@");
+      viewModel.doEvent(
+        LoginUserEvent(),
+        email: "ahmed@gmail.com",
+        password: "123qweASD@",
+      );
     },
 
     // Assert
-    expect: () => [isA<LoginLoading>(), isA<LoginSuccess>()],
+    expect: () => [isA<LoginLoadingState>(), isA<LoginSuccessState>()],
   );
 
   blocTest<LoginViewModel, LoginStates>(
@@ -65,10 +68,14 @@ void main() {
 
     // Act
     act: (viewModel) {
-      viewModel.doEvent(LoginUserEvent(), "ahmed@gmail.com", "123qweASD@");
+      viewModel.doEvent(
+        LoginUserEvent(),
+        email: "ahmed@gmail.com",
+        password: "123qweASD@",
+      );
     },
 
     // Assert
-    expect: () => [isA<LoginLoading>(), isA<LoginError>()],
+    expect: () => [isA<LoginLoadingState>(), isA<LoginErrorState>()],
   );
 }

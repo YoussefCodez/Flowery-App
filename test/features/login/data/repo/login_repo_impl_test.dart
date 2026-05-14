@@ -1,29 +1,35 @@
 import 'package:flowery/config/base_response/base_response.dart';
-import 'package:flowery/features/login/data/data_sources/login_data_sources_contract.dart';
+import 'package:flowery/features/login/data/data_sources/login_data_sources_local_contract.dart';
+import 'package:flowery/features/login/data/data_sources/login_data_sources_remote_contract.dart';
 import 'package:flowery/features/login/data/models/responses/login_response_model.dart';
 import 'package:flowery/features/login/data/models/responses/login_user_model.dart';
 import 'package:flowery/features/login/data/repo/login_repo_impl.dart';
 import 'package:flowery/features/login/domain/entities/login_user_entity.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockLoginDataSources extends Mock implements LoginDataSourcesContract {}
+class MockLoginRemoteDataSources extends Mock
+    implements LoginDataSourcesRemoteContract {}
 
-class MockFlutterSecureStorage extends Mock implements FlutterSecureStorage {}
+class MockLoginLocalDataSources extends Mock
+    implements LoginDataSourcesLocalContract {}
 
 void main() {
   late LoginRepoImpl repo;
-  late MockLoginDataSources dataSources;
-  late MockFlutterSecureStorage fss;
+  late MockLoginRemoteDataSources remoteDataSources;
+  late MockLoginLocalDataSources localDataSources;
+
   setUp(() {
-    fss = MockFlutterSecureStorage();
-    dataSources = MockLoginDataSources();
-    repo = LoginRepoImpl(dataSources: dataSources, fss: fss);
+    remoteDataSources = MockLoginRemoteDataSources();
+    localDataSources = MockLoginLocalDataSources();
+    repo = LoginRepoImpl(
+      remoteDataSource: remoteDataSources,
+      localDataSource: localDataSources,
+    );
   });
   test("Testing login repo when login succeeds", () async {
     // Arrange
-    when(() => dataSources.login(any(), any())).thenAnswer(
+    when(() => remoteDataSources.login(any(), any())).thenAnswer(
       (_) async => Success<LoginResponseModel>(
         data: LoginResponseModel(
           message: "success",
@@ -45,12 +51,7 @@ void main() {
       ),
     );
 
-    when(
-      () => fss.write(
-        key: any(named: "key"),
-        value: any(named: "value"),
-      ),
-    ).thenAnswer((_) async => {});
+    when(() => localDataSources.saveToken("Token")).thenAnswer((_) async => {});
 
     // Act
     final response = await repo.login("ahmed@gmail.com", "123qweASD@");
@@ -59,13 +60,10 @@ void main() {
     expect(response, isA<Success<LoginUserEntity>>());
   });
 
-  test("Testing login repo when login fails", () async{
-
+  test("Testing login repo when login fails", () async {
     // Arrange
-    when(() => dataSources.login(any(), any())).thenAnswer(
-      (_) async => Error<LoginResponseModel>(
-        exception: Exception()
-      ),
+    when(() => remoteDataSources.login(any(), any())).thenAnswer(
+      (_) async => Error<LoginResponseModel>(exception: Exception()),
     );
 
     // Act
@@ -73,6 +71,5 @@ void main() {
 
     // Assert
     expect(response, isA<Error<LoginUserEntity>>());
-
   });
 }
