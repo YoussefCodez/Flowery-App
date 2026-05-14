@@ -1,5 +1,5 @@
 import 'package:flowery/core/const/best_seller_values.dart';
-import 'package:flowery/features/domain/entities/best_seller_product_entity.dart';
+import 'package:flowery/features/best_seller/domain/entities/best_seller_product_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'best_seller_product_model.g.dart';

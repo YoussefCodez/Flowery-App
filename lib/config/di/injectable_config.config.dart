@@ -17,8 +17,8 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
     as _i161;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
-import '../../features/api/api_client/best_seller_api_client.dart' as _i1015;
-import '../../features/api/data_sources/best_seller_remote_data_source_impl.dart'
+import '../../features/best_seller/api/api_client/best_seller_api_client.dart' as _i1015;
+import '../../features/best_seller/api/data_sources/best_seller_remote_data_source_impl.dart'
     as _i124;
 import '../../features/categories/api/api_client/categories_api_client.dart'
     as _i612;
@@ -36,11 +36,11 @@ import '../../features/categories/domain/use_cases/get_products_by_category_usec
     as _i584;
 import '../../features/categories/presentation/view_model/cubit/categories_cubit.dart'
     as _i806;
-import '../../features/data/data_sources/best_seller_remote_data_source_contract.dart'
+import '../../features/best_seller/data/data_sources/best_seller_remote_data_source_contract.dart'
     as _i451;
-import '../../features/data/repo/best_seller_repo_impl.dart' as _i759;
-import '../../features/domain/repo/best_seller_repo_contract.dart' as _i1020;
-import '../../features/domain/use_cases/get_best_seller_products_use_case.dart'
+import '../../features/best_seller/data/repo/best_seller_repo_impl.dart' as _i759;
+import '../../features/best_seller/domain/repo/best_seller_repo_contract.dart' as _i1020;
+import '../../features/best_seller/domain/use_cases/get_best_seller_products_use_case.dart'
     as _i410;
 import '../../features/forget_password/api/forget_password_client.dart'
     as _i730;

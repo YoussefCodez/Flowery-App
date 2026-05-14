@@ -1,4 +1,5 @@
 import 'package:flowery/config/routing/app_routes.dart';
+import 'package:flowery/features/best_seller/presentation/screens/best_seller_screen.dart';
 import 'package:flowery/features/products_details/presentation/pages/products_details_screen.dart';
 import 'package:flowery/features/home/presentation/home.screen.dart';
 import 'package:flowery/features/login/presentation/screens/login_screen.dart';
@@ -73,6 +74,9 @@ class RouteGenerator {
           
         case AppRoutes.categories:
           return MaterialPageRoute(builder: (_) => const CategoriesScreen());
+
+        case AppRoutes.bestSeller:
+          return MaterialPageRoute(builder: (_) => const BestSellerScreen());
 
         default:
           return unDefinedRoute();

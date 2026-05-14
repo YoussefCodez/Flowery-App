@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flowery/config/api/app_endpoints.dart';
-import 'package:flowery/features/data/models/response/best_seller_products_response_model.dart';
+import 'package:flowery/features/best_seller/data/models/response/best_seller_products_response_model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 

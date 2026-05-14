@@ -3,7 +3,7 @@
 //     final bestSellerProductsResponseModel = bestSellerProductsResponseModelFromJson(jsonString);
 
 import 'package:flowery/core/const/best_seller_values.dart';
-import 'package:flowery/features/data/models/response/best_seller_product_model.dart';
+import 'package:flowery/features/best_seller/data/models/response/best_seller_product_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'dart:convert';
 
