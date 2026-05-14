@@ -490,6 +490,7 @@ abstract class AppLocalizations {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   /// No description provided for @enterFirstName.
   ///
   /// In en, this message translates to:
@@ -662,6 +663,13 @@ abstract class AppLocalizations {
 >>>>>>> feature/occasions
 =======
 >>>>>>> feature/best-seller
+=======
+  /// No description provided for @something_went_wrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong'**
+  String get something_went_wrong;
+>>>>>>> origin/categories_feature
 }
 
 class _AppLocalizationsDelegate

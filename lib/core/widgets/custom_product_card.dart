@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flowery/core/const/app_strings.dart';
-import 'package:flowery/core/const/occasions_values.dart';
 import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,7 +13,7 @@ class CustomProductCard extends StatelessWidget {
   final bool hasDiscount;
   final double oldPrice;
   final double discount;
-  final int? sold;
+  final int sold;
   final int quantity;
   final List<String> images;
   const CustomProductCard({
@@ -33,18 +32,6 @@ class CustomProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.pushNamed(
-        AppRoutes.productDetails,
-        arguments: <String, dynamic>{
-          OccasionsValues.title: title,
-          OccasionsValues.image: image,
-          OccasionsValues.price: price,
-          OccasionsValues.discount: discount,
-          OccasionsValues.sold: sold,
-          OccasionsValues.quantity: quantity,
-          OccasionsValues.images: images,
-        },
-      ),
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(color: Theme.of(context).colorScheme.onSecondary),
@@ -82,6 +69,8 @@ class CustomProductCard extends StatelessWidget {
                   ).textTheme.labelLarge?.copyWith(fontSize: 12.sp),
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 7.sp,
                   children: [
                     Text(
                       "EGP $price",
@@ -90,35 +79,23 @@ class CustomProductCard extends StatelessWidget {
                         fontSize: 14.sp,
                       ),
                     ),
-
-                    SizedBox(width: 4.w),
-
-                    Flexible(
-                      child: Text(
-                        "$oldPrice",
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          decoration: TextDecoration.lineThrough,
-                          decorationColor: Theme.of(
-                            context,
-                          ).colorScheme.onSecondary,
-                          decorationThickness: 1.w,
-                          color: Theme.of(context).colorScheme.onSecondary,
-                          fontSize: 12.sp,
-                        ),
+                    Text(
+                      "$oldPrice",
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        decoration: TextDecoration.lineThrough,
+                        decorationColor: Theme.of(
+                          context,
+                        ).colorScheme.onSecondary,
+                        decorationThickness: 1.w,
+                        color: Theme.of(context).colorScheme.onSecondary,
+                        fontSize: 12.sp,
                       ),
                     ),
-
-                    SizedBox(width: 4.w),
-
-                    Flexible(
+                    Expanded(
                       child: Text(
                         "$discount%",
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          fontWeight: FontWeight.w400,
+                          fontWeight: .w400,
                           color: AppColors.greenColor,
                           fontSize: 12.sp,
                         ),

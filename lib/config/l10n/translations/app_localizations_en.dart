@@ -213,6 +213,7 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   String get enterFirstName => 'Enter first Name';
 
   @override
@@ -302,4 +303,7 @@ class AppLocalizationsEn extends AppLocalizations {
 >>>>>>> feature/occasions
 =======
 >>>>>>> feature/best-seller
+=======
+  String get something_went_wrong => 'Something went wrong';
+>>>>>>> origin/categories_feature
 }

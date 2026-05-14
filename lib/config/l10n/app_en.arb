@@ -98,4 +98,6 @@
   "enter_your_password": "Enter your password",
   "new_password": "New password",
   "invalid_code": "Invalid code, please try again"
+  "an_error_occurred": "An error occurred",
+  "something_went_wrong": "Something went wrong"
 }

@@ -210,6 +210,7 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   String get enterFirstName => 'ادخل الاسم الاول';
 
   @override
@@ -298,4 +299,7 @@ class AppLocalizationsAr extends AppLocalizations {
 >>>>>>> feature/occasions
 =======
 >>>>>>> feature/best-seller
+=======
+  String get something_went_wrong => 'حدث خطأ غير متوقع';
+>>>>>>> origin/categories_feature
 }

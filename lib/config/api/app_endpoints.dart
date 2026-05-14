@@ -13,4 +13,5 @@ abstract class AppEndPoints {
   static const String resetPassword = 'auth/resetPassword';
   
   static const String login = 'auth/signin';
+  static const String categories = 'categories';
 }
