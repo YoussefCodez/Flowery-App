@@ -19,6 +19,7 @@ import 'config/routing/app_routes.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
+  Bloc.observer = MyBlocObserver();
   await configureDependencies();
   runApp(
     BlocProvider(
@@ -63,3 +64,4 @@ class FloweryApp extends StatelessWidget {
     );
   }
 }
+
