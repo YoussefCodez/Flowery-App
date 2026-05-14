@@ -17,9 +17,20 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
     as _i161;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
-import '../../features/best_seller/api/api_client/best_seller_api_client.dart' as _i1015;
+import '../../features/best_seller/api/api_client/best_seller_api_client.dart'
+    as _i618;
 import '../../features/best_seller/api/data_sources/best_seller_remote_data_source_impl.dart'
-    as _i124;
+    as _i395;
+import '../../features/best_seller/data/data_sources/best_seller_remote_data_source_contract.dart'
+    as _i850;
+import '../../features/best_seller/data/repo/best_seller_repo_impl.dart'
+    as _i1026;
+import '../../features/best_seller/domain/repo/best_seller_repo_contract.dart'
+    as _i949;
+import '../../features/best_seller/domain/use_cases/get_best_seller_products_use_case.dart'
+    as _i573;
+import '../../features/best_seller/presentation/view_model/cubit/best_seller_view_model.dart'
+    as _i935;
 import '../../features/categories/api/api_client/categories_api_client.dart'
     as _i612;
 import '../../features/categories/api/data_source/get_categories_data_source_impl.dart'
@@ -36,12 +47,6 @@ import '../../features/categories/domain/use_cases/get_products_by_category_usec
     as _i584;
 import '../../features/categories/presentation/view_model/cubit/categories_cubit.dart'
     as _i806;
-import '../../features/best_seller/data/data_sources/best_seller_remote_data_source_contract.dart'
-    as _i451;
-import '../../features/best_seller/data/repo/best_seller_repo_impl.dart' as _i759;
-import '../../features/best_seller/domain/repo/best_seller_repo_contract.dart' as _i1020;
-import '../../features/best_seller/domain/use_cases/get_best_seller_products_use_case.dart'
-    as _i410;
 import '../../features/forget_password/api/forget_password_client.dart'
     as _i730;
 import '../../features/forget_password/data/data_source/forget_password_data_source_contract.dart'
@@ -136,8 +141,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i612.CategoriesApiClient>(
       () => coreInjectableModule.categoriesApiClient(gh<_i361.Dio>()),
     );
-    gh.factory<_i1015.BestSellerApiClient>(
-      () => _i1015.BestSellerApiClient(gh<_i361.Dio>()),
+    gh.factory<_i618.BestSellerApiClient>(
+      () => _i618.BestSellerApiClient(gh<_i361.Dio>()),
     );
     gh.factory<_i730.ForgetPasswordClient>(
       () => _i730.ForgetPasswordClient(gh<_i361.Dio>()),
@@ -165,11 +170,6 @@ extension GetItInjectableX on _i174.GetIt {
         fss: gh<_i558.FlutterSecureStorage>(),
       ),
     );
-    gh.factory<_i451.BestSellerRemoteDataSourceContract>(
-      () => _i124.BestSellerRemoteDataSourceImpl(
-        apiClient: gh<_i1015.BestSellerApiClient>(),
-      ),
-    );
     gh.factory<_i758.OccasionsDataSourcesContract>(
       () => _i722.OccasionsDataSourcesImpl(
         apiClient: gh<_i1066.OccasionsApiClient>(),
@@ -182,17 +182,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i794.LocaleThemeCubit>(
       () => _i794.LocaleThemeCubit(gh<_i42.SharedPrefHelper>()),
-    );
-    gh.factory<_i1020.BestSellerRepoContract>(
-      () => _i759.BestSellerRepoImpl(
-        remoteDataSourceContract:
-            gh<_i451.BestSellerRemoteDataSourceContract>(),
-      ),
-    );
-    gh.factory<_i410.GetBestSellerProductsUseCase>(
-      () => _i410.GetBestSellerProductsUseCase(
-        repo: gh<_i1020.BestSellerRepoContract>(),
-      ),
     );
     gh.factory<_i668.RegisterRepository>(
       () => _i897.RegisterRepositoryImpl(gh<_i984.RegisterDataSource>()),
@@ -209,6 +198,11 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i176.LoginRepoImpl(
         remoteDataSource: gh<_i378.LoginDataSourcesRemoteContract>(),
         localDataSource: gh<_i251.LoginDataSourcesLocalContract>(),
+      ),
+    );
+    gh.factory<_i850.BestSellerRemoteDataSourceContract>(
+      () => _i395.BestSellerRemoteDataSourceImpl(
+        apiClient: gh<_i618.BestSellerApiClient>(),
       ),
     );
     gh.factory<_i405.OccasionsRepoContract>(
@@ -270,6 +264,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i705.LoginViewModel>(
       () => _i705.LoginViewModel(gh<_i191.LoginUseCase>()),
     );
+    gh.factory<_i949.BestSellerRepoContract>(
+      () => _i1026.BestSellerRepoImpl(
+        remoteDataSourceContract:
+            gh<_i850.BestSellerRemoteDataSourceContract>(),
+      ),
+    );
     gh.factory<_i656.ForgetPasswordViewModel>(
       () => _i656.ForgetPasswordViewModel(
         gh<_i427.ForgetPasswordUseCase>(),
@@ -285,6 +285,14 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i126.GetAllCategoriesUseCase>(),
         gh<_i584.GetProductsByCategoryUseCase>(),
       ),
+    );
+    gh.factory<_i573.GetBestSellerProductsUseCase>(
+      () => _i573.GetBestSellerProductsUseCase(
+        repo: gh<_i949.BestSellerRepoContract>(),
+      ),
+    );
+    gh.factory<_i935.BestSellerViewModel>(
+      () => _i935.BestSellerViewModel(gh<_i573.GetBestSellerProductsUseCase>()),
     );
     return this;
   }

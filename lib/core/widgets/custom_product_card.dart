@@ -1,6 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flowery/config/routing/app_routes.dart';
+import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flowery/core/const/app_strings.dart';
 import 'package:flowery/core/theme/app_colors.dart';
+import 'package:flowery/features/products_details/presentation/pages/products_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -14,6 +17,7 @@ class CustomProductCard extends StatelessWidget {
   final int sold;
   final int quantity;
   final List<String> images;
+  final String description;
   const CustomProductCard({
     super.key,
     required this.title,
@@ -25,11 +29,29 @@ class CustomProductCard extends StatelessWidget {
     required this.sold,
     required this.quantity,
     required this.images,
+    required this.description,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: () {
+        context.pushNamed(
+          AppRoutes.productDetails,
+          arguments: <String, dynamic>{
+            "title": title,
+            "image": image,
+            "price": price,
+            "hasDiscount": hasDiscount,
+            "oldPrice": oldPrice,
+            "discount": discount,
+            "sold": sold,
+            "quantity": quantity,
+            "images": images,
+            "description": description,
+          },
+        );
+      },
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(color: Theme.of(context).colorScheme.onSecondary),

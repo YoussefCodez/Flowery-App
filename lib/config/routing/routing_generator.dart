@@ -18,25 +18,42 @@ class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     try {
       switch (settings.name) {
-        case AppRoutes.productDetails:
-          // final args = settings.arguments as Map<String, dynamic>;
-          return MaterialPageRoute(
-            builder: (_) => const ProductsDetailsScreen(
-              imageUrl: '',
-              title: ' Pink Rose ',
-              price: 1500,
-              isdescount: false,
-              oldPrice: 0.0,
-              discount: 0.0,
-              sold: 0,
-              quantity: 15,
-              images: [],
-              //               images: List<String>.from(
-              //   args[CategoriesValues.images],
+        // case AppRoutes.productDetails:
+        //   final args = settings.arguments as Map<String, dynamic>;
+        //   return MaterialPageRoute(
+        //     builder: (_) => ProductsDetailsScreen(
+        //       imageUrl: args["image"],
+        //       title: args["title"],
+        //       price: args["price"],
+        //       isdescount: false,
+        //       oldPrice: 0,
+        //       discount: args["discount"],
+        //       sold: args["sold"],
+        //       quantity: args["quantity"],
+        //       images: args["images"],
+        //     ),
+        //   );
 
-              // ),
+        case AppRoutes.productDetails:
+          final args = settings.arguments as Map<String, dynamic>;
+          return MaterialPageRoute(
+            builder: (_) => ProductsDetailsScreen(
+              imageUrl: args["image"] ?? "",
+              title: args["title"] ?? "",
+              price: (args["price"] as num?)?.toDouble() ?? 0.0,
+              isdescount:
+                  args["hasDiscount"] ??
+                  false, // Map card's hasDiscount to screen's isdescount
+              oldPrice: (args["oldPrice"] as num?)?.toDouble() ?? 0.0,
+              discount: (args["discount"] as num?)?.toDouble() ?? 0.0,
+              sold: args["sold"] ?? 0,
+              quantity: args["quantity"] ?? 0,
+              images: List<String>.from(args["images"] ?? []),
+              description: args["description"] ?? "",
+            
             ),
           );
+
         case AppRoutes.register:
           return MaterialPageRoute(builder: (_) => const RegisterScreen());
 
@@ -71,7 +88,7 @@ class RouteGenerator {
 
         case AppRoutes.occasions:
           return MaterialPageRoute(builder: (_) => OccasionsScreen());
-          
+
         case AppRoutes.categories:
           return MaterialPageRoute(builder: (_) => const CategoriesScreen());
 
@@ -104,4 +121,3 @@ class RouteGenerator {
     );
   }
 }
-
