@@ -1,10 +1,12 @@
 abstract class AppRoutes {
   static const String login = "/login";
+  static const String productDetails = "/productDetails";
+
   static const String categories = "/categories";
 
   static const String bestSeller = "/best-seller";
   static const String occasions = "/occasions";
-  static const String productDetails = "/product-details";
+
 
   // Register
   static const String register = "/register";
