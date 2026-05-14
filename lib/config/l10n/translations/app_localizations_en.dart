@@ -212,6 +212,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
 <<<<<<< HEAD
+<<<<<<< HEAD
   String get enterFirstName => 'Enter first Name';
 
   @override
@@ -288,11 +289,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get invalid_code => 'Invalid code, please try again';
 =======
   String get occasion => 'Occasion';
+=======
+  String get best_seller => 'Best Seller';
+>>>>>>> feature/best-seller
 
   @override
   String get best_seller_title => 'Bloom with our exquisite best sellers';
 
   @override
   String get no_products => 'No Products';
+<<<<<<< HEAD
 >>>>>>> feature/occasions
+=======
+>>>>>>> feature/best-seller
 }

@@ -209,6 +209,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
 <<<<<<< HEAD
+<<<<<<< HEAD
   String get enterFirstName => 'ادخل الاسم الاول';
 
   @override
@@ -284,11 +285,17 @@ class AppLocalizationsAr extends AppLocalizations {
   String get invalid_code => 'الكود غير صحيح، يرجى المحاولة مرة أخرى';
 =======
   String get occasion => 'المناسبة';
+=======
+  String get best_seller => 'الأكثر مبيعًا';
+>>>>>>> feature/best-seller
 
   @override
   String get best_seller_title => 'تألقي مع أفضل منتجاتنا مبيعًا';
 
   @override
   String get no_products => 'لا يوجد منتجات';
+<<<<<<< HEAD
 >>>>>>> feature/occasions
+=======
+>>>>>>> feature/best-seller
 }

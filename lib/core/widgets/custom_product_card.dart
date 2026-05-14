@@ -14,7 +14,7 @@ class CustomProductCard extends StatelessWidget {
   final bool hasDiscount;
   final double oldPrice;
   final double discount;
-  final int sold;
+  final int? sold;
   final int quantity;
   final List<String> images;
   const CustomProductCard({
@@ -82,34 +82,46 @@ class CustomProductCard extends StatelessWidget {
                   ).textTheme.labelLarge?.copyWith(fontSize: 12.sp),
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  spacing: 7.sp,
                   children: [
                     Text(
                       "EGP $price",
                       style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        fontWeight: .w500,
+                        fontWeight: FontWeight.w500,
                         fontSize: 14.sp,
                       ),
                     ),
-                    Text(
-                      "$oldPrice",
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        decoration: TextDecoration.lineThrough,
-                        decorationColor: Theme.of(
-                          context,
-                        ).colorScheme.onSecondary,
-                        decorationThickness: 1.w,
-                        color: Theme.of(context).colorScheme.onSecondary,
-                        fontSize: 12.sp,
+
+                    SizedBox(width: 4.w),
+
+                    Flexible(
+                      child: Text(
+                        "$oldPrice",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          decoration: TextDecoration.lineThrough,
+                          decorationColor: Theme.of(
+                            context,
+                          ).colorScheme.onSecondary,
+                          decorationThickness: 1.w,
+                          color: Theme.of(context).colorScheme.onSecondary,
+                          fontSize: 12.sp,
+                        ),
                       ),
                     ),
-                    Text(
-                      "$discount%",
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        fontWeight: .w400,
-                        color: AppColors.greenColor,
-                        fontSize: 12.sp,
+
+                    SizedBox(width: 4.w),
+
+                    Flexible(
+                      child: Text(
+                        "$discount%",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.greenColor,
+                          fontSize: 12.sp,
+                        ),
                       ),
                     ),
                   ],

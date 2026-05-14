@@ -17,6 +17,7 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
     as _i161;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
+<<<<<<< HEAD
 import '../../features/occasions/api/api_client/occasions_api_client.dart'
     as _i1066;
 import '../../features/occasions/api/data_sources/occasions_data_sources_impl.dart'
@@ -32,6 +33,19 @@ import '../../features/occasions/domain/use_cases/get_products_of_specific_occas
     as _i694;
 import '../../features/occasions/presentation/view_model/cubit/occasion_view_model.dart'
     as _i516;
+=======
+import '../../features/api/api_client/best_seller_api_client.dart' as _i1015;
+import '../../features/api/data_sources/best_seller_remote_data_source_impl.dart'
+    as _i124;
+import '../../features/data/data_sources/best_seller_remote_data_source_contract.dart'
+    as _i451;
+import '../../features/data/repo/best_seller_repo_impl.dart' as _i759;
+import '../../features/domain/repo/best_seller_repo_contract.dart' as _i1020;
+import '../../features/domain/use_cases/get_best_seller_products_use_case.dart'
+    as _i410;
+import '../../features/presentation/view_model/cubit/best_seller_view_model.dart'
+    as _i703;
+>>>>>>> feature/best-seller
 import '../api/app_interceptors.dart' as _i781;
 import '../general_cubit/local_cubit.dart' as _i794;
 import '../helpers/shared_pref.dart' as _i42;
@@ -63,8 +77,13 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i42.SharedPrefHelper>(
       () => _i42.SharedPrefHelper(gh<_i460.SharedPreferences>()),
     );
+<<<<<<< HEAD
     gh.factory<_i1066.OccasionsApiClient>(
       () => _i1066.OccasionsApiClient(gh<_i361.Dio>()),
+=======
+    gh.factory<_i1015.BestSellerApiClient>(
+      () => _i1015.BestSellerApiClient(gh<_i361.Dio>()),
+>>>>>>> feature/best-seller
     );
     gh.singleton<_i781.AuthInterceptor>(
       () => _i781.AuthInterceptor(
@@ -72,19 +91,42 @@ extension GetItInjectableX on _i174.GetIt {
         fss: gh<_i558.FlutterSecureStorage>(),
       ),
     );
+<<<<<<< HEAD
     gh.factory<_i758.OccasionsDataSourcesContract>(
       () => _i722.OccasionsDataSourcesImpl(
         apiClient: gh<_i1066.OccasionsApiClient>(),
+=======
+    gh.factory<_i451.BestSellerRemoteDataSourceContract>(
+      () => _i124.BestSellerRemoteDataSourceImpl(
+        apiClient: gh<_i1015.BestSellerApiClient>(),
+>>>>>>> feature/best-seller
       ),
     );
     gh.factory<_i794.LocaleThemeCubit>(
       () => _i794.LocaleThemeCubit(gh<_i42.SharedPrefHelper>()),
     );
+<<<<<<< HEAD
     gh.factory<_i405.OccasionsRepoContract>(
       () => _i85.OccasionsRepoImpl(
         dataSources: gh<_i758.OccasionsDataSourcesContract>(),
       ),
     );
+=======
+    gh.factory<_i1020.BestSellerRepoContract>(
+      () => _i759.BestSellerRepoImpl(
+        remoteDataSourceContract:
+            gh<_i451.BestSellerRemoteDataSourceContract>(),
+      ),
+    );
+    gh.factory<_i410.GetBestSellerProductsUseCase>(
+      () => _i410.GetBestSellerProductsUseCase(
+        repo: gh<_i1020.BestSellerRepoContract>(),
+      ),
+    );
+    gh.factory<_i703.BestSellerViewModel>(
+      () => _i703.BestSellerViewModel(gh<_i410.GetBestSellerProductsUseCase>()),
+    );
+>>>>>>> feature/best-seller
     gh.factory<_i157.UserHelper>(
       () => _i157.UserHelper(
         gh<_i460.SharedPreferences>(),

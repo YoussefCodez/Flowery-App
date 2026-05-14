@@ -5,6 +5,8 @@ import 'package:flowery/features/forget_password/presentation/view_model/cubit/f
 import 'package:flowery/features/register/presentation/pages/register_screen.dart';
 import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/features/occasions/presentation/screens/occasions_screen.dart';
+import 'package:flowery/config/routing/app_routes.dart';
+import 'package:flowery/features/presentation/screens/best_seller_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/forget_password/presentation/screens/email_verification_view.dart';
@@ -49,6 +51,10 @@ class RouteGenerator {
 
         case AppRoutes.occasions:
           return MaterialPageRoute(builder: (_) => OccasionsScreen());
+        case AppRoutes.bestSeller:
+          return MaterialPageRoute(
+            builder: (_) => const BestSellerScreen(),
+          );
 
         default:
           return unDefinedRoute();

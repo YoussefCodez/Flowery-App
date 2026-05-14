@@ -52,6 +52,7 @@ packages:
   bloc_test:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     dependency: "direct dev"
 =======
     dependency: "direct main"
@@ -59,6 +60,9 @@ packages:
 =======
     dependency: "direct main"
 >>>>>>> feature/occasions
+=======
+    dependency: "direct main"
+>>>>>>> feature/best-seller
     description:
       name: bloc_test
       sha256: "1dd549e58be35148bc22a9135962106aa29334bc1e3f285994946a1057b29d7b"
@@ -767,6 +771,7 @@ packages:
     version: "2.0.0"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   mockito:
     dependency: "direct dev"
     description:
@@ -785,6 +790,10 @@ packages:
   mocktail:
     dependency: "direct main"
 >>>>>>> feature/occasions
+=======
+  mocktail:
+    dependency: "direct main"
+>>>>>>> feature/best-seller
     description:
       name: mocktail
       sha256: "5e1bf53cc7baa8062a33b84424deb61513858ea05c601b8509e683815b5914aa"

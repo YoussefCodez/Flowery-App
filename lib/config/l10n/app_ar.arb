@@ -64,6 +64,10 @@
   "register_success": "تم التسجيل بنجاح",
   "connectButton": "ربط",
   "an_error_occurred": "حدث خطأ",
+  "best_seller": "الأكثر مبيعًا",
+  "best_seller_title": "تألقي مع أفضل منتجاتنا مبيعًا",
+  "no_products": "لا يوجد منتجات"
+  "an_error_occurred": "حدث خطأ",
   "enterFirstName": "ادخل الاسم الاول",
   "firstName": "الاسم الاول",
   "enterLastName": "ادخل الاسم الاخير",
