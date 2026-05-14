@@ -1,5 +1,4 @@
 import 'package:flowery/config/base_response/base_response.dart';
-import 'package:flowery/features/occasions/data/models/response/product_model.dart';
 import 'package:flowery/features/occasions/domain/entities/occasion_entity.dart';
 import 'package:flowery/features/occasions/domain/entities/product_entity.dart';
 import 'package:flowery/features/occasions/domain/use_cases/get_occasions_use_case.dart';
