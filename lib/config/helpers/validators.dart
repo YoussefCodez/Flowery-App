@@ -88,4 +88,26 @@ abstract class Validations {
 
     return null;
   }
+  
+}
+
+extension ValidationErrorX on ValidationError {
+  String get message {
+    switch (this) {
+      case ValidationError.required:
+        return 'This field is required';
+      case ValidationError.invalidName:
+        return 'Please enter a valid name';
+      case ValidationError.invalidEmail:
+        return 'Please enter a valid email address';
+      case ValidationError.invalidPassword:
+        return 'Password must be at least 8 characters and include a number';
+      case ValidationError.passwordMismatch:
+        return 'Passwords do not match';
+      case ValidationError.invalidPhoneNumber:
+        return 'Please enter a valid phone number';
+      default:
+        return 'Invalid input';
+    }
+  }
 }

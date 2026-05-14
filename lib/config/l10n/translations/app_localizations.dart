@@ -488,9 +488,30 @@ abstract class AppLocalizations {
   /// **'An error occurred'**
   String get an_error_occurred;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+  /// No description provided for @best_seller.
+  ///
+  /// In en, this message translates to:
+  /// **'Best Seller'**
+  String get best_seller;
+
+  /// No description provided for @best_seller_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Bloom with our exquisite best sellers'**
+  String get best_seller_title;
+
+  /// No description provided for @occasion.
+  ///
+  /// In en, this message translates to:
+  /// **'Occasion'**
+  String get occasion;
+
+  /// No description provided for @no_products.
+  ///
+  /// In en, this message translates to:
+  /// **'No Products'**
+  String get no_products;
+
   /// No description provided for @enterFirstName.
   ///
   /// In en, this message translates to:
@@ -634,42 +655,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Invalid code, please try again'**
   String get invalid_code;
-=======
-  /// No description provided for @occasion.
-  ///
-  /// In en, this message translates to:
-  /// **'Occasion'**
-  String get occasion;
-=======
-  /// No description provided for @best_seller.
-  ///
-  /// In en, this message translates to:
-  /// **'Best Seller'**
-  String get best_seller;
->>>>>>> feature/best-seller
 
-  /// No description provided for @best_seller_title.
-  ///
-  /// In en, this message translates to:
-  /// **'Bloom with our exquisite best sellers'**
-  String get best_seller_title;
-
-  /// No description provided for @no_products.
-  ///
-  /// In en, this message translates to:
-  /// **'No Products'**
-  String get no_products;
-<<<<<<< HEAD
->>>>>>> feature/occasions
-=======
->>>>>>> feature/best-seller
-=======
   /// No description provided for @something_went_wrong.
   ///
   /// In en, this message translates to:
   /// **'Something went wrong'**
   String get something_went_wrong;
->>>>>>> origin/categories_feature
 }
 
 class _AppLocalizationsDelegate

@@ -211,9 +211,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get an_error_occurred => 'An error occurred';
 
   @override
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+  String get best_seller => 'Best Seller';
+
+  @override
+  String get best_seller_title => 'Bloom with our exquisite best sellers';
+
+  @override
+  String get occasion => 'Occasion';
+
+  @override
+  String get no_products => 'No Products';
+
+  @override
   String get enterFirstName => 'Enter first Name';
 
   @override
@@ -288,22 +297,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get invalid_code => 'Invalid code, please try again';
-=======
-  String get occasion => 'Occasion';
-=======
-  String get best_seller => 'Best Seller';
->>>>>>> feature/best-seller
 
   @override
-  String get best_seller_title => 'Bloom with our exquisite best sellers';
-
-  @override
-  String get no_products => 'No Products';
-<<<<<<< HEAD
->>>>>>> feature/occasions
-=======
->>>>>>> feature/best-seller
-=======
   String get something_went_wrong => 'Something went wrong';
->>>>>>> origin/categories_feature
 }

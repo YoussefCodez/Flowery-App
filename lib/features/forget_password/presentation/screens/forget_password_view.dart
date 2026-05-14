@@ -13,7 +13,6 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 
-
 import '../../data/model/reqest_models/forget_password_request.dart';
 import '../view_model/cubit/forget_password_view_model.dart';
 import '../view_model/event/forget_password_event.dart';
@@ -25,17 +24,13 @@ class ForgetPasswordView extends StatefulWidget {
   const ForgetPasswordView({super.key});
 
   @override
-  State<ForgetPasswordView> createState() =>
-      _ForgetPasswordViewState();
+  State<ForgetPasswordView> createState() => _ForgetPasswordViewState();
 }
 
-class _ForgetPasswordViewState
-    extends State<ForgetPasswordView> {
-  final GlobalKey<FormState> verifyEmailFormKey =
-  GlobalKey<FormState>();
+class _ForgetPasswordViewState extends State<ForgetPasswordView> {
+  final GlobalKey<FormState> verifyEmailFormKey = GlobalKey<FormState>();
 
-  final TextEditingController emailController =
-  TextEditingController();
+  final TextEditingController emailController = TextEditingController();
 
   @override
   void dispose() {
@@ -49,9 +44,7 @@ class _ForgetPasswordViewState
 
     return BlocProvider(
       create: (_) => getIt<ForgetPasswordViewModel>(),
-      child: BlocConsumer<
-          ForgetPasswordViewModel,
-          ForgetPasswordState>(
+      child: BlocConsumer<ForgetPasswordViewModel, ForgetPasswordState>(
         listenWhen: (prev, curr) =>
             prev.forgetPasswordState != curr.forgetPasswordState,
 
@@ -70,11 +63,9 @@ class _ForgetPasswordViewState
             loading: () {},
 
             error: (exception) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(exception.toString()),
-                ),
-              );
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(exception.toString())));
             },
 
             initial: () {},
@@ -83,23 +74,19 @@ class _ForgetPasswordViewState
 
         builder: (context, state) {
           final isLoading =
-              state.forgetPasswordState.state ==
-                  StateType.loading;
+              state.forgetPasswordState.state == StateType.loading;
 
           return Scaffold(
             appBar: customAppBar(context),
 
             body: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 14.w,
-              ),
+              padding: EdgeInsets.symmetric(horizontal: 14.w),
 
               child: Form(
                 key: verifyEmailFormKey,
 
                 child: Column(
-                  mainAxisAlignment:
-                  MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
 
                   children: [
                     SizedBox(height: 38.h),
@@ -108,30 +95,21 @@ class _ForgetPasswordViewState
                       child: Text(
                         l10n.forget_password,
 
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineSmall
+                        style: Theme.of(context).textTheme.headlineSmall
                             ?.copyWith(
-                          color:
-                          AppColors.blackColor,
-                          fontWeight:
-                          FontWeight.bold,
-                        ),
+                              color: AppColors.blackColor,
+                              fontWeight: FontWeight.bold,
+                            ),
                       ),
                     ),
 
                     SizedBox(height: 10.h),
 
                     Text(
-                      l10n
-                          .please_enter_your_email_associated_to_your_account,
+                      l10n.please_enter_your_email_associated_to_your_account,
 
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge
-                          ?.copyWith(
-                        color:
-                        AppColors.grayColor,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: AppColors.grayColor,
                       ),
 
                       textAlign: TextAlign.center,
@@ -140,64 +118,46 @@ class _ForgetPasswordViewState
                     SizedBox(height: 30.h),
 
                     CustomTextFormField(
-                      hintText:
-                      l10n.enter_your_email,
+                      hintText: l10n.enter_your_email,
 
                       labelText: l10n.email,
 
                       controller: emailController,
 
                       validator: (value) {
-                        return Validations
-                            .validateEmail(
-                          context,
-                          value,
-                        );
+                        final error = Validations.validateEmail(value);
+                        return error?.message;
                       },
                     ),
 
                     SizedBox(height: 48.h),
 
                     CustomButton(
-                      text: isLoading
-                          ? "Loading..."
-                          : l10n.confirm,
+                      text: isLoading ? "Loading..." : l10n.confirm,
 
-                      backgroundColor:
-                      AppColors.primaryColor,
+                      backgroundColor: AppColors.primaryColor,
 
-                      foregroundColor:
-                      AppColors.whiteColor,
+                      foregroundColor: AppColors.whiteColor,
 
-                      textColor:
-                      AppColors.whiteColor,
+                      textColor: AppColors.whiteColor,
 
-                      borderColor:
-                      AppColors.primaryColor,
+                      borderColor: AppColors.primaryColor,
 
                       onPressed: isLoading
                           ? null
                           : () {
-                        if (verifyEmailFormKey
-                            .currentState!
-                            .validate()) {
-                          context
-                              .read<
-                              ForgetPasswordViewModel>()
-                              .doIntent(
-                            event:
-                            SendEmailEvent(
-                              request:
-                              ForgetPasswordRequest(
-                                email:
-                                emailController
-                                    .text
-                                    .trim(),
-                              ),
-                            ),
-                          );
-                        }
-                      },
+                              if (verifyEmailFormKey.currentState!.validate()) {
+                                context
+                                    .read<ForgetPasswordViewModel>()
+                                    .doIntent(
+                                      event: SendEmailEvent(
+                                        request: ForgetPasswordRequest(
+                                          email: emailController.text.trim(),
+                                        ),
+                                      ),
+                                    );
+                              }
+                            },
                     ),
                   ],
                 ),

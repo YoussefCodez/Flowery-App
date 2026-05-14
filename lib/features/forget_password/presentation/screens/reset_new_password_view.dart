@@ -98,10 +98,11 @@ class _ResetNewPasswordViewState extends State<ResetNewPasswordView> {
                       hintText: l10n.enter_your_password,
                       labelText: l10n.new_password,
                       controller: _passwordController,
-                      validator: (value) =>
-                          Validations.validatePassword(context, value),
+                      validator: (value) {
+                        final error = Validations.validatePassword(value);
+                        return error?.message;
+                      },
                     ),
-
 
                     SizedBox(height: 22.h),
 
@@ -109,11 +110,13 @@ class _ResetNewPasswordViewState extends State<ResetNewPasswordView> {
                       hintText: l10n.confirm_password,
                       labelText: l10n.confirm_password,
                       controller: _confirmController,
-                      validator: (value) => Validations.validateConfirmPassword(
-                        context,
-                        value,
-                        _passwordController.text,
-                      ),
+                      validator: (value) {
+                        final error = Validations.validateConfirmPassword(
+                          confirmPassword: value,
+                          password: _passwordController.text,
+                        );
+                        return error?.message;
+                      },
                     ),
 
                     SizedBox(height: 48.h),

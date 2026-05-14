@@ -208,9 +208,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get an_error_occurred => 'حدث خطأ';
 
   @override
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+  String get best_seller => 'الأكثر مبيعًا';
+
+  @override
+  String get best_seller_title => 'تألقي مع أفضل منتجاتنا مبيعًا';
+
+  @override
+  String get occasion => 'المناسبة';
+
+  @override
+  String get no_products => 'لا يوجد منتجات';
+
+  @override
   String get enterFirstName => 'ادخل الاسم الاول';
 
   @override
@@ -284,22 +293,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get invalid_code => 'الكود غير صحيح، يرجى المحاولة مرة أخرى';
-=======
-  String get occasion => 'المناسبة';
-=======
-  String get best_seller => 'الأكثر مبيعًا';
->>>>>>> feature/best-seller
 
   @override
-  String get best_seller_title => 'تألقي مع أفضل منتجاتنا مبيعًا';
-
-  @override
-  String get no_products => 'لا يوجد منتجات';
-<<<<<<< HEAD
->>>>>>> feature/occasions
-=======
->>>>>>> feature/best-seller
-=======
   String get something_went_wrong => 'حدث خطأ غير متوقع';
->>>>>>> origin/categories_feature
 }

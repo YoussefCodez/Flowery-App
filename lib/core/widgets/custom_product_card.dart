@@ -1,6 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flowery/config/routing/app_routes.dart';
-import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flowery/core/const/app_strings.dart';
 import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';

@@ -168,9 +168,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           listener: (context, state) {
                             if (state is LoginSuccessState) {
                               // Save remember me flag value
-                              getIt<SharedPrefHelper>().saveData(
+                              getIt<SharedPrefHelper>().saveString(
                                 key: Apikeys.userId,
-                                val: rememberMeChecker.toString(),
+                                value: rememberMeChecker.toString(),
                               );
 
                               // Navigate to home
