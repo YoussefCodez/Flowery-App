@@ -1,4 +1,5 @@
 import 'package:flowery/config/di/injectable_config.dart';
+import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flowery/core/const/app_strings.dart';
 import 'package:flowery/features/categories/presentation/screens/widgets/categories_tab_bar.dart';
 import 'package:flowery/features/categories/presentation/screens/widgets/filter_button.dart';
@@ -19,6 +20,14 @@ class CategoriesScreen extends StatelessWidget {
       create: (context) =>
           getIt<CategoriesCubit>()..doEvent(GetAllCategoriesEvent()),
       child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios_new),
+            onPressed: () {
+              context.pop();
+            },
+          ),
+        ),
         body: SafeArea(
           child: Column(
             children: [

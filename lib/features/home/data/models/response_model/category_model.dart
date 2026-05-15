@@ -1,4 +1,4 @@
-import 'package:flowery/featuers/home/domain/home_enitiy/category_entity.dart';
+import 'package:flowery/features/home/domain/home_enitiy/category_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'category_model.g.dart';
 

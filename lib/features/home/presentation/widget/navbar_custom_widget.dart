@@ -21,7 +21,7 @@ class NavBarCustomWidget extends StatelessWidget {
       onTap: (index) {
         switch (index) {
           case 0:
-            Navigator.pushNamed(context, AppRoutes.homeView);
+            Navigator.pushNamed(context, AppRoutes.home);
             break;
           case 1:
             //Navigator.pushNamed(context, AppRoutes.categoryView);

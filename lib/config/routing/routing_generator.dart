@@ -1,7 +1,10 @@
+import 'package:flowery/config/di/injectable_config.dart';
 import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/features/best_seller/presentation/screens/best_seller_screen.dart';
+import 'package:flowery/features/home/presentation/screens/home_view.dart';
+import 'package:flowery/features/home/presentation/view_model/home_cubit.dart';
+import 'package:flowery/features/home/presentation/view_model/home_event.dart';
 import 'package:flowery/features/products_details/presentation/pages/products_details_screen.dart';
-import 'package:flowery/features/home/presentation/home.screen.dart';
 import 'package:flowery/features/login/presentation/screens/login_screen.dart';
 import 'package:flowery/features/forget_password/presentation/screens/forget_password_view.dart';
 import 'package:flowery/features/forget_password/presentation/view_model/cubit/forget_password_view_model.dart';
@@ -9,7 +12,6 @@ import 'package:flowery/features/register/presentation/pages/register_screen.dar
 import 'package:flowery/features/occasions/presentation/screens/occasions_screen.dart';
 import 'package:flowery/features/categories/presentation/screens/categories_screen.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/forget_password/presentation/screens/email_verification_view.dart';
 import '../../features/forget_password/presentation/screens/reset_new_password_view.dart';
@@ -18,21 +20,6 @@ class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     try {
       switch (settings.name) {
-        // case AppRoutes.productDetails:
-        //   final args = settings.arguments as Map<String, dynamic>;
-        //   return MaterialPageRoute(
-        //     builder: (_) => ProductsDetailsScreen(
-        //       imageUrl: args["image"],
-        //       title: args["title"],
-        //       price: args["price"],
-        //       isdescount: false,
-        //       oldPrice: 0,
-        //       discount: args["discount"],
-        //       sold: args["sold"],
-        //       quantity: args["quantity"],
-        //       images: args["images"],
-        //     ),
-        //   );
 
         case AppRoutes.productDetails:
           final args = settings.arguments as Map<String, dynamic>;
@@ -56,9 +43,6 @@ class RouteGenerator {
 
         case AppRoutes.register:
           return MaterialPageRoute(builder: (_) => const RegisterScreen());
-
-        case AppRoutes.home:
-          return MaterialPageRoute(builder: (_) => const HomeScreen());
 
         case AppRoutes.forgetPassword:
           // ForgetPasswordView owns the Cubit — it creates it internally.
@@ -95,7 +79,7 @@ class RouteGenerator {
         case AppRoutes.bestSeller:
           return MaterialPageRoute(builder: (_) => const BestSellerScreen());
 
-        case AppRoutes.homeView:
+        case AppRoutes.home:
           return MaterialPageRoute(
             builder: (_) => BlocProvider(
               create: (context) => getIt<HomeViewModel>()

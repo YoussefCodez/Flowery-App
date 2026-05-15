@@ -12,8 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'config/routing/app_routes.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
@@ -22,13 +20,15 @@ void main() async {
   runApp(
     BlocProvider(
       create: (context) => getIt<LocaleThemeCubit>(),
-      child: const FloweryApp(),
+      child: FloweryApp(),
     ),
   );
 }
 
 class FloweryApp extends StatelessWidget {
-  const FloweryApp({super.key});
+  FloweryApp({super.key});
+
+  final isRememberMe = getIt<SharedPrefHelper>().getString(Apikeys.userId);
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,9 @@ class FloweryApp extends StatelessWidget {
               theme: AppTheme.lightTheme,
               //  darkTheme: AppTheme.darkTheme,
               // themeMode: state.themeMode,
-              initialRoute: AppRoutes.home
+              initialRoute: isRememberMe == "true"
+                  ? AppRoutes.home
+                  : AppRoutes.login,
             );
           },
         );
