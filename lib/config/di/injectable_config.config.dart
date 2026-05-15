@@ -17,6 +17,21 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
     as _i161;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
+import '../../featuers/home/api/home_api_client/home_api_client.dart' as _i406;
+import '../../featuers/home/data/data_source/home_remote_data_source_contract.dart'
+    as _i794;
+import '../../featuers/home/data/data_source/home_remote_data_source_impl.dart'
+    as _i246;
+import '../../featuers/home/data/repo_impl/home_repo_impl.dart' as _i729;
+import '../../featuers/home/domain/home_use_case/best_seller_use_case.dart'
+    as _i928;
+import '../../featuers/home/domain/home_use_case/category_use_case.dart'
+    as _i788;
+import '../../featuers/home/domain/home_use_case/occasion_use_case.dart'
+    as _i218;
+import '../../featuers/home/domain/repo_contract/home_repo_contract.dart'
+    as _i633;
+import '../../featuers/home/presentation/view_model/home_cubit.dart' as _i4;
 import '../api/app_interceptors.dart' as _i781;
 import '../general_cubit/local_cubit.dart' as _i794;
 import '../helpers/shared_pref.dart' as _i42;
@@ -48,11 +63,15 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i42.SharedPrefHelper>(
       () => _i42.SharedPrefHelper(gh<_i460.SharedPreferences>()),
     );
+    gh.factory<_i406.HomeApiClient>(() => _i406.HomeApiClient(gh<_i361.Dio>()));
     gh.singleton<_i781.AuthInterceptor>(
       () => _i781.AuthInterceptor(
         dio: gh<_i361.Dio>(),
         fss: gh<_i558.FlutterSecureStorage>(),
       ),
+    );
+    gh.factory<_i794.HomeRemoteDataSourceContract>(
+      () => _i246.HomeRemoteDataSourceImpl(gh<_i406.HomeApiClient>()),
     );
     gh.factory<_i794.LocaleThemeCubit>(
       () => _i794.LocaleThemeCubit(gh<_i42.SharedPrefHelper>()),
@@ -61,6 +80,25 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i157.UserHelper(
         gh<_i460.SharedPreferences>(),
         gh<_i558.FlutterSecureStorage>(),
+      ),
+    );
+    gh.factory<_i633.HomeRepoContract>(
+      () => _i729.HomeRepoImpl(gh<_i794.HomeRemoteDataSourceContract>()),
+    );
+    gh.factory<_i928.GetBestSellerUseCase>(
+      () => _i928.GetBestSellerUseCase(gh<_i633.HomeRepoContract>()),
+    );
+    gh.factory<_i788.GetCategoriesUseCase>(
+      () => _i788.GetCategoriesUseCase(gh<_i633.HomeRepoContract>()),
+    );
+    gh.factory<_i218.GetOccasionsUseCase>(
+      () => _i218.GetOccasionsUseCase(gh<_i633.HomeRepoContract>()),
+    );
+    gh.factory<_i4.HomeViewModel>(
+      () => _i4.HomeViewModel(
+        gh<_i788.GetCategoriesUseCase>(),
+        gh<_i928.GetBestSellerUseCase>(),
+        gh<_i218.GetOccasionsUseCase>(),
       ),
     );
     return this;
