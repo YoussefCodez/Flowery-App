@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+
+import '../../feature/search/presentation/screen/search_view.dart';
+import 'app_routes.dart';
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     try {
@@ -7,6 +10,10 @@ class RouteGenerator {
         //   return MaterialPageRoute(
         //     builder: (_) => const LoginScreen(),
         //   );
+      case AppRoutes.search:
+        return MaterialPageRoute(
+          builder: (_) => const SearchView(),
+        );
 
         default:
           return unDefinedRoute();
