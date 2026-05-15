@@ -21,4 +21,6 @@ abstract class AppRoutes {
 
   // Home
   static const String home = "/home";
+  static const String productDetails = "/product-details";
+  static const String search = "/search";
 }

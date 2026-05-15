@@ -1,5 +1,6 @@
 import 'package:flowery/config/di/injectable_config.dart';
 import 'package:flowery/config/routing/app_routes.dart';
+import 'package:flowery/feature/search/presentation/screen/search_view.dart';
 import 'package:flowery/features/best_seller/presentation/screens/best_seller_screen.dart';
 import 'package:flowery/features/home/presentation/screens/home_view.dart';
 import 'package:flowery/features/home/presentation/view_model/home_cubit.dart';
@@ -87,6 +88,11 @@ class RouteGenerator {
               child: const HomeView(),
             ),
           );
+
+                case AppRoutes.search:
+        return MaterialPageRoute(
+          builder: (_) => const SearchView(),
+        );
 
         default:
           return unDefinedRoute();
