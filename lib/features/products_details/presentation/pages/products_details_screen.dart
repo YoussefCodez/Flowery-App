@@ -201,7 +201,7 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
                   ],
                 ),
               ),
-              Spacer(),
+              SizedBox(height: 24.h),
               Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
                 child: ElevatedButton(

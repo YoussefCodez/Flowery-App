@@ -30,8 +30,6 @@ class FloweryApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isRememberMe = getIt<SharedPrefHelper>().getString(Apikeys.userId);
-
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
@@ -49,7 +47,7 @@ class FloweryApp extends StatelessWidget {
               theme: AppTheme.lightTheme,
               //  darkTheme: AppTheme.darkTheme,
               // themeMode: state.themeMode,
-              initialRoute: AppRoutes.bestSeller
+              initialRoute: AppRoutes.home
             );
           },
         );
