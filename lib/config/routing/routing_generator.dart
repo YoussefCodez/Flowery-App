@@ -95,6 +95,15 @@ class RouteGenerator {
         case AppRoutes.bestSeller:
           return MaterialPageRoute(builder: (_) => const BestSellerScreen());
 
+        case AppRoutes.homeView:
+          return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+              create: (context) => getIt<HomeViewModel>()
+                ..doEvent(GetAllDataEvent()),
+              child: const HomeView(),
+            ),
+          );
+
         default:
           return unDefinedRoute();
       }

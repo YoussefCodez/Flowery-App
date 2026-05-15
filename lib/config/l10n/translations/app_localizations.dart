@@ -488,6 +488,7 @@ abstract class AppLocalizations {
   /// **'An error occurred'**
   String get an_error_occurred;
 
+<<<<<<< HEAD
   /// No description provided for @best_seller.
   ///
   /// In en, this message translates to:
@@ -500,12 +501,33 @@ abstract class AppLocalizations {
   /// **'Bloom with our exquisite best sellers'**
   String get best_seller_title;
 
+=======
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get search;
+
+  /// No description provided for @categories.
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
+  String get categories;
+
+  /// No description provided for @best_seller.
+  ///
+  /// In en, this message translates to:
+  /// **'Best seller'**
+  String get best_seller;
+
+>>>>>>> origin/feature/Home
   /// No description provided for @occasion.
   ///
   /// In en, this message translates to:
   /// **'Occasion'**
   String get occasion;
 
+<<<<<<< HEAD
   /// No description provided for @no_products.
   ///
   /// In en, this message translates to:
@@ -661,6 +683,25 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Something went wrong'**
   String get something_went_wrong;
+=======
+  /// No description provided for @view_all.
+  ///
+  /// In en, this message translates to:
+  /// **'View All'**
+  String get view_all;
+
+  /// No description provided for @cart.
+  ///
+  /// In en, this message translates to:
+  /// **'Cart'**
+  String get cart;
+
+  /// No description provided for @egp.
+  ///
+  /// In en, this message translates to:
+  /// **'EGP'**
+  String get egp;
+>>>>>>> origin/feature/Home
 }
 
 class _AppLocalizationsDelegate

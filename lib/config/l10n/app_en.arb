@@ -95,4 +95,10 @@
   "new_password": "New password",
   "invalid_code": "Invalid code, please try again",
   "something_went_wrong": "Something went wrong"
+  "search": "Search",
+    "categories": "Categories",
+    "view_all": "View All",
+    "cart": "Cart",
+    "profile": "Profile",
+    "egp": "EGP"
 }
