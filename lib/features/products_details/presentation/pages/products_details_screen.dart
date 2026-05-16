@@ -65,7 +65,7 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
                       );
                     },
                     options: CarouselOptions(
-                      height: 300.h,
+                      height: 400.h,
                       viewportFraction: 1.0,
                       enableInfiniteScroll: false,
                       onPageChanged: (index, reason) =>
