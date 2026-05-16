@@ -12,7 +12,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OccasionsScreen extends StatefulWidget {
-  const OccasionsScreen({super.key});
+  final String? selectedOccasionId;
+  const OccasionsScreen({super.key, this.selectedOccasionId = ""});
 
   @override
   State<OccasionsScreen> createState() => _OccasionsScreenState();
@@ -21,6 +22,8 @@ class OccasionsScreen extends StatefulWidget {
 class _OccasionsScreenState extends State<OccasionsScreen> {
   late TextTheme textTheme;
   late AppLocalizations localizations;
+  bool loadFirstOccasion = true;
+  bool loadNavigatedOccasion = true;
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -31,8 +34,11 @@ class _OccasionsScreenState extends State<OccasionsScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<OccasionViewModel>(
-      create: (context) =>
-          getIt.get<OccasionViewModel>()..doEvent(GetOccasionsEvent()),
+      create: (context) {
+        return getIt.get<OccasionViewModel>()
+          ..doEvent(GetOccasionsEvent(), incomingIndex: -1);
+      },
+
       child: ScreenUtilInit(
         designSize: Size(375.sp, 812.sp),
         child: Scaffold(
@@ -81,6 +87,38 @@ class _OccasionsScreenState extends State<OccasionsScreen> {
                             final List<String> occasionsNames =
                                 state.names ?? [];
                             final List<String> occasionsIds = state.ids ?? [];
+
+                            // default is -1
+                            int incomingIndex = occasionsIds.indexOf(
+                              widget.selectedOccasionId ?? "",
+                            );
+
+                            // for view all and also if the selected occasion doesn't locate
+                            if (occasionsIds.isNotEmpty &&
+                                loadFirstOccasion &&
+                                incomingIndex == -1) {
+                              WidgetsBinding.instance.addPostFrameCallback((_) {
+                                context.read<OccasionViewModel>().doEvent(
+                                  GetProductsOfSpecificOccasion(),
+                                  occasionId: occasionsIds[0],
+                                  index: 0,
+                                );
+                                loadFirstOccasion = false;
+                              });
+                            }
+
+                            // Load products automatically for passed occasion id
+                            if (incomingIndex != -1 && loadNavigatedOccasion) {
+                              WidgetsBinding.instance.addPostFrameCallback((_) {
+                                context.read<OccasionViewModel>().doEvent(
+                                  GetProductsOfSpecificOccasion(),
+                                  occasionId: widget.selectedOccasionId,
+                                  index: incomingIndex,
+                                );
+                              });
+                              loadNavigatedOccasion = false;
+                            }
+
                             return ListView.separated(
                               scrollDirection: Axis.horizontal,
                               itemCount: occasionsNames.length,
@@ -88,12 +126,14 @@ class _OccasionsScreenState extends State<OccasionsScreen> {
                                   SizedBox(width: 16.w),
                               itemBuilder: (context, index) {
                                 final isSelected = state.selectedIndex == index;
+
                                 return InkWell(
                                   onTap: () {
                                     context.read<OccasionViewModel>().doEvent(
                                       GetProductsOfSpecificOccasion(),
                                       occasionId: occasionsIds[index],
                                       index: index,
+                                      incomingIndex: -1,
                                     );
                                   },
                                   child: Column(
@@ -129,7 +169,7 @@ class _OccasionsScreenState extends State<OccasionsScreen> {
                               color: AppColors.redColor,
                             );
                           }
-                          return const SizedBox();
+                          return const SizedBox.shrink();
                         },
                       ),
                     ),

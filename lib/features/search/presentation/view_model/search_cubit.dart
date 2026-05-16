@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:flowery/config/base_response/base_response.dart';
+import 'package:flowery/config/base_state/base_state.dart';
 import 'package:injectable/injectable.dart';
-import '../../../../config/base_response/base_response.dart';
-import '../../../../config/base_state/base_state.dart';
+
 import '../../domain/search_entity/product_entity.dart';
 import '../../domain/search_use_case/search_use_case.dart';
 import 'search_event.dart';

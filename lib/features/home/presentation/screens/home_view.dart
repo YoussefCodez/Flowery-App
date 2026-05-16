@@ -37,32 +37,38 @@ class HomeView extends StatelessWidget {
                     SizedBox(width: 12.w),
 
                     Expanded(
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 12.w,
-                          vertical: 10.h,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.r),
-                          border: Border.all(
-                            color: AppColors.hintGrayColor,
-                            width: 1.5,
+                      child: InkWell(
+                        onTap: () => context.pushNamed(AppRoutes.search),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 12.w,
+                            vertical: 10.h,
                           ),
-                        ),
-                        child: Row(
-                          children: [
-                            Icon(Icons.search, color: AppColors.hintGrayColor),
-
-                            SizedBox(width: 8.w),
-
-                            Text(
-                              l10n.search,
-                              style: TextStyle(
-                                color: AppColors.hintGrayColor,
-                                fontSize: 14.sp,
-                              ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.r),
+                            border: Border.all(
+                              color: AppColors.hintGrayColor,
+                              width: 1.5,
                             ),
-                          ],
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.search,
+                                color: AppColors.hintGrayColor,
+                              ),
+
+                              SizedBox(width: 8.w),
+
+                              Text(
+                                l10n.search,
+                                style: TextStyle(
+                                  color: AppColors.hintGrayColor,
+                                  fontSize: 14.sp,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

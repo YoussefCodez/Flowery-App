@@ -1,7 +1,9 @@
+import 'package:flowery/config/di/injectable_config.dart';
+import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../config/di/injectable_config.dart';
+
 import '../view_model/search_cubit.dart';
 import '../widget/search_bar.dart';
 import '../widget/search_result.dart';
@@ -19,8 +21,18 @@ class SearchView extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
             child: Column(
               children: [
-                SearchBarWidget(),
-              Expanded(child: SearchResults()),
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        context.pop();
+                      },
+                      icon: Icon(Icons.arrow_back_ios_new),
+                    ),
+                    Expanded(child: SearchBarWidget()),
+                  ],
+                ),
+                Expanded(child: SearchResults()),
               ],
             ),
           ),
@@ -29,6 +41,3 @@ class SearchView extends StatelessWidget {
     );
   }
 }
-
-
-

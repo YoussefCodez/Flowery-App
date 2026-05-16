@@ -1,19 +1,17 @@
-
+import 'package:flowery/config/routing/app_routes.dart';
+import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SearchField extends StatelessWidget {
   final String hintText;
-  const SearchField({
-    super.key,
-    required this.hintText,
-  });
+  const SearchField({super.key, required this.hintText});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        //TODO: Navigate to search screen
+        context.pushNamed(AppRoutes.search);
       },
       child: TextField(
         enabled: false,

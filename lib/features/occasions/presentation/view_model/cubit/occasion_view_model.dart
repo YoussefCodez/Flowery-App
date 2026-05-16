@@ -18,34 +18,31 @@ class OccasionViewModel extends Cubit<OccasionsStates> {
     this._getProductsOfSpecificOccasionUseCase,
   ) : super(OccasionsInitState());
 
-  void doEvent(OccasionsEvents event, {String? occasionId, int? index}) {
+  void doEvent(
+    OccasionsEvents event, {
+    String? occasionId,
+    int? index,
+    int? incomingIndex,
+  }) {
     switch (event) {
       case GetOccasionsEvent():
-        _getOccasions();
+        _getOccasions(incomingIndex: incomingIndex);
       case GetProductsOfSpecificOccasion():
         _getProductsOfSpecificOccasion(occasionId: occasionId, index: index);
     }
   }
 
-  Future<void> _getOccasions() async {
+  Future<void> _getOccasions({int? incomingIndex}) async {
     emit(OccasionsLoadingState());
 
     final response = await _getOccasionsUseCase.call();
 
+    if (isClosed) return;
     if (response is Success<List<OccasionEntity>>) {
       final names = response.data!.map((e) => e.name).toList();
       final ids = response.data!.map((e) => e.id).toList();
 
-      if (state is OccasionsSuccessState) {
-        emit((state as OccasionsSuccessState).copyWith(names: names, ids: ids));
-      } else {
-        emit(OccasionsSuccessState(names: names, ids: ids));
-      }
-
-      // Fetch the first Occasion ID
-      if (ids.isNotEmpty) {
-        _getProductsOfSpecificOccasion(occasionId: ids.first);
-      }
+      emit(OccasionsSuccessState(names: names, ids: ids));
     } else {
       emit(OccasionsFailedState());
     }
@@ -58,6 +55,8 @@ class OccasionViewModel extends Cubit<OccasionsStates> {
     final response = await _getProductsOfSpecificOccasionUseCase.call(
       occasionId ?? '',
     );
+
+    if (isClosed) return;
 
     if (response is Success<List<ProductEntity>>) {
       final products = response.data!.map((e) => e).toList();

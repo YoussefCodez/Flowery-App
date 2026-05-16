@@ -37,7 +37,7 @@ class OccasionsDataSourcesImpl implements OccasionsDataSourcesContract {
       return Success<OccasionProductsResponseModel>(data: response);
     } on DioException catch (e) {
       return Error<OccasionProductsResponseModel>(
-        exception: e.response!.data[OccasionsValues.error],
+        exception: Exception(e.response!.data[OccasionsValues.error]),
       );
     }
   }

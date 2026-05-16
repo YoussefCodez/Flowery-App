@@ -1,6 +1,5 @@
 import 'package:flowery/config/di/injectable_config.dart';
 import 'package:flowery/config/routing/app_routes.dart';
-import 'package:flowery/feature/search/presentation/screen/search_view.dart';
 import 'package:flowery/features/best_seller/presentation/screens/best_seller_screen.dart';
 import 'package:flowery/features/home/presentation/screens/home_view.dart';
 import 'package:flowery/features/home/presentation/view_model/home_cubit.dart';
@@ -12,6 +11,7 @@ import 'package:flowery/features/forget_password/presentation/view_model/cubit/f
 import 'package:flowery/features/register/presentation/pages/register_screen.dart';
 import 'package:flowery/features/occasions/presentation/screens/occasions_screen.dart';
 import 'package:flowery/features/categories/presentation/screens/categories_screen.dart';
+import 'package:flowery/features/search/presentation/screen/search_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/forget_password/presentation/screens/email_verification_view.dart';
@@ -21,7 +21,6 @@ class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     try {
       switch (settings.name) {
-
         case AppRoutes.productDetails:
           final args = settings.arguments as Map<String, dynamic>;
           return MaterialPageRoute(
@@ -38,7 +37,6 @@ class RouteGenerator {
               quantity: args["quantity"] ?? 0,
               images: List<String>.from(args["images"] ?? []),
               description: args["description"] ?? "",
-            
             ),
           );
 
@@ -72,10 +70,16 @@ class RouteGenerator {
           return MaterialPageRoute(builder: (_) => LoginScreen());
 
         case AppRoutes.occasions:
-          return MaterialPageRoute(builder: (_) => OccasionsScreen());
+          final occasionId = settings.arguments as String?;
+          return MaterialPageRoute(
+            builder: (_) => OccasionsScreen(selectedOccasionId: occasionId),
+          );
 
         case AppRoutes.categories:
-          return MaterialPageRoute(builder: (_) => const CategoriesScreen());
+          final categoryId = settings.arguments as String?;
+          return MaterialPageRoute(
+            builder: (_) => CategoriesScreen(selectedCategoryId: categoryId),
+          );
 
         case AppRoutes.bestSeller:
           return MaterialPageRoute(builder: (_) => const BestSellerScreen());
@@ -83,16 +87,14 @@ class RouteGenerator {
         case AppRoutes.home:
           return MaterialPageRoute(
             builder: (_) => BlocProvider(
-              create: (context) => getIt<HomeViewModel>()
-                ..doEvent(GetAllDataEvent()),
+              create: (context) =>
+                  getIt<HomeViewModel>()..doEvent(GetAllDataEvent()),
               child: const HomeView(),
             ),
           );
 
-                case AppRoutes.search:
-        return MaterialPageRoute(
-          builder: (_) => const SearchView(),
-        );
+        case AppRoutes.search:
+          return MaterialPageRoute(builder: (_) => const SearchView());
 
         default:
           return unDefinedRoute();

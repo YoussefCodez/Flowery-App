@@ -1,9 +1,8 @@
-import 'package:flowery/feature/search/presentation/widget/product_card.dart';
+import 'package:flowery/core/theme/app_colors.dart';
+import 'package:flowery/features/search/presentation/widget/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../core/theme/app_colors.dart';
 import '../view_model/search_cubit.dart';
 import '../view_model/search_state.dart';
 

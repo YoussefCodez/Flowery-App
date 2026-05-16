@@ -1,3 +1,5 @@
+import 'package:flowery/config/routing/app_routes.dart';
+import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,7 +13,21 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // context.pushNamed(AppRoutes.productDetails, arguments: product.id);
+        context.pushNamed(
+          AppRoutes.productDetails,
+          arguments: <String, dynamic>{
+            "title": product.title,
+            "image": product.imgCover,
+            "price": product.priceAfterDiscount,
+            "hasDiscount": product.discount! > 0 ? true : false,
+            "oldPrice": product.price,
+            "discount": product.discount,
+            "sold": product.sold,
+            "quantity": product.quantity,
+            "images": product.images,
+            "description": product.description,
+          },
+        );
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -23,10 +39,8 @@ class ProductCard extends StatelessWidget {
               width: double.infinity,
               height: 150.h,
               fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) => Container(
-                height: 150.h,
-                color: const Color(0xFFF5F5F5),
-              ),
+              errorBuilder: (_, __, ___) =>
+                  Container(height: 150.h, color: const Color(0xFFF5F5F5)),
             ),
           ),
           SizedBox(height: 6.h),
@@ -37,7 +51,7 @@ class ProductCard extends StatelessWidget {
             style: TextStyle(fontSize: 13.sp, color: Colors.black87),
           ),
           Text(
-            '${product.price ?? 0} EGP',
+            '${product.priceAfterDiscount ?? 0} EGP',
             style: TextStyle(
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,

@@ -1,6 +1,7 @@
+import 'package:flowery/config/base_response/base_response.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../config/base_response/base_response.dart';
+
 import '../repo_contract/search_repo_contract.dart';
 import '../search_entity/product_entity.dart';
 

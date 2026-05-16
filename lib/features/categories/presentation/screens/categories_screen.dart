@@ -7,12 +7,14 @@ import 'package:flowery/features/categories/presentation/screens/widgets/search_
 import 'package:flowery/features/categories/presentation/view_model/cubit/categories_cubit.dart';
 import 'package:flowery/features/categories/presentation/view_model/events/categories_event.dart';
 import 'package:flowery/features/categories/presentation/view_model/states/categories_state.dart';
+import 'package:flowery/features/home/presentation/widget/navbar_custom_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key});
+  final String? selectedCategoryId;
+  const CategoriesScreen({super.key, this.selectedCategoryId = ""});
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +75,7 @@ class CategoriesScreen extends StatelessWidget {
             ],
           ),
         ),
+        bottomNavigationBar: NavBarCustomWidget(currentIndex: 1),
       ),
     );
   }

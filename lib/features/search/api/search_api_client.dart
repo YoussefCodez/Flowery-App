@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
-import '../../../../config/api/app_endpoints.dart';
+import '../../../config/api/app_endpoints.dart';
 import '../data/model/search_response_model.dart';
 part 'search_api_client.g.dart';
 

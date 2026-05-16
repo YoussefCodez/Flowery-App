@@ -4,6 +4,7 @@ abstract class AppRoutes {
 
   // Prodcut Details
   static const String productDetails = "/productDetails";
+  static const String search = "/search";
 
   // Categories , best seller and occasions
   static const String categories = "/categories";
@@ -21,6 +22,5 @@ abstract class AppRoutes {
 
   // Home
   static const String home = "/home";
-  static const String productDetails = "/product-details";
-  static const String search = "/search";
+
 }

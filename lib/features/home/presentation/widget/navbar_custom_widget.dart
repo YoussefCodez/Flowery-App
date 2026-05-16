@@ -1,3 +1,4 @@
+import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../config/l10n/translations/app_localizations.dart';
@@ -24,7 +25,7 @@ class NavBarCustomWidget extends StatelessWidget {
             Navigator.pushNamed(context, AppRoutes.home);
             break;
           case 1:
-            //Navigator.pushNamed(context, AppRoutes.categoryView);
+            context.pushNamed(AppRoutes.categories);
             break;
           case 2:
            // Navigator.pushNamed(context, AppRoutes.cartView);

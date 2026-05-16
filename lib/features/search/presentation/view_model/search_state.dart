@@ -1,4 +1,6 @@
-import '../../../../config/base_state/base_state.dart';
+
+import 'package:flowery/config/base_state/base_state.dart';
+
 import '../../domain/search_entity/product_entity.dart';
 
 class SearchState {

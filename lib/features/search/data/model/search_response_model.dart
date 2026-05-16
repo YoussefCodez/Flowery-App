@@ -1,4 +1,4 @@
-import 'package:flowery/feature/search/data/model/product_model.dart';
+import 'package:flowery/features/search/data/model/product_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'meta_data_model.dart';

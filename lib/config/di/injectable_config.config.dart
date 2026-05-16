@@ -17,7 +17,6 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
     as _i161;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
-<<<<<<< HEAD
 import '../../features/best_seller/api/api_client/best_seller_api_client.dart'
     as _i618;
 import '../../features/best_seller/api/data_sources/best_seller_remote_data_source_impl.dart'
@@ -123,20 +122,18 @@ import '../../features/register/domain/use_case/register_use_case.dart'
     as _i217;
 import '../../features/register/presentation/cubit/register_cubit.dart'
     as _i266;
-=======
-import '../../feature/search/api/search_api_client.dart' as _i599;
-import '../../feature/search/data/repo_impl/search_repo_impl.dart' as _i711;
-import '../../feature/search/data/search_remote_data/search_remote_data_contract.dart'
-    as _i911;
-import '../../feature/search/data/search_remote_data/search_remote_data_impl.dart'
-    as _i49;
-import '../../feature/search/domain/repo_contract/search_repo_contract.dart'
-    as _i481;
-import '../../feature/search/domain/search_use_case/search_use_case.dart'
-    as _i1044;
-import '../../feature/search/presentation/view_model/search_cubit.dart'
-    as _i453;
->>>>>>> origin/feature/search
+import '../../features/search/api/search_api_client.dart' as _i265;
+import '../../features/search/data/repo_impl/search_repo_impl.dart' as _i790;
+import '../../features/search/data/search_remote_data/search_remote_data_contract.dart'
+    as _i243;
+import '../../features/search/data/search_remote_data/search_remote_data_impl.dart'
+    as _i390;
+import '../../features/search/domain/repo_contract/search_repo_contract.dart'
+    as _i585;
+import '../../features/search/domain/search_use_case/search_use_case.dart'
+    as _i463;
+import '../../features/search/presentation/view_model/search_cubit.dart'
+    as _i794;
 import '../api/app_interceptors.dart' as _i781;
 import '../general_cubit/local_cubit.dart' as _i794;
 import '../helpers/shared_pref.dart' as _i42;
@@ -168,7 +165,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i42.SharedPrefHelper>(
       () => _i42.SharedPrefHelper(gh<_i460.SharedPreferences>()),
     );
-<<<<<<< HEAD
     gh.lazySingleton<_i612.CategoriesApiClient>(
       () => coreInjectableModule.categoriesApiClient(gh<_i361.Dio>()),
     );
@@ -188,6 +184,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i656.RegisterApiClient>(
       () => _i656.RegisterApiClient(gh<_i361.Dio>()),
     );
+    gh.factory<_i265.SearchApiClient>(
+      () => _i265.SearchApiClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i764.GetCategoriesDataSourceContract>(
       () => _i587.GetCategoriesDataSourceImpl(gh<_i612.CategoriesApiClient>()),
     );
@@ -195,10 +194,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i797.LoginDataSourcesLocalImpl(
         flutterSecureStorage: gh<_i558.FlutterSecureStorage>(),
       ),
-=======
-    gh.factory<_i599.SearchApiClient>(
-      () => _i599.SearchApiClient(gh<_i361.Dio>()),
->>>>>>> origin/feature/search
     );
     gh.singleton<_i781.AuthInterceptor>(
       () => _i781.AuthInterceptor(
@@ -221,6 +216,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i936.HomeRemoteDataSourceContract>(
       () => _i238.HomeRemoteDataSourceImpl(gh<_i866.HomeApiClient>()),
+    );
+    gh.factory<_i243.SearchRemoteDataSourceContract>(
+      () => _i390.SearchRemoteDataSourceImpl(gh<_i265.SearchApiClient>()),
     );
     gh.factory<_i668.RegisterRepository>(
       () => _i897.RegisterRepositoryImpl(gh<_i984.RegisterDataSource>()),
@@ -255,7 +253,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i558.FlutterSecureStorage>(),
       ),
     );
-<<<<<<< HEAD
+    gh.factory<_i585.SearchRepoContract>(
+      () => _i790.SearchRepoImpl(gh<_i243.SearchRemoteDataSourceContract>()),
+    );
     gh.factory<_i191.LoginUseCase>(
       () => _i191.LoginUseCase(repo: gh<_i180.LoginRepoContract>()),
     );
@@ -287,6 +287,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i694.GetProductsOfSpecificOccasionUseCase(
         repo: gh<_i405.OccasionsRepoContract>(),
       ),
+    );
+    gh.factory<_i463.SearchProductsUseCase>(
+      () => _i463.SearchProductsUseCase(gh<_i585.SearchRepoContract>()),
     );
     gh.factory<_i217.RegisterUseCase>(
       () => _i217.RegisterUseCase(gh<_i668.RegisterRepository>()),
@@ -338,6 +341,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i584.GetProductsByCategoryUseCase>(),
       ),
     );
+    gh.factory<_i794.SearchViewModel>(
+      () => _i794.SearchViewModel(gh<_i463.SearchProductsUseCase>()),
+    );
     gh.factory<_i573.GetBestSellerProductsUseCase>(
       () => _i573.GetBestSellerProductsUseCase(
         repo: gh<_i949.BestSellerRepoContract>(),
@@ -352,19 +358,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i935.BestSellerViewModel>(
       () => _i935.BestSellerViewModel(gh<_i573.GetBestSellerProductsUseCase>()),
-=======
-    gh.factory<_i911.SearchRemoteDataSourceContract>(
-      () => _i49.SearchRemoteDataSourceImpl(gh<_i599.SearchApiClient>()),
-    );
-    gh.factory<_i481.SearchRepoContract>(
-      () => _i711.SearchRepoImpl(gh<_i911.SearchRemoteDataSourceContract>()),
-    );
-    gh.factory<_i1044.SearchProductsUseCase>(
-      () => _i1044.SearchProductsUseCase(gh<_i481.SearchRepoContract>()),
-    );
-    gh.factory<_i453.SearchViewModel>(
-      () => _i453.SearchViewModel(gh<_i1044.SearchProductsUseCase>()),
->>>>>>> origin/feature/search
     );
     return this;
   }

@@ -1,3 +1,5 @@
+import 'package:flowery/config/routing/app_routes.dart';
+import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,7 +16,7 @@ class BestSellerCustomWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeViewModel, HomeState>(
       buildWhen: (previous, current) =>
-      previous.bestSellerState != current.bestSellerState,
+          previous.bestSellerState != current.bestSellerState,
       builder: (context, state) {
         return state.bestSellerState.when(
           initial: () => const SizedBox(),
@@ -56,7 +58,21 @@ class _BestSellerCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        // context.pushNamed(AppRoutes.productDetails, arguments: product.id);
+        context.pushNamed(
+          AppRoutes.productDetails,
+          arguments: <String, dynamic>{
+            "title": product.title,
+            "image": product.imgCover,
+            "price": product.priceAfterDiscount,
+            "hasDiscount": product.discount! > 0 ? true : false,
+            "oldPrice": product.price,
+            "discount": product.discount,
+            "sold": product.sold,
+            "quantity": product.quantity,
+            "images": product.images,
+            "description": product.description,
+          },
+        );
       },
       child: Container(
         width: 160.w,
