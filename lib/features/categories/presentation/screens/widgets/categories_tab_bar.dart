@@ -9,8 +9,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CategoriesTabView extends StatefulWidget {
   final List<CategoryEntity> categories;
-
-  const CategoriesTabView({super.key, required this.categories});
+  final String? selectedCategoryId;
+  const CategoriesTabView({
+    super.key,
+    required this.categories,
+    this.selectedCategoryId,
+  });
 
   @override
   State<CategoriesTabView> createState() => _CategoriesTabViewState();
@@ -27,7 +31,22 @@ class _CategoriesTabViewState extends State<CategoriesTabView>
       length: widget.categories.length + 1,
       vsync: this,
     );
-    context.read<CategoriesCubit>().doEvent(GetProductsByCategoryEvent());
+
+    if (widget.selectedCategoryId != null &&
+        widget.selectedCategoryId!.isNotEmpty) {
+      final index = widget.categories.indexWhere(
+        (category) => category.id == widget.selectedCategoryId,
+      );
+
+      if (index != -1) {
+        _tabController.index = index + 1;
+      }
+    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<CategoriesCubit>().doEvent(
+        GetProductsByCategoryEvent(widget.selectedCategoryId),
+      );
+    });
   }
 
   @override
@@ -40,6 +59,7 @@ class _CategoriesTabViewState extends State<CategoriesTabView>
   Widget build(BuildContext context) {
     return Column(
       children: [
+        // Categories
         TabBar(
           controller: _tabController,
           onTap: (index) {
@@ -65,16 +85,21 @@ class _CategoriesTabViewState extends State<CategoriesTabView>
             ...widget.categories.map((c) => Tab(text: c.name ?? '')),
           ],
         ),
+
+        // Products
         Expanded(
           child: BlocBuilder<CategoriesCubit, CategoriesState>(
             buildWhen: (prev, curr) => prev.productsState != curr.productsState,
             builder: (context, state) {
               return state.productsState.when(
-                initial: () => const Center(child: Text(AppStrings.selectCategory)),
+                initial: () =>
+                    const Center(child: Text(AppStrings.selectCategory)),
                 loading: () => const Center(child: CircularProgressIndicator()),
                 success: (products) {
                   if (products.isEmpty) {
-                    return const Center(child: Text(AppStrings.noProductsFound));
+                    return const Center(
+                      child: Text(AppStrings.noProductsFound),
+                    );
                   }
                   return CustomGridView(
                     productsLength: products.length,

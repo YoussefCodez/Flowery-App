@@ -33,6 +33,7 @@ class CategoriesScreen extends StatelessWidget {
         body: SafeArea(
           child: Column(
             children: [
+              // Search and filter
               Padding(
                 padding: REdgeInsets.all(16),
                 child: Row(
@@ -50,12 +51,17 @@ class CategoriesScreen extends StatelessWidget {
                   ],
                 ),
               ),
+
+              // Categories tab and products
               Expanded(
                 child: BlocBuilder<CategoriesCubit, CategoriesState>(
                   builder: (context, state) {
                     return state.categoriesState.when(
                       success: (categories) {
-                        return CategoriesTabView(categories: categories);
+                        return CategoriesTabView(
+                          categories: categories,
+                          selectedCategoryId: selectedCategoryId,
+                        );
                       },
                       loading: () {
                         return const Center(child: CircularProgressIndicator());
