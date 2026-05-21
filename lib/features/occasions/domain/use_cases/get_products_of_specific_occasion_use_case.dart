@@ -8,7 +8,7 @@ class GetProductsOfSpecificOccasionUseCase {
   final OccasionsRepoContract repo;
   GetProductsOfSpecificOccasionUseCase({required this.repo});
 
-  Future<Result<List<ProductEntity>>> call(String occasionId) async {
-    return await repo.getProductsOfSpecificOccasion(occasionId);
+  Future<Result<List<ProductEntity>>> call(String occasionId) {
+    return repo.getProductsOfSpecificOccasion(occasionId);
   }
 }

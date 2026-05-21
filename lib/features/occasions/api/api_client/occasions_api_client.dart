@@ -14,7 +14,7 @@ abstract class OccasionsApiClient {
   factory OccasionsApiClient(Dio dio) = _OccasionsApiClient;
 
   @GET(AppEndPoints.occasions)
-  Future<OccasionsResponseModel> getOcassions();
+  Future<OccasionsResponseModel> getOccasions();
 
   @GET(AppEndPoints.products)
   Future<OccasionProductsResponseModel> getProductsOfSpecificOccasion(

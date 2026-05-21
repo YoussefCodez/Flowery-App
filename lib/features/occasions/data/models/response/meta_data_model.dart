@@ -6,13 +6,13 @@ part 'meta_data_model.g.dart';
 @JsonSerializable()
 class Metadata {
   @JsonKey(name: OccasionsValues.currentPage)
-  int currentPage;
+  int? currentPage;
   @JsonKey(name: OccasionsValues.limit)
-  int limit;
+  int? limit;
   @JsonKey(name: OccasionsValues.totalPages)
-  int totalPages;
+  int? totalPages;
   @JsonKey(name: OccasionsValues.totalItems)
-  int totalItems;
+  int? totalItems;
 
   Metadata({
     required this.currentPage,

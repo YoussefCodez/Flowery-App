@@ -7,47 +7,47 @@ part 'product_model.g.dart';
 @JsonSerializable()
 class Product {
   @JsonKey(name: OccasionsValues.id)
-  String id;
+  String? id;
   @JsonKey(name: OccasionsValues.title)
-  String title;
+  String? title;
   @JsonKey(name: OccasionsValues.slug)
-  String slug;
+  String? slug;
   @JsonKey(name: OccasionsValues.description)
-  String description;
+  String? description;
   @JsonKey(name: OccasionsValues.imgCover)
-  String imgCover;
+  String? imgCover;
   @JsonKey(name: OccasionsValues.images)
-  List<String> images;
+  List<String>? images;
   @JsonKey(name: OccasionsValues.price, defaultValue: 0)
-  int price;
+  int? price;
   @JsonKey(name: OccasionsValues.priceAfterDiscount, defaultValue: 0)
-  int priceAfterDiscount;
+  int? priceAfterDiscount;
   @JsonKey(name: OccasionsValues.discount, defaultValue: 0)
-  int discount;
+  int? discount;
   @JsonKey(name: OccasionsValues.rateAvg, defaultValue: 0)
-  int rateAvg;
+  int? rateAvg;
   @JsonKey(name: OccasionsValues.rateCount, defaultValue: 0)
-  int rateCount;
+  int? rateCount;
   @JsonKey(name: OccasionsValues.sold, defaultValue: 0)
-  int sold;
+  int? sold;
   @JsonKey(name: OccasionsValues.quantity, defaultValue: 0)
-  int quantity;
+  int? quantity;
   @JsonKey(name: OccasionsValues.category)
-  String category;
+  String? category;
   @JsonKey(name: OccasionsValues.occasion)
-  String occasion;
+  String? occasion;
   @JsonKey(name: OccasionsValues.isSuperAdmin)
-  bool isSuperAdmin;
+  bool? isSuperAdmin;
   @JsonKey(name: OccasionsValues.createdAt)
-  DateTime createdAt;
+  DateTime? createdAt;
   @JsonKey(name: OccasionsValues.updatedAt)
-  DateTime updatedAt;
+  DateTime? updatedAt;
   @JsonKey(name: OccasionsValues.v)
-  int v;
+  int? v;
   @JsonKey(name: OccasionsValues.favoriteId)
   dynamic favoriteId;
   @JsonKey(name: OccasionsValues.isInWishlist)
-  bool isInWishlist;
+  bool? isInWishlist;
 
   Product({
     required this.id,
@@ -80,15 +80,15 @@ class Product {
 
   ProductEntity toDomain() {
     return ProductEntity(
-      imgCover: imgCover,
-      title: title,
-      description: description,
-      price: price,
-      priceAfterDiscount: priceAfterDiscount,
-      discount: discount,
-      quantity: quantity,
-      sold: sold,
-      images: images
+      imgCover: imgCover ?? "",
+      title: title ?? "",
+      description: description ?? "",
+      price: price ?? 0,
+      priceAfterDiscount: priceAfterDiscount ?? 0,
+      discount: discount ?? 0,
+      quantity: quantity ?? 0,
+      sold: sold ?? 0,
+      images: images ?? []
     );
   }
 }

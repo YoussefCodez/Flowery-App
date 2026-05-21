@@ -1,4 +1,8 @@
-class ProductEntity {
+import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+
+@immutable
+class ProductEntity extends Equatable {
   final String imgCover;
   final String title;
   final String description;
@@ -8,7 +12,7 @@ class ProductEntity {
   final int quantity;
   final int sold;
   final List<String> images;
-  ProductEntity({
+  const ProductEntity({
     required this.title,
     required this.description,
     required this.imgCover,
@@ -19,4 +23,17 @@ class ProductEntity {
     required this.sold,
     required this.images,
   });
+
+  @override
+  List<Object?> get props => [
+    imgCover,
+    title,
+    description,
+    price,
+    priceAfterDiscount,
+    discount,
+    quantity,
+    sold,
+    images,
+  ];
 }

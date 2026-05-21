@@ -1,12 +1,12 @@
 import 'package:flowery/config/di/injectable_config.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/config/routing/routing_extensions.dart';
+import 'package:flowery/core/const/occasions_values.dart';
 import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flowery/core/widgets/custom_grid_view.dart';
-import 'package:flowery/features/occasions/domain/entities/product_entity.dart';
 import 'package:flowery/features/occasions/presentation/view_model/cubit/occasion_view_model.dart';
 import 'package:flowery/features/occasions/presentation/view_model/events/occasions_events.dart';
-import 'package:flowery/features/occasions/presentation/view_model/states/occasions_states.dart';
+import 'package:flowery/features/occasions/presentation/view_model/states/occasions_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,9 +18,13 @@ class OccasionsScreen extends StatefulWidget {
   State<OccasionsScreen> createState() => _OccasionsScreenState();
 }
 
-class _OccasionsScreenState extends State<OccasionsScreen> {
+class _OccasionsScreenState extends State<OccasionsScreen>
+    with TickerProviderStateMixin {
   late TextTheme textTheme;
   late AppLocalizations localizations;
+
+  TabController? _tabController;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -56,119 +60,74 @@ class _OccasionsScreenState extends State<OccasionsScreen> {
               ],
             ),
             titleSpacing: 0.0,
+            bottom: PreferredSize(
+              preferredSize: Size.fromHeight(50.h),
+              child: BlocConsumer<OccasionViewModel, OccasionsState>(
+                listenWhen: (previous, current) =>
+                    previous.names.length != current.names.length,
+                listener: (context, state) {
+                  _tabController?.dispose();
+                  _tabController = TabController(
+                    length: state.names.length,
+                    vsync: this,
+                  );
+
+                  // Listen to manual tab clicks
+                  _tabController?.addListener(() {
+                    if (_tabController!.indexIsChanging) {
+    
+                      context.read<OccasionViewModel>().doEvent(
+                        GetProductsOfSpecificOccasion(),occasionId: state.ids[_tabController!.index]
+                      );
+                    }
+                  });
+                },
+                builder: (BuildContext context, OccasionsState state) {
+                  // initializing the tab controller and getting the first occasion products
+                  if (_tabController == null ||
+                      _tabController!.length != state.names.length) {
+                    _tabController?.dispose();
+                    _tabController = TabController(
+                      length: state.names.length,
+                      vsync: this,
+                    );
+                  }
+
+                  if (state.isLoadingOccasions) {
+                    return CircularProgressIndicator();
+                  }
+
+                  return TabBar(
+                    controller: _tabController,
+                    isScrollable: true,
+                    tabAlignment: TabAlignment.start,
+                    tabs: state.names.map((name) {
+                      return Tab(text: name);
+                    }).toList(),
+                  );
+                },
+              ),
+            ),
           ),
-
-          body: BlocBuilder<OccasionViewModel, OccasionsStates>(
+          body: BlocBuilder<OccasionViewModel, OccasionsState>(
+            buildWhen: (previous, current) {
+              return previous.products != current.products;
+            },
             builder: (context, state) {
-              if (state is OccasionsLoadingState) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.primaryColor,
-                  ),
-                );
+              if (state.isLoadingProducts) {
+                return const Center(child: CircularProgressIndicator());
               }
-              return Column(
-                children: [
-                  // Occasions
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: SizedBox(
-                      height: 40.h,
 
-                      child: BlocBuilder<OccasionViewModel, OccasionsStates>(
-                        builder: (context, state) {
-                          if (state is OccasionsSuccessState) {
-                            final List<String> occasionsNames =
-                                state.names ?? [];
-                            final List<String> occasionsIds = state.ids ?? [];
-                            return ListView.separated(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: occasionsNames.length,
-                              separatorBuilder: (_, index) =>
-                                  SizedBox(width: 16.w),
-                              itemBuilder: (context, index) {
-                                final isSelected = state.selectedIndex == index;
-                                return InkWell(
-                                  onTap: () {
-                                    context.read<OccasionViewModel>().doEvent(
-                                      GetProductsOfSpecificOccasion(),
-                                      occasionId: occasionsIds[index],
-                                      index: index,
-                                    );
-                                  },
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        occasionsNames[index],
-                                        style: TextStyle(
-                                          fontSize: 16.sp,
-                                          color: isSelected
-                                              ? AppColors.primaryColor
-                                              : AppColors.grayColor,
-                                          fontWeight: isSelected
-                                              ? FontWeight.bold
-                                              : FontWeight.normal,
-                                        ),
-                                      ),
-                                      SizedBox(height: 10.h),
-                                      Container(
-                                        width: 63.sp,
-                                        height: 3.h,
-                                        color: isSelected
-                                            ? AppColors.primaryColor
-                                            : AppColors.grayColor,
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                            );
-                          }
-                          if (state is OccasionsFailedState) {
-                            return CircularProgressIndicator(
-                              color: AppColors.redColor,
-                            );
-                          }
-                          return const SizedBox();
-                        },
-                      ),
-                    ),
-                  ),
+              if (state.products.isEmpty) {
+                return Center(child: Text(localizations.no_products));
+              }
+              if (state.errorMessage != null && state.errorMessage != '') {
+                return Center(child: Text(localizations.an_error_occurred));
+              }
 
-                  SizedBox(height: 16.h),
-
-                  // Products
-                  Expanded(
-                    child: BlocBuilder<OccasionViewModel, OccasionsStates>(
-                      builder: (BuildContext context, state) {
-                        if (state is OccasionsFailedState) {
-                          return CircularProgressIndicator(
-                            color: AppColors.redColor,
-                          );
-                        }
-                        if (state is OccasionsSuccessState) {
-                          final List<ProductEntity> products =
-                              state.products ?? [];
-                          if (products.isNotEmpty) {
-                            return CustomGridView(
-                              products: products,
-                              productsLength: products.length,
-                            );
-                          } else {
-                            return Center(
-                              child: Text(
-                                localizations.no_products,
-                                style: textTheme.bodyMedium,
-                              ),
-                            );
-                          }
-                        }
-
-                        return const SizedBox.shrink();
-                      },
-                    ),
-                  ),
-                ],
+              return CustomGridView(
+                productsLength: state.products.length,
+                products: state.products,
               );
             },
           ),

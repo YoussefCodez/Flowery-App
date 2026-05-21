@@ -9,11 +9,11 @@ part 'occasions_response_model.g.dart';
 @JsonSerializable()
 class OccasionsResponseModel {
   @JsonKey(name: OccasionsValues.message)
-  String message;
+  String? message;
   @JsonKey(name: OccasionsValues.metadata)
-  Metadata metadata;
+  Metadata? metadata;
   @JsonKey(name: OccasionsValues.occasions)
-  List<Occasion> occasions;
+  List<Occasion>? occasions;
 
   OccasionsResponseModel({
     required this.message,

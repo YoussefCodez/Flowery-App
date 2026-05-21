@@ -9,7 +9,7 @@ class GetOccasionsUseCase {
 
   GetOccasionsUseCase({required this.repo});
 
-  Future<Result<List<OccasionEntity>>> call() async {
-    return await repo.getOccasions();
+  Future<Result<List<OccasionEntity>>> call() {
+    return repo.getOccasions();
   }
 }

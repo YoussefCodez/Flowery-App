@@ -7,21 +7,21 @@ part 'occasion_model.g.dart';
 @JsonSerializable()
 class Occasion {
   @JsonKey(name: OccasionsValues.id)
-  String id;
+  String? id;
   @JsonKey(name: OccasionsValues.name)
-  String name;
+  String? name;
   @JsonKey(name: OccasionsValues.slug)
-  String slug;
+  String? slug;
   @JsonKey(name: OccasionsValues.image)
-  String image;
+  String? image;
   @JsonKey(name: OccasionsValues.isSuperAdmin)
-  bool isSuperAdmin;
+  bool? isSuperAdmin;
   @JsonKey(name: OccasionsValues.createdAt)
-  DateTime createdAt;
+  DateTime? createdAt;
   @JsonKey(name: OccasionsValues.updatedAt)
-  DateTime updatedAt;
+  DateTime? updatedAt;
   @JsonKey(name: OccasionsValues.productsCount)
-  int productsCount;
+  int? productsCount;
 
   Occasion({
     required this.id,
@@ -41,8 +41,8 @@ class Occasion {
 
   OccasionEntity toDomain() {
     return OccasionEntity(
-      name: name,
-      id:id
+      name: name ?? "",
+      id:id ?? ""
     );
   }
 }
