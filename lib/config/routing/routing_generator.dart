@@ -1,5 +1,5 @@
 import 'package:flowery/config/routing/app_routes.dart';
-import 'package:flowery/features/presentation/screens/best_seller_screen.dart';
+import 'package:flowery/features/best_seller/presentation/screens/best_seller_screen.dart';
 import 'package:flutter/material.dart';
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
