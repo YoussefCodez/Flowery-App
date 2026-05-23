@@ -4,7 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomBill extends StatefulWidget {
-  const CustomBill({super.key});
+  final int? subtotal;
+  final int? discount;
+  final int? subtotalAfterDiscount;
+  final int? deliveryFee;
+  int get total => (subtotalAfterDiscount ?? 0) + (deliveryFee ?? 0);
+  int get discountMoney => (subtotalAfterDiscount ?? 0) - (subtotal ?? 0);
+  const CustomBill({
+    super.key,
+    required this.subtotal,
+    required this.discount,
+    required this.subtotalAfterDiscount,
+    required this.deliveryFee,
+  });
 
   @override
   State<CustomBill> createState() => _CustomBillState();
@@ -40,7 +52,7 @@ class _CustomBillState extends State<CustomBill> {
                 ),
               ),
               Text(
-                "100 EGP",
+                "${widget.subtotal.toString()} ${localizations.egp}",
                 style: textTheme.labelSmall?.copyWith(
                   color: AppColors.grayColor,
                   decoration: TextDecoration.none,
@@ -49,6 +61,51 @@ class _CustomBillState extends State<CustomBill> {
               ),
             ],
           ),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "${localizations.discount} (${widget.discount}%)",
+                style: textTheme.labelSmall?.copyWith(
+                  color: AppColors.grayColor,
+                  decoration: TextDecoration.none,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              Text(
+                "${widget.discountMoney.toString()} ${localizations.egp}",
+                style: textTheme.labelSmall?.copyWith(
+                  color: AppColors.grayColor,
+                  decoration: TextDecoration.none,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ],
+          ),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                localizations.sub_total_after_discount,
+                style: textTheme.labelSmall?.copyWith(
+                  color: AppColors.grayColor,
+                  decoration: TextDecoration.none,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              Text(
+                "${widget.subtotalAfterDiscount.toString()} ${localizations.egp}",
+                style: textTheme.labelSmall?.copyWith(
+                  color: AppColors.grayColor,
+                  decoration: TextDecoration.none,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ],
+          ),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -61,7 +118,7 @@ class _CustomBillState extends State<CustomBill> {
                 ),
               ),
               Text(
-                "10 EGP",
+                "${widget.deliveryFee.toString()} ${localizations.egp}",
                 style: textTheme.labelSmall?.copyWith(
                   color: AppColors.grayColor,
                   decoration: TextDecoration.none,
@@ -83,7 +140,7 @@ class _CustomBillState extends State<CustomBill> {
                 ),
               ),
               Text(
-                "110 EGP",
+                "${widget.total} ${localizations.egp}",
                 style: textTheme.labelMedium?.copyWith(
                   color: AppColors.blackColor,
                   decoration: TextDecoration.none,

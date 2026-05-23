@@ -22,7 +22,7 @@ class AuthInterceptor extends Interceptor {
     options.cancelToken = getIt<CancelToken>();
     String? authToken = await fss.read(key: Apikeys.accessToken);
     if (authToken != null && authToken.isNotEmpty) {
-      // options.headers['Authorization'] = 'Bearer $authToken';
+      options.headers['Authorization'] = 'Bearer $authToken';
       options.headers[Apikeys.token] = authToken;
     }
     super.onRequest(options, handler);

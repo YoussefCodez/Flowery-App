@@ -1,10 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/core/theme/app_colors.dart';
+import 'package:flowery/features/cart/domain/entities/cart_item_entity.dart';
+import 'package:flowery/features/cart/presentation/view_model/cubit/cart_view_model.dart';
+import 'package:flowery/features/cart/presentation/view_model/events/cart_events.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomOrderContainer extends StatefulWidget {
-  const CustomOrderContainer({super.key});
+  final CartItemEntity cartItem;
+  const CustomOrderContainer({super.key, required this.cartItem});
 
   @override
   State<CustomOrderContainer> createState() => _CustomOrderContainerState();
@@ -12,10 +18,12 @@ class CustomOrderContainer extends StatefulWidget {
 
 class _CustomOrderContainerState extends State<CustomOrderContainer> {
   late TextTheme textTheme;
+  late AppLocalizations localizations;
 
   @override
   void didChangeDependencies() {
     textTheme = Theme.of(context).textTheme;
+    localizations = AppLocalizations.of(context)!;
     super.didChangeDependencies();
   }
 
@@ -38,8 +46,7 @@ class _CustomOrderContainerState extends State<CustomOrderContainer> {
               height: 120.h,
               fit: BoxFit.cover,
 
-              imageUrl:
-                  "https://assets.bucketlistly.blog/sites/5adf778b6eabcc00190b75b1/content_entry5adf77af6eabcc00190b75b6/6075185986d092000b192d0a/files/best-free-travel-images-main-image-hd-op.webp",
+              imageUrl: widget.cartItem.product?.imgCover ?? "",
               placeholder: (context, url) => Center(
                 child: SizedBox(
                   width: 20.w,
@@ -53,43 +60,49 @@ class _CustomOrderContainerState extends State<CustomOrderContainer> {
 
           SizedBox(width: 5.w),
 
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 10.h),
+          Flexible(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 10.h),
 
-                  Text(
-                    "Red roses",
-                    style: textTheme.labelMedium?.copyWith(
-                      color: AppColors.blackColor,
-                      decoration: TextDecoration.none,
+                    Text(
+                      widget.cartItem.product?.title ?? "",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: textTheme.labelMedium?.copyWith(
+                        color: AppColors.blackColor,
+                        decoration: TextDecoration.none,
+                      ),
                     ),
-                  ),
-                  Text(
-                    "15 Pink Rose Bouquet",
-                    style: textTheme.labelMedium?.copyWith(
-                      fontSize: 13.sp,
-                      color: AppColors.grayColor,
-                      decoration: TextDecoration.none,
+                    Text(
+                      widget.cartItem.product?.description ?? "",
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: textTheme.labelMedium?.copyWith(
+                        fontSize: 13.sp,
+                        color: AppColors.grayColor,
+                        decoration: TextDecoration.none,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-
-              SizedBox(height: 30.h),
-
-              Text(
-                "EGP 600",
-                style: textTheme.labelMedium?.copyWith(
-                  color: AppColors.blackColor,
-                  fontWeight: FontWeight.bold,
-                  decoration: TextDecoration.none,
+                  ],
                 ),
-              ),
-            ],
+
+                SizedBox(height: 25.h),
+
+                Text(
+                  "${widget.cartItem.product?.price.toString()} ${localizations.egp}",
+                  style: textTheme.labelMedium?.copyWith(
+                    color: AppColors.blackColor,
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.none,
+                  ),
+                ),
+              ],
+            ),
           ),
 
           Column(
@@ -97,7 +110,12 @@ class _CustomOrderContainerState extends State<CustomOrderContainer> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.read<CartViewModel>().doEvent(
+                    DeleteSpecificCartItemEvent(),
+                    cartItemId: widget.cartItem.product?.productId ?? "",
+                  );
+                },
                 icon: Icon(Icons.delete_forever_rounded, size: 30),
                 color: AppColors.redColor,
               ),
@@ -108,7 +126,13 @@ class _CustomOrderContainerState extends State<CustomOrderContainer> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.read<CartViewModel>().doEvent(
+                        UpdateSpecificCartItemEvent(),
+                        cartItemId: widget.cartItem.product?.productId ?? "",
+                        quantity: widget.cartItem.quantity! - 1,
+                      );
+                    },
                     icon: Icon(
                       Icons.remove,
                       size: 20.sp,
@@ -117,14 +141,20 @@ class _CustomOrderContainerState extends State<CustomOrderContainer> {
                     color: AppColors.blackColor,
                   ),
                   Text(
-                    "1",
+                    widget.cartItem.quantity.toString(),
                     style: textTheme.labelMedium?.copyWith(
                       color: AppColors.blackColor,
                       decoration: TextDecoration.none,
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.read<CartViewModel>().doEvent(
+                        UpdateSpecificCartItemEvent(),
+                        cartItemId: widget.cartItem.product?.productId ?? "",
+                        quantity: widget.cartItem.quantity! + 1,
+                      );
+                    },
                     icon: Icon(
                       Icons.add,
                       size: 20.sp,

@@ -65,5 +65,8 @@
   "sub_total": "المجموع الفرعي",
   "delivery_fee": "رسوم التوصيل",
   "total": "الإجمالي",
-  "checkout": "إتمام الطلب"
+  "checkout": "إتمام الطلب",
+  "egp":"جنيه",
+  "discount": "خصم",
+  "sub_total_after_discount": "المجموع الفرعي بعد الخصم"
 }
