@@ -100,5 +100,14 @@
   "view_all": "View All",
   "cart": "Cart",
   "profile": "Profile",
-  "egp": "EGP"
+  "egp": "EGP",
+  "cart": "Cart",
+  "items": "items",
+  "sub_total": "Sub Total",
+  "delivery_fee": "Delivery Fee",
+  "total": "Total",
+  "checkout": "Checkout",
+  "egp":"EGP",
+  "discount": "Discount",
+  "sub_total_after_discount": "Subtotal After Discount"
 }

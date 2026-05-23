@@ -12,7 +12,7 @@ import 'package:flowery/features/register/presentation/pages/register_screen.dar
 import 'package:flowery/features/occasions/presentation/screens/occasions_screen.dart';
 import 'package:flowery/features/categories/presentation/screens/categories_screen.dart';
 import 'package:flowery/features/search/presentation/screen/search_view.dart';
-import 'package:flowery/features/best_seller/presentation/screens/best_seller_screen.dart';
+import 'package:flowery/features/cart/presentation/screens/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/forget_password/presentation/screens/email_verification_view.dart';
@@ -96,6 +96,10 @@ class RouteGenerator {
 
         case AppRoutes.search:
           return MaterialPageRoute(builder: (_) => const SearchView());
+        case AppRoutes.cart:
+          return MaterialPageRoute(
+            builder: (_) => CartScreen(),
+          );
 
         default:
           return unDefinedRoute();

@@ -23,4 +23,6 @@ abstract class AppRoutes {
   // Home
   static const String home = "/home";
 
+  // Cart
+  static const String cart = "/cart";
 }
