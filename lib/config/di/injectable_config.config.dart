@@ -31,6 +31,23 @@ import '../../features/best_seller/domain/use_cases/get_best_seller_products_use
     as _i573;
 import '../../features/best_seller/presentation/view_model/cubit/best_seller_view_model.dart'
     as _i935;
+import '../../features/cart/api/api_client/cart_api_client.dart' as _i673;
+import '../../features/cart/api/data_sources/cart_remote_data_source_impl.dart'
+    as _i866;
+import '../../features/cart/data/data_sources/cart_remote_data_source_contract.dart'
+    as _i447;
+import '../../features/cart/data/repo/cart_repo_impl.dart' as _i234;
+import '../../features/cart/domain/repo/cart_repo_contract.dart' as _i63;
+import '../../features/cart/domain/use_cases/add_to_cart_use_case.dart'
+    as _i252;
+import '../../features/cart/domain/use_cases/delete_specific_cart_item_use_case.dart'
+    as _i933;
+import '../../features/cart/domain/use_cases/get_user_cart_products_use_case.dart'
+    as _i807;
+import '../../features/cart/domain/use_cases/update_specific_cart_item_quantity_use_case.dart'
+    as _i93;
+import '../../features/cart/presentation/view_model/cubit/cart_view_model.dart'
+    as _i421;
 import '../../features/categories/api/api_client/categories_api_client.dart'
     as _i612;
 import '../../features/categories/api/data_source/get_categories_data_source_impl.dart'
@@ -171,6 +188,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i618.BestSellerApiClient>(
       () => _i618.BestSellerApiClient(gh<_i361.Dio>()),
     );
+    gh.factory<_i673.CartApiClient>(() => _i673.CartApiClient(gh<_i361.Dio>()));
     gh.factory<_i730.ForgetPasswordClient>(
       () => _i730.ForgetPasswordClient(gh<_i361.Dio>()),
     );
@@ -271,6 +289,10 @@ extension GetItInjectableX on _i174.GetIt {
       () =>
           _i247.GetCategoriesImpl(gh<_i764.GetCategoriesDataSourceContract>()),
     );
+    gh.factory<_i447.CartRemoteDataSourceContract>(
+      () =>
+          _i866.CartRemoteDataSourceImpl(apiClient: gh<_i673.CartApiClient>()),
+    );
     gh.factory<_i427.ForgetPasswordUseCase>(
       () => _i427.ForgetPasswordUseCase(gh<_i308.ForgetPasswordRepoContract>()),
     );
@@ -280,12 +302,33 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i920.VerifyEmailUseCase>(
       () => _i920.VerifyEmailUseCase(gh<_i308.ForgetPasswordRepoContract>()),
     );
+    gh.factory<_i63.CartRepoContract>(
+      () => _i234.CartRepoImpl(
+        remoteDataSource: gh<_i447.CartRemoteDataSourceContract>(),
+      ),
+    );
     gh.factory<_i569.GetOccasionsUseCase>(
       () => _i569.GetOccasionsUseCase(repo: gh<_i405.OccasionsRepoContract>()),
     );
     gh.factory<_i694.GetProductsOfSpecificOccasionUseCase>(
       () => _i694.GetProductsOfSpecificOccasionUseCase(
         repo: gh<_i405.OccasionsRepoContract>(),
+      ),
+    );
+    gh.factory<_i252.AddToCartUseCase>(
+      () => _i252.AddToCartUseCase(repo: gh<_i63.CartRepoContract>()),
+    );
+    gh.factory<_i933.DeleteSpecificCartItemUseCase>(
+      () => _i933.DeleteSpecificCartItemUseCase(
+        repo: gh<_i63.CartRepoContract>(),
+      ),
+    );
+    gh.factory<_i807.GetUserCartProductsUseCase>(
+      () => _i807.GetUserCartProductsUseCase(repo: gh<_i63.CartRepoContract>()),
+    );
+    gh.factory<_i93.UpdateSpecificCartItemQuantityUseCase>(
+      () => _i93.UpdateSpecificCartItemQuantityUseCase(
+        repo: gh<_i63.CartRepoContract>(),
       ),
     );
     gh.factory<_i463.SearchProductsUseCase>(
@@ -306,6 +349,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i584.GetProductsByCategoryUseCase>(
       () =>
           _i584.GetProductsByCategoryUseCase(gh<_i618.GetCategoriesContract>()),
+    );
+    gh.factory<_i421.CartViewModel>(
+      () => _i421.CartViewModel(
+        gh<_i807.GetUserCartProductsUseCase>(),
+        gh<_i933.DeleteSpecificCartItemUseCase>(),
+        gh<_i93.UpdateSpecificCartItemQuantityUseCase>(),
+        gh<_i252.AddToCartUseCase>(),
+      ),
     );
     gh.factory<_i705.LoginViewModel>(
       () => _i705.LoginViewModel(gh<_i191.LoginUseCase>()),

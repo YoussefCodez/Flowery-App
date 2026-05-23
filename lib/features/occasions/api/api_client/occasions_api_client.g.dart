@@ -20,7 +20,7 @@ class _OccasionsApiClient implements OccasionsApiClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<OccasionsResponseModel> getOcassions() async {
+  Future<OccasionsResponseModel> getOccasions() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

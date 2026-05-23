@@ -7,14 +7,18 @@ part of 'occasion_model.dart';
 // **************************************************************************
 
 Occasion _$OccasionFromJson(Map<String, dynamic> json) => Occasion(
-  id: json['_id'] as String,
-  name: json['name'] as String,
-  slug: json['slug'] as String,
-  image: json['image'] as String,
-  isSuperAdmin: json['isSuperAdmin'] as bool,
-  createdAt: DateTime.parse(json['createdAt'] as String),
-  updatedAt: DateTime.parse(json['updatedAt'] as String),
-  productsCount: (json['productsCount'] as num).toInt(),
+  id: json['_id'] as String?,
+  name: json['name'] as String?,
+  slug: json['slug'] as String?,
+  image: json['image'] as String?,
+  isSuperAdmin: json['isSuperAdmin'] as bool?,
+  createdAt: json['createdAt'] == null
+      ? null
+      : DateTime.parse(json['createdAt'] as String),
+  updatedAt: json['updatedAt'] == null
+      ? null
+      : DateTime.parse(json['updatedAt'] as String),
+  productsCount: (json['productsCount'] as num?)?.toInt(),
 );
 
 Map<String, dynamic> _$OccasionToJson(Occasion instance) => <String, dynamic>{
@@ -23,7 +27,7 @@ Map<String, dynamic> _$OccasionToJson(Occasion instance) => <String, dynamic>{
   'slug': instance.slug,
   'image': instance.image,
   'isSuperAdmin': instance.isSuperAdmin,
-  'createdAt': instance.createdAt.toIso8601String(),
-  'updatedAt': instance.updatedAt.toIso8601String(),
+  'createdAt': instance.createdAt?.toIso8601String(),
+  'updatedAt': instance.updatedAt?.toIso8601String(),
   'productsCount': instance.productsCount,
 };

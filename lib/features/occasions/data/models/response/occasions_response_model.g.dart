@@ -9,10 +9,12 @@ part of 'occasions_response_model.dart';
 OccasionsResponseModel _$OccasionsResponseModelFromJson(
   Map<String, dynamic> json,
 ) => OccasionsResponseModel(
-  message: json['message'] as String,
-  metadata: Metadata.fromJson(json['metadata'] as Map<String, dynamic>),
-  occasions: (json['occasions'] as List<dynamic>)
-      .map((e) => Occasion.fromJson(e as Map<String, dynamic>))
+  message: json['message'] as String?,
+  metadata: json['metadata'] == null
+      ? null
+      : Metadata.fromJson(json['metadata'] as Map<String, dynamic>),
+  occasions: (json['occasions'] as List<dynamic>?)
+      ?.map((e) => Occasion.fromJson(e as Map<String, dynamic>))
       .toList(),
 );
 
