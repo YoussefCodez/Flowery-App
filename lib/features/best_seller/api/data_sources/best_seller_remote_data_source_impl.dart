@@ -22,7 +22,7 @@ class BestSellerRemoteDataSourceImpl
       return Success<BestSellerProductsResponseModel>(data: response);
     } on DioException catch (e) {
       return Error<BestSellerProductsResponseModel>(
-        exception: e.response!.data[BestSellerValues.error],
+        exception: Exception(e.response!.data[BestSellerValues.error]),
       );
     }
   }

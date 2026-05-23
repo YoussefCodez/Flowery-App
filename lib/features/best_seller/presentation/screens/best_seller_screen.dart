@@ -59,29 +59,25 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
                 ..doEvent(GetBestSellerProductsEvent()),
           child: BlocBuilder<BestSellerViewModel, BestSellerStates>(
             builder: (context, state) {
-              if (state is BestSellerLoadingState) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.primaryColor,
-                  ),
-                );
-              }
-              if (state is BestSellerSuccessState) {
-                final products = state.products;
+              switch (state) {
+                case BestSellerInitState():
+                  return SizedBox.shrink();
+                case BestSellerLoadingState():
+                  return Center(child: CircularProgressIndicator());
+                case BestSellerSuccessState():
+                  final products = state.products;
 
-                if (products.isNotEmpty) {
-                  return CustomGridView(
-                    productsLength: products.length,
-                    products: products,
-                  );
-                } else {
-                  return Center(child: Text(localizations.no_products));
-                }
+                  if (products.isNotEmpty) {
+                    return CustomGridView(
+                      productsLength: products.length,
+                      products: products,
+                    );
+                  } else {
+                    return Center(child: Text(localizations.no_products));
+                  }
+                case BestSellerErrorState():
+                  return Center(child: Text(localizations.an_error_occurred));
               }
-              if (state is BestSellerErrorState) {
-                return Center(child: Text(localizations.an_error_occurred));
-              }
-              return CustomGridView(productsLength: 0, products: []);
             },
           ),
         ),

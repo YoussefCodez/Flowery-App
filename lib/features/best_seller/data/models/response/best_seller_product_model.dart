@@ -7,45 +7,45 @@ part 'best_seller_product_model.g.dart';
 @JsonSerializable()
 class BestSellerProduct {
   @JsonKey(name: BestSellerValues.privateId)
-  String id;
+  String? id;
   @JsonKey(name: BestSellerValues.title)
-  String title;
+  String? title;
   @JsonKey(name: BestSellerValues.slug)
-  String slug;
+  String? slug;
   @JsonKey(name: BestSellerValues.description)
-  String description;
+  String? description;
   @JsonKey(name: BestSellerValues.imgCover)
-  String imgCover;
+  String? imgCover;
   @JsonKey(name: BestSellerValues.images)
-  List<String> images;
+  List<String>? images;
   @JsonKey(name: BestSellerValues.price)
-  int price;
+  int? price;
   @JsonKey(name: BestSellerValues.priceAfterDiscount)
-  int priceAfterDiscount;
+  int? priceAfterDiscount;
   @JsonKey(name: BestSellerValues.discount)
-  int discount;
+  int? discount;
   @JsonKey(name: BestSellerValues.rateAvg)
-  int rateAvg;
+  int? rateAvg;
   @JsonKey(name: BestSellerValues.rateCount)
-  int rateCount;
+  int? rateCount;
   @JsonKey(name: BestSellerValues.sold)
   int? sold;
   @JsonKey(name: BestSellerValues.quantity)
-  int quantity;
+  int? quantity;
   @JsonKey(name: BestSellerValues.category)
-  String category;
+  String? category;
   @JsonKey(name: BestSellerValues.occasion)
-  String occasion;
+  String? occasion;
   @JsonKey(name: BestSellerValues.isSuperAdmin)
-  bool isSuperAdmin;
+  bool? isSuperAdmin;
   @JsonKey(name: BestSellerValues.createdAt)
-  DateTime createdAt;
+  DateTime? createdAt;
   @JsonKey(name: BestSellerValues.updatedAt)
-  DateTime updatedAt;
+  DateTime? updatedAt;
   @JsonKey(name: BestSellerValues.v)
-  int v;
+  int? v;
   @JsonKey(name: BestSellerValues.id)
-  String bestSellerId;
+  String? bestSellerId;
 
   BestSellerProduct({
     required this.id,
@@ -77,15 +77,15 @@ class BestSellerProduct {
 
   BestSellerProductEntity toDomain() {
     return BestSellerProductEntity(
-      title: title,
-      description: description,
-      imgCover: imgCover,
-      price: price,
-      priceAfterDiscount: priceAfterDiscount,
-      discount: discount,
-      quantity: quantity,
-      sold: sold,
-      images: images,
+      title: title ?? "",
+      description: description ?? "",
+      imgCover: imgCover ?? "",
+      price: price ?? 0,
+      priceAfterDiscount: priceAfterDiscount ?? 0,
+      discount: discount ?? 0,
+      quantity: quantity ?? 0,
+      sold: sold ?? 0,
+      images: images ?? [],
     );
   }
 }

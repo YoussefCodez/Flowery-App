@@ -12,4 +12,8 @@ class BestSellerSuccessState extends BestSellerStates {
   BestSellerSuccessState({required this.products});
 }
 
-class BestSellerErrorState extends BestSellerStates {}
+class BestSellerErrorState extends BestSellerStates {
+  final String errorMessage;
+  BestSellerErrorState({required this.errorMessage});
+
+}

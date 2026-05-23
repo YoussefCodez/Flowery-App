@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final bestSellerProductsResponseModel = bestSellerProductsResponseModelFromJson(jsonString);
-
 import 'package:flowery/core/const/best_seller_values.dart';
 import 'package:flowery/features/best_seller/data/models/response/best_seller_product_model.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -16,9 +12,9 @@ String bestSellerProductsResponseModelToJson(BestSellerProductsResponseModel dat
 @JsonSerializable()
 class BestSellerProductsResponseModel {
     @JsonKey(name: BestSellerValues.message)
-    String message;
+    String? message;
     @JsonKey(name: BestSellerValues.bestSeller)
-    List<BestSellerProduct> bestSeller;
+    List<BestSellerProduct>? bestSeller;
 
     BestSellerProductsResponseModel({
         required this.message,

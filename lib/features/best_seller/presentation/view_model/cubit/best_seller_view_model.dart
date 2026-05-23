@@ -28,7 +28,7 @@ class BestSellerViewModel extends Cubit<BestSellerStates> {
       case Success<List<BestSellerProductEntity>>():
         emit(BestSellerSuccessState(products: response.data!));
       case Error<List<BestSellerProductEntity>>():
-        emit(BestSellerErrorState());
+        emit(BestSellerErrorState(errorMessage: response.exception.toString()));
     }
   }
 }

@@ -15,6 +15,33 @@ void main() {
   late BestSellerViewModel viewModel;
   late MockGetBestSellerProductsUseCase mockGetBestSellerProductsUseCase;
 
+  final errorMessage = "an error has occured";
+
+  final bestSellerProducts = [
+    BestSellerProductEntity(
+      title: 'product-1',
+      description: 'product-1-description',
+      imgCover: 'image-1',
+      price: 80,
+      priceAfterDiscount: 100,
+      discount: 20,
+      quantity: 10,
+      sold: 5,
+      images: [],
+    ),
+    BestSellerProductEntity(
+      title: 'product-2',
+      description: 'product-2-description',
+      imgCover: 'image-2',
+      price: 80,
+      priceAfterDiscount: 100,
+      discount: 20,
+      quantity: 20,
+      sold: 10,
+      images: [],
+    ),
+  ];
+
   setUp(() {
     mockGetBestSellerProductsUseCase = MockGetBestSellerProductsUseCase();
     viewModel = BestSellerViewModel(mockGetBestSellerProductsUseCase);
@@ -23,86 +50,84 @@ void main() {
   blocTest<BestSellerViewModel, BestSellerStates>(
     "Testing best seller view model when it has a list of one or more products",
 
-    build: () {
+    setUp: () {
       when(() => mockGetBestSellerProductsUseCase.call()).thenAnswer(
-        (_) async => Success<List<BestSellerProductEntity>>(
-          data: [
-            BestSellerProductEntity(
-              title: 'product-1',
-              description: 'product-1-description',
-              imgCover: 'image-1',
-              price: 80,
-              priceAfterDiscount: 100,
-              discount: 20,
-              quantity: 10,
-              sold: 5,
-              images: [],
-            ),
-            BestSellerProductEntity(
-              title: 'product-2',
-              description: 'product-2-description',
-              imgCover: 'image-2',
-              price: 80,
-              priceAfterDiscount: 100,
-              discount: 20,
-              quantity: 20,
-              sold: 10,
-              images: [],
-            ),
-          ],
-        ),
+        (_) async =>
+            Success<List<BestSellerProductEntity>>(data: bestSellerProducts),
       );
-
-      return viewModel;
     },
+
+    build: () => viewModel,
+
     act: (viewModel) {
       viewModel.doEvent(GetBestSellerProductsEvent());
     },
     expect: () => [
       isA<BestSellerLoadingState>(),
-      isA<BestSellerSuccessState>(),
+      isA<BestSellerSuccessState>().having(
+        (state) => state.products,
+        "Checking the best seller products are simillar to the expected",
+        bestSellerProducts,
+      ),
     ],
+
     verify: (_) {
       verify(() => mockGetBestSellerProductsUseCase.call()).called(1);
     },
   );
 
   blocTest<BestSellerViewModel, BestSellerStates>(
-    "Testing best seller view model when it has a empty list",
+    "Testing best seller view model when it has an empty list of products",
 
-    build: () {
+    setUp: () {
       when(() => mockGetBestSellerProductsUseCase.call()).thenAnswer(
         (_) async => Success<List<BestSellerProductEntity>>(data: []),
       );
-
-      return viewModel;
     },
+
+    build: () => viewModel,
+
     act: (viewModel) {
       viewModel.doEvent(GetBestSellerProductsEvent());
     },
     expect: () => [
       isA<BestSellerLoadingState>(),
-      isA<BestSellerSuccessState>(),
+      isA<BestSellerSuccessState>().having(
+        (state) => state.products,
+        "Checking the best seller products are empty",
+        [],
+      ),
     ],
+
     verify: (_) {
       verify(() => mockGetBestSellerProductsUseCase.call()).called(1);
     },
   );
 
   blocTest<BestSellerViewModel, BestSellerStates>(
-    "Testing best seller view model when it has an error",
+    "Testing best seller view model when it gives error",
 
-    build: () {
-      when(
-        () => mockGetBestSellerProductsUseCase.call(),
-      ).thenAnswer((_) async => Error<List<BestSellerProductEntity>>());
-
-      return viewModel;
+    setUp: () {
+      when(() => mockGetBestSellerProductsUseCase.call()).thenAnswer(
+        (_) async => Error<List<BestSellerProductEntity>>(
+          exception: Exception(errorMessage),
+        ),
+      );
     },
+
+    build: () => viewModel,
+
     act: (viewModel) {
       viewModel.doEvent(GetBestSellerProductsEvent());
     },
-    expect: () => [isA<BestSellerLoadingState>(), isA<BestSellerErrorState>()],
+    expect: () => [
+      isA<BestSellerLoadingState>(),
+      isA<BestSellerErrorState>().having(
+        (state) => state.errorMessage,
+        "Checking the best seller products are simillar to the expected",
+        "Exception: $errorMessage",
+      ),
+    ],
 
     verify: (_) {
       verify(() => mockGetBestSellerProductsUseCase.call()).called(1);

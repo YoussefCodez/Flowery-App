@@ -16,7 +16,7 @@ class BestSellerRepoImpl implements BestSellerRepoContract {
     return response.when(
       success: (data) {
         return Success<List<BestSellerProductEntity>>(
-          data: data!.bestSeller.map((e) => e.toDomain()).toList(),
+          data: data!.bestSeller!.map((e) => e.toDomain()).toList(),
         );
       },
       error: (exception) {
