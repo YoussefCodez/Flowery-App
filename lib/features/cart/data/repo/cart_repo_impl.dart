@@ -31,10 +31,30 @@ class CartRepoImpl implements CartRepoContract {
         return Error<CartEntity>(exception: response.exception);
     }
   }
-  
+
   @override
-  Future<Result<CartEntity>> updateCartProductQuantity(String cartItemId, int quantity) async{
-    final response = await remoteDataSource.updateCartProductQuantity(cartItemId,quantity);
+  Future<Result<CartEntity>> updateCartProductQuantity(
+    String cartItemId,
+    int quantity,
+  ) async {
+    final response = await remoteDataSource.updateCartProductQuantity(
+      cartItemId,
+      quantity,
+    );
+    switch (response) {
+      case Success<CartResponseModel>():
+        return Success<CartEntity>(data: response.data?.cart?.toDomain());
+      case Error<CartResponseModel>():
+        return Error<CartEntity>(exception: response.exception);
+    }
+  }
+
+  @override
+  Future<Result<CartEntity>> addToCart(String cartItemId, int quantity) async {
+    final response = await remoteDataSource.addToCart(
+      cartItemId,
+      quantity,
+    );
     switch (response) {
       case Success<CartResponseModel>():
         return Success<CartEntity>(data: response.data?.cart?.toDomain());

@@ -53,4 +53,19 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSourceContract {
       );
     }
   }
+  
+  @override
+  Future<Result<CartResponseModel>> addToCart(String cartItemId, int quantity) async {
+    try {
+      final response = await apiClient.addToCart({
+        CartValues.product: cartItemId,
+        CartValues.quantity: quantity,
+      });
+      return Success<CartResponseModel>(data: response);
+    } on DioException catch (e) {
+      return Error<CartResponseModel>(
+        exception: Exception(e.response?.data[CartValues.error]),
+      );
+    }
+  }
 }

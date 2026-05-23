@@ -6,5 +6,10 @@ abstract interface class CartRepoContract {
 
   Future<Result<CartEntity>> deleteSpecificItem(String cartItemId);
 
-  Future<Result<CartEntity>> updateCartProductQuantity(String cartItemId, int quantity);
+  Future<Result<CartEntity>> updateCartProductQuantity(
+    String cartItemId,
+    int quantity,
+  );
+
+  Future<Result<CartEntity>> addToCart(String cartItemId, int quantity);
 }

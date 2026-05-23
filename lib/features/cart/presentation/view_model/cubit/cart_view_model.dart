@@ -1,5 +1,6 @@
 import 'package:flowery/config/base_response/base_response.dart';
 import 'package:flowery/features/cart/domain/entities/cart_entity.dart';
+import 'package:flowery/features/cart/domain/use_cases/add_to_cart_use_case.dart';
 import 'package:flowery/features/cart/domain/use_cases/delete_specific_cart_item_use_case.dart';
 import 'package:flowery/features/cart/domain/use_cases/get_user_cart_products_use_case.dart';
 import 'package:flowery/features/cart/domain/use_cases/update_specific_cart_item_quantity_use_case.dart';
@@ -14,10 +15,12 @@ class CartViewModel extends Cubit<CartBaseState> {
   final DeleteSpecificCartItemUseCase _deleteSpecificCartItemUseCase;
   final UpdateSpecificCartItemQuantityUseCase
   _updateSpecificCartItemQuantityUseCase;
+  final AddToCartUseCase _addToCartUseCase;
   CartViewModel(
     this._getUserCartProductsUseCase,
     this._deleteSpecificCartItemUseCase,
     this._updateSpecificCartItemQuantityUseCase,
+    this._addToCartUseCase
   ) : super(CartBaseState());
 
   void doEvent(CartEvents event, {String cartItemId = "", int quantity = 0}) {
@@ -28,6 +31,8 @@ class CartViewModel extends Cubit<CartBaseState> {
         _deleteSpecificCartItem(cartItemId);
       case UpdateSpecificCartItemEvent():
         _updateSpecificCartItemQuantity(cartItemId, quantity);
+      case AddToCartEvent():
+        _addToCart(cartItemId, quantity);
     }
   }
 
@@ -48,7 +53,6 @@ class CartViewModel extends Cubit<CartBaseState> {
   }
 
   void _deleteSpecificCartItem(String cartItemId) async {
-
     final response = await _deleteSpecificCartItemUseCase.call(cartItemId);
     switch (response) {
       case Success<CartEntity>():
@@ -64,7 +68,6 @@ class CartViewModel extends Cubit<CartBaseState> {
   }
 
   void _updateSpecificCartItemQuantity(String cartItemId, int quantity) async {
-
     if (quantity <= 0) {
       _deleteSpecificCartItem(cartItemId);
     } else {
@@ -83,6 +86,26 @@ class CartViewModel extends Cubit<CartBaseState> {
             ),
           );
       }
+    }
+  }
+
+  void _addToCart(String cartItemId, int quantity) async {
+      emit(state.copyWith(isAddingToCart: true));
+
+    final response = await _addToCartUseCase.call(
+      cartItemId,
+      quantity,
+    );
+    switch (response) {
+      case Success<CartEntity>():
+        emit(state.copyWith(isAddingToCart: false, cart: response.data));
+      case Error<CartEntity>():
+        emit(
+          state.copyWith(
+            isAddingToCart: false,
+            errorMessage: response.exception.toString(),
+          ),
+        );
     }
   }
 }

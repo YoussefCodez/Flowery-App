@@ -33,6 +33,7 @@ class CustomGridView extends StatelessWidget {
             sold: products[index].sold,
             quantity: products[index].quantity,
             images: products[index].images,
+            id: products[index].id,
           );
         },
         itemCount: productsLength,
