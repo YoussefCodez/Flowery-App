@@ -13,10 +13,13 @@ import 'package:flowery/features/occasions/presentation/screens/occasions_screen
 import 'package:flowery/features/categories/presentation/screens/categories_screen.dart';
 import 'package:flowery/features/search/presentation/screen/search_view.dart';
 import 'package:flowery/features/cart/presentation/screens/cart_screen.dart';
+import 'package:flowery/config/routing/app_routes.dart';
+import 'package:flowery/features/app_language_logout/presntation/demo_logout_language.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/forget_password/presentation/screens/email_verification_view.dart';
 import '../../features/forget_password/presentation/screens/reset_new_password_view.dart';
+
 
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
@@ -99,6 +102,14 @@ class RouteGenerator {
         case AppRoutes.cart:
           return MaterialPageRoute(builder: (_) => CartScreen());
 
+        // case AppRoutes.login:
+        //   return MaterialPageRoute(
+        //     builder: (_) => const LoginScreen(),
+        //   );
+        case AppRoutes.languagepage:
+          return MaterialPageRoute(
+            builder: (_) => const DemoLogoutLanguagePage(),
+          );
         default:
           return unDefinedRoute();
       }
@@ -112,6 +123,8 @@ class RouteGenerator {
       builder: (_) => Scaffold(
         appBar: AppBar(title: const Text('No Route Found')),
         body: const Center(child: Text('No Route Found')),
+        appBar: AppBar(title: const Text('No Route Found')),
+        body: const Center(child: Text('No Route Found')),
       ),
     );
   }
@@ -121,7 +134,10 @@ class RouteGenerator {
       builder: (_) => Scaffold(
         appBar: AppBar(title: const Text('Route Error')),
         body: Center(child: Text(error)),
+        appBar: AppBar(title: const Text('Route Error')),
+        body: Center(child: Text(error)),
       ),
     );
   }
 }
+

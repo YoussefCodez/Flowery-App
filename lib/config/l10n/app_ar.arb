@@ -111,5 +111,11 @@
   "egp":"جنيه",
   "discount": "خصم",
   "sub_total_after_discount": "المجموع الفرعي بعد الخصم",
-  "your_cart_is_empty": "السلة فارغة"
+  "your_cart_is_empty": "السلة فارغة",
+  "language": "اللغة",
+  "cancel": "إلغاء",
+  "confirm_logout": "تأكيد تسجيل الخروج!!",
+  "change_language": "تغيير اللغة",
+  "arabic": "العربية",
+  "english": "الإنجليزية"
 }

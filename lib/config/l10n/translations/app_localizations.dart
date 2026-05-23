@@ -488,6 +488,7 @@ abstract class AppLocalizations {
   /// **'An error occurred'**
   String get an_error_occurred;
 
+<<<<<<< HEAD
   /// No description provided for @best_seller.
   ///
   /// In en, this message translates to:
@@ -739,6 +740,43 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your cart is empty'**
   String get your_cart_is_empty;
+=======
+  /// No description provided for @language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get language;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @confirm_logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm logout!!'**
+  String get confirm_logout;
+
+  /// No description provided for @change_language.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Language'**
+  String get change_language;
+
+  /// No description provided for @arabic.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic'**
+  String get arabic;
+
+  /// No description provided for @english.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get english;
+>>>>>>> origin/feature/app_languge&logout
 }
 
 class _AppLocalizationsDelegate

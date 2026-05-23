@@ -208,6 +208,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get an_error_occurred => 'حدث خطأ';
 
   @override
+<<<<<<< HEAD
   String get best_seller => 'الأكثر مبيعًا';
 
   @override
@@ -335,4 +336,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get your_cart_is_empty => 'السلة فارغة';
+=======
+  String get language => 'اللغة';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get confirm_logout => 'تأكيد تسجيل الخروج!!';
+
+  @override
+  String get change_language => 'تغيير اللغة';
+
+  @override
+  String get arabic => 'العربية';
+
+  @override
+  String get english => 'الإنجليزية';
+>>>>>>> origin/feature/app_languge&logout
 }

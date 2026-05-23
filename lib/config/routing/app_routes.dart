@@ -25,4 +25,5 @@ abstract class AppRoutes {
 
   // Cart
   static const String cart = "/cart";
+  static const String languagepage = "/language-page";
 }

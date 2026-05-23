@@ -11,10 +11,11 @@ abstract class AppEndPoints {
   static const String forgetPassword = 'auth/forgotPassword';
   static const String verifyResetPassword = 'auth/verifyResetCode';
   static const String resetPassword = 'auth/resetPassword';
-  
+
   static const String login = 'auth/signin';
   static const String categories = 'categories';
   static const String getHomeData = 'home';
   static const String getProduct = "products";
   static const String cart = 'cart';
+  static const String logout = 'auth/logout';
 }
