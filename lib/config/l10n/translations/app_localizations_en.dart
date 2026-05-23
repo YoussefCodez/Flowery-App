@@ -315,4 +315,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get egp => 'EGP';
+
+  @override
+  String get items => 'items';
+
+  @override
+  String get sub_total => 'Sub Total';
+
+  @override
+  String get delivery_fee => 'Delivery Fee';
+
+  @override
+  String get total => 'Total';
+
+  @override
+  String get checkout => 'Checkout';
+
+  @override
+  String get discount => 'Discount';
+
+  @override
+  String get sub_total_after_discount => 'Subtotal After Discount';
+
+  @override
+  String get your_cart_is_empty => 'Your cart is empty';
 }

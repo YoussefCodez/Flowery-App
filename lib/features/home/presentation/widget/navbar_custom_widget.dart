@@ -28,7 +28,7 @@ class NavBarCustomWidget extends StatelessWidget {
             context.pushNamed(AppRoutes.categories);
             break;
           case 2:
-           // Navigator.pushNamed(context, AppRoutes.cartView);
+           Navigator.pushNamed(context, AppRoutes.cart);
             break;
           case 3:
            // Navigator.pushNamed(context, AppRoutes.profileView);

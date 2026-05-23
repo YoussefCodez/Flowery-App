@@ -23,7 +23,7 @@ class OccasionViewModel extends Cubit<OccasionsState> {
   void doEvent(OccasionsEvents event, {String occasionId = ''}) {
     switch (event) {
       case GetOccasionsEvent():
-        _getOccasions(incomingIndex: incomingIndex);
+        _getOccasions();
       case GetProductsOfSpecificOccasion():
         _getProductsOfSpecificOccasion(occasionId: occasionId);
     }

@@ -35,126 +35,139 @@ class CustomProductCard extends StatelessWidget {
     required this.quantity,
     required this.images,
     required this.id,
+    required this.description,
   });
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<CartViewModel>(
       create: (context) => getIt.get<CartViewModel>(),
-      child: InkWell(
-        onTap: () => context.pushNamed(
-          AppRoutes.productDetails,
-          arguments: <String, dynamic>{
-            AppStrings.title: title,
-            AppStrings.image: image,
-            AppStrings.price: price,
-            AppStrings.discount: discount,
-            AppStrings.sold: sold,
-            AppStrings.quantity: quantity,
-            AppStrings.images: images,
-          },
-        ),
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Theme.of(context).colorScheme.onSecondary,
+      child: Builder(
+        builder: (context) {
+          return InkWell(
+            onTap: () => context.pushNamed(
+              AppRoutes.productDetails,
+              arguments: <String, dynamic>{
+                AppStrings.title: title,
+                AppStrings.image: image,
+                AppStrings.price: price,
+                AppStrings.discount: discount,
+                AppStrings.sold: sold,
+                AppStrings.quantity: quantity,
+                AppStrings.images: images,
+              },
             ),
-            borderRadius: BorderRadius.circular(8.r),
-          ),
-          padding: REdgeInsets.all(8),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Expanded(
-                child: CachedNetworkImage(
-                  imageUrl: image,
-                  height: 130.h,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) => Center(
-                    child: CircularProgressIndicator(
-                      color: Theme.of(context).colorScheme.primary,
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Theme.of(context).colorScheme.onSecondary,
+                ),
+                borderRadius: BorderRadius.circular(8.r),
+              ),
+              padding: REdgeInsets.all(8),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Expanded(
+                    child: CachedNetworkImage(
+                      imageUrl: image,
+                      height: 130.h,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => Center(
+                        child: CircularProgressIndicator(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => Icon(
+                        Icons.error,
+                        color: Theme.of(context).colorScheme.error,
+                      ),
                     ),
                   ),
-                  errorWidget: (context, url, error) => Icon(
-                    Icons.error,
-                    color: Theme.of(context).colorScheme.error,
-                  ),
-                ),
-              ),
-              SizedBox(height: 8.h),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: Theme.of(
-                      context,
-                    ).textTheme.labelLarge?.copyWith(fontSize: 12.sp),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    spacing: 7.sp,
+                  SizedBox(height: 8.h),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "EGP $price",
-                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          fontWeight: .w500,
-                          fontSize: 14.sp,
-                        ),
+                        title,
+                        style: Theme.of(
+                          context,
+                        ).textTheme.labelLarge?.copyWith(fontSize: 12.sp),
                       ),
-                      Text(
-                        "$oldPrice",
-                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          decoration: TextDecoration.lineThrough,
-                          decorationColor: Theme.of(
-                            context,
-                          ).colorScheme.onSecondary,
-                          decorationThickness: 1.w,
-                          color: Theme.of(context).colorScheme.onSecondary,
-                          fontSize: 12.sp,
-                        ),
-                      ),
-                      Text(
-                        "$discount%",
-                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          fontWeight: .w400,
-                          color: AppColors.greenColor,
-                          fontSize: 12.sp,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        spacing: 7.sp,
+                        children: [
+                          Text(
+                            "EGP $price",
+                            style: Theme.of(context).textTheme.labelLarge
+                                ?.copyWith(fontWeight: .w500, fontSize: 14.sp),
+                          ),
+                          Text(
+                            "$oldPrice",
+                            style: Theme.of(context).textTheme.labelLarge
+                                ?.copyWith(
+                                  decoration: TextDecoration.lineThrough,
+                                  decorationColor: Theme.of(
+                                    context,
+                                  ).colorScheme.onSecondary,
+                                  decorationThickness: 1.w,
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onSecondary,
+                                  fontSize: 12.sp,
+                                ),
+                          ),
+                          Text(
+                            "$discount%",
+                            style: Theme.of(context).textTheme.labelLarge
+                                ?.copyWith(
+                                  fontWeight: .w400,
+                                  color: AppColors.greenColor,
+                                  fontSize: 12.sp,
+                                ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ],
-              ),
-              SizedBox(height: 8.h),
-              ElevatedButton(
-                onPressed: () =>
-                    context.read<CartViewModel>()
+                  SizedBox(height: 8.h),
+                  ElevatedButton(
+                    onPressed: () => context.read<CartViewModel>()
                       ..doEvent(AddToCartEvent(), cartItemId: id, quantity: 1),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.shopping_cart_outlined, size: 16.sp),
-                    SizedBox(width: 4.w),
-                    BlocBuilder<CartViewModel, CartBaseState>(
+                    child: BlocBuilder<CartViewModel, CartBaseState>(
                       builder: (context, state) {
                         if (state.isAddingToCart == true) {
-                          return Center(child: CircularProgressIndicator());
+                          return SizedBox(
+                            height: 15.h,
+                            width: 15.w,
+                            child: CircularProgressIndicator(
+                              color: AppColors.whiteColor,
+                              strokeWidth: 2,
+                            ),
+                          );
                         } else {
-                          return Text(
-                            AppStrings.addToCart,
-                            style: Theme.of(context).textTheme.titleLarge,
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.shopping_cart_outlined, size: 16.sp),
+                              SizedBox(width: 4.w),
+                              Text(
+                                AppStrings.addToCart,
+                                style: Theme.of(context).textTheme.titleLarge,
+                              ),
+                            ],
                           );
                         }
                       },
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }

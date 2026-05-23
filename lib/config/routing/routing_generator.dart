@@ -73,7 +73,7 @@ class RouteGenerator {
         case AppRoutes.occasions:
           final occasionId = settings.arguments as String?;
           return MaterialPageRoute(
-            builder: (_) => OccasionsScreen(selectedOccasionId: occasionId),
+            builder: (_) => OccasionsScreen(occasionId: occasionId ?? ""),
           );
 
         case AppRoutes.categories:
@@ -97,9 +97,7 @@ class RouteGenerator {
         case AppRoutes.search:
           return MaterialPageRoute(builder: (_) => const SearchView());
         case AppRoutes.cart:
-          return MaterialPageRoute(
-            builder: (_) => CartScreen(),
-          );
+          return MaterialPageRoute(builder: (_) => CartScreen());
 
         default:
           return unDefinedRoute();

@@ -1,7 +1,6 @@
 import 'package:flowery/config/di/injectable_config.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/config/routing/routing_extensions.dart';
-import 'package:flowery/core/const/occasions_values.dart';
 import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flowery/core/widgets/custom_grid_view.dart';
 import 'package:flowery/features/occasions/presentation/view_model/cubit/occasion_view_model.dart';
@@ -12,8 +11,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OccasionsScreen extends StatefulWidget {
-  final String? selectedOccasionId;
-  const OccasionsScreen({super.key, this.selectedOccasionId = ""});
+  final String occasionId;
+  const OccasionsScreen({
+    super.key,
+    required this.occasionId,
+    String? selectedOccasionId,
+  });
 
   @override
   State<OccasionsScreen> createState() => _OccasionsScreenState();
@@ -36,11 +39,8 @@ class _OccasionsScreenState extends State<OccasionsScreen>
   @override
   Widget build(BuildContext context) {
     return BlocProvider<OccasionViewModel>(
-      create: (context) {
-        return getIt.get<OccasionViewModel>()
-          ..doEvent(GetOccasionsEvent(), incomingIndex: -1);
-      },
-
+      create: (context) =>
+          getIt.get<OccasionViewModel>()..doEvent(GetOccasionsEvent()),
       child: ScreenUtilInit(
         designSize: Size(375.sp, 812.sp),
         child: Scaffold(
@@ -79,9 +79,9 @@ class _OccasionsScreenState extends State<OccasionsScreen>
                   // Listen to manual tab clicks
                   _tabController?.addListener(() {
                     if (_tabController!.indexIsChanging) {
-    
                       context.read<OccasionViewModel>().doEvent(
-                        GetProductsOfSpecificOccasion(),occasionId: state.ids[_tabController!.index]
+                        GetProductsOfSpecificOccasion(),
+                        occasionId: state.ids[_tabController!.index],
                       );
                     }
                   });

@@ -8,24 +8,27 @@ class CustomLocation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Icon(Icons.location_on_outlined),
-        Text(
-          " Deliver to ",
-          style: TextStyle(fontSize: 20.sp, color: AppColors.grayColor),
-        ),
-        Text(
-          "2XVP+XC - Sheikh Zayed.....",
-          style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
-        ),
-        Icon(
-          Icons.keyboard_arrow_down_sharp,
-          size: 30.sp,
-          fontWeight: FontWeight.w100,
-          weight: 10,
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+          Icon(Icons.location_on_outlined),
+          Text(
+            " Deliver to ",
+            style: TextStyle(fontSize: 18.sp, color: AppColors.grayColor),
+          ),
+          Text(
+            "2XVP+XC - Sheikh Zayed.....",
+            style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w500),
+          ),
+          Icon(
+            Icons.keyboard_arrow_down_sharp,
+            size: 18.sp,
+            fontWeight: FontWeight.w100,
+            weight: 10,
+          ),
+        ],
+      ),
     );
   }
 }

@@ -7,6 +7,7 @@ import 'package:flowery/features/cart/presentation/view_model/states/cart_base_s
 import 'package:flowery/features/cart/presentation/widgets/custom_bill.dart';
 import 'package:flowery/features/cart/presentation/widgets/custom_location.dart';
 import 'package:flowery/features/cart/presentation/widgets/custom_order_container.dart';
+import 'package:flowery/features/home/presentation/widget/navbar_custom_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,14 +30,14 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: Size(375.w, 812.h),
-      child: BlocProvider<CartViewModel>(
-        create: (context) =>
-            getIt.get<CartViewModel>()..doEvent(GetUserCartProductsEvent()),
-        child: Scaffold(
-          appBar: AppBar(
-            title: Row(
+    return BlocProvider<CartViewModel>(
+      create: (context) =>
+          getIt.get<CartViewModel>()..doEvent(GetUserCartProductsEvent()),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
               children: [
                 Text(localizations.cart),
                 BlocBuilder<CartViewModel, CartBaseState>(
@@ -58,59 +59,62 @@ class _CartScreenState extends State<CartScreen> {
                 ),
               ],
             ),
-            titleSpacing: 0.0,
-            leading: IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.arrow_back_ios_new),
-            ),
-            bottom: PreferredSize(
-              preferredSize: Size(343.w, 40.h),
-              child: CustomLocation(),
-            ),
           ),
-          body: Column(
-            children: [
-              Expanded(
-                child: BlocBuilder<CartViewModel, CartBaseState>(
-                  builder: (context, state) {
-                    if (state.isLoadingCart == true) {
-                      return const Center(child: CircularProgressIndicator());
-                    } else {
-                      return Scrollbar(
-                        thumbVisibility: true,
-                        thickness: 6.w,
-                        child: ListView.builder(
-                          itemCount: state.cart.numberOfCartItems,
-                          itemBuilder: (context, index) {
-                            return CustomOrderContainer(
-                              cartItem: state.cart.cartItems![index],
-                            );
-                          },
-                        ),
-                      );
-                    }
-                  },
-                ),
-              ),
-              SizedBox(height: 10.h),
-
-              BlocBuilder<CartViewModel, CartBaseState>(
+          automaticallyImplyLeading: false,
+          titleSpacing: 0.0,
+          bottom: PreferredSize(
+            preferredSize: Size(343.w, 40.h),
+            child: CustomLocation(),
+          ),
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: BlocBuilder<CartViewModel, CartBaseState>(
                 builder: (context, state) {
-                  if (state.isLoadingCart == false && state.cart.numberOfCartItems! > 0) {
-                    return CustomBill(
-                      subtotal: state.cart.totalPriceBeforeDiscount,
-                      discount: state.cart.discount,
-                      subtotalAfterDiscount: state.cart.totalPriceAfterDiscount,
-                      deliveryFee: state.deliveryFee,
+                  if (state.isLoadingCart == true) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (state.cart.cartItems!.isEmpty) {
+                    return Center(
+                      child: Text(localizations.your_cart_is_empty),
                     );
                   } else {
-                    return const SizedBox.shrink();
+                    return Scrollbar(
+                      thumbVisibility: true,
+                      thickness: 6.w,
+                      child: ListView.builder(
+                        itemCount: state.cart.numberOfCartItems,
+                        itemBuilder: (context, index) {
+                          return CustomOrderContainer(
+                            cartItem: state.cart.cartItems![index],
+                          );
+                        },
+                      ),
+                    );
                   }
                 },
               ),
-            ],
-          ),
+            ),
+            SizedBox(height: 10.h),
+
+            BlocBuilder<CartViewModel, CartBaseState>(
+              builder: (context, state) {
+                if (state.isLoadingCart == false &&
+                    state.cart.numberOfCartItems! > 0) {
+                  return CustomBill(
+                    subtotal: state.cart.totalPriceBeforeDiscount,
+                    discount: state.cart.discount,
+                    subtotalAfterDiscount: state.cart.totalPriceAfterDiscount,
+                    deliveryFee: state.deliveryFee,
+                  );
+                } else {
+                  return const SizedBox.shrink();
+                }
+              },
+            ),
+          ],
         ),
+        bottomNavigationBar: NavBarCustomWidget(currentIndex: 2),
       ),
     );
   }
