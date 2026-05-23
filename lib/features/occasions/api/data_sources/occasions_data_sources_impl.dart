@@ -15,12 +15,12 @@ class OccasionsDataSourcesImpl implements OccasionsDataSourcesContract {
   @override
   Future<Result<OccasionsResponseModel>> getOccasions() async {
     try {
-      final response = await apiClient.getOcassions();
+      final response = await apiClient.getOccasions();
 
       return Success<OccasionsResponseModel>(data: response);
     } on DioException catch (e) {
       return Error<OccasionsResponseModel>(
-        exception: e.response!.data[OccasionsValues.error],
+        exception: Exception(e.response?.data[OccasionsValues.error]),
       );
     }
   }

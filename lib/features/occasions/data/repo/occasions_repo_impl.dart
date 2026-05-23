@@ -17,7 +17,7 @@ class OccasionsRepoImpl implements OccasionsRepoContract {
     return response.when(
       success: (data) {
         return Success<List<OccasionEntity>>(
-          data: data!.occasions.map((e) => e.toDomain()).toList(),
+          data: data!.occasions!.map((e) => e.toDomain()).toList(),
         );
       },
       error: (exception) {
@@ -36,7 +36,7 @@ class OccasionsRepoImpl implements OccasionsRepoContract {
     return response.when(
       success: (data) {
         return Success<List<ProductEntity>>(
-          data: data!.products.map((e) => e.toDomain()).toList(),
+          data: data!.products!.map((e) => e.toDomain()).toList(),
         );
       },
       error: (exception) {

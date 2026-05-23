@@ -13,11 +13,11 @@ String occasionProductsResponseModelToJson(OccasionProductsResponseModel data) =
 @JsonSerializable()
 class OccasionProductsResponseModel {
     @JsonKey(name: OccasionsValues.message)
-    String message;
+    String? message;
     @JsonKey(name: OccasionsValues.metadata)
-    Metadata metadata;
+    Metadata? metadata;
     @JsonKey(name: OccasionsValues.products)
-    List<Product> products;
+    List<Product>? products;
 
     OccasionProductsResponseModel({
         required this.message,
