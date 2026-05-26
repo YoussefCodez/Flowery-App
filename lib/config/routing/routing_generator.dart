@@ -1,6 +1,7 @@
 import 'package:flowery/config/di/injectable_config.dart';
 import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/features/best_seller/presentation/screens/best_seller_screen.dart';
+import 'package:flowery/features/cart/presentation/view_model/cubit/cart_view_model.dart';
 import 'package:flowery/features/home/presentation/screens/home_view.dart';
 import 'package:flowery/features/home/presentation/view_model/home_cubit.dart';
 import 'package:flowery/features/home/presentation/view_model/home_event.dart';
@@ -13,13 +14,11 @@ import 'package:flowery/features/occasions/presentation/screens/occasions_screen
 import 'package:flowery/features/categories/presentation/screens/categories_screen.dart';
 import 'package:flowery/features/search/presentation/screen/search_view.dart';
 import 'package:flowery/features/cart/presentation/screens/cart_screen.dart';
-import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/features/app_language_logout/presntation/demo_logout_language.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/forget_password/presentation/screens/email_verification_view.dart';
 import '../../features/forget_password/presentation/screens/reset_new_password_view.dart';
-
 
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
@@ -28,19 +27,25 @@ class RouteGenerator {
         case AppRoutes.productDetails:
           final args = settings.arguments as Map<String, dynamic>;
           return MaterialPageRoute(
-            builder: (_) => ProductsDetailsScreen(
-              imageUrl: args["image"] ?? "",
-              title: args["title"] ?? "",
-              price: (args["price"] as num?)?.toDouble() ?? 0.0,
-              isdescount:
-                  args["hasDiscount"] ??
-                  false, // Map card's hasDiscount to screen's isdescount
-              oldPrice: (args["oldPrice"] as num?)?.toDouble() ?? 0.0,
-              discount: (args["discount"] as num?)?.toDouble() ?? 0.0,
-              sold: args["sold"] ?? 0,
-              quantity: args["quantity"] ?? 0,
-              images: List<String>.from(args["images"] ?? []),
-              description: args["description"] ?? "",
+            builder: (_) => BlocProvider(
+              create: (context) => getIt.get<CartViewModel>(),
+              child: ProductsDetailsScreen(
+                imageUrl: args["image"] ?? "",
+                title: args["title"] ?? "",
+                price: (args["price"] as num?)?.toDouble() ?? 0.0,
+                isdescount: args["hasDiscount"] ?? false,
+                oldPrice: (args["oldPrice"] as num?)?.toDouble() ?? 0.0,
+                discount: (args["discount"] as num?)?.toDouble() ?? 0.0,
+                sold: args["sold"] ?? 0,
+                quantity: args["quantity"] ?? 0,
+                images:
+                    (args["images"] as List?)
+                        ?.map((e) => e.toString())
+                        .toList() ??
+                    [],
+                description: args["description"] ?? "",
+                id: args["id"] ?? "",
+              ),
             ),
           );
 
@@ -123,8 +128,6 @@ class RouteGenerator {
       builder: (_) => Scaffold(
         appBar: AppBar(title: const Text('No Route Found')),
         body: const Center(child: Text('No Route Found')),
-        appBar: AppBar(title: const Text('No Route Found')),
-        body: const Center(child: Text('No Route Found')),
       ),
     );
   }
@@ -134,10 +137,7 @@ class RouteGenerator {
       builder: (_) => Scaffold(
         appBar: AppBar(title: const Text('Route Error')),
         body: Center(child: Text(error)),
-        appBar: AppBar(title: const Text('Route Error')),
-        body: Center(child: Text(error)),
       ),
     );
   }
 }
-

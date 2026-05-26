@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flowery/config/di/injectable_config.dart';
+import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_extensions.dart';
-import 'package:flowery/core/const/app_strings.dart';
 import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flowery/features/cart/presentation/view_model/cubit/cart_view_model.dart';
 import 'package:flowery/features/cart/presentation/view_model/events/cart_events.dart';
@@ -12,7 +12,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomProductCard extends StatelessWidget {
-  final String id;
   final String title;
   final String image;
   final double price;
@@ -23,6 +22,7 @@ class CustomProductCard extends StatelessWidget {
   final int quantity;
   final List<String> images;
   final String description;
+  final String id;
   const CustomProductCard({
     super.key,
     required this.title,
@@ -34,8 +34,8 @@ class CustomProductCard extends StatelessWidget {
     required this.sold,
     required this.quantity,
     required this.images,
-    required this.id,
     required this.description,
+    required this.id,
   });
 
   @override
@@ -45,18 +45,24 @@ class CustomProductCard extends StatelessWidget {
       child: Builder(
         builder: (context) {
           return InkWell(
-            onTap: () => context.pushNamed(
-              AppRoutes.productDetails,
-              arguments: <String, dynamic>{
-                AppStrings.title: title,
-                AppStrings.image: image,
-                AppStrings.price: price,
-                AppStrings.discount: discount,
-                AppStrings.sold: sold,
-                AppStrings.quantity: quantity,
-                AppStrings.images: images,
-              },
-            ),
+            onTap: () {
+              context.pushNamed(
+                AppRoutes.productDetails,
+                arguments: <String, dynamic>{
+                  "title": title,
+                  "image": image,
+                  "price": price,
+                  "hasDiscount": hasDiscount,
+                  "oldPrice": oldPrice,
+                  "discount": discount,
+                  "sold": sold,
+                  "quantity": quantity,
+                  "images": images,
+                  "description": description,
+                  "id": id,
+                },
+              );
+            },
             child: Container(
               decoration: BoxDecoration(
                 border: Border.all(
@@ -102,7 +108,10 @@ class CustomProductCard extends StatelessWidget {
                           Text(
                             "EGP $price",
                             style: Theme.of(context).textTheme.labelLarge
-                                ?.copyWith(fontWeight: .w500, fontSize: 14.sp),
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14.sp,
+                                ),
                           ),
                           Text(
                             "$oldPrice",
@@ -119,14 +128,16 @@ class CustomProductCard extends StatelessWidget {
                                   fontSize: 12.sp,
                                 ),
                           ),
-                          Text(
-                            "$discount%",
-                            style: Theme.of(context).textTheme.labelLarge
-                                ?.copyWith(
-                                  fontWeight: .w400,
-                                  color: AppColors.greenColor,
-                                  fontSize: 12.sp,
-                                ),
+                          Expanded(
+                            child: Text(
+                              "$discount%",
+                              style: Theme.of(context).textTheme.labelLarge
+                                  ?.copyWith(
+                                    fontWeight: .w400,
+                                    color: AppColors.greenColor,
+                                    fontSize: 12.sp,
+                                  ),
+                            ),
                           ),
                         ],
                       ),
@@ -144,7 +155,6 @@ class CustomProductCard extends StatelessWidget {
                             width: 15.w,
                             child: CircularProgressIndicator(
                               color: AppColors.whiteColor,
-                              strokeWidth: 2,
                             ),
                           );
                         } else {
@@ -154,7 +164,7 @@ class CustomProductCard extends StatelessWidget {
                               Icon(Icons.shopping_cart_outlined, size: 16.sp),
                               SizedBox(width: 4.w),
                               Text(
-                                AppStrings.addToCart,
+                                AppLocalizations.of(context)!.add_to_cart,
                                 style: Theme.of(context).textTheme.titleLarge,
                               ),
                             ],

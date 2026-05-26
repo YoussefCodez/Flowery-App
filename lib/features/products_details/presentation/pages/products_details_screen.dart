@@ -1,6 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flowery/config/l10n/translations/app_localizations.dart';
+import 'package:flowery/core/theme/app_colors.dart';
+import 'package:flowery/features/cart/presentation/view_model/cubit/cart_view_model.dart';
+import 'package:flowery/features/cart/presentation/view_model/events/cart_events.dart';
+import 'package:flowery/features/cart/presentation/view_model/states/cart_base_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductsDetailsScreen extends StatefulWidget {
@@ -14,6 +20,7 @@ class ProductsDetailsScreen extends StatefulWidget {
   final int quantity;
   final List<String> images;
   final String description;
+  final String id;
 
   const ProductsDetailsScreen({
     super.key,
@@ -26,7 +33,8 @@ class ProductsDetailsScreen extends StatefulWidget {
     required this.sold,
     required this.quantity,
     required this.images,
-    required this.description,
+    required this.description, 
+    required this.id,
   });
   @override
   State<ProductsDetailsScreen> createState() => _ProductsDetailsScreenState();
@@ -205,13 +213,33 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(300, 50),
+                  onPressed: () => context.read<CartViewModel>()
+                    ..doEvent(AddToCartEvent(), cartItemId: widget.id, quantity: 1),
+                  child: BlocBuilder<CartViewModel, CartBaseState>(
+                    builder: (context, state) {
+                      if (state.isAddingToCart == true) {
+                        return SizedBox(
+                          height: 15.h,
+                          width: 15.w,
+                          child: CircularProgressIndicator(
+                            color: AppColors.whiteColor,
+                          ),
+                        );
+                      } else {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.shopping_cart_outlined, size: 16.sp),
+                            SizedBox(width: 4.w),
+                            Text(
+                              AppLocalizations.of(context)!.add_to_cart,
+                              style: Theme.of(context).textTheme.titleLarge,
+                            ),
+                          ],
+                        );
+                      }
+                    },
                   ),
-                  onPressed: () {
-                    // Handle button press
-                  },
-                  child: const Text('Add to Cart'),
                 ),
               ),
             ],

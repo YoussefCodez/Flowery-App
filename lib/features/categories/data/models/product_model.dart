@@ -92,6 +92,7 @@ class ProductModel {
       rateCount: rateCount,
       quantity: quantity,
       category: category,
+      sold: sold,
     );
   }
 }

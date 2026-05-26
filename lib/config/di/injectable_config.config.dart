@@ -17,7 +17,18 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
     as _i161;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
-<<<<<<< HEAD
+import '../../features/app_language_logout/api/logout_api_service.dart'
+    as _i884;
+import '../../features/app_language_logout/data/data_sources/logout_remote_data_source.dart'
+    as _i117;
+import '../../features/app_language_logout/data/repositories/logout_repository_impl.dart'
+    as _i395;
+import '../../features/app_language_logout/domain/repositories/logout_repository.dart'
+    as _i122;
+import '../../features/app_language_logout/domain/use_cases/logout_use_case.dart'
+    as _i443;
+import '../../features/app_language_logout/presntation/cubit/logout_cubit.dart'
+    as _i773;
 import '../../features/best_seller/api/api_client/best_seller_api_client.dart'
     as _i618;
 import '../../features/best_seller/api/data_sources/best_seller_remote_data_source_impl.dart'
@@ -152,20 +163,6 @@ import '../../features/search/domain/search_use_case/search_use_case.dart'
     as _i463;
 import '../../features/search/presentation/view_model/search_cubit.dart'
     as _i794;
-=======
-import '../../features/app_language_logout/api/logout_api_service.dart'
-    as _i884;
-import '../../features/app_language_logout/data/data_sources/logout_remote_data_source.dart'
-    as _i117;
-import '../../features/app_language_logout/data/repositories/logout_repository_impl.dart'
-    as _i395;
-import '../../features/app_language_logout/domain/repositories/logout_repository.dart'
-    as _i122;
-import '../../features/app_language_logout/domain/use_cases/logout_use_case.dart'
-    as _i443;
-import '../../features/app_language_logout/presntation/cubit/logout_cubit.dart'
-    as _i773;
->>>>>>> origin/feature/app_languge&logout
 import '../api/app_interceptors.dart' as _i781;
 import '../general_cubit/local_cubit.dart' as _i794;
 import '../helpers/shared_pref.dart' as _i42;
@@ -197,9 +194,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i42.SharedPrefHelper>(
       () => _i42.SharedPrefHelper(gh<_i460.SharedPreferences>()),
     );
-<<<<<<< HEAD
     gh.lazySingleton<_i612.CategoriesApiClient>(
       () => coreInjectableModule.categoriesApiClient(gh<_i361.Dio>()),
+    );
+    gh.lazySingleton<_i884.LogoutApiService>(
+      () => coreInjectableModule.logoutApiService(gh<_i361.Dio>()),
     );
     gh.factory<_i618.BestSellerApiClient>(
       () => _i618.BestSellerApiClient(gh<_i361.Dio>()),
@@ -228,10 +227,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i797.LoginDataSourcesLocalImpl(
         flutterSecureStorage: gh<_i558.FlutterSecureStorage>(),
       ),
-=======
-    gh.lazySingleton<_i884.LogoutApiService>(
-      () => coreInjectableModule.logoutApiService(gh<_i361.Dio>()),
->>>>>>> origin/feature/app_languge&logout
     );
     gh.singleton<_i781.AuthInterceptor>(
       () => _i781.AuthInterceptor(
@@ -239,7 +234,6 @@ extension GetItInjectableX on _i174.GetIt {
         fss: gh<_i558.FlutterSecureStorage>(),
       ),
     );
-<<<<<<< HEAD
     gh.factory<_i758.OccasionsDataSourcesContract>(
       () => _i722.OccasionsDataSourcesImpl(
         apiClient: gh<_i1066.OccasionsApiClient>(),
@@ -249,10 +243,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i495.RegisterDataSourceImpl(
         registerApiClient: gh<_i656.RegisterApiClient>(),
       ),
-=======
+    );
     gh.factory<_i117.LogoutRemoteDataSource>(
       () => _i117.LogoutRemoteDataSourceImpl(gh<_i884.LogoutApiService>()),
->>>>>>> origin/feature/app_languge&logout
     );
     gh.factory<_i794.LocaleThemeCubit>(
       () => _i794.LocaleThemeCubit(gh<_i42.SharedPrefHelper>()),
@@ -296,7 +289,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i558.FlutterSecureStorage>(),
       ),
     );
-<<<<<<< HEAD
     gh.factory<_i585.SearchRepoContract>(
       () => _i790.SearchRepoImpl(gh<_i243.SearchRemoteDataSourceContract>()),
     );
@@ -306,6 +298,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i308.ForgetPasswordRepoContract>(
       () => _i346.ForgetPasswordRepoImpl(
         gh<_i492.ForgetPasswordDataSourceContract>(),
+      ),
+    );
+    gh.factory<_i122.LogoutRepository>(
+      () => _i395.LogoutRepositoryImpl(
+        gh<_i117.LogoutRemoteDataSource>(),
+        gh<_i157.UserHelper>(),
       ),
     );
     gh.factory<_i817.HomeRepoContract>(
@@ -340,6 +338,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i694.GetProductsOfSpecificOccasionUseCase(
         repo: gh<_i405.OccasionsRepoContract>(),
       ),
+    );
+    gh.factory<_i443.LogoutUseCase>(
+      () => _i443.LogoutUseCase(gh<_i122.LogoutRepository>()),
     );
     gh.factory<_i252.AddToCartUseCase>(
       () => _i252.AddToCartUseCase(repo: gh<_i63.CartRepoContract>()),
@@ -421,6 +422,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i794.SearchViewModel>(
       () => _i794.SearchViewModel(gh<_i463.SearchProductsUseCase>()),
     );
+    gh.factory<_i773.LogoutCubit>(
+      () => _i773.LogoutCubit(gh<_i443.LogoutUseCase>()),
+    );
     gh.factory<_i573.GetBestSellerProductsUseCase>(
       () => _i573.GetBestSellerProductsUseCase(
         repo: gh<_i949.BestSellerRepoContract>(),
@@ -435,19 +439,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i935.BestSellerViewModel>(
       () => _i935.BestSellerViewModel(gh<_i573.GetBestSellerProductsUseCase>()),
-=======
-    gh.factory<_i122.LogoutRepository>(
-      () => _i395.LogoutRepositoryImpl(
-        gh<_i117.LogoutRemoteDataSource>(),
-        gh<_i157.UserHelper>(),
-      ),
-    );
-    gh.factory<_i443.LogoutUseCase>(
-      () => _i443.LogoutUseCase(gh<_i122.LogoutRepository>()),
-    );
-    gh.factory<_i773.LogoutCubit>(
-      () => _i773.LogoutCubit(gh<_i443.LogoutUseCase>()),
->>>>>>> origin/feature/app_languge&logout
     );
     return this;
   }

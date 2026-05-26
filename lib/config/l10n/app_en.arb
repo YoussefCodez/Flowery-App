@@ -116,5 +116,6 @@
   "egp":"EGP",
   "discount": "Discount",
   "sub_total_after_discount": "Subtotal After Discount",
-  "your_cart_is_empty": "Your cart is empty"
+  "your_cart_is_empty": "Your cart is empty",
+  "add_to_cart": "Add to Cart"
 }

@@ -86,6 +86,7 @@ class BestSellerProduct {
       quantity: quantity ?? 0,
       sold: sold ?? 0,
       images: images ?? [],
+      id: id ?? ""
     );
   }
 }

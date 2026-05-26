@@ -8,10 +8,7 @@ import '../../../../core/theme/app_colors.dart';
 class NavBarCustomWidget extends StatelessWidget {
   final int currentIndex;
 
-  const NavBarCustomWidget({
-    super.key,
-    required this.currentIndex,
-  });
+  const NavBarCustomWidget({super.key, required this.currentIndex});
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +25,10 @@ class NavBarCustomWidget extends StatelessWidget {
             context.pushNamed(AppRoutes.categories);
             break;
           case 2:
-           Navigator.pushNamed(context, AppRoutes.cart);
+            Navigator.pushNamed(context, AppRoutes.cart);
             break;
           case 3:
-           // Navigator.pushNamed(context, AppRoutes.profileView);
+            Navigator.pushNamed(context, AppRoutes.languagepage);
             break;
         }
       },
@@ -45,17 +42,17 @@ class NavBarCustomWidget extends StatelessWidget {
           activeIcon: const Icon(Icons.home),
           label: l10n.home,
         ),
-         BottomNavigationBarItem(
+        BottomNavigationBarItem(
           icon: Icon(Icons.category_outlined),
           activeIcon: Icon(Icons.category),
           label: l10n.categories,
         ),
-         BottomNavigationBarItem(
+        BottomNavigationBarItem(
           icon: Icon(Icons.shopping_cart_outlined),
           activeIcon: Icon(Icons.shopping_cart),
           label: l10n.cart,
         ),
-         BottomNavigationBarItem(
+        BottomNavigationBarItem(
           icon: Icon(Icons.person_outline),
           activeIcon: Icon(Icons.person),
           label: l10n.profile,

@@ -14,6 +14,7 @@ class ProductEntity extends Equatable {
   final int? rateCount;
   final int? quantity;
   final String? category;
+  final int? sold;
 
   const ProductEntity({
     this.id,
@@ -29,8 +30,9 @@ class ProductEntity extends Equatable {
     this.rateCount,
     this.quantity,
     this.category,
+    this.sold,
   });
 
   @override
-  List<Object?> get props => [id, title, slug, price, imgCover, category];
+  List<Object?> get props => [id, title, slug, price, imgCover, category, sold];
 }
