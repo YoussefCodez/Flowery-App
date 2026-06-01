@@ -75,6 +75,10 @@ class _CartScreenState extends State<CartScreen> {
                   builder: (context, state) {
                     if (state.isLoadingCart == true) {
                       return const Center(child: CircularProgressIndicator());
+                    } else if (state.cart.numberOfCartItems == 0) {
+                      return Center(
+                        child: Text(localizations.your_cart_is_empty),
+                      );
                     } else {
                       return Scrollbar(
                         thumbVisibility: true,
@@ -96,7 +100,8 @@ class _CartScreenState extends State<CartScreen> {
 
               BlocBuilder<CartViewModel, CartBaseState>(
                 builder: (context, state) {
-                  if (state.isLoadingCart == false && state.cart.numberOfCartItems! > 0) {
+                  if (state.isLoadingCart == false &&
+                      state.cart.numberOfCartItems! > 0) {
                     return CustomBill(
                       subtotal: state.cart.totalPriceBeforeDiscount,
                       discount: state.cart.discount,

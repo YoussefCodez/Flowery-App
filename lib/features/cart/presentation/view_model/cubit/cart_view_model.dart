@@ -20,7 +20,7 @@ class CartViewModel extends Cubit<CartBaseState> {
     this._getUserCartProductsUseCase,
     this._deleteSpecificCartItemUseCase,
     this._updateSpecificCartItemQuantityUseCase,
-    this._addToCartUseCase
+    this._addToCartUseCase,
   ) : super(CartBaseState());
 
   void doEvent(CartEvents event, {String cartItemId = "", int quantity = 0}) {
@@ -53,14 +53,22 @@ class CartViewModel extends Cubit<CartBaseState> {
   }
 
   void _deleteSpecificCartItem(String cartItemId) async {
+    emit(state.copyWith(isDeletingCartItem: true, itemId: cartItemId));
     final response = await _deleteSpecificCartItemUseCase.call(cartItemId);
     switch (response) {
       case Success<CartEntity>():
-        emit(state.copyWith(isLoadingCart: false, cart: response.data));
+        emit(
+          state.copyWith(
+            isDeletingCartItem: false,
+            itemId: '',
+            cart: response.data,
+          ),
+        );
       case Error<CartEntity>():
         emit(
           state.copyWith(
-            isLoadingCart: false,
+            isDeletingCartItem: false,
+            itemId: '',
             errorMessage: response.exception.toString(),
           ),
         );
@@ -71,17 +79,25 @@ class CartViewModel extends Cubit<CartBaseState> {
     if (quantity <= 0) {
       _deleteSpecificCartItem(cartItemId);
     } else {
+      emit(state.copyWith(isUpdatingCartItem: true, itemId: cartItemId));
       final response = await _updateSpecificCartItemQuantityUseCase.call(
         cartItemId,
         quantity,
       );
       switch (response) {
         case Success<CartEntity>():
-          emit(state.copyWith(isLoadingCart: false, cart: response.data));
+          emit(
+            state.copyWith(
+              isUpdatingCartItem: false,
+              itemId: '',
+              cart: response.data,
+            ),
+          );
         case Error<CartEntity>():
           emit(
             state.copyWith(
-              isLoadingCart: false,
+              isUpdatingCartItem: false,
+              itemId: '',
               errorMessage: response.exception.toString(),
             ),
           );
@@ -90,19 +106,23 @@ class CartViewModel extends Cubit<CartBaseState> {
   }
 
   void _addToCart(String cartItemId, int quantity) async {
-      emit(state.copyWith(isAddingToCart: true));
+    emit(state.copyWith(isAddingToCart: true, itemId: cartItemId));
 
-    final response = await _addToCartUseCase.call(
-      cartItemId,
-      quantity,
-    );
+    final response = await _addToCartUseCase.call(cartItemId, quantity);
     switch (response) {
       case Success<CartEntity>():
-        emit(state.copyWith(isAddingToCart: false, cart: response.data));
+        emit(
+          state.copyWith(
+            isAddingToCart: false,
+            itemId: '',
+            cart: response.data,
+          ),
+        );
       case Error<CartEntity>():
         emit(
           state.copyWith(
             isAddingToCart: false,
+            itemId: '',
             errorMessage: response.exception.toString(),
           ),
         );
