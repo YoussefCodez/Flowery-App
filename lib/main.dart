@@ -6,6 +6,7 @@ import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_generator.dart';
 import 'package:flowery/core/theme/app_theme.dart';
+import 'package:flowery/features/cart/presentation/cart_manager/cart_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,10 +14,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
+
   await configureDependencies();
+
   runApp(
-    BlocProvider(
-      create: (context) => getIt<LocaleThemeCubit>(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => getIt<LocaleThemeCubit>(),
+        ),
+
+        BlocProvider.value(
+          value: getIt<CartManager>(),
+        ),
+      ],
       child: const FloweryApp(),
     ),
   );
