@@ -135,6 +135,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get home => 'الرئيسية';
 
   @override
+  String get categories => 'الفئات';
+
+  @override
+  String get cart => 'السلة';
+
+  @override
   String get profile => 'الملف الشخصي';
 
   @override
