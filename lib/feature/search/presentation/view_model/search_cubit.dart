@@ -23,8 +23,9 @@ class SearchViewModel extends Cubit<SearchState> {
           emit(state.copyWith(searchState: const BaseState.initial()));
           return;
         }
+
         _debounce?.cancel();
-        _debounce = Timer(const Duration(milliseconds: 500), () {
+        _debounce = Timer(const Duration(milliseconds: 700), () {
           _searchProducts(event.search.trim());
         });
         break;
@@ -40,14 +41,10 @@ class SearchViewModel extends Cubit<SearchState> {
     final response = await _searchProductsUseCase(search: search);
     switch (response) {
       case Success<List<ProductEntity>>():
-        emit(state.copyWith(
-          searchState: BaseState.success(response.data),
-        ));
+        emit(state.copyWith(searchState: BaseState.success(response.data)));
         break;
       case Error<List<ProductEntity>>(:final exception):
-        emit(state.copyWith(
-          searchState: BaseState.error(exception),
-        ));
+        emit(state.copyWith(searchState: BaseState.error(exception)));
         break;
     }
   }
