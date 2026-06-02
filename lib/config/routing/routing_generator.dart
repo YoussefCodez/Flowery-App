@@ -1,4 +1,8 @@
+import 'package:flowery/featuers/home/presentation/screens/home_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'app_routes.dart';
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     try {
@@ -7,6 +11,11 @@ class RouteGenerator {
         //   return MaterialPageRoute(
         //     builder: (_) => const LoginScreen(),
         //   );
+
+        case AppRoutes.homeView:
+          return MaterialPageRoute(
+            builder: (_) => const HomeView(),
+          );
 
         default:
           return unDefinedRoute();

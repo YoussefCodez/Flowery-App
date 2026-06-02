@@ -48,12 +48,12 @@ class MainTextField extends StatelessWidget {
         hintText: hintText,
         hintStyle: TextStyle(
           fontSize: 14.sp,
-          fontWeight: .w400,
+          fontWeight:FontWeight.w400,
           color: AppColors.hintGrayColor,
         ),
         labelText: labelText,
         labelStyle: TextStyle(
-          fontWeight: .w400,
+          fontWeight: FontWeight.w400,
           fontSize: 14.sp,
           color: AppColors.blackColor,
         ),

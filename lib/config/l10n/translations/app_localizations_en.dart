@@ -197,4 +197,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get an_error_occurred => 'An error occurred';
+
+  @override
+  String get search => 'Search';
+
+  @override
+  String get categories => 'Categories';
+
+  @override
+  String get best_seller => 'Best seller';
+
+  @override
+  String get occasion => 'Occasion';
+
+  @override
+  String get view_all => 'View All';
+
+  @override
+  String get cart => 'Cart';
+
+  @override
+  String get egp => 'EGP';
 }
