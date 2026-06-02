@@ -2,10 +2,6 @@ import 'package:flowery/featuers/home/presentation/screens/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../featuers/home/presentation/view_model/home_cubit.dart';
-import '../../featuers/home/presentation/view_model/home_event.dart';
-import '../../featuers/home/presentation/widget/navbar_custom_widget.dart';
-import '../di/injectable_config.dart';
 import 'app_routes.dart';
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
@@ -18,11 +14,7 @@ class RouteGenerator {
 
         case AppRoutes.homeView:
           return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-              create: (context) => getIt<HomeViewModel>()
-                ..doEvent(GetAllDataEvent()),
-              child: const HomeView(),
-            ),
+            builder: (_) => const HomeView(),
           );
 
         default:

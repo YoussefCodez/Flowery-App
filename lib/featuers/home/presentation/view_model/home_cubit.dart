@@ -29,28 +29,24 @@ class HomeViewModel extends Cubit<HomeState> {
       case GetAllDataEvent():
         _callAll();
         break;
-      case GetCategoriesEvent():
-        _getCategories();
-        break;
-      case GetBestSellerEvent():
-        _getBestSeller();
-        break;
-      case GetOccasionsEvent():
-        _getOccasions();
-        break;
+
     }
   }
 
   void _callAll() async {
+    emit(state.copyWith(isLoading: true));
+
     await Future.wait([
       _getCategories(),
       _getBestSeller(),
       _getOccasions(),
     ]);
+    emit(state.copyWith(isLoading: false));
+
   }
 
   Future<void> _getCategories() async {
-    emit(state.copyWith(categoryState: const BaseState.loading()));
+   // emit(state.copyWith(categoryState: const BaseState.loading()));
     final response = await _getCategoriesUseCase();
     switch (response) {
       case Success<List<CategoryEntity>>():
@@ -67,7 +63,7 @@ class HomeViewModel extends Cubit<HomeState> {
   }
 
   Future<void> _getBestSeller() async {
-    emit(state.copyWith(bestSellerState: const BaseState.loading()));
+   // emit(state.copyWith(bestSellerState: const BaseState.loading()));
     final response = await _getBestSellerUseCase();
     switch (response) {
       case Success<List<BestSellerEntity>>():
@@ -84,7 +80,7 @@ class HomeViewModel extends Cubit<HomeState> {
   }
 
   Future<void> _getOccasions() async {
-    emit(state.copyWith(occasionState: const BaseState.loading()));
+   // emit(state.copyWith(occasionState: const BaseState.loading()));
     final response = await _getOccasionsUseCase();
     switch (response) {
       case Success<List<OccasionEntity>>():

@@ -93,7 +93,7 @@ class _BestSellerCard extends StatelessWidget {
             Text(
               '${product.price ?? 0} ${l10n.egp}',
               style: TextStyle(
-                fontSize: 16.sp,
+                fontSize: 14.sp,
                 color: Colors.black,
                 fontWeight: FontWeight.w600,
               ),
