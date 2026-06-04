@@ -59,5 +59,19 @@
   "login_success": "تم تسجيل الدخول بنجاح",
   "register_success": "تم التسجيل بنجاح",
   "connectButton": "ربط",
-  "an_error_occurred": "حدث خطأ"
+  "an_error_occurred": "حدث خطأ",
+  "edit_profile": "تعديل الملف الشخصي",
+  "first_name": "الاسم الأول",
+  "last_name": "اسم العائلة",
+  "phone": "رقم الموبيل",
+  "change": "تغيير",
+  "gender": "النوع",
+  "male": "ذكر",
+  "female": "أنثى",
+  "update": "تحديث",
+  "stars" : "★★★★★★",
+  "first_name_is_required": "الاسم الأول مطلوب",
+  "last_name_is_required": "اسم العائلة مطلوب",
+  "email_is_required": "البريد الإلكتروني مطلوب",
+  "phone_is_required": "رقم الهاتف مطلوب"
 }

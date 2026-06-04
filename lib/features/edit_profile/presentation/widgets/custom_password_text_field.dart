@@ -2,7 +2,7 @@ import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MainTextField extends StatelessWidget {
+class CustomPasswordTextField extends StatelessWidget {
   final String hintText;
   final String labelText;
   final TextEditingController controller;
@@ -11,7 +11,7 @@ class MainTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final String? Function(String?)? validator;
-  const MainTextField({
+  const CustomPasswordTextField({
     super.key,
     required this.hintText,
     required this.labelText,
@@ -25,13 +25,13 @@ class MainTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      validator: validator,
+    return TextField(
+      readOnly: true,
       keyboardType: keyboardType,
       obscureText: obscureText,
       controller: controller,
       decoration: InputDecoration(
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.r)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(16.r)),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5.r),
           borderSide: BorderSide(color: AppColors.blackColor),
