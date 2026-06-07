@@ -64,5 +64,7 @@
   "current_password": "كلمة المرور الحالية",
   "new_password": "كلمة المرور الجديدة",
   "update": "تحديث",
-  "incorrect_password" : "كلمة المرور غير صحيحة"
+  "incorrect_password" : "كلمة المرور القديمة غير صحيحة",
+  "password_changed_success" : "تم تغيير كلمة المرور بنجاح",
+  "success" : "نجحت"
 }

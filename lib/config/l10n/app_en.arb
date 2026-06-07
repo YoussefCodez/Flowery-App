@@ -64,5 +64,7 @@
   "current_password": "Current Password",
   "new_password": "New Password",
   "update": "Update",
-  "incorrect_password" : "Not correct password"
+  "incorrect_password" : "Incorrect old password",
+  "password_changed_success" : "Password has been changed successfully",
+  "success" : "Success"
 }
