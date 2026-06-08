@@ -18,7 +18,6 @@ class ChangePasswordRepoImpl implements ChangePasswordRepoContract {
     String newPassword,
   ) async {
     final oldToken = await fss.read(key: Apikeys.accessToken);
-    print("OLD TOKENZ: $oldToken");
     final response = await dataSource.changePassword(oldPassword, newPassword);
     switch (response) {
       case Success<ChangePasswordResponseModel>():

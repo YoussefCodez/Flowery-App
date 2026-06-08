@@ -188,7 +188,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 context.read<ChangePasswordViewModel>().doEvent(
-                                  ChangePassowrdEvent(),
+                                  ChangePasswordEvent(),
                                   oldPassword: currentPasswordController.text,
                                   newPassword: newPasswordController.text,
                                 );

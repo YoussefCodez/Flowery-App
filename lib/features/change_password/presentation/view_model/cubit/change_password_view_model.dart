@@ -19,7 +19,7 @@ class ChangePasswordViewModel extends Cubit<ChangePasswordBaseState> {
     String? newPassword,
   }) {
     switch (event) {
-      case ChangePassowrdEvent():
+      case ChangePasswordEvent():
         _changePassword(oldPassword: oldPassword, newPassword: newPassword);
     }
   }

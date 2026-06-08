@@ -1,3 +1,3 @@
 sealed class ChangePasswordEvents {}
 
-class ChangePassowrdEvent extends ChangePasswordEvents {}
+class ChangePasswordEvent extends ChangePasswordEvents {}
