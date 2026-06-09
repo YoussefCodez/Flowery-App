@@ -10,7 +10,6 @@ import '../../../../core/theme/app_colors.dart';
 import '../widget/categories_custom_widget.dart';
 import '../widget/header_custom_widget.dart';
 import '../widget/location_custom_widget.dart';
-import '../widget/navbar_custom_widget.dart';
 import '../widget/occasion_custom_widget.dart';
 import '../widget/product_custom_widget.dart';
 
