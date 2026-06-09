@@ -1,20 +1,16 @@
 import 'package:flowery/core/widgets/main_layout.dart';
 import 'package:flowery/features/login/presentation/screens/login_screen.dart';
-
 import 'package:flowery/features/forget_password/presentation/screens/forget_password_view.dart';
 import 'package:flowery/features/forget_password/presentation/view_model/cubit/forget_password_view_model.dart';
 import 'package:flowery/features/register/presentation/pages/register_screen.dart';
 import 'package:flowery/features/home/presentation/screens/home_view.dart';
-
 import 'package:flowery/features/categories/presentation/screens/categories_screen.dart';
 import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/features/best_seller/presentation/screens/best_seller_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../features/forget_password/presentation/screens/email_verification_view.dart';
 import '../../features/forget_password/presentation/screens/reset_new_password_view.dart';
-import 'app_routes.dart';
 import '../../features/home/presentation/view_model/home_cubit.dart';
 import '../../features/home/presentation/view_model/home_event.dart';
 import '../di/injectable_config.dart';
