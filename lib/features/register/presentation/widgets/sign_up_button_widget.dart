@@ -1,7 +1,4 @@
 import 'package:flowery/config/utils/constants.dart';
-import 'package:flowery/features/register/presentation/cubit/register_cubit.dart';
-import 'package:flowery/features/register/presentation/cubit/register_events.dart';
-import 'package:flowery/features/register/presentation/cubit/register_states.dart';
 import 'package:flutter/material.dart';
 
 class SignUpButtonWidget extends StatelessWidget {
