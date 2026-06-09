@@ -5,10 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../config/l10n/translations/app_localizations.dart';
 
 class HeaderCustomWidget extends StatelessWidget {
-  String title;
-  VoidCallback onPressed;
+  final String title;
+  final VoidCallback onPressed;
 
-  HeaderCustomWidget({super.key, required this.title, required this.onPressed});
+  const HeaderCustomWidget({super.key, required this.title, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {

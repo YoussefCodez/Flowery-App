@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flowery/config/base_response/base_response.dart';
 import 'package:flowery/features/home/data/models/response_model/best_seller_model.dart';
-import 'package:flowery/features/home/data/models/response_model/home_response_model.dart';
 import 'package:flowery/features/home/data/models/response_model/occasion_model.dart';
 import 'package:injectable/injectable.dart';
 
