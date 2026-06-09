@@ -1,8 +1,8 @@
 import 'package:flowery/features/login/presentation/screens/login_screen.dart';
 
-
 import 'package:flowery/features/forget_password/presentation/screens/forget_password_view.dart';
 import 'package:flowery/features/forget_password/presentation/view_model/cubit/forget_password_view_model.dart';
+import 'package:flowery/features/register/presentation/pages/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,16 +15,14 @@ class RouteGenerator {
     switch (settings.name) {
       case AppRoutes.login:
         return MaterialPageRoute(builder: (_) => LoginScreen());
+
+      case AppRoutes.register:
+        return MaterialPageRoute(builder: (_) => RegisterScreen());
+
       case AppRoutes.forgetPassword:
-        // ForgetPasswordView owns the Cubit — it creates it internally.
-        return MaterialPageRoute(
-          builder: (_) => const ForgetPasswordView(),
-        );
+        return MaterialPageRoute(builder: (_) => const ForgetPasswordView());
 
       case AppRoutes.emailVerification:
-        // The Cubit is passed as an argument from ForgetPasswordView's listener.
-        // BlocProvider.value shares the existing instance without taking ownership
-        // (it won't close the Cubit when this route is popped).
         final cubit = settings.arguments as ForgetPasswordViewModel;
         return MaterialPageRoute(
           builder: (_) => BlocProvider.value(
@@ -36,10 +34,8 @@ class RouteGenerator {
       case AppRoutes.resetPassword:
         final cubit = settings.arguments as ForgetPasswordViewModel;
         return MaterialPageRoute(
-          builder: (_) => BlocProvider.value(
-            value: cubit,
-            child: ResetNewPasswordView(),
-          ),
+          builder: (_) =>
+              BlocProvider.value(value: cubit, child: ResetNewPasswordView()),
         );
 
       default:
@@ -50,12 +46,8 @@ class RouteGenerator {
   static Route<dynamic> unDefinedRoute() {
     return MaterialPageRoute(
       builder: (_) => Scaffold(
-        appBar: AppBar(
-          title: const Text('No Route Found'),
-        ),
-        body: const Center(
-          child: Text('No Route Found'),
-        ),
+        appBar: AppBar(title: const Text('No Route Found')),
+        body: const Center(child: Text('No Route Found')),
       ),
     );
   }
@@ -63,12 +55,8 @@ class RouteGenerator {
   static Route<dynamic> errorRoute(String error) {
     return MaterialPageRoute(
       builder: (_) => Scaffold(
-        appBar: AppBar(
-          title: const Text('Route Error'),
-        ),
-        body: Center(
-          child: Text(error),
-        ),
+        appBar: AppBar(title: const Text('Route Error')),
+        body: Center(child: Text(error)),
       ),
     );
   }

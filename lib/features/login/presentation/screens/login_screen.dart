@@ -129,10 +129,14 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ],
                           ),
-                          Text(
-                            titles.forget_password_ques,
-                            style: theme.textTheme.labelSmall!.copyWith(
-                              fontSize: 12.sp,
+                          InkWell(
+                            onTap: () =>
+                                context.pushNamed(AppRoutes.forgetPassword),
+                            child: Text(
+                              titles.forget_password_ques,
+                              style: theme.textTheme.labelSmall!.copyWith(
+                                fontSize: 12.sp,
+                              ),
                             ),
                           ),
                         ],
@@ -200,9 +204,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           const SizedBox(width: 2),
-                          Text(
-                            titles.sign_up,
-                            style: theme.textTheme.labelMedium,
+                          InkWell(
+                            onTap: () => context.pushNamed(AppRoutes.register),
+                            child: Text(
+                              titles.sign_up,
+                              style: theme.textTheme.labelMedium,
+                            ),
                           ),
                         ],
                       ),
