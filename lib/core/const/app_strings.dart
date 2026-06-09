@@ -7,4 +7,9 @@ abstract class AppStrings {
   static const String sold = "sold";
   static const String quantity = "quantity";
   static const String images = "images";
+  static const String allCategories = "All";
+  static const String selectCategory = "Select a category";
+  static const String noProductsFound = "No products found";
+  static const String initialCategoryState = "Initial";
+  static const String search = "Search";
 }

@@ -1,9 +1,12 @@
+import 'package:flowery/core/widgets/main_layout.dart';
 import 'package:flowery/features/login/presentation/screens/login_screen.dart';
 
 import 'package:flowery/features/forget_password/presentation/screens/forget_password_view.dart';
 import 'package:flowery/features/forget_password/presentation/view_model/cubit/forget_password_view_model.dart';
 import 'package:flowery/features/register/presentation/pages/register_screen.dart';
 import 'package:flowery/features/home/presentation/screens/home_view.dart';
+
+import 'package:flowery/features/categories/presentation/screens/categories_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,27 +44,41 @@ class RouteGenerator {
           builder: (_) =>
               BlocProvider.value(value: cubit, child: ResetNewPasswordView()),
         );
-        case AppRoutes.home:
-          return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-              create: (context) => getIt<HomeViewModel>()
-                ..doEvent(GetAllDataEvent()),
-              child: const HomeView(),
-            ),
-          );
+      case AppRoutes.home:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                getIt<HomeViewModel>()..doEvent(GetAllDataEvent()),
+            child: const HomeView(),
+          ),
+        );
 
+      case AppRoutes.categories:
+        return MaterialPageRoute(builder: (_) => const CategoriesScreen());
+
+      case AppRoutes.mainLayout:
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (_) =>
+                    getIt<HomeViewModel>()..doEvent(GetAllDataEvent()),
+              ),
+            ],
+            child: const MainLayout(),
+          ),
+        );
       default:
         return unDefinedRoute();
-
-      }
     }
   }
+}
 
-  Route<dynamic> unDefinedRoute() {
-    return MaterialPageRoute(
-      builder: (_) => Scaffold(
-        appBar: AppBar(title: const Text('No Route Found')),
-        body: const Center(child: Text('No Route Found')),
-      ),
-    );
-  }
+Route<dynamic> unDefinedRoute() {
+  return MaterialPageRoute(
+    builder: (_) => Scaffold(
+      appBar: AppBar(title: const Text('No Route Found')),
+      body: const Center(child: Text('No Route Found')),
+    ),
+  );
+}

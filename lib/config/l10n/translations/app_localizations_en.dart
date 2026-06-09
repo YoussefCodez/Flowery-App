@@ -306,4 +306,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get egp => 'EGP';
+
+  @override
+  String get something_went_wrong => 'Something went wrong';
 }

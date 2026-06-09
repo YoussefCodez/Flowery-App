@@ -302,4 +302,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get egp => 'جنيه';
+
+  @override
+  String get something_went_wrong => 'حدث خطأ غير متوقع';
 }

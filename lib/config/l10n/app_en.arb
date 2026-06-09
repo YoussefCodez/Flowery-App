@@ -98,5 +98,6 @@
   "home": "Home",
   "cart": "Cart",
   "profile": "Profile",
-  "egp": "EGP"
+  "egp": "EGP",
+  "something_went_wrong": "Something went wrong"
 }

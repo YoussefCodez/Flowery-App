@@ -6,4 +6,6 @@ abstract class AppRoutes {
   static const String emailVerification = "/email-verification";
   static const String home = "/home";
   static const String productDetails = "/prodcut-details";
+  static const String categories = "/categories";
+  static const String mainLayout = "/main-layout";
 }

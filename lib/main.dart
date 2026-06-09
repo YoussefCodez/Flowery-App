@@ -47,7 +47,7 @@ class FloweryApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               theme: AppTheme.lightTheme,
               initialRoute: isRememberMe == "true"
-                  ? AppRoutes.home
+                  ? AppRoutes.mainLayout
                   : AppRoutes.login,
             );
           },
