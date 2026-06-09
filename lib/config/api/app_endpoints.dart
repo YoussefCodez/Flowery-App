@@ -9,4 +9,5 @@ abstract class AppEndPoints {
   static const String getHomeData = 'home';
   static const String categories = 'categories';
   static const String products = 'products';
+  static const String bestSeller = 'best-seller';
 }

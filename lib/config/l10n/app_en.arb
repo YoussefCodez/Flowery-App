@@ -99,5 +99,8 @@
   "cart": "Cart",
   "profile": "Profile",
   "egp": "EGP",
-  "something_went_wrong": "Something went wrong"
+  "something_went_wrong": "Something went wrong",
+  "best_seller": "Best Seller",
+  "best_seller_title": "Bloom with our exquisite best sellers",
+  "no_products": "No Products"
 }

@@ -305,4 +305,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get something_went_wrong => 'حدث خطأ غير متوقع';
+
+  @override
+  String get best_seller_title => 'تألقي مع أفضل منتجاتنا مبيعًا';
+
+  @override
+  String get no_products => 'لا يوجد منتجات';
 }

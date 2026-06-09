@@ -82,7 +82,10 @@ class HomeView extends StatelessWidget {
               CategoriesCustomWidget(),
               SizedBox(height: 15.h),
 
-              HeaderCustomWidget(title: l10n.best_seller, onPressed: () {}),
+              HeaderCustomWidget(
+                title: l10n.best_seller,
+                onPressed: () => context.pushNamed(AppRoutes.bestSeller),
+              ),
               SizedBox(height: 10.h),
               BestSellerCustomWidget(),
               SizedBox(height: 15.h),

@@ -7,6 +7,8 @@ import 'package:flowery/features/register/presentation/pages/register_screen.dar
 import 'package:flowery/features/home/presentation/screens/home_view.dart';
 
 import 'package:flowery/features/categories/presentation/screens/categories_screen.dart';
+import 'package:flowery/config/routing/app_routes.dart';
+import 'package:flowery/features/best_seller/presentation/screens/best_seller_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -70,6 +72,9 @@ class RouteGenerator {
             child: const MainLayout(),
           ),
         );
+
+      case AppRoutes.bestSeller:
+        return MaterialPageRoute(builder: (_) => const BestSellerScreen());
       default:
         return unDefinedRoute();
     }

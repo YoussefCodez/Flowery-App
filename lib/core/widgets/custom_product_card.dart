@@ -14,7 +14,7 @@ class CustomProductCard extends StatefulWidget {
   final bool hasDiscount;
   final double oldPrice;
   final double discount;
-  final int sold;
+  final int? sold;
   final int quantity;
   final List<String> images;
   const CustomProductCard({

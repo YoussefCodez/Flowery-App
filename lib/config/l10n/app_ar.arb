@@ -99,6 +99,8 @@
   "cart": "السلة",
   "profile": "الملف الشخصي",
   "egp": "جنيه",
-  "something_went_wrong": "حدث خطأ غير متوقع"
-
+  "something_went_wrong": "حدث خطأ غير متوقع",
+  "best_seller": "الأكثر مبيعًا",
+  "best_seller_title": "تألقي مع أفضل منتجاتنا مبيعًا",
+  "no_products": "لا يوجد منتجات"
 }
