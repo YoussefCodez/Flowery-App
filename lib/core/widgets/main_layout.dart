@@ -15,7 +15,7 @@ class _MainLayoutState extends State<MainLayout> {
 
   final screens = [
     const HomeView(),
-    const CategoriesScreen(),
+    const CategoriesScreen(showBackButton: false,),
     // const CartScreen(),
     // const ProfileScreen(),
   ];

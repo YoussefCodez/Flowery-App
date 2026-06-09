@@ -54,7 +54,9 @@ class RouteGenerator {
         );
 
       case AppRoutes.categories:
-        return MaterialPageRoute(builder: (_) => const CategoriesScreen());
+        return MaterialPageRoute(
+          builder: (_) => const CategoriesScreen(showBackButton: true),
+        );
 
       case AppRoutes.mainLayout:
         return MaterialPageRoute(

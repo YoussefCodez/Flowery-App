@@ -1,4 +1,5 @@
 import 'package:flowery/config/di/injectable_config.dart';
+import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flowery/core/const/app_strings.dart';
 import 'package:flowery/features/categories/presentation/screens/widgets/categories_tab_bar.dart';
 import 'package:flowery/features/categories/presentation/screens/widgets/filter_button.dart';
@@ -11,7 +12,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key});
+  final bool showBackButton;
+  const CategoriesScreen({super.key, required this.showBackButton});
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,12 @@ class CategoriesScreen extends StatelessWidget {
                 padding: REdgeInsets.all(16),
                 child: Row(
                   children: [
+                    showBackButton?
+                    InkWell(
+                      onTap: () => context.pop(),
+                      child: Icon(Icons.arrow_back_ios_new),
+                    ):SizedBox.shrink(),
+                    SizedBox(width: 8.w),
                     Expanded(
                       child: SizedBox(
                         height: 48.h,
