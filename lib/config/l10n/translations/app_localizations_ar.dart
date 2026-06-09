@@ -281,4 +281,25 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get invalid_code => 'الكود غير صحيح، يرجى المحاولة مرة أخرى';
+
+  @override
+  String get search => 'بحث';
+
+  @override
+  String get categories => 'التصنيفات';
+
+  @override
+  String get best_seller => 'الأكثر مبيعًا';
+
+  @override
+  String get occasion => 'المناسبات';
+
+  @override
+  String get view_all => 'عرض الكل';
+
+  @override
+  String get cart => 'السلة';
+
+  @override
+  String get egp => 'جنيه';
 }

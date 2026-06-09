@@ -23,6 +23,7 @@ dependencies:
     sdk: flutter
   flutter_screenutil: ^5.9.3
   flutter_secure_storage: ^10.0.0
+  flutter_svg: ^2.3.0
   fluttertoast: ^9.0.0
   font_awesome_flutter: ^10.12.0
   get_it: ^9.2.1
@@ -55,5 +56,8 @@ dev_dependencies:
   bloc_test: ^10.0.0
 
 flutter:
+
   uses-material-design: true
   generate: true
+  assets:
+    - assets/svgs/
