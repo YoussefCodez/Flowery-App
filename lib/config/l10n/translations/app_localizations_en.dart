@@ -211,7 +211,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get an_error_occurred => 'An error occurred';
 
   @override
-<<<<<<< HEAD
   String get enterFirstName => 'Enter first Name';
 
   @override
@@ -250,15 +249,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get termsAndConditions => 'Terms&Conditions';
-=======
+
+  @override
   String get forget_password => 'Forget password';
 
   @override
   String get please_enter_your_email_associated_to_your_account =>
       'Please enter your email associated with your account';
-
-  @override
-  String get enter_your_email => 'Enter your email';
 
   @override
   String get confirm => 'Confirm';
@@ -284,12 +281,8 @@ class AppLocalizationsEn extends AppLocalizations {
       'Password must not be empty and must contain at least 6 characters, one uppercase letter, and one number';
 
   @override
-  String get enter_your_password => 'Enter your password';
-
-  @override
   String get new_password => 'New password';
 
   @override
   String get invalid_code => 'Invalid code, please try again';
->>>>>>> origin/forget-password
 }

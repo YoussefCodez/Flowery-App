@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flowery/featuers/forget_password/data/model/reqest_models/forget_password_request.dart';
+import 'package:flowery/features/forget_password/data/model/reqest_models/forget_password_request.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 

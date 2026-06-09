@@ -18,10 +18,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get sign_up => 'انشاء حساب';
 
   @override
-  String get enter_your_email => 'ادخل البريد الإلكتروني';
+  String get enter_your_email => 'أدخل بريدك الإلكتروني';
 
   @override
-  String get enter_your_password => 'ادخل كلمة المرور';
+  String get enter_your_password => 'أدخل كلمة المرور';
 
   @override
   String get name_is_required => 'الاسم مطلوب!';
@@ -208,7 +208,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get an_error_occurred => 'حدث خطأ';
 
   @override
-<<<<<<< HEAD
   String get enterFirstName => 'ادخل الاسم الاول';
 
   @override
@@ -246,15 +245,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get termsAndConditions => 'الشروط والأحكام';
-=======
+
+  @override
   String get forget_password => 'نسيت كلمة المرور';
 
   @override
   String get please_enter_your_email_associated_to_your_account =>
       'من فضلك أدخل البريد الإلكتروني المرتبط بحسابك';
-
-  @override
-  String get enter_your_email => 'أدخل بريدك الإلكتروني';
 
   @override
   String get confirm => 'تأكيد';
@@ -280,12 +277,8 @@ class AppLocalizationsAr extends AppLocalizations {
       'يجب ألا تكون كلمة المرور فارغة وأن تحتوي على 6 أحرف وحرف كبير ورقم واحد على الأقل';
 
   @override
-  String get enter_your_password => 'أدخل كلمة المرور';
-
-  @override
   String get new_password => 'كلمة المرور الجديدة';
 
   @override
   String get invalid_code => 'الكود غير صحيح، يرجى المحاولة مرة أخرى';
->>>>>>> origin/forget-password
 }

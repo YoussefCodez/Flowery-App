@@ -488,7 +488,6 @@ abstract class AppLocalizations {
   /// **'An error occurred'**
   String get an_error_occurred;
 
-<<<<<<< HEAD
   /// No description provided for @enterFirstName.
   ///
   /// In en, this message translates to:
@@ -566,7 +565,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Terms&Conditions'**
   String get termsAndConditions;
-=======
+
   /// No description provided for @forget_password.
   ///
   /// In en, this message translates to:
@@ -578,12 +577,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please enter your email associated with your account'**
   String get please_enter_your_email_associated_to_your_account;
-
-  /// No description provided for @enter_your_email.
-  ///
-  /// In en, this message translates to:
-  /// **'Enter your email'**
-  String get enter_your_email;
 
   /// No description provided for @confirm.
   ///
@@ -627,12 +620,6 @@ abstract class AppLocalizations {
   /// **'Password must not be empty and must contain at least 6 characters, one uppercase letter, and one number'**
   String get password_must_not_be_empty;
 
-  /// No description provided for @enter_your_password.
-  ///
-  /// In en, this message translates to:
-  /// **'Enter your password'**
-  String get enter_your_password;
-
   /// No description provided for @new_password.
   ///
   /// In en, this message translates to:
@@ -644,7 +631,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Invalid code, please try again'**
   String get invalid_code;
->>>>>>> origin/forget-password
 }
 
 class _AppLocalizationsDelegate

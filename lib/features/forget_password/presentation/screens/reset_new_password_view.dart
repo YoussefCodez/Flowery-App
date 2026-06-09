@@ -1,3 +1,4 @@
+import 'package:flowery/config/helpers/regex.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -98,10 +99,13 @@ class _ResetNewPasswordViewState extends State<ResetNewPasswordView> {
                       hintText: l10n.enter_your_password,
                       labelText: l10n.new_password,
                       controller: _passwordController,
-                      validator: (value) =>
-                          Validations.validatePassword(context, value),
+                      validator: (value) {
+                        if (AppRegExp.isPasswordValid(value ?? "")) {
+                          return "";
+                        }
+                        return "";
+                      },
                     ),
-
 
                     SizedBox(height: 22.h),
 
@@ -109,11 +113,24 @@ class _ResetNewPasswordViewState extends State<ResetNewPasswordView> {
                       hintText: l10n.confirm_password,
                       labelText: l10n.confirm_password,
                       controller: _confirmController,
-                      validator: (value) => Validations.validateConfirmPassword(
-                        context,
-                        value,
-                        _passwordController.text,
-                      ),
+                      validator: (value) {
+                        final error = Validations.validateConfirmPassword(
+                          password: _passwordController.text,
+                          confirmPassword: value,
+                        );
+
+                        switch (error) {
+                          case ValidationError.required:
+                            return l10n.confirm_password_is_required;
+                          case ValidationError.invalidConfirmPassword:
+                            return l10n.confirm_password_is_not_valid;
+                          case ValidationError.passwordMismatch:
+                            return l10n
+                                .password_and_confirm_password_must_be_same;
+                          default:
+                            return null;
+                        }
+                      },
                     ),
 
                     SizedBox(height: 48.h),
