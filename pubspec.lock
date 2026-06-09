@@ -51,10 +51,14 @@ packages:
     version: "9.2.0"
   bloc_test:
 <<<<<<< HEAD
+<<<<<<< HEAD
     dependency: "direct main"
 =======
     dependency: "direct dev"
 >>>>>>> origin/register
+=======
+    dependency: "direct dev"
+>>>>>>> origin/forget-password
     description:
       name: bloc_test
       sha256: "1dd549e58be35148bc22a9135962106aa29334bc1e3f285994946a1057b29d7b"
@@ -762,6 +766,7 @@ packages:
     source: hosted
     version: "2.0.0"
 <<<<<<< HEAD
+<<<<<<< HEAD
   mocktail:
     dependency: "direct main"
 =======
@@ -777,6 +782,11 @@ packages:
     dependency: transitive
 >>>>>>> origin/register
     description:
+=======
+  mocktail:
+    dependency: "direct dev"
+    description:
+>>>>>>> origin/forget-password
       name: mocktail
       sha256: "5e1bf53cc7baa8062a33b84424deb61513858ea05c601b8509e683815b5914aa"
       url: "https://pub.dev"
