@@ -63,5 +63,18 @@
   "login_success": "تم تسجيل الدخول بنجاح",
   "register_success": "تم التسجيل بنجاح",
   "connectButton": "ربط",
-  "an_error_occurred": "حدث خطأ"
+  "an_error_occurred": "حدث خطأ",
+  "enterFirstName": "ادخل الاسم الاول",
+  "firstName": "الاسم الاول",
+  "enterLastName": "ادخل الاسم الاخير",
+  "lastName": "الاسم الاخير",
+  "enterYourEmail": "ادخل ايميلك",
+  "enterPassword": "ادخل الرقم السري",
+  "enterPhoneNumber": "ادخل رقم الهاتف",
+  "phoneNumber": "رقم الهاتف",
+  "gender": "الجنس",
+  "female": "انثي",
+  "male": "رجل",
+  "creatingAccountAgreement": "بإنشاء حساب، فإنك توافق على شروطنا",
+  "termsAndConditions": "الشروط والأحكام"
 }

@@ -209,4 +209,44 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get an_error_occurred => 'An error occurred';
+
+  @override
+  String get enterFirstName => 'Enter first Name';
+
+  @override
+  String get firstName => 'First name';
+
+  @override
+  String get enterLastName => 'Enter last name';
+
+  @override
+  String get lastName => 'LastName';
+
+  @override
+  String get enterYourEmail => 'Enter your email';
+
+  @override
+  String get enterPassword => 'Enter password';
+
+  @override
+  String get enterPhoneNumber => 'Enter phone number';
+
+  @override
+  String get phoneNumber => 'Phone number';
+
+  @override
+  String get gender => 'Gender';
+
+  @override
+  String get female => 'Female';
+
+  @override
+  String get male => 'Male';
+
+  @override
+  String get creatingAccountAgreement =>
+      'Creating an account, you agree to our';
+
+  @override
+  String get termsAndConditions => 'Terms&Conditions';
 }
