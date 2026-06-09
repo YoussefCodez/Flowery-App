@@ -7,7 +7,6 @@ import 'package:flowery/features/register/presentation/cubit/register_cubit.dart
 import 'package:flowery/features/register/presentation/cubit/register_states.dart';
 import 'package:flowery/features/register/presentation/cubit/register_events.dart';
 import 'package:flowery/features/register/domain/use_case/register_use_case.dart';
-import 'package:flowery/features/register/data/models/request/register_request.dart';
 import 'package:flowery/features/register/domain/entities/register_entity.dart'; // ← add this
 import 'package:flowery/config/base_state/base_state.dart';
 
