@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:flowery/config/base_state/base_state.dart';
 import 'package:flowery/features/register/data/models/request/register_request.dart';
 import 'package:flowery/features/register/domain/use_case/register_use_case.dart';
 import 'package:flowery/features/register/presentation/cubit/register_events.dart';

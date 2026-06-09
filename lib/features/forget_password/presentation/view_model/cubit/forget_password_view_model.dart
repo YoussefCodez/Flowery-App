@@ -5,7 +5,6 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../../config/base_response/base_response.dart';
 import '../../../../../config/base_state/base_state.dart';
-import '../../../../../main.dart';
 
 import '../../../data/model/reqest_models/forget_password_request.dart';
 import '../../../data/model/reqest_models/reset_password_request.dart';
