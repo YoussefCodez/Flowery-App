@@ -95,6 +95,9 @@ class RouteGenerator {
             // ),
           ),
         );
+
+      case AppRoutes.cart:
+        return MaterialPageRoute(builder: (_) => CartScreen());
       default:
         return unDefinedRoute();
     }

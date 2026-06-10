@@ -102,5 +102,15 @@
   "something_went_wrong": "حدث خطأ غير متوقع",
   "best_seller": "الأكثر مبيعًا",
   "best_seller_title": "تألقي مع أفضل منتجاتنا مبيعًا",
-  "no_products": "لا يوجد منتجات"
+  "no_products": "لا يوجد منتجات",
+  "cart": "السلة",
+  "items": "العناصر",
+  "sub_total": "المجموع الفرعي",
+  "delivery_fee": "رسوم التوصيل",
+  "total": "الإجمالي",
+  "checkout": "إتمام الطلب",
+  "egp":"جنيه",
+  "discount": "خصم",
+  "sub_total_after_discount": "المجموع الفرعي بعد الخصم",
+  "your_cart_is_empty" : "سلتك فارغة"
 }

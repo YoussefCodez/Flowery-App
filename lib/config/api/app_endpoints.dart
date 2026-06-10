@@ -12,4 +12,5 @@ abstract class AppEndPoints {
   static const String getHomeData = 'home';
   static const String categories = 'categories';
   static const String bestSeller = 'best-seller';
+  static const String cart = 'cart';
 }
