@@ -141,6 +141,18 @@ import '../../features/register/domain/use_case/register_use_case.dart'
     as _i217;
 import '../../features/register/presentation/cubit/register_cubit.dart'
     as _i266;
+import '../../features/search/api/search_api_client.dart' as _i265;
+import '../../features/search/data/repo_impl/search_repo_impl.dart' as _i790;
+import '../../features/search/data/search_remote_data/search_remote_data_contract.dart'
+    as _i243;
+import '../../features/search/data/search_remote_data/search_remote_data_impl.dart'
+    as _i390;
+import '../../features/search/domain/repo_contract/search_repo_contract.dart'
+    as _i585;
+import '../../features/search/domain/search_use_case/search_use_case.dart'
+    as _i463;
+import '../../features/search/presentation/view_model/search_cubit.dart'
+    as _i794;
 import '../api/app_interceptors.dart' as _i781;
 import '../general_cubit/local_cubit.dart' as _i794;
 import '../helpers/shared_pref.dart' as _i42;
@@ -192,6 +204,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i656.RegisterApiClient>(
       () => _i656.RegisterApiClient(gh<_i361.Dio>()),
     );
+    gh.factory<_i265.SearchApiClient>(
+      () => _i265.SearchApiClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i764.GetCategoriesDataSourceContract>(
       () => _i587.GetCategoriesDataSourceImpl(gh<_i612.CategoriesApiClient>()),
     );
@@ -221,6 +236,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i936.HomeRemoteDataSourceContract>(
       () => _i238.HomeRemoteDataSourceImpl(gh<_i866.HomeApiClient>()),
+    );
+    gh.factory<_i243.SearchRemoteDataSourceContract>(
+      () => _i390.SearchRemoteDataSourceImpl(gh<_i265.SearchApiClient>()),
     );
     gh.factory<_i668.RegisterRepository>(
       () => _i897.RegisterRepositoryImpl(gh<_i984.RegisterDataSource>()),
@@ -254,6 +272,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i460.SharedPreferences>(),
         gh<_i558.FlutterSecureStorage>(),
       ),
+    );
+    gh.factory<_i585.SearchRepoContract>(
+      () => _i790.SearchRepoImpl(gh<_i243.SearchRemoteDataSourceContract>()),
     );
     gh.factory<_i191.LoginUseCase>(
       () => _i191.LoginUseCase(repo: gh<_i180.LoginRepoContract>()),
@@ -311,6 +332,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i93.UpdateSpecificCartItemQuantityUseCase(
         repo: gh<_i63.CartRepoContract>(),
       ),
+    );
+    gh.factory<_i463.SearchProductsUseCase>(
+      () => _i463.SearchProductsUseCase(gh<_i585.SearchRepoContract>()),
     );
     gh.factory<_i217.RegisterUseCase>(
       () => _i217.RegisterUseCase(gh<_i668.RegisterRepository>()),
@@ -377,6 +401,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i126.GetAllCategoriesUseCase>(),
         gh<_i584.GetProductsByCategoryUseCase>(),
       ),
+    );
+    gh.factory<_i794.SearchViewModel>(
+      () => _i794.SearchViewModel(gh<_i463.SearchProductsUseCase>()),
     );
     gh.factory<_i573.GetBestSellerProductsUseCase>(
       () => _i573.GetBestSellerProductsUseCase(

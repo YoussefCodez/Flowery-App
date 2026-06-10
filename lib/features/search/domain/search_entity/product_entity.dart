@@ -1,4 +1,4 @@
-class BestSellerEntity {
+class ProductEntity {
   final String? id;
   final String? title;
   final String? slug;
@@ -6,19 +6,19 @@ class BestSellerEntity {
   final String? imgCover;
   final List<String>? images;
   final double? price;
-  final double? priceAfterDiscount;
+  final int? priceAfterDiscount;
   final double? discount;
-  final double? rateAvg;
+  final int? rateAvg;
   final int? rateCount;
   final int? sold;
   final int? quantity;
   final String? category;
   final String? occasion;
-  final bool? isSuperAdmin;
+  final bool? isInWishlist;
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
-  const BestSellerEntity({
+  const ProductEntity({
     this.id,
     this.title,
     this.slug,
@@ -34,7 +34,7 @@ class BestSellerEntity {
     this.quantity,
     this.category,
     this.occasion,
-    this.isSuperAdmin,
+    this.isInWishlist,
     this.createdAt,
     this.updatedAt,
   });

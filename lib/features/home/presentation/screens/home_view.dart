@@ -48,20 +48,26 @@ class HomeView extends StatelessWidget {
                             width: 1.5,
                           ),
                         ),
-                        child: Row(
-                          children: [
-                            Icon(Icons.search, color: AppColors.hintGrayColor),
-
-                            SizedBox(width: 8.w),
-
-                            Text(
-                              l10n.search,
-                              style: TextStyle(
+                        child: InkWell(
+                          onTap: () => context.pushNamed(AppRoutes.search),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.search,
                                 color: AppColors.hintGrayColor,
-                                fontSize: 14.sp,
                               ),
-                            ),
-                          ],
+
+                              SizedBox(width: 8.w),
+
+                              Text(
+                                l10n.search,
+                                style: TextStyle(
+                                  color: AppColors.hintGrayColor,
+                                  fontSize: 14.sp,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

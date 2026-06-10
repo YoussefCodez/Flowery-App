@@ -1,10 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../../domain/home_enitiy/best_seller_entity.dart';
-part 'best_seller_model.g.dart';
+import '../../domain/search_entity/product_entity.dart';
+
+part 'product_model.g.dart';
 
 @JsonSerializable()
-class BestSeller {
+class Product {
   @JsonKey(name: "_id")
   String? id;
   @JsonKey(name: "title")
@@ -20,11 +21,11 @@ class BestSeller {
   @JsonKey(name: "price")
   double? price;
   @JsonKey(name: "priceAfterDiscount")
-  double? priceAfterDiscount;
+  int? priceAfterDiscount;
   @JsonKey(name: "discount")
   double? discount;
   @JsonKey(name: "rateAvg")
-  double? rateAvg;
+  int? rateAvg;
   @JsonKey(name: "rateCount")
   int? rateCount;
   @JsonKey(name: "sold")
@@ -43,10 +44,12 @@ class BestSeller {
   DateTime? updatedAt;
   @JsonKey(name: "__v")
   int? v;
-  @JsonKey(name: "id")
-  String? bestSellerId;
+  @JsonKey(name: "favoriteId")
+  dynamic favoriteId;
+  @JsonKey(name: "isInWishlist")
+  bool? isInWishlist;
 
-  BestSeller({
+  Product({
     this.id,
     this.title,
     this.slug,
@@ -66,10 +69,10 @@ class BestSeller {
     this.createdAt,
     this.updatedAt,
     this.v,
-    this.bestSellerId,
+    this.favoriteId,
+    this.isInWishlist,
   });
-
-  BestSellerEntity toDomain() => BestSellerEntity(
+  ProductEntity toDomain() => ProductEntity(
     id: id,
     title: title,
     slug: slug,
@@ -85,12 +88,11 @@ class BestSeller {
     quantity: quantity,
     category: category,
     occasion: occasion,
-    isSuperAdmin: isSuperAdmin,
+    isInWishlist: isInWishlist,
     createdAt: createdAt,
     updatedAt: updatedAt,
   );
+  factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
 
-  factory BestSeller.fromJson(Map<String, dynamic> json) => _$BestSellerFromJson(json);
-
-  Map<String, dynamic> toJson() => _$BestSellerToJson(this);
+  Map<String, dynamic> toJson() => _$ProductToJson(this);
 }

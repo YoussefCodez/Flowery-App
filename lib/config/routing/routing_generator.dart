@@ -1,5 +1,6 @@
 import 'package:flowery/core/const/app_strings.dart';
 import 'package:flowery/core/widgets/main_layout.dart';
+import 'package:flowery/features/search/presentation/screen/search_view.dart';
 import 'package:flowery/features/cart/presentation/screens/cart_screen.dart';
 import 'package:flowery/features/login/presentation/screens/login_screen.dart';
 import 'package:flowery/features/forget_password/presentation/screens/forget_password_view.dart';
@@ -85,7 +86,6 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) => ProductDetailsScreen(
             title: args[AppStrings.title],
-            imageUrl: args[AppStrings.image],
             price: args[AppStrings.price],
             discount: args[AppStrings.discount],
             sold: args[AppStrings.sold],
@@ -100,6 +100,9 @@ class RouteGenerator {
 
       case AppRoutes.cart:
         return MaterialPageRoute(builder: (_) => CartScreen());
+
+      case AppRoutes.search:
+        return MaterialPageRoute(builder: (_) => const SearchView());
 
       default:
         return unDefinedRoute();
