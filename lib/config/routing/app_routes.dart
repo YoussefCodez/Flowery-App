@@ -9,4 +9,5 @@ abstract class AppRoutes {
   static const String categories = "/categories";
   static const String mainLayout = "/main-layout";
   static const String bestSeller = "/best-seller";
+  static const String occasions = "/occasions";
 }

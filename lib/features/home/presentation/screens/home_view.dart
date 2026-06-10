@@ -90,7 +90,10 @@ class HomeView extends StatelessWidget {
               BestSellerCustomWidget(),
               SizedBox(height: 15.h),
 
-              HeaderCustomWidget(title: l10n.occasion, onPressed: () {}),
+              HeaderCustomWidget(
+                title: l10n.occasion,
+                onPressed: () => context.pushNamed(AppRoutes.occasions),
+              ),
               SizedBox(height: 10.h),
               OccasionCustomWidget(),
             ],

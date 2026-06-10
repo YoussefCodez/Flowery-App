@@ -94,6 +94,21 @@ import '../../features/login/domain/repo/login_repo_contract.dart' as _i180;
 import '../../features/login/domain/use_cases/login_use_case.dart' as _i191;
 import '../../features/login/presentation/view_model/cubit/login_view_model.dart'
     as _i705;
+import '../../features/occasions/api/api_client/occasions_api_client.dart'
+    as _i1066;
+import '../../features/occasions/api/data_sources/occasions_data_sources_impl.dart'
+    as _i722;
+import '../../features/occasions/data/data_sources/occasions_data_sources_contract.dart'
+    as _i758;
+import '../../features/occasions/data/repo/occasions_repo_impl.dart' as _i85;
+import '../../features/occasions/domain/repo/occasions_repo_contract.dart'
+    as _i405;
+import '../../features/occasions/domain/use_cases/get_occasions_use_case.dart'
+    as _i569;
+import '../../features/occasions/domain/use_cases/get_products_of_specific_occasion_use_case.dart'
+    as _i694;
+import '../../features/occasions/presentation/view_model/cubit/occasion_view_model.dart'
+    as _i516;
 import '../../features/register/api/api_client/register_api_client.dart'
     as _i656;
 import '../../features/register/api/data_source/register_data_source_imp.dart'
@@ -151,6 +166,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i395.LoginApiClient>(
       () => _i395.LoginApiClient(gh<_i361.Dio>()),
     );
+    gh.factory<_i1066.OccasionsApiClient>(
+      () => _i1066.OccasionsApiClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i656.RegisterApiClient>(
       () => _i656.RegisterApiClient(gh<_i361.Dio>()),
     );
@@ -166,6 +184,11 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i781.AuthInterceptor(
         dio: gh<_i361.Dio>(),
         fss: gh<_i558.FlutterSecureStorage>(),
+      ),
+    );
+    gh.factory<_i758.OccasionsDataSourcesContract>(
+      () => _i722.OccasionsDataSourcesImpl(
+        apiClient: gh<_i1066.OccasionsApiClient>(),
       ),
     );
     gh.factory<_i984.RegisterDataSource>(
@@ -201,6 +224,11 @@ extension GetItInjectableX on _i174.GetIt {
         apiClient: gh<_i618.BestSellerApiClient>(),
       ),
     );
+    gh.factory<_i405.OccasionsRepoContract>(
+      () => _i85.OccasionsRepoImpl(
+        dataSources: gh<_i758.OccasionsDataSourcesContract>(),
+      ),
+    );
     gh.factory<_i157.UserHelper>(
       () => _i157.UserHelper(
         gh<_i460.SharedPreferences>(),
@@ -231,8 +259,22 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i920.VerifyEmailUseCase>(
       () => _i920.VerifyEmailUseCase(gh<_i308.ForgetPasswordRepoContract>()),
     );
+    gh.factory<_i569.GetOccasionsUseCase>(
+      () => _i569.GetOccasionsUseCase(repo: gh<_i405.OccasionsRepoContract>()),
+    );
+    gh.factory<_i694.GetProductsOfSpecificOccasionUseCase>(
+      () => _i694.GetProductsOfSpecificOccasionUseCase(
+        repo: gh<_i405.OccasionsRepoContract>(),
+      ),
+    );
     gh.factory<_i217.RegisterUseCase>(
       () => _i217.RegisterUseCase(gh<_i668.RegisterRepository>()),
+    );
+    gh.factory<_i516.OccasionViewModel>(
+      () => _i516.OccasionViewModel(
+        gh<_i569.GetOccasionsUseCase>(),
+        gh<_i694.GetProductsOfSpecificOccasionUseCase>(),
+      ),
     );
     gh.lazySingleton<_i126.GetAllCategoriesUseCase>(
       () => _i126.GetAllCategoriesUseCase(gh<_i618.GetCategoriesContract>()),
