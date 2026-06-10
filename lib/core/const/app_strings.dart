@@ -1,6 +1,7 @@
 abstract class AppStrings {
   static const String addToCart = "Add to Cart";
   static const String title = "title";
+  static const String id = "id";
   static const String image = "image";
   static const String price = "price";
   static const String discount = "discount";
@@ -12,4 +13,5 @@ abstract class AppStrings {
   static const String noProductsFound = "No products found";
   static const String initialCategoryState = "Initial";
   static const String search = "Search";
+  static const String description = "description";
 }

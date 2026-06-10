@@ -38,6 +38,7 @@ class _CartScreenState extends State<CartScreen> {
           appBar: AppBar(
             title: Row(
               children: [
+                SizedBox(width: 16.w),
                 Text(localizations.cart),
                 BlocBuilder<CartViewModel, CartBaseState>(
                   builder: (context, state) {
@@ -59,10 +60,7 @@ class _CartScreenState extends State<CartScreen> {
               ],
             ),
             titleSpacing: 0.0,
-            leading: IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.arrow_back_ios_new),
-            ),
+            automaticallyImplyLeading: false,
             bottom: PreferredSize(
               preferredSize: Size(343.w, 40.h),
               child: CustomLocation(),

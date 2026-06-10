@@ -1,3 +1,4 @@
+import 'package:flowery/core/const/app_strings.dart';
 import 'package:flowery/core/widgets/main_layout.dart';
 import 'package:flowery/features/cart/presentation/screens/cart_screen.dart';
 import 'package:flowery/features/login/presentation/screens/login_screen.dart';
@@ -79,24 +80,27 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => OccasionsScreen());
 
       case AppRoutes.productDetails:
+        final args = settings.arguments as Map<String, dynamic>;
+
         return MaterialPageRoute(
-          builder: (_) => const ProductDetailsScreen(
-            imageUrl: '',
-            title: ' Pink Rose ',
-            price: 1500,
-            isdescount: false,
-            oldPrice: 0.0,
-            discount: 0.0,
-            sold: 0,
-            quantity: 15,
-            images: [], description: '',
-            id: '',
+          builder: (_) => ProductDetailsScreen(
+            title: args[AppStrings.title],
+            imageUrl: args[AppStrings.image],
+            price: args[AppStrings.price],
+            discount: args[AppStrings.discount],
+            sold: args[AppStrings.sold],
+            quantity: args[AppStrings.quantity],
+            images: List<String>.from(args[AppStrings.images]),
+            id: args[AppStrings.id],
+            isdiscount: args[AppStrings.discount] >= 0 ? true : false,
+            oldPrice: args[AppStrings.price],
+            description: args[AppStrings.description],
           ),
         );
 
       case AppRoutes.cart:
         return MaterialPageRoute(builder: (_) => CartScreen());
-        
+
       default:
         return unDefinedRoute();
     }

@@ -34,6 +34,7 @@ class CustomGridView extends StatelessWidget {
             quantity: products[index].quantity ?? 0,
             images: products[index].images ?? [], 
             id: products[index].id ?? "",
+            description: products[index].description ?? ""
           );
         },
         itemCount: productsLength,
