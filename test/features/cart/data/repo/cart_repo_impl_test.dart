@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flowery/config/base_response/base_response.dart';
 import 'package:flowery/features/cart/data/data_sources/cart_remote_data_source_contract.dart';
 import 'package:flowery/features/cart/data/models/responses/cart_item_model.dart';

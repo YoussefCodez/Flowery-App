@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flowery/config/di/injectable_config.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_extensions.dart';
@@ -7,9 +6,6 @@ import 'package:flowery/core/const/app_strings.dart';
 import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flowery/features/cart/presentation/cart_manager/cart_manager.dart';
 import 'package:flowery/features/cart/presentation/cart_manager/cart_state.dart';
-import 'package:flowery/features/cart/presentation/view_model/cubit/cart_view_model.dart';
-import 'package:flowery/features/cart/presentation/view_model/events/cart_events.dart';
-import 'package:flowery/features/cart/presentation/view_model/states/cart_base_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
