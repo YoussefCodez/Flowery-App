@@ -42,7 +42,13 @@ class CartManager extends Cubit<CartState> {
   }
 
   Future<void> addToCart(String productId, int quantity) async {
-    emit(state.copyWith(isAddingToCart: true, itemId: productId));
+    emit(
+      state.copyWith(
+        isAddingToCart: true,
+        itemId: productId,
+        isAddedSuccessfully: false,
+      ),
+    );
 
     final response = await addToCartUseCase(productId, quantity);
 
@@ -53,6 +59,7 @@ class CartManager extends Cubit<CartState> {
             isAddingToCart: false,
             itemId: '',
             cart: response.data,
+            isAddedSuccessfully: true,
           ),
         );
 
@@ -62,6 +69,7 @@ class CartManager extends Cubit<CartState> {
             isAddingToCart: false,
             itemId: '',
             errorMessage: response.exception.toString(),
+            isAddedSuccessfully: false,
           ),
         );
     }

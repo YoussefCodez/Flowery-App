@@ -36,20 +36,20 @@ class HomeView extends StatelessWidget {
                     SizedBox(width: 12.w),
 
                     Expanded(
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 12.w,
-                          vertical: 10.h,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.r),
-                          border: Border.all(
-                            color: AppColors.hintGrayColor,
-                            width: 1.5,
+                      child: InkWell(
+                        onTap: () => context.pushNamed(AppRoutes.search),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 12.w,
+                            vertical: 10.h,
                           ),
-                        ),
-                        child: InkWell(
-                          onTap: () => context.pushNamed(AppRoutes.search),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.r),
+                            border: Border.all(
+                              color: AppColors.hintGrayColor,
+                              width: 1.5,
+                            ),
+                          ),
                           child: Row(
                             children: [
                               Icon(

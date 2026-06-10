@@ -342,4 +342,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get add_to_cart => 'Add to Cart';
+
+  @override
+  String get the_item_has_been_added => 'The item has been added Successfully';
 }

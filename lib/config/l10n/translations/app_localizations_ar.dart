@@ -338,4 +338,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get add_to_cart => 'اضف الي السلة';
+
+  @override
+  String get the_item_has_been_added => 'تم اضافة العنصر بنجاح الي سلتك';
 }

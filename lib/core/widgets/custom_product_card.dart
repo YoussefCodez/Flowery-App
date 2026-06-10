@@ -161,7 +161,8 @@ class _CustomProductCardState extends State<CustomProductCard> {
                 children: [
                   BlocBuilder<CartManager, CartState>(
                     builder: (context, state) {
-                      if (state.isLoading == true) {
+                      if (state.isAddingToCart == true &&
+                          state.itemId == widget.id) {
                         return Center(
                           child: SizedBox(
                             height: 15.h,
@@ -171,18 +172,17 @@ class _CustomProductCardState extends State<CustomProductCard> {
                             ),
                           ),
                         );
-                      } else {
-                        return Row(
-                          children: [
-                            Icon(Icons.shopping_cart_outlined, size: 16.sp),
-                            SizedBox(width: 4.w),
-                            Text(
-                              AppStrings.addToCart,
-                              style: Theme.of(context).textTheme.titleLarge,
-                            ),
-                          ],
-                        );
                       }
+                      return Row(
+                        children: [
+                          Icon(Icons.shopping_cart_outlined, size: 16.sp),
+                          SizedBox(width: 4.w),
+                          Text(
+                            AppStrings.addToCart,
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                        ],
+                      );
                     },
                   ),
                 ],

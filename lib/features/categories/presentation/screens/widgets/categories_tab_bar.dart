@@ -41,7 +41,9 @@ class _CategoriesTabViewState extends State<CategoriesTabView>
     );
 
     context.read<CategoriesCubit>().doEvent(
-      GetProductsByCategoryEvent(widget.categoryId),
+      GetProductsByCategoryEvent(
+        widget.categoryId.isNotEmpty ? widget.categoryId : null,
+      ),
     );
   }
 

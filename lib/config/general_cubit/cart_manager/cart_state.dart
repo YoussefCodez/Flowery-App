@@ -8,7 +8,7 @@ class CartState extends Equatable {
   final bool isDeletingCartItem;
   final bool isUpdatingCartItem;
   final bool isAddingToCart;
-
+  final bool isAddedSuccessfully;
   final String itemId;
   final String? errorMessage;
 
@@ -20,6 +20,7 @@ class CartState extends Equatable {
     this.isAddingToCart = false,
     this.itemId = '',
     this.errorMessage,
+    this.isAddedSuccessfully = false,
   });
 
   CartState copyWith({
@@ -28,6 +29,7 @@ class CartState extends Equatable {
     bool? isDeletingCartItem,
     bool? isUpdatingCartItem,
     bool? isAddingToCart,
+    bool? isAddedSuccessfully,
     String? itemId,
     String? errorMessage,
   }) {
@@ -39,6 +41,7 @@ class CartState extends Equatable {
       isAddingToCart: isAddingToCart ?? this.isAddingToCart,
       itemId: itemId ?? this.itemId,
       errorMessage: errorMessage,
+      isAddedSuccessfully: isAddedSuccessfully ?? this.isAddedSuccessfully,
     );
   }
 
@@ -51,5 +54,6 @@ class CartState extends Equatable {
     isAddingToCart,
     itemId,
     errorMessage,
+    isAddedSuccessfully,
   ];
 }

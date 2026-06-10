@@ -745,6 +745,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add to Cart'**
   String get add_to_cart;
+
+  /// No description provided for @the_item_has_been_added.
+  ///
+  /// In en, this message translates to:
+  /// **'The item has been added Successfully'**
+  String get the_item_has_been_added;
 }
 
 class _AppLocalizationsDelegate

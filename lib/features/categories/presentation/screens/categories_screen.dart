@@ -1,4 +1,5 @@
 import 'package:flowery/config/di/injectable_config.dart';
+import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flowery/core/const/app_strings.dart';
 import 'package:flowery/features/categories/presentation/screens/widgets/categories_tab_bar.dart';
@@ -58,7 +59,10 @@ class CategoriesScreen extends StatelessWidget {
                   builder: (context, state) {
                     return state.categoriesState.when(
                       success: (categories) {
-                        return CategoriesTabView(categories: categories,categoryId:categoryId);
+                        return CategoriesTabView(
+                          categories: categories,
+                          categoryId: categoryId,
+                        );
                       },
                       loading: () {
                         return const Center(child: CircularProgressIndicator());
