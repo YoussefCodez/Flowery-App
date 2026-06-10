@@ -1,7 +1,7 @@
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/core/theme/app_colors.dart';
-import 'package:flowery/features/cart/presentation/cart_manager/cart_manager.dart';
-import 'package:flowery/features/cart/presentation/cart_manager/cart_state.dart';
+import 'package:flowery/config/general_cubit/cart_manager/cart_manager.dart';
+import 'package:flowery/config/general_cubit/cart_manager/cart_state.dart';
 import 'package:flowery/features/cart/presentation/widgets/custom_bill.dart';
 import 'package:flowery/features/cart/presentation/widgets/custom_location.dart';
 import 'package:flowery/features/cart/presentation/widgets/custom_order_container.dart';

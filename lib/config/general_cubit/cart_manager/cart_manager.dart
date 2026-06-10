@@ -1,4 +1,4 @@
-import 'package:flowery/features/cart/presentation/cart_manager/cart_state.dart';
+import 'package:flowery/config/general_cubit/cart_manager/cart_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flowery/config/base_response/base_response.dart';
 import 'package:flowery/features/cart/domain/entities/cart_entity.dart';

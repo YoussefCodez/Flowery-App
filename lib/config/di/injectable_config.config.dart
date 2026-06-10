@@ -46,7 +46,7 @@ import '../../features/cart/domain/use_cases/get_user_cart_products_use_case.dar
     as _i807;
 import '../../features/cart/domain/use_cases/update_specific_cart_item_quantity_use_case.dart'
     as _i93;
-import '../../features/cart/presentation/cart_manager/cart_manager.dart'
+import '../general_cubit/cart_manager/cart_manager.dart'
     as _i526;
 import '../../features/cart/presentation/view_model/cubit/cart_view_model.dart'
     as _i421;
