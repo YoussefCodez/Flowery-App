@@ -311,4 +311,31 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get no_products => 'لا يوجد منتجات';
+
+  @override
+  String get items => 'العناصر';
+
+  @override
+  String get sub_total => 'المجموع الفرعي';
+
+  @override
+  String get delivery_fee => 'رسوم التوصيل';
+
+  @override
+  String get total => 'الإجمالي';
+
+  @override
+  String get checkout => 'إتمام الطلب';
+
+  @override
+  String get discount => 'خصم';
+
+  @override
+  String get sub_total_after_discount => 'المجموع الفرعي بعد الخصم';
+
+  @override
+  String get your_cart_is_empty => 'سلتك فارغة';
+
+  @override
+  String get add_to_cart => 'اضف الي السلة';
 }

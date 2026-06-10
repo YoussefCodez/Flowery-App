@@ -88,7 +88,8 @@ class Product {
       discount: discount ?? 0,
       quantity: quantity ?? 0,
       sold: sold ?? 0,
-      images: images ?? []
+      images: images ?? [],
+      id: id ?? ""
     );
   }
 }

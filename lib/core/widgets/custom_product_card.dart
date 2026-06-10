@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flowery/config/di/injectable_config.dart';
+import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flowery/core/const/app_strings.dart';
@@ -11,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CustomProductCard extends StatelessWidget {
+class CustomProductCard extends StatefulWidget {
   final String id;
   final String title;
   final String image;
@@ -37,6 +38,18 @@ class CustomProductCard extends StatelessWidget {
   });
 
   @override
+  State<CustomProductCard> createState() => _CustomProductCardState();
+}
+
+class _CustomProductCardState extends State<CustomProductCard> {
+  late AppLocalizations localizations;
+  @override
+  void didChangeDependencies() {
+    localizations = AppLocalizations.of(context)!;
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocProvider<CartViewModel>(
       create: (context) => getIt.get<CartViewModel>(),
@@ -44,13 +57,13 @@ class CustomProductCard extends StatelessWidget {
         onTap: () => context.pushNamed(
           AppRoutes.productDetails,
           arguments: <String, dynamic>{
-            AppStrings.title: title,
-            AppStrings.image: image,
-            AppStrings.price: price,
-            AppStrings.discount: discount,
-            AppStrings.sold: sold,
-            AppStrings.quantity: quantity,
-            AppStrings.images: images,
+            AppStrings.title: widget.title,
+            AppStrings.image: widget.image,
+            AppStrings.price: widget.price,
+            AppStrings.discount: widget.discount,
+            AppStrings.sold: widget.sold,
+            AppStrings.quantity: widget.quantity,
+            AppStrings.images: widget.images,
           },
         ),
         child: Container(
@@ -66,7 +79,7 @@ class CustomProductCard extends StatelessWidget {
             children: [
               Expanded(
                 child: CachedNetworkImage(
-                  imageUrl: image,
+                  imageUrl: widget.image,
                   height: 130.h,
                   width: double.infinity,
                   fit: BoxFit.cover,
@@ -86,40 +99,58 @@ class CustomProductCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    widget.title,
                     style: Theme.of(
                       context,
                     ).textTheme.labelLarge?.copyWith(fontSize: 12.sp),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    spacing: 7.sp,
                     children: [
-                      Text(
-                        "EGP $price",
-                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          fontWeight: .w500,
-                          fontSize: 14.sp,
+                      Flexible(
+                        child: Text(
+                          "${localizations.egp} ${widget.price}",
+                          style: Theme.of(context).textTheme.labelLarge
+                              ?.copyWith(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14.sp,
+                              ),
                         ),
                       ),
-                      Text(
-                        "$oldPrice",
-                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          decoration: TextDecoration.lineThrough,
-                          decorationColor: Theme.of(
-                            context,
-                          ).colorScheme.onSecondary,
-                          decorationThickness: 1.w,
-                          color: Theme.of(context).colorScheme.onSecondary,
-                          fontSize: 12.sp,
+                      SizedBox(width: 7.w),
+
+                      Flexible(
+                        child: Text(
+                          "${widget.oldPrice}",
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: Theme.of(context).textTheme.labelLarge
+                              ?.copyWith(
+                                decoration: TextDecoration.lineThrough,
+                                decorationColor: Theme.of(
+                                  context,
+                                ).colorScheme.onSecondary,
+                                decorationThickness: 1.w,
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSecondary,
+                                fontSize: 12.sp,
+                              ),
                         ),
                       ),
-                      Text(
-                        "$discount%",
-                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          fontWeight: .w400,
-                          color: AppColors.greenColor,
-                          fontSize: 12.sp,
+                      SizedBox(width: 7.w),
+
+                      Flexible(
+                        child: Text(
+                          "${widget.discount}%",
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: Theme.of(context).textTheme.labelLarge
+                              ?.copyWith(
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.greenColor,
+                                fontSize: 12.sp,
+                              ),
                         ),
                       ),
                     ],
@@ -128,9 +159,12 @@ class CustomProductCard extends StatelessWidget {
               ),
               SizedBox(height: 8.h),
               ElevatedButton(
-                onPressed: () =>
-                    context.read<CartViewModel>()
-                      ..doEvent(AddToCartEvent(), cartItemId: id, quantity: 1),
+                onPressed: () => context.read<CartViewModel>()
+                  ..doEvent(
+                    AddToCartEvent(),
+                    cartItemId: widget.id,
+                    quantity: 1,
+                  ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

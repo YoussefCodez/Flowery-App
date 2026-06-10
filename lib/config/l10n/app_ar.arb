@@ -112,5 +112,6 @@
   "egp":"جنيه",
   "discount": "خصم",
   "sub_total_after_discount": "المجموع الفرعي بعد الخصم",
-  "your_cart_is_empty" : "سلتك فارغة"
+  "your_cart_is_empty" : "سلتك فارغة",
+  "add_to_cart" : "اضف الي السلة"
 }

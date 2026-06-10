@@ -12,6 +12,7 @@ class BestSellerProductEntity extends Equatable {
   final int quantity;
   final int sold;
   final List<String> images;
+  final String id;
   const BestSellerProductEntity({
     required this.title,
     required this.description,
@@ -21,7 +22,8 @@ class BestSellerProductEntity extends Equatable {
     required this.discount,
     required this.quantity,
     required this.sold,
-    required this.images,
+    required this.images, 
+    required this.id,
   });
 
   @override
@@ -36,5 +38,6 @@ class BestSellerProductEntity extends Equatable {
     sold,
     images,
     images,
+    id
   ];
 }

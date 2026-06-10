@@ -32,7 +32,8 @@ class CustomGridView extends StatelessWidget {
             oldPrice: products[index].price?.toDouble() ?? 0,
             sold: products[index].discount?.toInt() ?? 0,
             quantity: products[index].quantity ?? 0,
-            images: products[index].images ?? [],
+            images: products[index].images ?? [], 
+            id: products[index].id ?? "",
           );
         },
         itemCount: productsLength,

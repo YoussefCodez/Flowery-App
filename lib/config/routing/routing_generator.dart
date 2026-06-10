@@ -1,4 +1,5 @@
 import 'package:flowery/core/widgets/main_layout.dart';
+import 'package:flowery/features/cart/presentation/screens/cart_screen.dart';
 import 'package:flowery/features/login/presentation/screens/login_screen.dart';
 import 'package:flowery/features/forget_password/presentation/screens/forget_password_view.dart';
 import 'package:flowery/features/forget_password/presentation/view_model/cubit/forget_password_view_model.dart';
@@ -88,16 +89,14 @@ class RouteGenerator {
             discount: 0.0,
             sold: 0,
             quantity: 15,
-            images: [],
-            //               images: List<String>.from(
-            //   args[CategoriesValues.images],
-
-            // ),
+            images: [], description: '',
+            id: '',
           ),
         );
 
       case AppRoutes.cart:
         return MaterialPageRoute(builder: (_) => CartScreen());
+        
       default:
         return unDefinedRoute();
     }

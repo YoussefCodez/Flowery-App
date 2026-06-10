@@ -28,6 +28,7 @@ void main() {
       quantity: 10,
       sold: 5,
       images: [],
+      id: "1"
     ),
     BestSellerProductEntity(
       title: 'product-2',
@@ -39,6 +40,7 @@ void main() {
       quantity: 20,
       sold: 10,
       images: [],
+      id: "2"
     ),
   ];
 

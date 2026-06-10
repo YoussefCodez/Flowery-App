@@ -12,7 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CartScreen extends StatefulWidget {
-  CartScreen({super.key});
+  const CartScreen({super.key});
 
   @override
   State<CartScreen> createState() => _CartScreenState();
@@ -81,7 +81,6 @@ class _CartScreenState extends State<CartScreen> {
                       );
                     } else {
                       return Scrollbar(
-                        thumbVisibility: true,
                         thickness: 6.w,
                         child: ListView.builder(
                           itemCount: state.cart.numberOfCartItems,

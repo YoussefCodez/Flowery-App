@@ -37,6 +37,7 @@ void main() {
       quantity: 10,
       sold: 5,
       images: [],
+      id: "1"
     ),
     ProductEntity(
       title: 'product-2',
@@ -48,6 +49,7 @@ void main() {
       quantity: 10,
       sold: 5,
       images: [],
+      id: "2"
     ),
   ];
 

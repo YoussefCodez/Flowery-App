@@ -1,3 +1,4 @@
+import 'package:flowery/features/cart/presentation/screens/cart_screen.dart';
 import 'package:flowery/features/categories/presentation/screens/categories_screen.dart';
 import 'package:flowery/features/home/presentation/screens/home_view.dart';
 import 'package:flowery/features/home/presentation/widget/navbar_custom_widget.dart';
@@ -16,7 +17,7 @@ class _MainLayoutState extends State<MainLayout> {
   final screens = [
     const HomeView(),
     const CategoriesScreen(showBackButton: false,),
-    // const CartScreen(),
+    CartScreen(),
     // const ProfileScreen(),
   ];
 
@@ -24,6 +25,7 @@ class _MainLayoutState extends State<MainLayout> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(
+        
         index: currentIndex,
         children: screens,
       ),
