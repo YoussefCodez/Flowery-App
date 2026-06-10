@@ -2,6 +2,7 @@ import 'package:flowery/core/widgets/main_layout.dart';
 import 'package:flowery/features/login/presentation/screens/login_screen.dart';
 import 'package:flowery/features/forget_password/presentation/screens/forget_password_view.dart';
 import 'package:flowery/features/forget_password/presentation/view_model/cubit/forget_password_view_model.dart';
+import 'package:flowery/features/product_details/presentation/screens/product_details_screen.dart';
 import 'package:flowery/features/register/presentation/pages/register_screen.dart';
 import 'package:flowery/features/home/presentation/screens/home_view.dart';
 import 'package:flowery/features/categories/presentation/screens/categories_screen.dart';
@@ -75,6 +76,25 @@ class RouteGenerator {
 
       case AppRoutes.occasions:
         return MaterialPageRoute(builder: (_) => OccasionsScreen());
+
+      case AppRoutes.productDetails:
+        return MaterialPageRoute(
+          builder: (_) => const ProductDetailsScreen(
+            imageUrl: '',
+            title: ' Pink Rose ',
+            price: 1500,
+            isdescount: false,
+            oldPrice: 0.0,
+            discount: 0.0,
+            sold: 0,
+            quantity: 15,
+            images: [],
+            //               images: List<String>.from(
+            //   args[CategoriesValues.images],
+
+            // ),
+          ),
+        );
       default:
         return unDefinedRoute();
     }
