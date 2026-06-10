@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flowery/features/cart/domain/entities/cart_item_entity.dart';
+import 'package:flowery/features/cart/presentation/cart_manager/cart_manager.dart';
+import 'package:flowery/features/cart/presentation/cart_manager/cart_state.dart';
 import 'package:flowery/features/cart/presentation/view_model/cubit/cart_view_model.dart';
 import 'package:flowery/features/cart/presentation/view_model/events/cart_events.dart';
 import 'package:flowery/features/cart/presentation/view_model/states/cart_base_state.dart';
@@ -38,7 +40,7 @@ class _CustomOrderContainerState extends State<CustomOrderContainer> {
         borderRadius: BorderRadius.circular(7.r),
         border: Border.all(width: 0.5.w, color: AppColors.grayColor),
       ),
-      child: BlocBuilder<CartViewModel, CartBaseState>(
+      child: BlocBuilder<CartManager, CartState>(
         builder: (context, state) {
           if (state.isDeletingCartItem == true &&
               state.itemId == widget.cartItem.product?.productId) {
@@ -124,9 +126,8 @@ class _CustomOrderContainerState extends State<CustomOrderContainer> {
                   children: [
                     IconButton(
                       onPressed: () {
-                        context.read<CartViewModel>().doEvent(
-                          DeleteSpecificCartItemEvent(),
-                          cartItemId: widget.cartItem.product?.productId ?? "",
+                        context.read<CartManager>().deleteItem(
+                          widget.cartItem.product?.productId ?? "",
                         );
                       },
                       icon: Icon(Icons.delete_forever_rounded, size: 30),
@@ -140,11 +141,10 @@ class _CustomOrderContainerState extends State<CustomOrderContainer> {
                       children: [
                         IconButton(
                           onPressed: () {
-                            context.read<CartViewModel>().doEvent(
-                              UpdateSpecificCartItemEvent(),
-                              cartItemId:
+                            context.read<CartManager>().updateQuantity(
+ 
                                   widget.cartItem.product?.productId ?? "",
-                              quantity: widget.cartItem.quantity! - 1,
+widget.cartItem.quantity! - 1,
                             );
                           },
                           icon: Icon(
@@ -154,8 +154,8 @@ class _CustomOrderContainerState extends State<CustomOrderContainer> {
                           ),
                           color: AppColors.blackColor,
                         ),
-                        BlocBuilder<CartViewModel, CartBaseState>(
-                          builder: (BuildContext context, CartBaseState state) {
+                        BlocBuilder<CartManager, CartState>(
+                          builder: (context,state) {
                             if (state.isUpdatingCartItem == true &&
                                 state.itemId ==
                                     widget.cartItem.product?.productId) {
@@ -181,11 +181,9 @@ class _CustomOrderContainerState extends State<CustomOrderContainer> {
                         ),
                         IconButton(
                           onPressed: () {
-                            context.read<CartViewModel>().doEvent(
-                              UpdateSpecificCartItemEvent(),
-                              cartItemId:
-                                  widget.cartItem.product?.productId ?? "",
-                              quantity: widget.cartItem.quantity! + 1,
+                            context.read<CartManager>().updateQuantity(
+                              widget.cartItem.product?.productId ?? "",
+                              widget.cartItem.quantity! + 1,
                             );
                           },
                           icon: Icon(

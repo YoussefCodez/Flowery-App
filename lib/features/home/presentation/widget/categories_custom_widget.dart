@@ -1,3 +1,5 @@
+import 'package:flowery/config/routing/app_routes.dart';
+import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,19 +15,17 @@ class CategoriesCustomWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeViewModel, HomeState>(
       buildWhen: (previous, current) =>
-      previous.categoryState != current.categoryState,
+          previous.categoryState != current.categoryState,
       builder: (context, state) {
         return state.categoryState.when(
           initial: () => const SizedBox(),
           loading: () => const Center(
-            child: CircularProgressIndicator(
-              color: AppColors.primaryColor,
-            ),
+            child: CircularProgressIndicator(color: AppColors.primaryColor),
           ),
           error: (exception) => Center(
             child: Text(
               exception.toString(),
-              style: const TextStyle(color:  AppColors.primaryColor),
+              style: const TextStyle(color: AppColors.primaryColor),
             ),
           ),
           success: (categories) => SizedBox(
@@ -68,7 +68,7 @@ class _CategoryCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        // context.pushNamed(AppRoutes.categoryProducts, arguments: categoryId);
+        context.pushNamed(AppRoutes.categories, arguments: categoryId);
       },
       child: Padding(
         padding: EdgeInsets.only(right: 16.w),
@@ -84,28 +84,28 @@ class _CategoryCard extends StatelessWidget {
               ),
               child: image != null
                   ? ClipRRect(
-                borderRadius: BorderRadius.circular(16.r),
-                child: Padding(
-                  padding:  EdgeInsets.all(15.h),
-                  child: Image.network(
-                    image!,
-                    width: 64.w,
-                    height: 64.h,
-                    fit: BoxFit.contain,
-                    errorBuilder: (context, error, stackTrace) =>
-                    const Icon(
+                      borderRadius: BorderRadius.circular(16.r),
+                      child: Padding(
+                        padding: EdgeInsets.all(15.h),
+                        child: Image.network(
+                          image!,
+                          width: 64.w,
+                          height: 64.h,
+                          fit: BoxFit.contain,
+                          errorBuilder: (context, error, stackTrace) =>
+                              const Icon(
+                                Icons.category_outlined,
+                                color: pinkColor,
+                                size: 28,
+                              ),
+                        ),
+                      ),
+                    )
+                  : const Icon(
                       Icons.category_outlined,
                       color: pinkColor,
                       size: 28,
                     ),
-                  ),
-                ),
-              )
-                  : const Icon(
-                Icons.category_outlined,
-                color: pinkColor,
-                size: 28,
-              ),
             ),
             SizedBox(height: 8.h),
             Text(

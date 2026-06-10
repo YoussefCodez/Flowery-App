@@ -11,7 +11,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OccasionsScreen extends StatefulWidget {
-  const OccasionsScreen({super.key});
+  final String occasionId;
+  const OccasionsScreen({
+    super.key,
+    required this.occasionId,
+    String? selectedOccasionId,
+  });
 
   @override
   State<OccasionsScreen> createState() => _OccasionsScreenState();
@@ -35,7 +40,8 @@ class _OccasionsScreenState extends State<OccasionsScreen>
   Widget build(BuildContext context) {
     return BlocProvider<OccasionViewModel>(
       create: (context) =>
-          getIt.get<OccasionViewModel>()..doEvent(GetOccasionsEvent()),
+          getIt.get<OccasionViewModel>()
+            ..doEvent(GetOccasionsEvent(), occasionId: widget.occasionId),
       child: Scaffold(
         appBar: AppBar(
           toolbarHeight: 100.h,
@@ -69,6 +75,11 @@ class _OccasionsScreenState extends State<OccasionsScreen>
                   vsync: this,
                 );
 
+                if (widget.occasionId != "") {
+                  int selectedIndex = state.ids.indexOf(widget.occasionId);
+                  _tabController!.index = selectedIndex;
+                }
+
                 // Listen to manual tab clicks
                 _tabController?.addListener(() {
                   if (_tabController!.indexIsChanging) {
@@ -79,7 +90,7 @@ class _OccasionsScreenState extends State<OccasionsScreen>
                   }
                 });
               },
-              builder: (context, state) {
+              builder: (BuildContext context, OccasionsState state) {
                 // initializing the tab controller and getting the first occasion products
                 if (_tabController == null ||
                     _tabController!.length != state.names.length) {
@@ -89,10 +100,6 @@ class _OccasionsScreenState extends State<OccasionsScreen>
                     vsync: this,
                   );
                 }
-
-                // if (state.isLoadingOccasions) {
-                //   return CircularProgressIndicator();
-                // }
 
                 return TabBar(
                   controller: _tabController,
@@ -108,18 +115,19 @@ class _OccasionsScreenState extends State<OccasionsScreen>
         ),
         body: BlocBuilder<OccasionViewModel, OccasionsState>(
           builder: (context, state) {
-            if (state.isLoadingProducts) {
+            if (state.isLoadingOccasions) {
               return const Center(child: CircularProgressIndicator());
             }
 
+            if (state.isLoadingProducts) {
+              return const Center(child: CircularProgressIndicator());
+            }
             if (state.errorMessage != null && state.errorMessage!.isNotEmpty) {
               return Center(child: Text(localizations.an_error_occurred));
             }
-
             if (state.products.isEmpty) {
               return Center(child: Text(localizations.no_products));
             }
-
             return CustomGridView(
               productsLength: state.products.length,
               products: state.products,

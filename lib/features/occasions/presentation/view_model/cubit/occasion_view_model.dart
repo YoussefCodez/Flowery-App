@@ -23,20 +23,14 @@ class OccasionViewModel extends Cubit<OccasionsState> {
   void doEvent(OccasionsEvents event, {String occasionId = ''}) {
     switch (event) {
       case GetOccasionsEvent():
-        _getOccasions();
+        _getOccasions(occasionId: occasionId);
       case GetProductsOfSpecificOccasion():
         _getProductsOfSpecificOccasion(occasionId: occasionId);
     }
   }
 
-  Future<void> _getOccasions() async {
-    emit(
-      state.copyWith(
-        isLoadingOccasions: true,
-        isLoadingProducts: true,
-        errorMessage: null,
-      ),
-    );
+  Future<void> _getOccasions({required String occasionId}) async {
+    emit(state.copyWith(isLoadingOccasions: true, errorMessage: null));
 
     final response = await _getOccasionsUseCase.call();
 
@@ -49,8 +43,12 @@ class OccasionViewModel extends Cubit<OccasionsState> {
         emit(state.copyWith(isLoadingOccasions: false, names: names, ids: ids));
 
         // fetch the first occasion prodcuts
-        if (ids.isNotEmpty) {
+        if (ids.isNotEmpty && occasionId == "") {
           _getProductsOfSpecificOccasion(occasionId: ids[0]);
+        }
+
+        if(occasionId != ""){
+          _getProductsOfSpecificOccasion(occasionId: occasionId);
         }
         return;
       case Error<List<OccasionEntity>>():

@@ -1,5 +1,6 @@
 import 'package:flowery/core/const/app_strings.dart';
 import 'package:flowery/core/widgets/main_layout.dart';
+import 'package:flowery/features/cart/presentation/cart_manager/cart_manager.dart';
 import 'package:flowery/features/search/presentation/screen/search_view.dart';
 import 'package:flowery/features/cart/presentation/screens/cart_screen.dart';
 import 'package:flowery/features/login/presentation/screens/login_screen.dart';
@@ -57,8 +58,10 @@ class RouteGenerator {
         );
 
       case AppRoutes.categories:
+        final categoryId = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (_) => const CategoriesScreen(showBackButton: true),
+          builder: (_) =>
+              CategoriesScreen(showBackButton: true, categoryId: categoryId),
         );
 
       case AppRoutes.mainLayout:
@@ -78,7 +81,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const BestSellerScreen());
 
       case AppRoutes.occasions:
-        return MaterialPageRoute(builder: (_) => OccasionsScreen());
+        final occasionId = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (_) => OccasionsScreen(occasionId: occasionId),
+        );
 
       case AppRoutes.productDetails:
         final args = settings.arguments as Map<String, dynamic>;

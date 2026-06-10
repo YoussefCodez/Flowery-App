@@ -5,6 +5,8 @@ import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flowery/core/const/app_strings.dart';
 import 'package:flowery/core/theme/app_colors.dart';
+import 'package:flowery/features/cart/presentation/cart_manager/cart_manager.dart';
+import 'package:flowery/features/cart/presentation/cart_manager/cart_state.dart';
 import 'package:flowery/features/cart/presentation/view_model/cubit/cart_view_model.dart';
 import 'package:flowery/features/cart/presentation/view_model/events/cart_events.dart';
 import 'package:flowery/features/cart/presentation/view_model/states/cart_base_state.dart';
@@ -53,166 +55,145 @@ class _CustomProductCardState extends State<CustomProductCard> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<CartViewModel>(
-      create: (context) => getIt.get<CartViewModel>(),
-      child: Builder(
-        builder: (context) {
-          return InkWell(
-            onTap: () => context.pushNamed(
-              AppRoutes.productDetails,
-              arguments: <String, dynamic>{
-                AppStrings.title: widget.title,
-                AppStrings.image: widget.image,
-                AppStrings.price: widget.price,
-                AppStrings.discount: widget.discount,
-                AppStrings.sold: widget.sold,
-                AppStrings.quantity: widget.quantity,
-                AppStrings.images: widget.images,
-                AppStrings.id: widget.id,
-                AppStrings.description: widget.description,
-              },
-            ),
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Theme.of(context).colorScheme.onSecondary,
+    return InkWell(
+      onTap: () => context.pushNamed(
+        AppRoutes.productDetails,
+        arguments: <String, dynamic>{
+          AppStrings.title: widget.title,
+          AppStrings.image: widget.image,
+          AppStrings.price: widget.price,
+          AppStrings.discount: widget.discount,
+          AppStrings.sold: widget.sold,
+          AppStrings.quantity: widget.quantity,
+          AppStrings.images: widget.images,
+          AppStrings.id: widget.id,
+          AppStrings.description: widget.description,
+        },
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: Theme.of(context).colorScheme.onSecondary),
+          borderRadius: BorderRadius.circular(8.r),
+        ),
+        padding: REdgeInsets.all(8),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Expanded(
+              child: CachedNetworkImage(
+                imageUrl: widget.image,
+                height: 130.h,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                placeholder: (context, url) => Center(
+                  child: CircularProgressIndicator(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
-                borderRadius: BorderRadius.circular(8.r),
+                errorWidget: (context, url, error) => Icon(
+                  Icons.error,
+                  color: Theme.of(context).colorScheme.error,
+                ),
               ),
-              padding: REdgeInsets.all(8),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
+            ),
+            SizedBox(height: 8.h),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.title,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.labelLarge?.copyWith(fontSize: 12.sp),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Flexible(
+                      child: Text(
+                        "${localizations.egp} ${widget.price}",
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14.sp,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 7.w),
+
+                    Flexible(
+                      child: Text(
+                        "${widget.oldPrice}",
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          decoration: TextDecoration.lineThrough,
+                          decorationColor: Theme.of(
+                            context,
+                          ).colorScheme.onSecondary,
+                          decorationThickness: 1.w,
+                          color: Theme.of(context).colorScheme.onSecondary,
+                          fontSize: 12.sp,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 7.w),
+
+                    Flexible(
+                      child: Text(
+                        "${widget.discount}%",
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.greenColor,
+                          fontSize: 12.sp,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(height: 8.h),
+            ElevatedButton(
+              onPressed: () {
+                context.read<CartManager>().addToCart(widget.id, 1);
+                context.read<CartManager>().getCartUseCase();
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
-                    child: CachedNetworkImage(
-                      imageUrl: widget.image,
-                      height: 130.h,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) => Center(
-                        child: CircularProgressIndicator(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
-                      errorWidget: (context, url, error) => Icon(
-                        Icons.error,
-                        color: Theme.of(context).colorScheme.error,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 8.h),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.title,
-                        style: Theme.of(
-                          context,
-                        ).textTheme.labelLarge?.copyWith(fontSize: 12.sp),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Flexible(
-                            child: Text(
-                              "${localizations.egp} ${widget.price}",
-                              style: Theme.of(context).textTheme.labelLarge
-                                  ?.copyWith(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14.sp,
-                                  ),
+                  BlocBuilder<CartManager, CartState>(
+                    builder: (context, state) {
+                      if (state.isLoading == true) {
+                        return Center(
+                          child: SizedBox(
+                            height: 15.h,
+                            width: 15.w,
+                            child: CircularProgressIndicator(
+                              color: AppColors.whiteColor,
                             ),
                           ),
-                          SizedBox(width: 7.w),
-
-                          Flexible(
-                            child: Text(
-                              "${widget.oldPrice}",
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
-                              style: Theme.of(context).textTheme.labelLarge
-                                  ?.copyWith(
-                                    decoration: TextDecoration.lineThrough,
-                                    decorationColor: Theme.of(
-                                      context,
-                                    ).colorScheme.onSecondary,
-                                    decorationThickness: 1.w,
-                                    color: Theme.of(
-                                      context,
-                                    ).colorScheme.onSecondary,
-                                    fontSize: 12.sp,
-                                  ),
+                        );
+                      } else {
+                        return Row(
+                          children: [
+                            Icon(Icons.shopping_cart_outlined, size: 16.sp),
+                            SizedBox(width: 4.w),
+                            Text(
+                              AppStrings.addToCart,
+                              style: Theme.of(context).textTheme.titleLarge,
                             ),
-                          ),
-                          SizedBox(width: 7.w),
-
-                          Flexible(
-                            child: Text(
-                              "${widget.discount}%",
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
-                              style: Theme.of(context).textTheme.labelLarge
-                                  ?.copyWith(
-                                    fontWeight: FontWeight.w400,
-                                    color: AppColors.greenColor,
-                                    fontSize: 12.sp,
-                                  ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 8.h),
-                  ElevatedButton(
-                    onPressed: () => context.read<CartViewModel>()
-                      ..doEvent(
-                        AddToCartEvent(),
-                        cartItemId: widget.id,
-                        quantity: 1,
-                      ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        BlocBuilder<CartViewModel, CartBaseState>(
-                          builder: (context, state) {
-                            if (state.isAddingToCart == true) {
-                              return Center(
-                                child: SizedBox(
-                                  height: 15.h,
-                                  width: 15.w,
-                                  child: CircularProgressIndicator(
-                                    color: AppColors.whiteColor,
-                                  ),
-                                ),
-                              );
-                            } else {
-                              return Row(
-                                children: [
-                                  Icon(
-                                    Icons.shopping_cart_outlined,
-                                    size: 16.sp,
-                                  ),
-                                  SizedBox(width: 4.w),
-                                  Text(
-                                    AppStrings.addToCart,
-                                    style: Theme.of(
-                                      context,
-                                    ).textTheme.titleLarge,
-                                  ),
-                                ],
-                              );
-                            }
-                          },
-                        ),
-                      ],
-                    ),
+                          ],
+                        );
+                      }
+                    },
                   ),
                 ],
               ),
             ),
-          );
-        },
+          ],
+        ),
       ),
     );
   }

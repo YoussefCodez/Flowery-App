@@ -13,7 +13,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CategoriesScreen extends StatelessWidget {
   final bool showBackButton;
-  const CategoriesScreen({super.key, required this.showBackButton});
+  final String categoryId;
+  const CategoriesScreen({
+    super.key,
+    required this.showBackButton,
+    this.categoryId = "",
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +33,12 @@ class CategoriesScreen extends StatelessWidget {
                 padding: REdgeInsets.all(16),
                 child: Row(
                   children: [
-                    showBackButton?
-                    InkWell(
-                      onTap: () => context.pop(),
-                      child: Icon(Icons.arrow_back_ios_new),
-                    ):SizedBox.shrink(),
+                    showBackButton
+                        ? InkWell(
+                            onTap: () => context.pop(),
+                            child: Icon(Icons.arrow_back_ios_new),
+                          )
+                        : SizedBox.shrink(),
                     SizedBox(width: 8.w),
                     Expanded(
                       child: SizedBox(
@@ -52,7 +58,7 @@ class CategoriesScreen extends StatelessWidget {
                   builder: (context, state) {
                     return state.categoriesState.when(
                       success: (categories) {
-                        return CategoriesTabView(categories: categories);
+                        return CategoriesTabView(categories: categories,categoryId:categoryId);
                       },
                       loading: () {
                         return const Center(child: CircularProgressIndicator());

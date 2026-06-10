@@ -29,12 +29,7 @@ class CartManager extends Cubit<CartState> {
 
     switch (response) {
       case Success<CartEntity>():
-        emit(
-          state.copyWith(
-            isLoading: false,
-            cart: response.data,
-          ),
-        );
+        emit(state.copyWith(isLoading: false, cart: response.data));
 
       case Error<CartEntity>():
         emit(
@@ -46,19 +41,17 @@ class CartManager extends Cubit<CartState> {
     }
   }
 
-  Future<void> addToCart(
-    String productId,
-    int quantity,
-  ) async {
-    final response = await addToCartUseCase(
-      productId,
-      quantity,
-    );
+  Future<void> addToCart(String productId, int quantity) async {
+    emit(state.copyWith(isAddingToCart: true, itemId: productId));
+
+    final response = await addToCartUseCase(productId, quantity);
 
     switch (response) {
       case Success<CartEntity>():
         emit(
           state.copyWith(
+            isAddingToCart: false,
+            itemId: '',
             cart: response.data,
           ),
         );
@@ -66,23 +59,25 @@ class CartManager extends Cubit<CartState> {
       case Error<CartEntity>():
         emit(
           state.copyWith(
+            isAddingToCart: false,
+            itemId: '',
             errorMessage: response.exception.toString(),
           ),
         );
     }
   }
 
-  Future<void> deleteItem(
-    String cartItemId,
-  ) async {
-    final response = await deleteUseCase(
-      cartItemId,
-    );
+  Future<void> deleteItem(String cartItemId) async {
+    emit(state.copyWith(isDeletingCartItem: true, itemId: cartItemId));
+
+    final response = await deleteUseCase(cartItemId);
 
     switch (response) {
       case Success<CartEntity>():
         emit(
           state.copyWith(
+            isDeletingCartItem: false,
+            itemId: '',
             cart: response.data,
           ),
         );
@@ -90,25 +85,28 @@ class CartManager extends Cubit<CartState> {
       case Error<CartEntity>():
         emit(
           state.copyWith(
+            isDeletingCartItem: false,
+            itemId: '',
             errorMessage: response.exception.toString(),
           ),
         );
     }
   }
 
-  Future<void> updateQuantity(
-    String cartItemId,
-    int quantity,
-  ) async {
-    final response = await updateUseCase(
-      cartItemId,
-      quantity,
-    );
+  Future<void> updateQuantity(String cartItemId, int quantity) async {
+    if (quantity == 0 || quantity < 0) {
+      return deleteItem(cartItemId);
+    }
+    emit(state.copyWith(isUpdatingCartItem: true, itemId: cartItemId));
+
+    final response = await updateUseCase(cartItemId, quantity);
 
     switch (response) {
       case Success<CartEntity>():
         emit(
           state.copyWith(
+            isUpdatingCartItem: false,
+            itemId: '',
             cart: response.data,
           ),
         );
@@ -116,6 +114,8 @@ class CartManager extends Cubit<CartState> {
       case Error<CartEntity>():
         emit(
           state.copyWith(
+            isUpdatingCartItem: false,
+            itemId: '',
             errorMessage: response.exception.toString(),
           ),
         );

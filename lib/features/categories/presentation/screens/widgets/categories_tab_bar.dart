@@ -9,8 +9,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CategoriesTabView extends StatefulWidget {
   final List<CategoryEntity> categories;
-
-  const CategoriesTabView({super.key, required this.categories});
+  final String categoryId;
+  const CategoriesTabView({
+    super.key,
+    required this.categories,
+    this.categoryId = '',
+  });
 
   @override
   State<CategoriesTabView> createState() => _CategoriesTabViewState();
@@ -23,11 +27,22 @@ class _CategoriesTabViewState extends State<CategoriesTabView>
   @override
   void initState() {
     super.initState();
+
+    final selectedIndex = widget.categoryId.isNotEmpty
+        ? widget.categories.indexWhere(
+            (category) => category.id == widget.categoryId,
+          )
+        : -1;
+
     _tabController = TabController(
       length: widget.categories.length + 1,
       vsync: this,
+      initialIndex: selectedIndex >= 0 ? selectedIndex + 1 : 0,
     );
-    context.read<CategoriesCubit>().doEvent(GetProductsByCategoryEvent());
+
+    context.read<CategoriesCubit>().doEvent(
+      GetProductsByCategoryEvent(widget.categoryId),
+    );
   }
 
   @override
@@ -70,11 +85,14 @@ class _CategoriesTabViewState extends State<CategoriesTabView>
             buildWhen: (prev, curr) => prev.productsState != curr.productsState,
             builder: (context, state) {
               return state.productsState.when(
-                initial: () => const Center(child: Text(AppStrings.selectCategory)),
+                initial: () =>
+                    const Center(child: Text(AppStrings.selectCategory)),
                 loading: () => const Center(child: CircularProgressIndicator()),
                 success: (products) {
                   if (products.isEmpty) {
-                    return const Center(child: Text(AppStrings.noProductsFound));
+                    return const Center(
+                      child: Text(AppStrings.noProductsFound),
+                    );
                   }
                   return CustomGridView(
                     productsLength: products.length,

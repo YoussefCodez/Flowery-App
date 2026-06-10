@@ -1,3 +1,5 @@
+import 'package:flowery/config/routing/app_routes.dart';
+import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,7 +15,7 @@ class OccasionCustomWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeViewModel, HomeState>(
       buildWhen: (previous, current) =>
-      previous.occasionState != current.occasionState,
+          previous.occasionState != current.occasionState,
       builder: (context, state) {
         return state.occasionState.when(
           initial: () => const SizedBox(),
@@ -53,7 +55,7 @@ class _OccasionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // context.pushNamed(AppRoutes.occasionProducts, arguments: occasion.id);
+        context.pushNamed(AppRoutes.occasions, arguments: occasion.id);
       },
       child: Container(
         width: 160.w,
