@@ -1,5 +1,4 @@
 import 'package:flowery/config/di/injectable_config.dart';
-import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flowery/core/const/app_strings.dart';
 import 'package:flowery/features/categories/presentation/screens/widgets/categories_tab_bar.dart';
