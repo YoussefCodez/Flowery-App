@@ -751,6 +751,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The item has been added Successfully'**
   String get the_item_has_been_added;
+
+  /// No description provided for @my_orders.
+  ///
+  /// In en, this message translates to:
+  /// **'My orders'**
+  String get my_orders;
+
+  /// No description provided for @saved_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved address'**
+  String get saved_address;
+
+  /// No description provided for @notification.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification'**
+  String get notification;
+
+  /// No description provided for @language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get language;
+
+  /// No description provided for @english.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get english;
+
+  /// No description provided for @about_us.
+  ///
+  /// In en, this message translates to:
+  /// **'About us'**
+  String get about_us;
+
+  /// No description provided for @terms_and_conditions.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms & conditions'**
+  String get terms_and_conditions;
 }
 
 class _AppLocalizationsDelegate

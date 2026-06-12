@@ -1,5 +1,6 @@
 import 'package:flowery/core/const/app_strings.dart';
 import 'package:flowery/core/widgets/main_layout.dart';
+import 'package:flowery/features/main_profile/presentation/screen/main_profile_view.dart';
 import 'package:flowery/features/search/presentation/screen/search_view.dart';
 import 'package:flowery/features/cart/presentation/screens/cart_screen.dart';
 import 'package:flowery/features/login/presentation/screens/login_screen.dart';
@@ -109,6 +110,8 @@ class RouteGenerator {
       case AppRoutes.search:
         return MaterialPageRoute(builder: (_) => const SearchView());
 
+      case AppRoutes.mainProfile:
+        return MaterialPageRoute(builder: (_) => const MainProfileView());
       default:
         return unDefinedRoute();
     }

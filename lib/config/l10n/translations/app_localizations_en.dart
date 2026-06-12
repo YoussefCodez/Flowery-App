@@ -345,4 +345,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get the_item_has_been_added => 'The item has been added Successfully';
+
+  @override
+  String get my_orders => 'My orders';
+
+  @override
+  String get saved_address => 'Saved address';
+
+  @override
+  String get notification => 'Notification';
+
+  @override
+  String get language => 'Language';
+
+  @override
+  String get english => 'English';
+
+  @override
+  String get about_us => 'About us';
+
+  @override
+  String get terms_and_conditions => 'Terms & conditions';
 }

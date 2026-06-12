@@ -114,5 +114,12 @@
   "sub_total_after_discount": "Subtotal After Discount",
   "your_cart_is_empty" : "Your Cart is Empty",
   "add_to_cart" : "Add to Cart",
-  "the_item_has_been_added" : "The item has been added Successfully"
+  "the_item_has_been_added" : "The item has been added Successfully",
+  "my_orders": "My orders",
+  "saved_address": "Saved address",
+  "notification": "Notification",
+  "language": "Language",
+  "english": "English",
+  "about_us": "About us",
+  "terms_and_conditions": "Terms & conditions"
 }

@@ -17,6 +17,18 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
     as _i161;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
+import '../../features/main_profile/api/main_profile_api_client.dart' as _i930;
+import '../../features/main_profile/data/data_sources/remote_data_source/remote_data_sources_contract.dart'
+    as _i152;
+import '../../features/main_profile/data/data_sources/remote_data_source/remote_data_sources_impl.dart'
+    as _i708;
+import '../../features/main_profile/data/repo/profile_repo_impl.dart' as _i419;
+import '../../features/main_profile/domain/profile_repo/profile_repo_contract.dart'
+    as _i341;
+import '../../features/main_profile/domain/use_case/profile_use_case.dart'
+    as _i795;
+import '../../features/main_profile/presentation/view_model/profile_cubit.dart'
+    as _i510;
 import '../../features/best_seller/api/api_client/best_seller_api_client.dart'
     as _i618;
 import '../../features/best_seller/api/data_sources/best_seller_remote_data_source_impl.dart'
@@ -46,8 +58,6 @@ import '../../features/cart/domain/use_cases/get_user_cart_products_use_case.dar
     as _i807;
 import '../../features/cart/domain/use_cases/update_specific_cart_item_quantity_use_case.dart'
     as _i93;
-import '../general_cubit/cart_manager/cart_manager.dart'
-    as _i526;
 import '../../features/cart/presentation/view_model/cubit/cart_view_model.dart'
     as _i421;
 import '../../features/categories/api/api_client/categories_api_client.dart'
@@ -154,6 +164,7 @@ import '../../features/search/domain/search_use_case/search_use_case.dart'
 import '../../features/search/presentation/view_model/search_cubit.dart'
     as _i794;
 import '../api/app_interceptors.dart' as _i781;
+import '../general_cubit/cart_manager/cart_manager.dart' as _i431;
 import '../general_cubit/local_cubit.dart' as _i794;
 import '../helpers/shared_pref.dart' as _i42;
 import '../user_helper/user_helper.dart' as _i157;
@@ -187,6 +198,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i612.CategoriesApiClient>(
       () => coreInjectableModule.categoriesApiClient(gh<_i361.Dio>()),
     );
+    gh.factory<_i930.MainProfileApiClient>(
+      () => _i930.MainProfileApiClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i618.BestSellerApiClient>(
       () => _i618.BestSellerApiClient(gh<_i361.Dio>()),
     );
@@ -209,6 +223,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i764.GetCategoriesDataSourceContract>(
       () => _i587.GetCategoriesDataSourceImpl(gh<_i612.CategoriesApiClient>()),
+    );
+    gh.factory<_i152.ProfileRemoteDataSourceContract>(
+      () => _i708.ProfileRemoteDataSourceImpl(gh<_i930.MainProfileApiClient>()),
     );
     gh.factory<_i251.LoginDataSourcesLocalContract>(
       () => _i797.LoginDataSourcesLocalImpl(
@@ -273,6 +290,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i558.FlutterSecureStorage>(),
       ),
     );
+    gh.factory<_i341.ProfileRepoContract>(
+      () => _i419.ProfileRepoImpl(gh<_i152.ProfileRemoteDataSourceContract>()),
+    );
     gh.factory<_i585.SearchRepoContract>(
       () => _i790.SearchRepoImpl(gh<_i243.SearchRemoteDataSourceContract>()),
     );
@@ -316,6 +336,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i694.GetProductsOfSpecificOccasionUseCase(
         repo: gh<_i405.OccasionsRepoContract>(),
       ),
+    );
+    gh.factory<_i795.GetProfileDataUseCase>(
+      () => _i795.GetProfileDataUseCase(gh<_i341.ProfileRepoContract>()),
     );
     gh.factory<_i252.AddToCartUseCase>(
       () => _i252.AddToCartUseCase(repo: gh<_i63.CartRepoContract>()),
@@ -363,8 +386,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i705.LoginViewModel>(
       () => _i705.LoginViewModel(gh<_i191.LoginUseCase>()),
     );
-    gh.singleton<_i526.CartManager>(
-      () => _i526.CartManager(
+    gh.singleton<_i431.CartManager>(
+      () => _i431.CartManager(
         gh<_i807.GetUserCartProductsUseCase>(),
         gh<_i933.DeleteSpecificCartItemUseCase>(),
         gh<_i93.UpdateSpecificCartItemQuantityUseCase>(),
@@ -392,6 +415,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i920.VerifyEmailUseCase>(),
         gh<_i292.ResetPasswordUseCase>(),
       ),
+    );
+    gh.factory<_i510.ProfileCubit>(
+      () => _i510.ProfileCubit(gh<_i795.GetProfileDataUseCase>()),
     );
     gh.factory<_i266.RegisterCubit>(
       () => _i266.RegisterCubit(gh<_i217.RegisterUseCase>()),
