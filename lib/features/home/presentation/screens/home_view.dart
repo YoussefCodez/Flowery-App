@@ -1,6 +1,7 @@
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_extensions.dart';
+import 'package:flowery/core/widgets/custom_location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -9,7 +10,6 @@ import '../../../../core/const/app_svgs.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../widget/categories_custom_widget.dart';
 import '../widget/header_custom_widget.dart';
-import '../widget/location_custom_widget.dart';
 import '../widget/occasion_custom_widget.dart';
 import '../widget/product_custom_widget.dart';
 

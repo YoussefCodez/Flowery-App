@@ -119,7 +119,12 @@
   "saved_address": "العناوين المحفوظة",
   "notification": "الإشعارات",
   "language": "اللغة",
-  "english": "الإنجليزية",
   "about_us": "عن التطبيق",
-  "terms_and_conditions": "الشروط والأحكام"
+  "terms_and_conditions": "الشروط والأحكام",
+  "cancel": "إلغاء",
+  "confirm_logout": "تأكيد تسجيل الخروج!!",
+  "change_language": "تغيير اللغة",
+  "arabic": "العربية",
+  "english": "الإنجليزية",
+  "search_for_any_product_you_want" : "ابحث عن اي منتج تريد"
 }

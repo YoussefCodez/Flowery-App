@@ -3,7 +3,7 @@ import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flowery/config/general_cubit/cart_manager/cart_manager.dart';
 import 'package:flowery/config/general_cubit/cart_manager/cart_state.dart';
 import 'package:flowery/features/cart/presentation/widgets/custom_bill.dart';
-import 'package:flowery/features/cart/presentation/widgets/custom_location.dart';
+import 'package:flowery/core/widgets/custom_location.dart';
 import 'package:flowery/features/cart/presentation/widgets/custom_order_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -57,8 +57,8 @@ class _CartScreenState extends State<CartScreen> {
           titleSpacing: 0.0,
           automaticallyImplyLeading: false,
           bottom: PreferredSize(
-            preferredSize: Size(343.w, 40.h),
-            child: CustomLocation(),
+            preferredSize: Size(200.w, 40.h),
+            child: LocationCustomWidget(),
           ),
         ),
         body: Column(

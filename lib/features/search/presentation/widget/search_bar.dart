@@ -1,3 +1,4 @@
+import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,6 +13,12 @@ class SearchBarWidget extends StatefulWidget {
 
 class _SearchBarWidgetState extends State<SearchBarWidget> {
   final TextEditingController _controller = TextEditingController();
+  late AppLocalizations appLocalizations;
+  @override
+  void didChangeDependencies() {
+    appLocalizations = AppLocalizations.of(context)!;
+    super.didChangeDependencies();
+  }
 
   @override
   void dispose() {
@@ -45,7 +52,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                 }
               },
               decoration: InputDecoration(
-                hintText: 'Search',
+                hintText: appLocalizations.search,
                 hintStyle: TextStyle(
                   color: AppColors.hintGrayColor,
                   fontSize: 14.sp,
@@ -66,7 +73,11 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                 shape: BoxShape.circle,
                 border: Border.all(color: AppColors.hintGrayColor),
               ),
-              child: Icon(Icons.close, size: 14.sp, color: AppColors.hintGrayColor),
+              child: Icon(
+                Icons.close,
+                size: 14.sp,
+                color: AppColors.hintGrayColor,
+              ),
             ),
           ),
         ],

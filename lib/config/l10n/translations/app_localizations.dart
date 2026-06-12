@@ -776,12 +776,6 @@ abstract class AppLocalizations {
   /// **'Language'**
   String get language;
 
-  /// No description provided for @english.
-  ///
-  /// In en, this message translates to:
-  /// **'English'**
-  String get english;
-
   /// No description provided for @about_us.
   ///
   /// In en, this message translates to:
@@ -793,6 +787,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Terms & conditions'**
   String get terms_and_conditions;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @confirm_logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm logout!!'**
+  String get confirm_logout;
+
+  /// No description provided for @change_language.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Language'**
+  String get change_language;
+
+  /// No description provided for @arabic.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic'**
+  String get arabic;
+
+  /// No description provided for @english.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get english;
+
+  /// No description provided for @search_for_any_product_you_want.
+  ///
+  /// In en, this message translates to:
+  /// **'Search For Any Product You Want'**
+  String get search_for_any_product_you_want;
 }
 
 class _AppLocalizationsDelegate

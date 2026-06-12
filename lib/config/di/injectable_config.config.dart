@@ -17,18 +17,18 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
     as _i161;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
-import '../../features/main_profile/api/main_profile_api_client.dart' as _i930;
-import '../../features/main_profile/data/data_sources/remote_data_source/remote_data_sources_contract.dart'
-    as _i152;
-import '../../features/main_profile/data/data_sources/remote_data_source/remote_data_sources_impl.dart'
-    as _i708;
-import '../../features/main_profile/data/repo/profile_repo_impl.dart' as _i419;
-import '../../features/main_profile/domain/profile_repo/profile_repo_contract.dart'
-    as _i341;
-import '../../features/main_profile/domain/use_case/profile_use_case.dart'
-    as _i795;
-import '../../features/main_profile/presentation/view_model/profile_cubit.dart'
-    as _i510;
+import '../../features/app_language_logout/api/logout_api_service.dart'
+    as _i884;
+import '../../features/app_language_logout/data/data_sources/logout_remote_data_source.dart'
+    as _i117;
+import '../../features/app_language_logout/data/repositories/logout_repository_impl.dart'
+    as _i395;
+import '../../features/app_language_logout/domain/repositories/logout_repository.dart'
+    as _i122;
+import '../../features/app_language_logout/domain/use_cases/logout_use_case.dart'
+    as _i443;
+import '../../features/app_language_logout/presntation/cubit/logout_cubit.dart'
+    as _i773;
 import '../../features/best_seller/api/api_client/best_seller_api_client.dart'
     as _i618;
 import '../../features/best_seller/api/data_sources/best_seller_remote_data_source_impl.dart'
@@ -123,6 +123,18 @@ import '../../features/login/domain/repo/login_repo_contract.dart' as _i180;
 import '../../features/login/domain/use_cases/login_use_case.dart' as _i191;
 import '../../features/login/presentation/view_model/cubit/login_view_model.dart'
     as _i705;
+import '../../features/main_profile/api/main_profile_api_client.dart' as _i866;
+import '../../features/main_profile/data/data_sources/remote_data_source/remote_data_sources_contract.dart'
+    as _i203;
+import '../../features/main_profile/data/data_sources/remote_data_source/remote_data_sources_impl.dart'
+    as _i412;
+import '../../features/main_profile/data/repo/profile_repo_impl.dart' as _i1073;
+import '../../features/main_profile/domain/profile_repo/profile_repo_contract.dart'
+    as _i802;
+import '../../features/main_profile/domain/use_case/profile_use_case.dart'
+    as _i979;
+import '../../features/main_profile/presentation/view_model/profile_cubit.dart'
+    as _i576;
 import '../../features/occasions/api/api_client/occasions_api_client.dart'
     as _i1066;
 import '../../features/occasions/api/data_sources/occasions_data_sources_impl.dart'
@@ -198,8 +210,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i612.CategoriesApiClient>(
       () => coreInjectableModule.categoriesApiClient(gh<_i361.Dio>()),
     );
-    gh.factory<_i930.MainProfileApiClient>(
-      () => _i930.MainProfileApiClient(gh<_i361.Dio>()),
+    gh.lazySingleton<_i884.LogoutApiService>(
+      () => coreInjectableModule.logoutApiService(gh<_i361.Dio>()),
     );
     gh.factory<_i618.BestSellerApiClient>(
       () => _i618.BestSellerApiClient(gh<_i361.Dio>()),
@@ -212,6 +224,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i395.LoginApiClient>(
       () => _i395.LoginApiClient(gh<_i361.Dio>()),
     );
+    gh.factory<_i866.MainProfileApiClient>(
+      () => _i866.MainProfileApiClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i1066.OccasionsApiClient>(
       () => _i1066.OccasionsApiClient(gh<_i361.Dio>()),
     );
@@ -223,9 +238,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i764.GetCategoriesDataSourceContract>(
       () => _i587.GetCategoriesDataSourceImpl(gh<_i612.CategoriesApiClient>()),
-    );
-    gh.factory<_i152.ProfileRemoteDataSourceContract>(
-      () => _i708.ProfileRemoteDataSourceImpl(gh<_i930.MainProfileApiClient>()),
     );
     gh.factory<_i251.LoginDataSourcesLocalContract>(
       () => _i797.LoginDataSourcesLocalImpl(
@@ -248,6 +260,9 @@ extension GetItInjectableX on _i174.GetIt {
         registerApiClient: gh<_i656.RegisterApiClient>(),
       ),
     );
+    gh.factory<_i117.LogoutRemoteDataSource>(
+      () => _i117.LogoutRemoteDataSourceImpl(gh<_i884.LogoutApiService>()),
+    );
     gh.factory<_i794.LocaleThemeCubit>(
       () => _i794.LocaleThemeCubit(gh<_i42.SharedPrefHelper>()),
     );
@@ -259,6 +274,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i668.RegisterRepository>(
       () => _i897.RegisterRepositoryImpl(gh<_i984.RegisterDataSource>()),
+    );
+    gh.factory<_i203.ProfileRemoteDataSourceContract>(
+      () => _i412.ProfileRemoteDataSourceImpl(gh<_i866.MainProfileApiClient>()),
     );
     gh.factory<_i492.ForgetPasswordDataSourceContract>(
       () => _i164.ForgetPasswordDataSourceImpl(
@@ -290,9 +308,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i558.FlutterSecureStorage>(),
       ),
     );
-    gh.factory<_i341.ProfileRepoContract>(
-      () => _i419.ProfileRepoImpl(gh<_i152.ProfileRemoteDataSourceContract>()),
-    );
     gh.factory<_i585.SearchRepoContract>(
       () => _i790.SearchRepoImpl(gh<_i243.SearchRemoteDataSourceContract>()),
     );
@@ -302,6 +317,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i308.ForgetPasswordRepoContract>(
       () => _i346.ForgetPasswordRepoImpl(
         gh<_i492.ForgetPasswordDataSourceContract>(),
+      ),
+    );
+    gh.factory<_i122.LogoutRepository>(
+      () => _i395.LogoutRepositoryImpl(
+        gh<_i117.LogoutRemoteDataSource>(),
+        gh<_i157.UserHelper>(),
       ),
     );
     gh.factory<_i817.HomeRepoContract>(
@@ -337,8 +358,8 @@ extension GetItInjectableX on _i174.GetIt {
         repo: gh<_i405.OccasionsRepoContract>(),
       ),
     );
-    gh.factory<_i795.GetProfileDataUseCase>(
-      () => _i795.GetProfileDataUseCase(gh<_i341.ProfileRepoContract>()),
+    gh.factory<_i443.LogoutUseCase>(
+      () => _i443.LogoutUseCase(gh<_i122.LogoutRepository>()),
     );
     gh.factory<_i252.AddToCartUseCase>(
       () => _i252.AddToCartUseCase(repo: gh<_i63.CartRepoContract>()),
@@ -383,6 +404,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i252.AddToCartUseCase>(),
       ),
     );
+    gh.factory<_i802.ProfileRepoContract>(
+      () => _i1073.ProfileRepoImpl(gh<_i203.ProfileRemoteDataSourceContract>()),
+    );
     gh.factory<_i705.LoginViewModel>(
       () => _i705.LoginViewModel(gh<_i191.LoginUseCase>()),
     );
@@ -400,6 +424,9 @@ extension GetItInjectableX on _i174.GetIt {
             gh<_i850.BestSellerRemoteDataSourceContract>(),
       ),
     );
+    gh.factory<_i979.GetProfileDataUseCase>(
+      () => _i979.GetProfileDataUseCase(gh<_i802.ProfileRepoContract>()),
+    );
     gh.factory<_i839.GetBestSellerUseCase>(
       () => _i839.GetBestSellerUseCase(gh<_i817.HomeRepoContract>()),
     );
@@ -416,9 +443,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i292.ResetPasswordUseCase>(),
       ),
     );
-    gh.factory<_i510.ProfileCubit>(
-      () => _i510.ProfileCubit(gh<_i795.GetProfileDataUseCase>()),
-    );
     gh.factory<_i266.RegisterCubit>(
       () => _i266.RegisterCubit(gh<_i217.RegisterUseCase>()),
     );
@@ -431,6 +455,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i794.SearchViewModel>(
       () => _i794.SearchViewModel(gh<_i463.SearchProductsUseCase>()),
     );
+    gh.factory<_i773.LogoutCubit>(
+      () => _i773.LogoutCubit(gh<_i443.LogoutUseCase>()),
+    );
     gh.factory<_i573.GetBestSellerProductsUseCase>(
       () => _i573.GetBestSellerProductsUseCase(
         repo: gh<_i949.BestSellerRepoContract>(),
@@ -442,6 +469,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i839.GetBestSellerUseCase>(),
         gh<_i925.GetOccasionsUseCase>(),
       ),
+    );
+    gh.factory<_i576.ProfileCubit>(
+      () => _i576.ProfileCubit(gh<_i979.GetProfileDataUseCase>()),
     );
     gh.factory<_i935.BestSellerViewModel>(
       () => _i935.BestSellerViewModel(gh<_i573.GetBestSellerProductsUseCase>()),

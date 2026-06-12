@@ -150,7 +150,6 @@ class _CustomBillState extends State<CustomBill> {
             ],
           ),
 
-          SizedBox(height: 20.h),
           ElevatedButton(onPressed: () {}, child: Text(localizations.checkout)),
         ],
       ),

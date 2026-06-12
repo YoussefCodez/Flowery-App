@@ -1,4 +1,5 @@
 import 'package:flowery/config/di/injectable_config.dart';
+import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flowery/core/const/app_strings.dart';
 import 'package:flowery/features/categories/presentation/screens/widgets/categories_tab_bar.dart';
@@ -11,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CategoriesScreen extends StatelessWidget {
+class CategoriesScreen extends StatefulWidget {
   final bool showBackButton;
   final String? categoryId;
   const CategoriesScreen({
@@ -19,6 +20,18 @@ class CategoriesScreen extends StatelessWidget {
     required this.showBackButton,
     this.categoryId = "",
   });
+
+  @override
+  State<CategoriesScreen> createState() => _CategoriesScreenState();
+}
+
+class _CategoriesScreenState extends State<CategoriesScreen> {
+  late AppLocalizations localizations;
+  @override
+  void didChangeDependencies() {
+    localizations = AppLocalizations.of(context)!;
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +46,7 @@ class CategoriesScreen extends StatelessWidget {
                 padding: REdgeInsets.all(16),
                 child: Row(
                   children: [
-                    showBackButton
+                    widget.showBackButton
                         ? InkWell(
                             onTap: () => context.pop(),
                             child: Icon(Icons.arrow_back_ios_new),
@@ -43,7 +56,7 @@ class CategoriesScreen extends StatelessWidget {
                     Expanded(
                       child: SizedBox(
                         height: 48.h,
-                        child: SearchField(hintText: AppStrings.search),
+                        child: SearchField(hintText: localizations.search),
                       ),
                     ),
                     SizedBox(width: 8.w),
@@ -60,7 +73,7 @@ class CategoriesScreen extends StatelessWidget {
                       success: (categories) {
                         return CategoriesTabView(
                           categories: categories,
-                          categoryId: categoryId,
+                          categoryId: widget.categoryId,
                         );
                       },
                       loading: () {

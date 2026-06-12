@@ -176,8 +176,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 value: rememberMeChecker.toString(),
                               );
 
-                              // Navigate to home
-                              context.pushNamed(AppRoutes.home);
+                              // Navigate to main layout at home
+                              context.pushNamed(AppRoutes.mainLayout);
                             }
 
                             if (state is LoginErrorState) {

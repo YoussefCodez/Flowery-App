@@ -15,4 +15,5 @@ abstract class AppEndPoints {
   static const String cart = 'cart';
   static const String getProduct = "products";
   static const String getProfileData = 'auth/profile-data';
+  static const String logout = 'auth/logout';
 }

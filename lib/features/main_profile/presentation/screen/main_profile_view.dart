@@ -3,6 +3,8 @@ import 'package:flowery/config/di/injectable_config.dart';
 import 'package:flowery/core/const/app_strings.dart';
 import 'package:flowery/core/const/app_svgs.dart';
 import 'package:flowery/core/theme/app_colors.dart';
+import 'package:flowery/features/app_language_logout/presntation/widgets/language_tile.dart';
+import 'package:flowery/features/app_language_logout/presntation/widgets/logout_button.dart';
 import 'package:flowery/features/main_profile/domain/entity/profile_entity.dart';
 import 'package:flowery/features/main_profile/presentation/view_model/profile_cubit.dart';
 import 'package:flowery/features/main_profile/presentation/view_model/profile_event.dart';
@@ -145,18 +147,7 @@ class _MainProfileViewState extends State<MainProfileView> {
           trailingWidget: Icon(Icons.chevron_right, color: AppColors.grayColor),
         ),
         const Divider(height: 1, thickness: 1, color: AppColors.dividerColor),
-        CustomProfile(
-          leadingIcon: Icon(
-            Icons.translate,
-            size: 20.sp,
-            color: AppColors.blackColor,
-          ),
-          title: l10n.language,
-          trailingWidget: Text(
-            l10n.english,
-            style: TextStyle(fontSize: 14.sp, color: AppColors.primaryColor),
-          ),
-        ),
+        LanguageTile(),
         CustomProfile(
           title: l10n.about_us,
           trailingWidget: Icon(Icons.chevron_right, color: AppColors.grayColor),
@@ -168,20 +159,7 @@ class _MainProfileViewState extends State<MainProfileView> {
           onTap: () {},
         ),
         const Divider(height: 1, thickness: 1, color: AppColors.dividerColor),
-        CustomProfile(
-          leadingIcon: Icon(
-            Icons.exit_to_app,
-            size: 20.sp,
-            color: AppColors.blackColor,
-          ),
-          title: l10n.logout,
-          trailingWidget: Icon(
-            Icons.logout,
-            size: 20.sp,
-            color: AppColors.blackColor,
-          ),
-          onTap: () {},
-        ),
+        LogoutButton(),
         const Spacer(),
         Text(
           AppStrings.appVersion,

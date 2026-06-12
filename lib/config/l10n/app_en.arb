@@ -119,7 +119,12 @@
   "saved_address": "Saved address",
   "notification": "Notification",
   "language": "Language",
-  "english": "English",
   "about_us": "About us",
-  "terms_and_conditions": "Terms & conditions"
+  "terms_and_conditions": "Terms & conditions",
+  "cancel": "Cancel",
+  "confirm_logout": "Confirm logout!!",
+  "change_language": "Change Language",
+  "arabic": "Arabic",
+  "english": "English",
+  "search_for_any_product_you_want" : "Search For Any Product You Want"
 }

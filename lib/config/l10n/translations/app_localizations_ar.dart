@@ -355,11 +355,26 @@ class AppLocalizationsAr extends AppLocalizations {
   String get language => 'اللغة';
 
   @override
-  String get english => 'الإنجليزية';
-
-  @override
   String get about_us => 'عن التطبيق';
 
   @override
   String get terms_and_conditions => 'الشروط والأحكام';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get confirm_logout => 'تأكيد تسجيل الخروج!!';
+
+  @override
+  String get change_language => 'تغيير اللغة';
+
+  @override
+  String get arabic => 'العربية';
+
+  @override
+  String get english => 'الإنجليزية';
+
+  @override
+  String get search_for_any_product_you_want => 'ابحث عن اي منتج تريد';
 }

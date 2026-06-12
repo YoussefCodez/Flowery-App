@@ -30,6 +30,7 @@ class OccasionViewModel extends Cubit<OccasionsState> {
   }
 
   Future<void> _getOccasions({required String? occasionId}) async {
+    print("I AM IN _getOccasions");
     emit(state.copyWith(isLoadingOccasions: true, errorMessage: null));
 
     final response = await _getOccasionsUseCase.call();
@@ -43,11 +44,12 @@ class OccasionViewModel extends Cubit<OccasionsState> {
         emit(state.copyWith(isLoadingOccasions: false, names: names, ids: ids));
 
         // fetch the first occasion prodcuts
-        if (ids.isNotEmpty && occasionId == "") {
+        if (ids.isNotEmpty && (occasionId == "" || occasionId == null)) {
           _getProductsOfSpecificOccasion(occasionId: ids[0]);
         }
 
-        if(occasionId != ""){
+        // Responsible for navigating @Home -> Specific Occasion
+        if (occasionId != null && occasionId != "") {
           _getProductsOfSpecificOccasion(occasionId: occasionId);
         }
         return;

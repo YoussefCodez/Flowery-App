@@ -359,11 +359,27 @@ class AppLocalizationsEn extends AppLocalizations {
   String get language => 'Language';
 
   @override
-  String get english => 'English';
-
-  @override
   String get about_us => 'About us';
 
   @override
   String get terms_and_conditions => 'Terms & conditions';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get confirm_logout => 'Confirm logout!!';
+
+  @override
+  String get change_language => 'Change Language';
+
+  @override
+  String get arabic => 'Arabic';
+
+  @override
+  String get english => 'English';
+
+  @override
+  String get search_for_any_product_you_want =>
+      'Search For Any Product You Want';
 }
