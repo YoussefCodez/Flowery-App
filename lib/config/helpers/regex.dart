@@ -11,6 +11,10 @@ abstract class AppRegExp {
     return RegExp(r"^01[0125][0-9]{8}$").hasMatch(phoneNumber);
   }
 
+  static bool isEgyptianPhoneNumberValid(String phoneNumber) {
+    return RegExp(r'^\+20(10|11|12|15)\d{8}$').hasMatch(phoneNumber);
+  }
+
   static bool isOTPValid(String otp) {
     return RegExp(r"^[0-9]{6}$").hasMatch(otp);
   }

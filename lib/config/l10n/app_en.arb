@@ -126,5 +126,15 @@
   "change_language": "Change Language",
   "arabic": "Arabic",
   "english": "English",
-  "search_for_any_product_you_want" : "Search For Any Product You Want"
+  "search_for_any_product_you_want" : "Search For Any Product You Want",
+  "edit_profile": "Edit profile",
+  "first_name": "First name",
+  "last_name": "Last name",
+  "phone": "Phone number",
+  "change": "Change",
+  "update": "Update",
+  "stars" : "★★★★★★",
+  "first_name_is_required" : "First name is required",
+  "last_name_is_required" : "Last name is required",
+  "phone_is_required" : "Phone is required"
 }

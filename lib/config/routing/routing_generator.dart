@@ -118,6 +118,8 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) => const DemoLogoutLanguagePage(),
         );
+      case AppRoutes.editProfile:
+        return MaterialPageRoute(builder: (_) => const EditProfileScreen());
       default:
         return unDefinedRoute();
     }
