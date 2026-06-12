@@ -377,4 +377,34 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get search_for_any_product_you_want => 'ابحث عن اي منتج تريد';
+
+  @override
+  String get edit_profile => 'تعديل الملف الشخصي';
+
+  @override
+  String get first_name => 'الاسم الأول';
+
+  @override
+  String get last_name => 'اسم العائلة';
+
+  @override
+  String get phone => 'رقم الموبيل';
+
+  @override
+  String get change => 'تغيير';
+
+  @override
+  String get update => 'تحديث';
+
+  @override
+  String get stars => '★★★★★★';
+
+  @override
+  String get first_name_is_required => 'الاسم الأول مطلوب';
+
+  @override
+  String get last_name_is_required => 'اسم العائلة مطلوب';
+
+  @override
+  String get phone_is_required => 'رقم الهاتف مطلوب';
 }

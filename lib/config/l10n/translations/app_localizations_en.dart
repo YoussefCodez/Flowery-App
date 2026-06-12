@@ -382,4 +382,34 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get search_for_any_product_you_want =>
       'Search For Any Product You Want';
+
+  @override
+  String get edit_profile => 'Edit profile';
+
+  @override
+  String get first_name => 'First name';
+
+  @override
+  String get last_name => 'Last name';
+
+  @override
+  String get phone => 'Phone number';
+
+  @override
+  String get change => 'Change';
+
+  @override
+  String get update => 'Update';
+
+  @override
+  String get stars => '★★★★★★';
+
+  @override
+  String get first_name_is_required => 'First name is required';
+
+  @override
+  String get last_name_is_required => 'Last name is required';
+
+  @override
+  String get phone_is_required => 'Phone is required';
 }

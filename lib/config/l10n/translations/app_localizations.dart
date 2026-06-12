@@ -823,6 +823,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Search For Any Product You Want'**
   String get search_for_any_product_you_want;
+
+  /// No description provided for @edit_profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile'**
+  String get edit_profile;
+
+  /// No description provided for @first_name.
+  ///
+  /// In en, this message translates to:
+  /// **'First name'**
+  String get first_name;
+
+  /// No description provided for @last_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Last name'**
+  String get last_name;
+
+  /// No description provided for @phone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number'**
+  String get phone;
+
+  /// No description provided for @change.
+  ///
+  /// In en, this message translates to:
+  /// **'Change'**
+  String get change;
+
+  /// No description provided for @update.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get update;
+
+  /// No description provided for @stars.
+  ///
+  /// In en, this message translates to:
+  /// **'★★★★★★'**
+  String get stars;
+
+  /// No description provided for @first_name_is_required.
+  ///
+  /// In en, this message translates to:
+  /// **'First name is required'**
+  String get first_name_is_required;
+
+  /// No description provided for @last_name_is_required.
+  ///
+  /// In en, this message translates to:
+  /// **'Last name is required'**
+  String get last_name_is_required;
+
+  /// No description provided for @phone_is_required.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone is required'**
+  String get phone_is_required;
 }
 
 class _AppLocalizationsDelegate
