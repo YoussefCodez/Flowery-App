@@ -27,15 +27,15 @@ class MainTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       validator: validator,
-    return TextFormField(
-      validator: validator,
       keyboardType: keyboardType,
       obscureText: obscureText,
       controller: controller,
       decoration: InputDecoration(
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(4.r)),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16.r),
+        ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4.r),
+          borderRadius: BorderRadius.circular(16.r),
           borderSide: BorderSide(color: AppColors.blackColor),
         ),
         focusedBorder: OutlineInputBorder(
@@ -62,4 +62,3 @@ class MainTextField extends StatelessWidget {
     );
   }
 }
-

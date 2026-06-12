@@ -76,6 +76,24 @@ import '../../features/categories/domain/use_cases/get_products_by_category_usec
     as _i584;
 import '../../features/categories/presentation/view_model/cubit/categories_cubit.dart'
     as _i806;
+import '../../features/edit_profile/api/api_client/edit_profile_api_client.dart'
+    as _i690;
+import '../../features/edit_profile/api/data_sources/edit_profile_remote_data_sources_impl.dart'
+    as _i954;
+import '../../features/edit_profile/data/data_sources/edit_profile_remote_data_sources_contract.dart'
+    as _i510;
+import '../../features/edit_profile/data/repo/edit_profile_repo_impl.dart'
+    as _i440;
+import '../../features/edit_profile/domain/repo/edit_profile_repo_contract.dart'
+    as _i131;
+import '../../features/edit_profile/domain/use_cases/get_logged_user_use_case.dart'
+    as _i125;
+import '../../features/edit_profile/domain/use_cases/update_logged_user_use_case.dart'
+    as _i59;
+import '../../features/edit_profile/domain/use_cases/upload_user_photo_use_case.dart'
+    as _i252;
+import '../../features/edit_profile/presentation/view_model/cubit/edit_profile_view_model.dart'
+    as _i70;
 import '../../features/forget_password/api/forget_password_client.dart'
     as _i730;
 import '../../features/forget_password/data/data_source/forget_password_data_source_contract.dart'
@@ -217,6 +235,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i618.BestSellerApiClient(gh<_i361.Dio>()),
     );
     gh.factory<_i673.CartApiClient>(() => _i673.CartApiClient(gh<_i361.Dio>()));
+    gh.factory<_i690.EditProfileApiClient>(
+      () => _i690.EditProfileApiClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i730.ForgetPasswordClient>(
       () => _i730.ForgetPasswordClient(gh<_i361.Dio>()),
     );
@@ -265,6 +286,16 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i794.LocaleThemeCubit>(
       () => _i794.LocaleThemeCubit(gh<_i42.SharedPrefHelper>()),
+    );
+    gh.factory<_i510.EditProfileRemoteDataSourcesContract>(
+      () => _i954.EditProfileRemoteDataSourcesImpl(
+        apiClient: gh<_i690.EditProfileApiClient>(),
+      ),
+    );
+    gh.factory<_i131.EditProfileRepoContract>(
+      () => _i440.EditProfileRepoImpl(
+        remoteDataSource: gh<_i510.EditProfileRemoteDataSourcesContract>(),
+      ),
     );
     gh.factory<_i936.HomeRemoteDataSourceContract>(
       () => _i238.HomeRemoteDataSourceImpl(gh<_i866.HomeApiClient>()),
@@ -348,6 +379,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i63.CartRepoContract>(
       () => _i234.CartRepoImpl(
         remoteDataSource: gh<_i447.CartRemoteDataSourceContract>(),
+      ),
+    );
+    gh.factory<_i125.GetLoggedUserUseCase>(
+      () =>
+          _i125.GetLoggedUserUseCase(repo: gh<_i131.EditProfileRepoContract>()),
+    );
+    gh.factory<_i59.UpdateLoggedUserUseCase>(
+      () => _i59.UpdateLoggedUserUseCase(
+        repo: gh<_i131.EditProfileRepoContract>(),
+      ),
+    );
+    gh.factory<_i252.UploadUserPhotoUseCase>(
+      () => _i252.UploadUserPhotoUseCase(
+        repo: gh<_i131.EditProfileRepoContract>(),
       ),
     );
     gh.factory<_i569.GetOccasionsUseCase>(
@@ -441,6 +486,13 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i427.ForgetPasswordUseCase>(),
         gh<_i920.VerifyEmailUseCase>(),
         gh<_i292.ResetPasswordUseCase>(),
+      ),
+    );
+    gh.factory<_i70.EditProfileViewModel>(
+      () => _i70.EditProfileViewModel(
+        gh<_i125.GetLoggedUserUseCase>(),
+        gh<_i59.UpdateLoggedUserUseCase>(),
+        gh<_i252.UploadUserPhotoUseCase>(),
       ),
     );
     gh.factory<_i266.RegisterCubit>(

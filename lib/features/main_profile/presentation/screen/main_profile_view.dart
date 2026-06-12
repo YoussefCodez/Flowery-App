@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flowery/config/di/injectable_config.dart';
+import 'package:flowery/config/routing/app_routes.dart';
+import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flowery/core/const/app_strings.dart';
 import 'package:flowery/core/const/app_svgs.dart';
 import 'package:flowery/core/theme/app_colors.dart';
@@ -103,7 +105,14 @@ class _MainProfileViewState extends State<MainProfileView> {
               ),
             ),
             SizedBox(width: 6.w),
-            Icon(Icons.edit_outlined, size: 16.sp, color: AppColors.grayColor),
+            InkWell(
+              onTap: () => context.pushNamed(AppRoutes.editProfile),
+              child: Icon(
+                Icons.edit_outlined,
+                size: 16.sp,
+                color: AppColors.grayColor,
+              ),
+            ),
           ],
         ),
         SizedBox(height: 4.h),

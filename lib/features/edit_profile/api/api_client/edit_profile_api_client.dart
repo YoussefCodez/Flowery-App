@@ -12,7 +12,7 @@ abstract class EditProfileApiClient {
   @factoryMethod
   factory EditProfileApiClient(Dio dio) = _EditProfileApiClient;
 
-  @GET(AppEndPoints.getLoggedUserData)
+  @GET(AppEndPoints.getProfileData)
   Future<GetUserResponseModel> getCurrentUser();
 
   @PUT(AppEndPoints.editUserProfile)

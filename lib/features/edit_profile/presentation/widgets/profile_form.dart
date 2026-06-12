@@ -1,5 +1,7 @@
 import 'package:flowery/config/helpers/regex.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
+import 'package:flowery/config/routing/app_routes.dart';
+import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flowery/core/const/edit_profile_values.dart';
 import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flowery/core/widgets/custom_text_field.dart';
@@ -145,9 +147,7 @@ class _ProfileFormState extends State<ProfileForm> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: InkWell(
-                    onTap: () {
-                      // TODO: Navigate To Change Password Screen
-                    },
+                    onTap: () => context.pushNamed(AppRoutes.changePassword),
                     child: Text(
                       localizations.change,
                       style: TextStyle(

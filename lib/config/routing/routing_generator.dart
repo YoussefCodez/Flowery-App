@@ -1,5 +1,6 @@
 import 'package:flowery/core/const/app_strings.dart';
 import 'package:flowery/core/widgets/main_layout.dart';
+import 'package:flowery/features/edit_profile/presentation/screens/edit_profile_screen.dart';
 import 'package:flowery/features/main_profile/presentation/screen/main_profile_view.dart';
 import 'package:flowery/features/search/presentation/screen/search_view.dart';
 import 'package:flowery/features/cart/presentation/screens/cart_screen.dart';

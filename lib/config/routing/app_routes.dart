@@ -1,6 +1,5 @@
 abstract class AppRoutes {
   static const String login = "/login";
-<<<<<<< HEAD
   static const String register = "/register";
   static const String forgetPassword = "/forget-password";
   static const String resetPassword = "/reset-password";
@@ -15,8 +14,5 @@ abstract class AppRoutes {
   static const String search = "/search";
   static const String mainProfile = "/main-profile";
   static const String languagepage = "/language-page";
-=======
-  static const String productDetails = "/product-details";
   static const String editProfile = "/edit-profile";
->>>>>>> feature/edit-profile
 }
