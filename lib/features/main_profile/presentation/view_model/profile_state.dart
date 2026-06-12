@@ -1,5 +1,4 @@
 import 'package:flowery/config/base_state/base_state.dart';
-import 'package:flowery/features/main_profile/data/model/user_response_model.dart';
 import 'package:flowery/features/main_profile/domain/entity/profile_entity.dart';
 
 class ProfileState {
@@ -15,7 +14,7 @@ class ProfileState {
 
 }){
      return ProfileState(
-         getProfileDate: getProfileDatePram ?? this.getProfileDate
+         getProfileDate: getProfileDatePram ?? getProfileDate
      );
    }
 
