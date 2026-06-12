@@ -1,4 +1,3 @@
-import 'package:flowery/config/di/injectable_config.dart';
 import 'package:flowery/config/general_cubit/local_cubit.dart';
 import 'package:flowery/config/helpers/regex.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';

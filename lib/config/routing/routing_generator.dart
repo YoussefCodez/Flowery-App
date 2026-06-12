@@ -15,7 +15,6 @@ import 'package:flowery/features/categories/presentation/screens/categories_scre
 import 'package:flowery/features/occasions/presentation/screens/occasions_screen.dart';
 import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/features/best_seller/presentation/screens/best_seller_screen.dart';
-import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/features/app_language_logout/presntation/demo_logout_language.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
