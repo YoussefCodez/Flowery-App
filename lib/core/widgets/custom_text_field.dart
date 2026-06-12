@@ -31,11 +31,9 @@ class MainTextField extends StatelessWidget {
       obscureText: obscureText,
       controller: controller,
       decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16.r),
-        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.r)),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16.r),
+          borderRadius: BorderRadius.circular(5.r),
           borderSide: BorderSide(color: AppColors.blackColor),
         ),
         focusedBorder: OutlineInputBorder(

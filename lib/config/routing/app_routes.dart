@@ -15,4 +15,5 @@ abstract class AppRoutes {
   static const String mainProfile = "/main-profile";
   static const String languagepage = "/language-page";
   static const String editProfile = "/edit-profile";
+  static const String changePassword = "/change-password";
 }

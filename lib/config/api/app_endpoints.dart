@@ -18,4 +18,5 @@ abstract class AppEndPoints {
   static const String logout = 'auth/logout';
   static const String editUserProfile = "auth/editProfile";
   static const String uploadPhoto = "auth/upload-photo";
+  static const String changePassword = "auth/change-password";
 }

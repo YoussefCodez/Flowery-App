@@ -407,4 +407,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get phone_is_required => 'رقم الهاتف مطلوب';
+
+  @override
+  String get current_password => 'كلمة المرور الحالية';
+
+  @override
+  String get incorrect_password => 'كلمة المرور القديمة غير صحيحة';
+
+  @override
+  String get password_changed_success => 'تم تغيير كلمة المرور بنجاح';
+
+  @override
+  String get success => 'نجحت';
 }

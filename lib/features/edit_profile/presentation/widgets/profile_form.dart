@@ -1,7 +1,10 @@
+import 'package:flowery/config/di/injectable_config.dart';
+import 'package:flowery/config/general_cubit/local_cubit.dart';
 import 'package:flowery/config/helpers/regex.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_extensions.dart';
+import 'package:flowery/config/utils/constants.dart';
 import 'package:flowery/core/const/edit_profile_values.dart';
 import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flowery/core/widgets/custom_text_field.dart';
@@ -46,7 +49,6 @@ class _ProfileFormState extends State<ProfileForm> {
   late TextEditingController passwordController;
   late String? gender;
   late AppLocalizations localizations;
-
   @override
   void didChangeDependencies() {
     localizations = AppLocalizations.of(context)!;
@@ -61,7 +63,6 @@ class _ProfileFormState extends State<ProfileForm> {
 
   @override
   Widget build(BuildContext context) {
-     print("PROFILE FORM PHOTO = ${widget.photo}");
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Form(
@@ -137,13 +138,18 @@ class _ProfileFormState extends State<ProfileForm> {
             ),
             SizedBox(height: 20.h),
             Stack(
-              alignment: Alignment.centerRight,
+              alignment:
+                  context.read<LocaleThemeCubit>().loadCurrentLanguage() ==
+                      AppConstants.arKey
+                  ? Alignment.centerLeft
+                  : Alignment.centerRight,
               children: [
                 CustomPasswordTextField(
                   controller: passwordController,
                   hintText: localizations.password,
                   labelText: localizations.password,
                 ),
+
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: InkWell(

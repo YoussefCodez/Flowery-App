@@ -883,6 +883,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Phone is required'**
   String get phone_is_required;
+
+  /// No description provided for @current_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Password'**
+  String get current_password;
+
+  /// No description provided for @incorrect_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect old password'**
+  String get incorrect_password;
+
+  /// No description provided for @password_changed_success.
+  ///
+  /// In en, this message translates to:
+  /// **'Password has been changed successfully'**
+  String get password_changed_success;
+
+  /// No description provided for @success.
+  ///
+  /// In en, this message translates to:
+  /// **'Success'**
+  String get success;
 }
 
 class _AppLocalizationsDelegate

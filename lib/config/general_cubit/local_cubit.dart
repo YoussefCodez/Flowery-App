@@ -11,52 +11,40 @@ class LocaleThemeCubit extends Cubit<LocaleThemeState> {
   final SharedPrefHelper sharedPrefHelper;
 
   LocaleThemeCubit(this.sharedPrefHelper)
-      : super(
-          LocaleThemeState(
-            locale: Locale(
-              sharedPrefHelper.getString(
-                    AppConstants.languageCode,
-                  ) ??
-                  AppConstants.enKey,
-            ),
-            isDark:
-                sharedPrefHelper.getBool(
-                      AppConstants.isDark,
-                    ) ??
-                    false,
+    : super(
+        LocaleThemeState(
+          locale: Locale(
+            sharedPrefHelper.getString(AppConstants.languageCode) ??
+                AppConstants.enKey,
           ),
-        );
+          isDark: sharedPrefHelper.getBool(AppConstants.isDark) ?? false,
+        ),
+      );
 
   void changeLocale() {
     final lanCode = state.locale.languageCode;
 
-    final newLocale =
-        lanCode == AppConstants.enKey
-            ? AppConstants.arKey
-            : AppConstants.enKey;
+    final newLocale = lanCode == AppConstants.enKey
+        ? AppConstants.arKey
+        : AppConstants.enKey;
 
     sharedPrefHelper.saveString(
       key: AppConstants.languageCode,
       value: newLocale,
     );
 
-    emit(
-      state.copyWith(
-        locale: Locale(newLocale),
-      ),
-    );
+    emit(state.copyWith(locale: Locale(newLocale)));
   }
 
   void toggleTheme() {
     final newTheme = !state.isDark;
 
-    sharedPrefHelper.saveBool(
-      key: AppConstants.isDark,
-      value: newTheme,
-    );
+    sharedPrefHelper.saveBool(key: AppConstants.isDark, value: newTheme);
 
-    emit(
-      state.copyWith(isDark: newTheme),
-    );
+    emit(state.copyWith(isDark: newTheme));
+  }
+
+  String? loadCurrentLanguage() {
+    return sharedPrefHelper.getString(AppConstants.languageCode);
   }
 }

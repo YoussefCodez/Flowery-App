@@ -412,4 +412,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get phone_is_required => 'Phone is required';
+
+  @override
+  String get current_password => 'Current Password';
+
+  @override
+  String get incorrect_password => 'Incorrect old password';
+
+  @override
+  String get password_changed_success =>
+      'Password has been changed successfully';
+
+  @override
+  String get success => 'Success';
 }

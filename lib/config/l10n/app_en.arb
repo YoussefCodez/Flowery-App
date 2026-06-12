@@ -136,5 +136,9 @@
   "stars" : "★★★★★★",
   "first_name_is_required" : "First name is required",
   "last_name_is_required" : "Last name is required",
-  "phone_is_required" : "Phone is required"
+  "phone_is_required" : "Phone is required",
+  "current_password": "Current Password",
+  "incorrect_password" : "Incorrect old password",
+  "password_changed_success" : "Password has been changed successfully",
+  "success" : "Success"
 }

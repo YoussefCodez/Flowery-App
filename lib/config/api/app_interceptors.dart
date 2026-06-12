@@ -37,7 +37,7 @@ class AuthInterceptor extends Interceptor {
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     debugPrint("err.response?.statusCode ${err.response?.statusCode}");
     if (err.response?.statusCode == StatusCode.expiredToken) {
-      getIt.get<UserHelper>().clearUserData();
+      // getIt.get<UserHelper>().clearUserData();
     }
     super.onError(err, handler);
   }
