@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:flowery/config/base_response/base_response.dart';
 import 'package:flowery/features/main_profile/api/main_profile_api_client.dart';
 import 'package:flowery/features/main_profile/data/data_sources/remote_data_source/remote_data_sources_contract.dart';
-import 'package:flowery/features/main_profile/data/model/profile_response_model.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../model/user_response_model.dart';
