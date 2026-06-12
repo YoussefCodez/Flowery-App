@@ -1,4 +1,5 @@
 abstract class AppStrings {
+  static const String appVersion = 'v 6.3.0 · (446)';
   static const String addToCart = "Add to Cart";
   static const String title = "title";
   static const String image = "image";

@@ -194,4 +194,25 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get an_error_occurred => 'حدث خطأ';
+
+  @override
+  String get my_orders => 'طلباتي';
+
+  @override
+  String get saved_address => 'العناوين المحفوظة';
+
+  @override
+  String get notification => 'الإشعارات';
+
+  @override
+  String get language => 'اللغة';
+
+  @override
+  String get english => 'الإنجليزية';
+
+  @override
+  String get about_us => 'عن التطبيق';
+
+  @override
+  String get terms_and_conditions => 'الشروط والأحكام';
 }

@@ -1,16 +1,46 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomProfile extends StatelessWidget {
   final Widget? leadingIcon;
-  final String? title;
-  final Widget? trailingIcon;
+  final String title;
+  final Widget? trailingWidget;
+  final VoidCallback? onTap;
 
-
-  const CustomProfile({super.key,this.leadingIcon,required this.title,this.trailingIcon,});
+  const CustomProfile({
+    super.key,
+    this.leadingIcon,
+    required this.title,
+    this.trailingWidget,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Row(children: [],);
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 14.h),
+        child: Row(
+          children: [
+            ...?leadingIcon != null
+                ? [leadingIcon!, SizedBox(width: 12.w)]
+                : null,
+            Expanded(
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.blackColor,
+                ),
+              ),
+            ),
+            if (trailingWidget != null) trailingWidget!,
+          ],
+        ),
+      ),
+    );
   }
 }

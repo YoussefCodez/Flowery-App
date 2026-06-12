@@ -17,6 +17,18 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
     as _i161;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
+import '../../featuers/main_profile/api/main_profile_api_client.dart' as _i930;
+import '../../featuers/main_profile/data/data_sources/remote_data_source/remote_data_sources_contract.dart'
+    as _i152;
+import '../../featuers/main_profile/data/data_sources/remote_data_source/remote_data_sources_impl.dart'
+    as _i708;
+import '../../featuers/main_profile/data/repo/profile_repo_impl.dart' as _i419;
+import '../../featuers/main_profile/domain/profile_repo/profile_repo_contract.dart'
+    as _i341;
+import '../../featuers/main_profile/domain/use_case/profile_use_case.dart'
+    as _i795;
+import '../../featuers/main_profile/presentation/view_model/profile_cubit.dart'
+    as _i510;
 import '../api/app_interceptors.dart' as _i781;
 import '../general_cubit/local_cubit.dart' as _i794;
 import '../helpers/shared_pref.dart' as _i42;
@@ -48,6 +60,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i42.SharedPrefHelper>(
       () => _i42.SharedPrefHelper(gh<_i460.SharedPreferences>()),
     );
+    gh.factory<_i930.MainProfileApiClient>(
+      () => _i930.MainProfileApiClient(gh<_i361.Dio>()),
+    );
+    gh.factory<_i152.ProfileRemoteDataSourceContract>(
+      () => _i708.ProfileRemoteDataSourceImpl(gh<_i930.MainProfileApiClient>()),
+    );
     gh.singleton<_i781.AuthInterceptor>(
       () => _i781.AuthInterceptor(
         dio: gh<_i361.Dio>(),
@@ -62,6 +80,15 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i460.SharedPreferences>(),
         gh<_i558.FlutterSecureStorage>(),
       ),
+    );
+    gh.factory<_i341.ProfileRepoContract>(
+      () => _i419.ProfileRepoImpl(gh<_i152.ProfileRemoteDataSourceContract>()),
+    );
+    gh.factory<_i795.GetProfileDataUseCase>(
+      () => _i795.GetProfileDataUseCase(gh<_i341.ProfileRepoContract>()),
+    );
+    gh.factory<_i510.ProfileCubit>(
+      () => _i510.ProfileCubit(gh<_i795.GetProfileDataUseCase>()),
     );
     return this;
   }
