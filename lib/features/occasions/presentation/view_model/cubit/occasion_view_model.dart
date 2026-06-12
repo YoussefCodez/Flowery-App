@@ -20,7 +20,7 @@ class OccasionViewModel extends Cubit<OccasionsState> {
     this._getProductsOfSpecificOccasionUseCase,
   ) : super(OccasionsState());
 
-  void doEvent(OccasionsEvents event, {String occasionId = ''}) {
+  void doEvent(OccasionsEvents event, {String? occasionId = ''}) {
     switch (event) {
       case GetOccasionsEvent():
         _getOccasions(occasionId: occasionId);
@@ -29,7 +29,7 @@ class OccasionViewModel extends Cubit<OccasionsState> {
     }
   }
 
-  Future<void> _getOccasions({required String occasionId}) async {
+  Future<void> _getOccasions({required String? occasionId}) async {
     emit(state.copyWith(isLoadingOccasions: true, errorMessage: null));
 
     final response = await _getOccasionsUseCase.call();
@@ -63,12 +63,12 @@ class OccasionViewModel extends Cubit<OccasionsState> {
   }
 
   Future<void> _getProductsOfSpecificOccasion({
-    required String occasionId,
+    required String? occasionId,
   }) async {
     emit(state.copyWith(isLoadingProducts: true, errorMessage: null));
 
     final response = await _getProductsOfSpecificOccasionUseCase.call(
-      occasionId,
+      occasionId ?? "",
     );
 
     switch (response) {

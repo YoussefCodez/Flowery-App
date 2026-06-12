@@ -11,7 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OccasionsScreen extends StatefulWidget {
-  final String occasionId;
+  final String? occasionId;
   const OccasionsScreen({
     super.key,
     required this.occasionId,
@@ -39,9 +39,13 @@ class _OccasionsScreenState extends State<OccasionsScreen>
   @override
   Widget build(BuildContext context) {
     return BlocProvider<OccasionViewModel>(
-      create: (context) =>
-          getIt.get<OccasionViewModel>()
-            ..doEvent(GetOccasionsEvent(), occasionId: widget.occasionId),
+      create: (context) => getIt.get<OccasionViewModel>()
+        ..doEvent(
+          GetOccasionsEvent(),
+          occasionId: widget.occasionId?.isNotEmpty == true
+              ? widget.occasionId
+              : null,
+        ),
       child: Scaffold(
         appBar: AppBar(
           toolbarHeight: 100.h,
@@ -74,10 +78,13 @@ class _OccasionsScreenState extends State<OccasionsScreen>
                   length: state.names.length,
                   vsync: this,
                 );
+                if (widget.occasionId?.isNotEmpty == true) {
+                  final selectedIndex = state.ids.indexOf(widget.occasionId!);
 
-                if (widget.occasionId != "") {
-                  int selectedIndex = state.ids.indexOf(widget.occasionId);
-                  _tabController!.index = selectedIndex;
+                  if (selectedIndex >= 0 &&
+                      selectedIndex < _tabController!.length) {
+                    _tabController!.index = selectedIndex;
+                  }
                 }
 
                 // Listen to manual tab clicks

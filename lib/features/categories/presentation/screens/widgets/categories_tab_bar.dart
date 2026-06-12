@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CategoriesTabView extends StatefulWidget {
   final List<CategoryEntity> categories;
-  final String categoryId;
+  final String? categoryId;
   const CategoriesTabView({
     super.key,
     required this.categories,
@@ -28,7 +28,7 @@ class _CategoriesTabViewState extends State<CategoriesTabView>
   void initState() {
     super.initState();
 
-    final selectedIndex = widget.categoryId.isNotEmpty
+    final selectedIndex = widget.categoryId != null
         ? widget.categories.indexWhere(
             (category) => category.id == widget.categoryId,
           )
@@ -42,7 +42,7 @@ class _CategoriesTabViewState extends State<CategoriesTabView>
 
     context.read<CategoriesCubit>().doEvent(
       GetProductsByCategoryEvent(
-        widget.categoryId.isNotEmpty ? widget.categoryId : null,
+        widget.categoryId?.isNotEmpty == true ? widget.categoryId : null,
       ),
     );
   }

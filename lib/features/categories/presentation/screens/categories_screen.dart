@@ -13,7 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CategoriesScreen extends StatelessWidget {
   final bool showBackButton;
-  final String categoryId;
+  final String? categoryId;
   const CategoriesScreen({
     super.key,
     required this.showBackButton,

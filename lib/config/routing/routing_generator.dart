@@ -57,7 +57,7 @@ class RouteGenerator {
         );
 
       case AppRoutes.categories:
-        final categoryId = settings.arguments as String;
+        final categoryId = settings.arguments as String?;
         return MaterialPageRoute(
           builder: (_) =>
               CategoriesScreen(showBackButton: true, categoryId: categoryId),
@@ -80,7 +80,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const BestSellerScreen());
 
       case AppRoutes.occasions:
-        final occasionId = settings.arguments as String;
+        final occasionId = settings.arguments as String?;
         return MaterialPageRoute(
           builder: (_) => OccasionsScreen(occasionId: occasionId),
         );

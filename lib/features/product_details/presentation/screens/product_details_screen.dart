@@ -15,7 +15,7 @@ class ProductDetailsScreen extends StatefulWidget {
   final bool isdiscount;
   final double oldPrice;
   final double discount;
-  final int sold;
+  final int? sold;
   final int quantity;
   final List<String> images;
   final String description;
