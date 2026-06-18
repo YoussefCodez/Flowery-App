@@ -140,5 +140,18 @@
   "current_password": "كلمة المرور الحالية",
   "incorrect_password" : "كلمة المرور القديمة غير صحيحة",
   "password_changed_success" : "تم تغيير كلمة المرور بنجاح",
-  "success" : "نجحت"
+  "success" : "نجحت",
+  "delivery_time": "وقت التوصيل",
+  "instant": "فوري",
+  "delivery_address": "عنوان التوصيل",
+  "payment_method": "طريقة الدفع",
+  "cash_on_delivery": "الدفع عند الاستلام",
+  "credit_card": "بطاقة ائتمانية",
+  "it_is_a_gift": "إنها هدية",
+  "place_order": "إتمام الطلب",
+  "add_new" : "اضف عنوان جديد",
+  "enter_the_name" : "ادخل الاسم",
+  "enter_the_phone_number" : "ادخل رقم الهاتف",
+  "your_order_has_been_placed" : "تم تسجيل طلبك بنجاح",
+  "go_to_home" : "العودة للصفحة الرئيسية"
 }

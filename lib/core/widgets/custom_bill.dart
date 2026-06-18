@@ -1,4 +1,6 @@
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
+import 'package:flowery/config/routing/app_routes.dart';
+import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,6 +10,7 @@ class CustomBill extends StatefulWidget {
   final int? discount;
   final int? subtotalAfterDiscount;
   final int? deliveryFee;
+  final bool? isItPlaceOrder;
   int get total => (subtotalAfterDiscount ?? 0) + (deliveryFee ?? 0);
   int get discountMoney => (subtotalAfterDiscount ?? 0) - (subtotal ?? 0);
   const CustomBill({
@@ -16,6 +19,7 @@ class CustomBill extends StatefulWidget {
     required this.discount,
     required this.subtotalAfterDiscount,
     required this.deliveryFee,
+    this.isItPlaceOrder,
   });
 
   @override
@@ -149,10 +153,36 @@ class _CustomBillState extends State<CustomBill> {
               ),
             ],
           ),
-
-          ElevatedButton(onPressed: () {}, child: Text(localizations.checkout)),
+          widget.isItPlaceOrder == null
+              ? ElevatedButton(
+                  onPressed: () => context.pushNamed(
+                    AppRoutes.checkout,
+                    arguments: TransferBill(
+                      subtotal: widget.subtotal ?? 0,
+                      discount: widget.discount ?? 0,
+                      subtotalAfterDiscount: widget.subtotalAfterDiscount ?? 0,
+                      deliveryFee: widget.deliveryFee ?? 0,
+                    ),
+                  ),
+                  child: Text(localizations.checkout),
+                )
+              : SizedBox.shrink(),
         ],
       ),
     );
   }
+}
+
+class TransferBill {
+  final int subtotal;
+  final int discount;
+  final int subtotalAfterDiscount;
+  final int deliveryFee;
+
+  TransferBill({
+    required this.subtotal,
+    required this.discount,
+    required this.subtotalAfterDiscount,
+    required this.deliveryFee,
+  });
 }

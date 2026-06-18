@@ -68,4 +68,16 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSourceContract {
       );
     }
   }
+  
+  @override
+  Future<Result<CartResponseModel>> deleteUserCart() async{
+    try {
+      final response = await apiClient.deleteUserCart();
+      return Success<CartResponseModel>(data: response);
+    } on DioException catch (e) {
+      return Error<CartResponseModel>(
+        exception: Exception(e.response?.data[CartValues.error]),
+      );
+    }
+  }
 }

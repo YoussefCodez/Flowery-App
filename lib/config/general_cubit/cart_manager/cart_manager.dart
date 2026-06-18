@@ -1,4 +1,5 @@
 import 'package:flowery/config/general_cubit/cart_manager/cart_state.dart';
+import 'package:flowery/features/cart/domain/use_cases/delete_user_cart.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flowery/config/base_response/base_response.dart';
 import 'package:flowery/features/cart/domain/entities/cart_entity.dart';
@@ -14,12 +15,14 @@ class CartManager extends Cubit<CartState> {
   final DeleteSpecificCartItemUseCase deleteUseCase;
   final UpdateSpecificCartItemQuantityUseCase updateUseCase;
   final AddToCartUseCase addToCartUseCase;
+  final DeleteUserCart deleteUserCartUseCase;
 
   CartManager(
     this.getCartUseCase,
     this.deleteUseCase,
     this.updateUseCase,
     this.addToCartUseCase,
+    this.deleteUserCartUseCase
   ) : super(const CartState());
 
   Future<void> loadCart() async {
@@ -124,6 +127,30 @@ class CartManager extends Cubit<CartState> {
           state.copyWith(
             isUpdatingCartItem: false,
             itemId: '',
+            errorMessage: response.exception.toString(),
+          ),
+        );
+    }
+  }
+
+  Future<void> deleteCart() async {
+    emit(state.copyWith(isDeletingCart: true));
+
+    final response = await deleteUserCartUseCase();
+
+    switch (response) {
+      case Success<CartEntity>():
+        emit(
+          state.copyWith(
+            isDeletingCart: false,
+            cart: response.data,
+          ),
+        );
+
+      case Error<CartEntity>():
+        emit(
+          state.copyWith(
+            isDeletingCart: false,
             errorMessage: response.exception.toString(),
           ),
         );

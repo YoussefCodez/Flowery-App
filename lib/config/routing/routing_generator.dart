@@ -1,6 +1,8 @@
 import 'package:flowery/core/const/app_strings.dart';
+import 'package:flowery/core/widgets/custom_bill.dart';
 import 'package:flowery/core/widgets/main_layout.dart';
 import 'package:flowery/features/change_password/presentation/screens/change_password_screen.dart';
+import 'package:flowery/features/checkout/presentation/screens/checkout_screen.dart';
 import 'package:flowery/features/edit_profile/presentation/screens/edit_profile_screen.dart';
 import 'package:flowery/features/main_profile/presentation/screen/main_profile_view.dart';
 import 'package:flowery/features/search/presentation/screen/search_view.dart';
@@ -32,6 +34,17 @@ class RouteGenerator {
 
       case AppRoutes.register:
         return MaterialPageRoute(builder: (_) => RegisterScreen());
+
+      case AppRoutes.checkout:
+        final args = settings.arguments as TransferBill;
+        return MaterialPageRoute(
+          builder: (_) => CheckoutScreen(
+            subtotal: args.subtotal,
+            discount: args.discount,
+            subtotalAfterDiscount: args.subtotalAfterDiscount,
+            deliveryFee: args.deliveryFee,
+          ),
+        );
 
       case AppRoutes.forgetPassword:
         return MaterialPageRoute(builder: (_) => const ForgetPasswordView());
@@ -123,9 +136,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const EditProfileScreen());
 
       case AppRoutes.changePassword:
-        return MaterialPageRoute(
-          builder: (_) => const ChangePasswordScreen(),
-        );
+        return MaterialPageRoute(builder: (_) => const ChangePasswordScreen());
       default:
         return unDefinedRoute();
     }
