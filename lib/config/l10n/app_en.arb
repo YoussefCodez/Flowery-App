@@ -153,5 +153,6 @@
   "enter_the_name" : "Enter the name",
   "enter_the_phone_number" : "Enter the phone number",
   "your_order_has_been_placed" : "Your order has been placed successfully.",
-  "go_to_home" : "Go to Home"
+  "go_to_home" : "Go to Home",
+  "arrive_by" : "Arrive by,"
 }

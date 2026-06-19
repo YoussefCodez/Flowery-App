@@ -12,10 +12,16 @@ class CheckoutViewModel extends Cubit<CheckoutState> {
   CheckoutViewModel(this._creditCheckoutSessionUseCase)
     : super(CheckoutState());
 
-  void doEvent(CheckoutEvents event) {
+  void doEvent(CheckoutEvents event, {bool isGift = false}) {
     switch (event) {
       case CheckoutUsingCreditEvent():
         _checkoutCredit();
+      case CheckoutUsingCreditCardEvent():
+        _checkoutCreditCard();
+      case CheckoutUsingCashEvent():
+        _checkoutCash();
+      case CheckoutUsingGiftEvent():
+        _checkoutGift(isGift);
     }
   }
 
@@ -25,9 +31,21 @@ class CheckoutViewModel extends Cubit<CheckoutState> {
 
     switch (response) {
       case Success<CheckoutEntity>():
-        emit(state.copyWith(isLoading: false,url: response.data?.url));
+        emit(state.copyWith(isLoading: false, url: response.data?.url));
       case Error<CheckoutEntity>():
-      emit(state.copyWith(isLoading: false));
+        emit(state.copyWith(isLoading: false));
     }
+  }
+
+  void _checkoutCash() {
+    emit(state.copyWith(isCreditCard: false));
+  }
+
+  void _checkoutCreditCard() {
+    emit(state.copyWith(isCreditCard: true));
+  }
+
+  void _checkoutGift(bool value) {
+    emit(state.copyWith(isGift: value));
   }
 }

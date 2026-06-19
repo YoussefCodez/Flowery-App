@@ -1,14 +1,19 @@
+import 'package:flowery/features/checkout/presentation/view_model/cubit/checkout_view_model.dart';
+import 'package:flowery/features/checkout/presentation/view_model/events/checkout_events.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PaymentMethodContainer extends StatelessWidget {
   final String paymentMethodName;
   final bool selectedMethod;
+  final bool isCreditCard;
 
   const PaymentMethodContainer({
     super.key,
     required this.paymentMethodName,
     required this.selectedMethod,
+    required this.isCreditCard,
   });
 
   @override
@@ -48,7 +53,13 @@ class PaymentMethodContainer extends StatelessWidget {
                 RadioMenuButton(
                   value: true,
                   groupValue: selectedMethod,
-                  onChanged: (_) {},
+                  onChanged: (_) {
+                    context.read<CheckoutViewModel>().doEvent(
+                      isCreditCard
+                          ? CheckoutUsingCreditCardEvent()
+                          : CheckoutUsingCashEvent(),
+                    );
+                  },
                   child: Text(""),
                 ),
               ],

@@ -1,8 +1,7 @@
 import 'package:flowery/config/di/injectable_config.dart';
-import 'package:flowery/config/general_cubit/cart_manager/cart_manager.dart';
 import 'package:flowery/config/helpers/regex.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
-import 'package:flowery/config/routing/app_routes.dart';
+import 'package:flowery/config/remote_config_service/remote_config_service.dart';
 import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flowery/core/widgets/custom_bill.dart';
@@ -38,10 +37,11 @@ class CheckoutScreen extends StatefulWidget {
 class _CheckoutScreenState extends State<CheckoutScreen> {
   late AppLocalizations localizations;
   late TextTheme textTheme;
-  bool _notificationsEnabled = true;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final deliveryDays = RemoteConfigService.deliveryDays;
+
   final savedAddresses = [
     SavedAddress(
       addressTitle: "Home",
@@ -64,6 +64,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final deliveryDate = DateTime.now().add(Duration(days: deliveryDays));
     return BlocProvider<CheckoutViewModel>(
       create: (context) => getIt.get<CheckoutViewModel>(),
       child: Builder(
@@ -115,7 +116,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                   style: textTheme.labelLarge,
                                 ),
                                 Text(
-                                  " Arrive by 03 Sep 2024, 11:00 AM",
+                                  " ${localizations.arrive_by} $deliveryDate",
                                   style: textTheme.labelSmall?.copyWith(
                                     color: AppColors.greenColor,
                                     decoration: TextDecoration.none,
@@ -192,13 +193,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           ),
                         ),
                       ),
-
-                      // Delivery Payment Method
                       Divider(
                         color: AppColors.dividerColor,
                         height: 24.h,
                         thickness: 24.h,
                       ),
+
+                      // Delivery Payment Method
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -215,13 +216,44 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               ),
                             ],
                           ),
-                          PaymentMethodContainer(
-                            paymentMethodName: localizations.cash_on_delivery,
-                            selectedMethod: true,
-                          ),
-                          PaymentMethodContainer(
-                            paymentMethodName: localizations.credit_card,
-                            selectedMethod: false,
+                          BlocBuilder<CheckoutViewModel, CheckoutState>(
+                            builder: (context, state) {
+                              if (state.isCreditCard) {
+                                return Column(
+                                  children: [
+                                    PaymentMethodContainer(
+                                      paymentMethodName:
+                                          localizations.cash_on_delivery,
+                                      selectedMethod: !state.isCreditCard,
+                                      isCreditCard: false,
+                                    ),
+                                    PaymentMethodContainer(
+                                      paymentMethodName:
+                                          localizations.credit_card,
+                                      selectedMethod: state.isCreditCard,
+                                      isCreditCard: true,
+                                    ),
+                                  ],
+                                );
+                              } else {
+                                return Column(
+                                  children: [
+                                    PaymentMethodContainer(
+                                      paymentMethodName:
+                                          localizations.cash_on_delivery,
+                                      selectedMethod: !state.isCreditCard,
+                                      isCreditCard: false,
+                                    ),
+                                    PaymentMethodContainer(
+                                      paymentMethodName:
+                                          localizations.credit_card,
+                                      selectedMethod: state.isCreditCard,
+                                      isCreditCard: true,
+                                    ),
+                                  ],
+                                );
+                              }
+                            },
                           ),
                         ],
                       ),
@@ -232,74 +264,102 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       ),
 
                       // (optional Gift)
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            SizedBox(height: 20.h),
-                            Row(
+                      BlocBuilder<CheckoutViewModel, CheckoutState>(
+                        builder: (BuildContext context, CheckoutState state) {
+                          if (state.isCreditCard) {
+                            return Column(
                               children: [
-                                CupertinoSwitch(
-                                  value: _notificationsEnabled,
-                                  activeTrackColor: AppColors.primaryColor,
-                                  onChanged: (val) => setState(
-                                    () => _notificationsEnabled = val,
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: [
+                                      SizedBox(height: 20.h),
+                                      Row(
+                                        children: [
+                                          CupertinoSwitch(
+                                            value: state.isGift,
+                                            activeTrackColor:
+                                                AppColors.primaryColor,
+                                            onChanged: (value) {
+                                              context
+                                                  .read<CheckoutViewModel>()
+                                                  .doEvent(
+                                                    CheckoutUsingGiftEvent(),
+                                                    isGift: value,
+                                                  );
+                                            },
+                                          ),
+                                          SizedBox(width: 5.w),
+                                          Text(
+                                            localizations.it_is_a_gift,
+                                            style: TextStyle(
+                                              fontSize: 18.sp,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: MainTextField(
+                                          enabled: state.isGift,
+                                          hintText:
+                                              localizations.enter_the_name,
+                                          labelText: localizations.name,
+                                          controller: nameController,
+                                          obscureText: false,
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return localizations
+                                                  .name_is_required;
+                                            }
+                                            return null;
+                                          },
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: MainTextField(
+                                          enabled: state.isGift,
+                                          hintText: localizations
+                                              .enter_the_phone_number,
+                                          labelText: localizations.phone,
+                                          controller: phoneController,
+                                          obscureText: false,
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return localizations
+                                                  .phone_is_required;
+                                            }
+                                            if (!AppRegExp.isPhoneNumberValid(
+                                              value,
+                                            )) {
+                                              return localizations
+                                                  .phone_number_is_not_valid;
+                                            }
+                                            return null;
+                                          },
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                SizedBox(width: 5.w),
-                                Text(
-                                  localizations.it_is_a_gift,
-                                  style: TextStyle(
-                                    fontSize: 18.sp,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                Divider(
+                                  color: AppColors.dividerColor,
+                                  height: 24.h,
+                                  thickness: 24.h,
                                 ),
                               ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: MainTextField(
-                                hintText: localizations.enter_the_name,
-                                labelText: localizations.name,
-                                controller: nameController,
-                                obscureText: false,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return localizations.name_is_required;
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: MainTextField(
-                                hintText: localizations.enter_the_phone_number,
-                                labelText: localizations.phone,
-                                controller: phoneController,
-                                obscureText: false,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return localizations.phone_is_required;
-                                  }
-                                  if (!AppRegExp.isPhoneNumberValid(value)) {
-                                    return localizations
-                                        .phone_number_is_not_valid;
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Divider(
-                        color: AppColors.dividerColor,
-                        height: 24.h,
-                        thickness: 24.h,
-                      ),
+                            );
+                          } else {
+                            return SizedBox.shrink();
+                          }
+                        },
 
-                      // Money Details + place order
+                        // Money Details + place order
+                      ),
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Stack(
