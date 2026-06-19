@@ -1,13 +1,12 @@
 import 'package:flowery/config/routing/app_routes.dart';
-import 'package:flowery/featuers/main_profile/presentation/screen/main_profile_view.dart';
 import 'package:flutter/material.dart';
 
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     try {
       switch (settings.name) {
-        case AppRoutes.mainProfile:
-          return MaterialPageRoute(builder: (_) => const MainProfileView());
+        // case AppRoutes.mainProfile:
+        //   return MaterialPageRoute(builder: (_) => const MainProfileView());
 
         default:
           return unDefinedRoute();

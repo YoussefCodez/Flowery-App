@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flowery/config/di/injectable_config.dart';
 import 'package:flowery/config/general_cubit/general_state.dart';
 import 'package:flowery/config/general_cubit/local_cubit.dart';
@@ -10,10 +12,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'featuers/notification/notification_service/notification_service.dart';
+import 'firebase_options.dart';
+@pragma('vm:entry-point')
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  print('📨 إشعار وصل والتطبيق مقفول: ${message.messageId}');
+}
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+
   Bloc.observer = MyBlocObserver();
   await configureDependencies();
+
+  final notificationService = getIt<NotificationService>();
+  await notificationService.requestPermission();
+  await notificationService.getToken();
+  await notificationService.initLocalNotifications();
+  notificationService.initListeners();
+
   runApp(
     BlocProvider(
       create: (context) => getIt<LocaleThemeCubit>(),
