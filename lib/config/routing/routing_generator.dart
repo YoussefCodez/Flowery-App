@@ -1,13 +1,35 @@
 import 'package:flowery/config/routing/app_routes.dart';
-import 'package:flowery/featuers/main_profile/presentation/screen/main_profile_view.dart';
+import 'package:flowery/featuers/web_view/presentation/screen/test_term_screen.dart';
+import 'package:flowery/featuers/web_view/presentation/screen/web_view_screen.dart';
 import 'package:flutter/material.dart';
 
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     try {
       switch (settings.name) {
-        case AppRoutes.mainProfile:
-          return MaterialPageRoute(builder: (_) => const MainProfileView());
+        // case AppRoutes.mainProfile:
+        //   return MaterialPageRoute(builder: (_) => const MainProfileView());
+
+        case AppRoutes.testTerm:
+          return MaterialPageRoute(
+            builder: (_) => const TestTermScreen(),
+          );
+
+        case AppRoutes.termsAndConditions:
+          return MaterialPageRoute(
+            builder: (_) => const WebViewScreen(
+              url: 'https://elevate-flutter-team.github.io/flower_app_web_views/terms.html',
+              title: 'Terms & Conditions',
+            ),
+          );
+
+        case AppRoutes.aboutUs:
+          return MaterialPageRoute(
+            builder: (_) => const WebViewScreen(
+              url: 'https://elevate-flutter-team.github.io/flower_app_web_views/about.html',
+              title: 'About Us',
+            ),
+          );
 
         default:
           return unDefinedRoute();

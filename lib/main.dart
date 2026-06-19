@@ -44,7 +44,7 @@ class FloweryApp extends StatelessWidget {
               theme: AppTheme.lightTheme,
               //  darkTheme: AppTheme.darkTheme,
               // themeMode: state.themeMode,
-              initialRoute: AppRoutes.mainProfile,
+              initialRoute: AppRoutes.testTerm,
             );
           },
         );
