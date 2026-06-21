@@ -4,5 +4,5 @@ import 'package:flowery/features/categories/data/models/product_response_model.d
 
 abstract interface class GetCategoriesDataSourceContract {
   Future<Result<CategoryResponseModel>> getAllCategories();
-  Future<Result<ProductResponseModel>> getProductsByCategory(String? categoryId);
+  Future<Result<ProductResponseModel>> getProductsByCategory(String? categoryId, String? sortOption);
 }

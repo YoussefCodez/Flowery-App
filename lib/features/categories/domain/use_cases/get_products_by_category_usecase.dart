@@ -9,7 +9,10 @@ class GetProductsByCategoryUseCase {
 
   GetProductsByCategoryUseCase(this._repository);
 
-  Future<Result<List<ProductEntity>>> call([String? categoryId]) async {
-    return await _repository.getProductsByCategory(categoryId);
+  Future<Result<List<ProductEntity>>> call([
+    String? categoryId,
+    String? sortOption,
+  ]) async {
+    return await _repository.getProductsByCategory(categoryId, sortOption);
   }
 }
