@@ -8,6 +8,7 @@ import 'package:flowery/features/categories/presentation/screens/widgets/search_
 import 'package:flowery/features/categories/presentation/view_model/cubit/categories_cubit.dart';
 import 'package:flowery/features/categories/presentation/view_model/events/categories_event.dart';
 import 'package:flowery/features/categories/presentation/view_model/states/categories_state.dart';
+import 'package:flowery/features/filter/presentation/widgets/sort_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,62 +39,73 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     return BlocProvider(
       create: (context) =>
           getIt<CategoriesCubit>()..doEvent(GetAllCategoriesEvent()),
-      child: Scaffold(
-        body: SafeArea(
-          child: Column(
-            children: [
-              Padding(
-                padding: REdgeInsets.all(16),
-                child: Row(
-                  children: [
-                    widget.showBackButton
-                        ? InkWell(
-                            onTap: () => context.pop(),
-                            child: Icon(Icons.arrow_back_ios_new),
-                          )
-                        : SizedBox.shrink(),
-                    SizedBox(width: 8.w),
-                    Expanded(
-                      child: SizedBox(
-                        height: 48.h,
-                        child: SearchField(hintText: localizations.search),
-                      ),
+      child: Builder(
+        builder: (context) {
+          return Scaffold(
+            body: SafeArea(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: REdgeInsets.all(16),
+                    child: Row(
+                      children: [
+                        widget.showBackButton
+                            ? InkWell(
+                                onTap: () => context.pop(),
+                                child: Icon(Icons.arrow_back_ios_new),
+                              )
+                            : SizedBox.shrink(),
+                        SizedBox(width: 8.w),
+                        Expanded(
+                          child: SizedBox(
+                            height: 48.h,
+                            child: SearchField(hintText: localizations.search),
+                          ),
+                        ),
+                        SizedBox(width: 8.w),
+                        FilterButton(
+                          onTap: () {
+                            // call the bottom sheet
+                            SortBottomSheet.show(
+                              context: context,
+                            );
+                          },
+                        ),
+                      ],
                     ),
-                    SizedBox(width: 8.w),
-                    FilterButton(
-                      onTap: () {}, //TODO: Implement filter functionality
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: BlocBuilder<CategoriesCubit, CategoriesState>(
-                  builder: (context, state) {
-                    return state.categoriesState.when(
-                      success: (categories) {
-                        return CategoriesTabView(
-                          categories: categories,
-                          categoryId: widget.categoryId,
+                  ),
+                  Expanded(
+                    child: BlocBuilder<CategoriesCubit, CategoriesState>(
+                      builder: (context, state) {
+                        return state.categoriesState.when(
+                          success: (categories) {
+                            return CategoriesTabView(
+                              categories: categories,
+                              categoryId: widget.categoryId,
+                            );
+                          },
+                          loading: () {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          },
+                          error: (error) {
+                            return Center(child: Text(error.toString()));
+                          },
+                          initial: () {
+                            return const Center(
+                              child: Text(AppStrings.initialCategoryState),
+                            );
+                          },
                         );
                       },
-                      loading: () {
-                        return const Center(child: CircularProgressIndicator());
-                      },
-                      error: (error) {
-                        return Center(child: Text(error.toString()));
-                      },
-                      initial: () {
-                        return const Center(
-                          child: Text(AppStrings.initialCategoryState),
-                        );
-                      },
-                    );
-                  },
-                ),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }
