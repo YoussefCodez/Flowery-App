@@ -5,5 +5,5 @@ sealed class FilterEvents {}
 class UpdateSortOptionEvent extends FilterEvents {
   final SortOption sortOption;
 
-  UpdateSortOptionEvent({required this.sortOption});
+  UpdateSortOptionEvent(this.sortOption);
 }
