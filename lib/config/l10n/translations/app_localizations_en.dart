@@ -425,4 +425,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get success => 'Success';
+
+  @override
+  String get lowest_price => 'Lowest Price';
+
+  @override
+  String get highest_price => 'Highest Price';
+
+  @override
+  String get new_products => 'New';
+
+  @override
+  String get old_products => 'Old';
+
+  @override
+  String get filter => 'Filter';
+
+  @override
+  String get sort_by => 'Sort by';
 }

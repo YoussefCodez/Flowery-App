@@ -419,4 +419,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get success => 'نجحت';
+
+  @override
+  String get lowest_price => 'ارخص ثمن';
+
+  @override
+  String get highest_price => 'اغلي ثمن';
+
+  @override
+  String get new_products => 'جديد';
+
+  @override
+  String get old_products => 'قديم';
+
+  @override
+  String get filter => 'فلتر';
+
+  @override
+  String get sort_by => 'فرز حسب';
 }
