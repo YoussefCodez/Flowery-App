@@ -1,26 +1,19 @@
 name: Lint
 
-on:
+on: 
   pull_request:
-    branches:
-      [dev]
+    branches: [dev]
 
 jobs:
   run-linters:
     name: Run linters
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: '3.41.9'
           channel: 'stable'
-
       - run: flutter pub get
-
       - run: dart run build_runner build
-
       - run: flutter analyze
