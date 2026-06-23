@@ -17,6 +17,16 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
     as _i161;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
+import '../../featuers/my_order/api/my_order_api_client.dart' as _i267;
+import '../../featuers/my_order/data/data_source/remote_data_source_contract.dart'
+    as _i911;
+import '../../featuers/my_order/data/data_source/remote_data_source_impl.dart'
+    as _i375;
+import '../../featuers/my_order/data/repo/my_order_repo_impl.dart' as _i911;
+import '../../featuers/my_order/domain/repo/my_order_repo_contract.dart'
+    as _i1036;
+import '../../featuers/my_order/domain/use_case/get_my_order_data.dart'
+    as _i647;
 import '../api/app_interceptors.dart' as _i781;
 import '../general_cubit/local_cubit.dart' as _i794;
 import '../helpers/shared_pref.dart' as _i42;
@@ -48,6 +58,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i42.SharedPrefHelper>(
       () => _i42.SharedPrefHelper(gh<_i460.SharedPreferences>()),
     );
+    gh.factory<_i267.MyOrderApiClient>(
+      () => _i267.MyOrderApiClient(gh<_i361.Dio>()),
+    );
     gh.singleton<_i781.AuthInterceptor>(
       () => _i781.AuthInterceptor(
         dio: gh<_i361.Dio>(),
@@ -57,11 +70,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i794.LocaleThemeCubit>(
       () => _i794.LocaleThemeCubit(gh<_i42.SharedPrefHelper>()),
     );
+    gh.factory<_i911.RemoteDataSourceContract>(
+      () => _i375.RemoteDataSourceImpl(gh<_i267.MyOrderApiClient>()),
+    );
     gh.factory<_i157.UserHelper>(
       () => _i157.UserHelper(
         gh<_i460.SharedPreferences>(),
         gh<_i558.FlutterSecureStorage>(),
       ),
+    );
+    gh.factory<_i1036.MyOrderRepoContract>(
+      () => _i911.MyOrderRepoImpl(gh<_i911.RemoteDataSourceContract>()),
+    );
+    gh.factory<_i647.GetMyOrderData>(
+      () => _i647.GetMyOrderData(gh<_i1036.MyOrderRepoContract>()),
     );
     return this;
   }
