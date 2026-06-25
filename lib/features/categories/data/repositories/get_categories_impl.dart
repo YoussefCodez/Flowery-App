@@ -25,8 +25,8 @@ class GetCategoriesImpl implements GetCategoriesContract {
   }
 
   @override
-  Future<Result<List<ProductEntity>>> getProductsByCategory(String? categoryId) async {
-    final response = await _dataSource.getProductsByCategory(categoryId);
+  Future<Result<List<ProductEntity>>> getProductsByCategory(String? categoryId, String? sortOption) async {
+    final response = await _dataSource.getProductsByCategory(categoryId, sortOption);
     switch (response) {
       case Success(data: final data):
         final entities =

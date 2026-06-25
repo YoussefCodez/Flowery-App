@@ -9,6 +9,7 @@ import 'package:flowery/features/categories/domain/use_cases/get_products_by_cat
 import 'package:flowery/features/categories/presentation/view_model/cubit/categories_cubit.dart';
 import 'package:flowery/features/categories/presentation/view_model/events/categories_event.dart';
 import 'package:flowery/features/categories/presentation/view_model/states/categories_state.dart';
+import 'package:flowery/features/filter/presentation/widgets/sort_bottom_sheet.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -41,9 +42,9 @@ void main() {
   });
 
   CategoriesCubit buildCubit() => CategoriesCubit(
-        mockGetAllCategoriesUseCase,
-        mockGetProductsByCategoryUseCase,
-      );
+    mockGetAllCategoriesUseCase,
+    mockGetProductsByCategoryUseCase,
+  );
 
   group('initial state', () {
     test('should have a default CategoriesState as the initial state', () {
@@ -59,17 +60,14 @@ void main() {
       'should emit [loading, success] states when UseCase is successful',
       build: buildCubit,
       setUp: () {
-        when(() => mockGetAllCategoriesUseCase.call())
-            .thenAnswer((_) async => const Success(data: tCategories));
+        when(
+          () => mockGetAllCategoriesUseCase.call(),
+        ).thenAnswer((_) async => const Success(data: tCategories));
       },
       act: (cubit) => cubit.doEvent(GetAllCategoriesEvent()),
       expect: () => [
-        const CategoriesState(
-          categoriesState: BaseState.loading(),
-        ),
-        const CategoriesState(
-          categoriesState: BaseState.success(tCategories),
-        ),
+        const CategoriesState(categoriesState: BaseState.loading()),
+        const CategoriesState(categoriesState: BaseState.success(tCategories)),
       ],
       verify: (_) {
         verify(() => mockGetAllCategoriesUseCase.call()).called(1);
@@ -80,15 +78,14 @@ void main() {
       'should emit [loading, success([])] states when data is null',
       build: buildCubit,
       setUp: () {
-        when(() => mockGetAllCategoriesUseCase.call())
-            .thenAnswer((_) async => const Success(data: null));
+        when(
+          () => mockGetAllCategoriesUseCase.call(),
+        ).thenAnswer((_) async => const Success(data: null));
       },
       act: (cubit) => cubit.doEvent(GetAllCategoriesEvent()),
       expect: () => [
         const CategoriesState(categoriesState: BaseState.loading()),
-        const CategoriesState(
-          categoriesState: BaseState.success([]),
-        ),
+        const CategoriesState(categoriesState: BaseState.success([])),
       ],
     );
 
@@ -96,15 +93,14 @@ void main() {
       'should emit [loading, error] states when UseCase fails with Failure',
       build: buildCubit,
       setUp: () {
-        when(() => mockGetAllCategoriesUseCase.call())
-            .thenAnswer((_) async => const Error(exception: tFailure));
+        when(
+          () => mockGetAllCategoriesUseCase.call(),
+        ).thenAnswer((_) async => const Error(exception: tFailure));
       },
       act: (cubit) => cubit.doEvent(GetAllCategoriesEvent()),
       expect: () => [
         const CategoriesState(categoriesState: BaseState.loading()),
-        const CategoriesState(
-          categoriesState: BaseState.error(tFailure),
-        ),
+        const CategoriesState(categoriesState: BaseState.error(tFailure)),
       ],
     );
 
@@ -113,8 +109,9 @@ void main() {
       build: buildCubit,
       setUp: () {
         final ex = Exception('Unknown error');
-        when(() => mockGetAllCategoriesUseCase.call())
-            .thenAnswer((_) async => Error(exception: ex));
+        when(
+          () => mockGetAllCategoriesUseCase.call(),
+        ).thenAnswer((_) async => Error(exception: ex));
       },
       act: (cubit) => cubit.doEvent(GetAllCategoriesEvent()),
       expect: () => [
@@ -131,8 +128,9 @@ void main() {
       'should not affect productsState when loading categories',
       build: buildCubit,
       setUp: () {
-        when(() => mockGetAllCategoriesUseCase.call())
-            .thenAnswer((_) async => const Success(data: tCategories));
+        when(
+          () => mockGetAllCategoriesUseCase.call(),
+        ).thenAnswer((_) async => const Success(data: tCategories));
       },
       act: (cubit) => cubit.doEvent(GetAllCategoriesEvent()),
       expect: () => [
@@ -155,20 +153,25 @@ void main() {
       'should emit [loading, success] states when UseCase succeeds with categoryId',
       build: buildCubit,
       setUp: () {
-        when(() => mockGetProductsByCategoryUseCase.call(tCategoryId))
-            .thenAnswer((_) async => const Success(data: tProducts));
+        when(
+          () => mockGetProductsByCategoryUseCase.call(tCategoryId, any()),
+        ).thenAnswer((_) async => const Success(data: tProducts));
       },
-      act: (cubit) =>
-          cubit.doEvent(GetProductsByCategoryEvent(tCategoryId)),
+      act: (cubit) => cubit.doEvent(GetProductsByCategoryEvent(tCategoryId)),
       expect: () => [
-        const CategoriesState(productsState: BaseState.loading()),
+        CategoriesState(
+          productsState: const BaseState.loading(),
+          selectedCategoryId: tCategoryId,
+        ),
         const CategoriesState(
           productsState: BaseState.success(tProducts),
+          selectedCategoryId: tCategoryId,
         ),
       ],
       verify: (_) {
-        verify(() => mockGetProductsByCategoryUseCase.call(tCategoryId))
-            .called(1);
+        verify(
+          () => mockGetProductsByCategoryUseCase.call(tCategoryId, any()),
+        ).called(1);
       },
     );
 
@@ -176,15 +179,14 @@ void main() {
       'should emit [loading, success] states when passing null as categoryId',
       build: buildCubit,
       setUp: () {
-        when(() => mockGetProductsByCategoryUseCase.call(null))
-            .thenAnswer((_) async => const Success(data: tProducts));
+        when(
+          () => mockGetProductsByCategoryUseCase.call(null),
+        ).thenAnswer((_) async => const Success(data: tProducts));
       },
       act: (cubit) => cubit.doEvent(GetProductsByCategoryEvent()),
       expect: () => [
         const CategoriesState(productsState: BaseState.loading()),
-        const CategoriesState(
-          productsState: BaseState.success(tProducts),
-        ),
+        const CategoriesState(productsState: BaseState.success(tProducts)),
       ],
     );
 
@@ -192,15 +194,19 @@ void main() {
       'should emit [loading, success([])] states when data is null',
       build: buildCubit,
       setUp: () {
-        when(() => mockGetProductsByCategoryUseCase.call(tCategoryId))
-            .thenAnswer((_) async => const Success(data: null));
+        when(
+          () => mockGetProductsByCategoryUseCase.call(tCategoryId, any()),
+        ).thenAnswer((_) async => const Success(data: null));
       },
-      act: (cubit) =>
-          cubit.doEvent(GetProductsByCategoryEvent(tCategoryId)),
+      act: (cubit) => cubit.doEvent(GetProductsByCategoryEvent(tCategoryId)),
       expect: () => [
-        const CategoriesState(productsState: BaseState.loading()),
+        CategoriesState(
+          productsState: const BaseState.loading(),
+          selectedCategoryId: tCategoryId,
+        ),
         const CategoriesState(
           productsState: BaseState.success([]),
+          selectedCategoryId: tCategoryId,
         ),
       ],
     );
@@ -209,15 +215,19 @@ void main() {
       'should emit [loading, error] states when UseCase fails with Failure',
       build: buildCubit,
       setUp: () {
-        when(() => mockGetProductsByCategoryUseCase.call(tCategoryId))
-            .thenAnswer((_) async => const Error(exception: tFailure));
+        when(
+          () => mockGetProductsByCategoryUseCase.call(tCategoryId, any()),
+        ).thenAnswer((_) async => const Error(exception: tFailure));
       },
-      act: (cubit) =>
-          cubit.doEvent(GetProductsByCategoryEvent(tCategoryId)),
+      act: (cubit) => cubit.doEvent(GetProductsByCategoryEvent(tCategoryId)),
       expect: () => [
-        const CategoriesState(productsState: BaseState.loading()),
+        CategoriesState(
+          productsState: const BaseState.loading(),
+          selectedCategoryId: tCategoryId,
+        ),
         const CategoriesState(
           productsState: BaseState.error(tFailure),
+          selectedCategoryId: tCategoryId,
         ),
       ],
     );
@@ -226,11 +236,11 @@ void main() {
       'should not affect categoriesState when loading products',
       build: buildCubit,
       setUp: () {
-        when(() => mockGetProductsByCategoryUseCase.call(tCategoryId))
-            .thenAnswer((_) async => const Success(data: tProducts));
+        when(
+          () => mockGetProductsByCategoryUseCase.call(tCategoryId, any()),
+        ).thenAnswer((_) async => const Success(data: tProducts));
       },
-      act: (cubit) =>
-          cubit.doEvent(GetProductsByCategoryEvent(tCategoryId)),
+      act: (cubit) => cubit.doEvent(GetProductsByCategoryEvent(tCategoryId)),
       expect: () => [
         isA<CategoriesState>().having(
           (s) => s.categoriesState.state,
@@ -251,10 +261,12 @@ void main() {
       'should preserve the value of the other state when running sequential events',
       build: buildCubit,
       setUp: () {
-        when(() => mockGetAllCategoriesUseCase.call())
-            .thenAnswer((_) async => const Success(data: tCategories));
-        when(() => mockGetProductsByCategoryUseCase.call(tCategoryId))
-            .thenAnswer((_) async => const Success(data: tProducts));
+        when(
+          () => mockGetAllCategoriesUseCase.call(),
+        ).thenAnswer((_) async => const Success(data: tCategories));
+        when(
+          () => mockGetProductsByCategoryUseCase.call(tCategoryId, any()),
+        ).thenAnswer((_) async => const Success(data: tProducts));
       },
       act: (cubit) async {
         await cubit.doEvent(GetAllCategoriesEvent());
@@ -265,6 +277,82 @@ void main() {
         expect(cubit.state.productsState.state, StateType.success);
         expect(cubit.state.categoriesState.data, tCategories);
         expect(cubit.state.productsState.data, tProducts);
+      },
+    );
+  });
+
+  group('GetProductsByCategoryEvent with SortOption', () {
+    blocTest<CategoriesCubit, CategoriesState>(
+      'should pass sort option to use case and emit [loading, success]',
+      build: buildCubit,
+      setUp: () {
+        when(
+          () => mockGetProductsByCategoryUseCase.call(
+            tCategoryId,
+            SortOption.lowestPrice.sortValue,
+          ),
+        ).thenAnswer((_) async => const Success(data: tProducts));
+      },
+      act: (cubit) => cubit.doEvent(
+        GetProductsByCategoryEvent(tCategoryId, SortOption.lowestPrice),
+      ),
+      expect: () => [
+        CategoriesState(
+          productsState: const BaseState.loading(),
+          selectedCategoryId: tCategoryId,
+        ),
+        const CategoriesState(
+          productsState: BaseState.success(tProducts),
+          selectedCategoryId: tCategoryId,
+        ),
+      ],
+      verify: (_) {
+        verify(
+          () => mockGetProductsByCategoryUseCase.call(
+            tCategoryId,
+            SortOption.lowestPrice.sortValue,
+          ),
+        ).called(1);
+      },
+    );
+
+    blocTest<CategoriesCubit, CategoriesState>(
+      'should pass null sort value when sort option is null',
+      build: buildCubit,
+      setUp: () {
+        when(
+          () => mockGetProductsByCategoryUseCase.call(tCategoryId, null),
+        ).thenAnswer((_) async => const Success(data: tProducts));
+      },
+      act: (cubit) => cubit.doEvent(GetProductsByCategoryEvent(tCategoryId)),
+      verify: (_) {
+        verify(
+          () => mockGetProductsByCategoryUseCase.call(tCategoryId, null),
+        ).called(1);
+      },
+    );
+
+    blocTest<CategoriesCubit, CategoriesState>(
+      'should pass sort option when categoryId is null',
+      build: buildCubit,
+      setUp: () {
+        when(
+          () => mockGetProductsByCategoryUseCase.call(
+            null,
+            SortOption.highestPrice.sortValue,
+          ),
+        ).thenAnswer((_) async => const Success(data: tProducts));
+      },
+      act: (cubit) => cubit.doEvent(
+        GetProductsByCategoryEvent(null, SortOption.highestPrice),
+      ),
+      verify: (_) {
+        verify(
+          () => mockGetProductsByCategoryUseCase.call(
+            null,
+            SortOption.highestPrice.sortValue,
+          ),
+        ).called(1);
       },
     );
   });

@@ -22,55 +22,49 @@ void main() {
   });
 
   CategoryModel tCategoryModel() => CategoryModel(
-        id: '1',
-        name: 'Roses',
-        slug: 'roses',
-        image: 'https://example.com/roses.jpg',
-      );
+    id: '1',
+    name: 'Roses',
+    slug: 'roses',
+    image: 'https://example.com/roses.jpg',
+  );
 
   ProductModel tProductModel() => ProductModel(
-        id: '101',
-        title: 'Red Rose Bouquet',
-        slug: 'red-rose-bouquet',
-        price: 49.99,
-        category: '1',
-      );
+    id: '101',
+    title: 'Red Rose Bouquet',
+    slug: 'red-rose-bouquet',
+    price: 49.99,
+    category: '1',
+  );
 
-  CategoryResponseModel tCategoryResponse() => CategoryResponseModel(
-        message: 'success',
-        categories: [tCategoryModel()],
-      );
+  CategoryResponseModel tCategoryResponse() =>
+      CategoryResponseModel(message: 'success', categories: [tCategoryModel()]);
 
-  ProductResponseModel tProductResponse() => ProductResponseModel(
-        message: 'success',
-        products: [tProductModel()],
-      );
+  ProductResponseModel tProductResponse() =>
+      ProductResponseModel(message: 'success', products: [tProductModel()]);
 
   DioException tDioException() => DioException(
-        requestOptions: RequestOptions(path: '/categories'),
-        message: 'Connection refused',
-        type: DioExceptionType.connectionError,
-      );
+    requestOptions: RequestOptions(path: '/categories'),
+    message: 'Connection refused',
+    type: DioExceptionType.connectionError,
+  );
 
   group('getAllCategories', () {
-    test(
-      'should return Success when the API call is successful',
-      () async {
-        // arrange
-        when(() => mockApiClient.getAllCategories())
-            .thenAnswer((_) async => tCategoryResponse());
+    test('should return Success when the API call is successful', () async {
+      // arrange
+      when(
+        () => mockApiClient.getAllCategories(),
+      ).thenAnswer((_) async => tCategoryResponse());
 
-        // act
-        final result = await dataSource.getAllCategories();
+      // act
+      final result = await dataSource.getAllCategories();
 
-        // assert
-        expect(result, isA<Success<CategoryResponseModel>>());
-        final success = result as Success<CategoryResponseModel>;
-        expect(success.data?.categories?.length, 1);
-        expect(success.data?.categories?.first.name, 'Roses');
-        verify(() => mockApiClient.getAllCategories()).called(1);
-      },
-    );
+      // assert
+      expect(result, isA<Success<CategoryResponseModel>>());
+      final success = result as Success<CategoryResponseModel>;
+      expect(success.data?.categories?.length, 1);
+      expect(success.data?.categories?.first.name, 'Roses');
+      verify(() => mockApiClient.getAllCategories()).called(1);
+    });
 
     test(
       'should return Error<ServerFailure> when a DioException is thrown',
@@ -94,8 +88,9 @@ void main() {
       'should return Error<Exception> when a non-DioException is thrown',
       () async {
         // arrange
-        when(() => mockApiClient.getAllCategories())
-            .thenThrow(Exception('Unexpected error'));
+        when(
+          () => mockApiClient.getAllCategories(),
+        ).thenThrow(Exception('Unexpected error'));
 
         // act
         final result = await dataSource.getAllCategories();
@@ -111,8 +106,9 @@ void main() {
       'should return Success with empty categories when response data is empty',
       () async {
         // arrange
-        when(() => mockApiClient.getAllCategories())
-            .thenAnswer((_) async => CategoryResponseModel(categories: []));
+        when(
+          () => mockApiClient.getAllCategories(),
+        ).thenAnswer((_) async => CategoryResponseModel(categories: []));
 
         // act
         final result = await dataSource.getAllCategories();
@@ -132,18 +128,24 @@ void main() {
       'should return Success when the API call is successful with valid categoryId',
       () async {
         // arrange
-        when(() => mockApiClient.getProductsByCategory(tCategoryId))
-            .thenAnswer((_) async => tProductResponse());
+        when(
+          () => mockApiClient.getProductsByCategory(tCategoryId, null),
+        ).thenAnswer((_) async => tProductResponse());
 
         // act
-        final result = await dataSource.getProductsByCategory(tCategoryId);
+        final result = await dataSource.getProductsByCategory(
+          tCategoryId,
+          null,
+        );
 
         // assert
         expect(result, isA<Success<ProductResponseModel>>());
         final success = result as Success<ProductResponseModel>;
         expect(success.data?.products?.length, 1);
         expect(success.data?.products?.first.title, 'Red Rose Bouquet');
-        verify(() => mockApiClient.getProductsByCategory(tCategoryId)).called(1);
+        verify(
+          () => mockApiClient.getProductsByCategory(tCategoryId, null),
+        ).called(1);
       },
     );
 
@@ -151,15 +153,16 @@ void main() {
       'should pass null as categoryId to the API when invoked with null',
       () async {
         // arrange
-        when(() => mockApiClient.getProductsByCategory(null))
-            .thenAnswer((_) async => tProductResponse());
+        when(
+          () => mockApiClient.getProductsByCategory(null, null),
+        ).thenAnswer((_) async => tProductResponse());
 
         // act
-        final result = await dataSource.getProductsByCategory(null);
+        final result = await dataSource.getProductsByCategory(null, null);
 
         // assert
         expect(result, isA<Success<ProductResponseModel>>());
-        verify(() => mockApiClient.getProductsByCategory(null)).called(1);
+        verify(() => mockApiClient.getProductsByCategory(null, null)).called(1);
       },
     );
 
@@ -167,11 +170,15 @@ void main() {
       'should return Error<ServerFailure> when a DioException is thrown',
       () async {
         // arrange
-        when(() => mockApiClient.getProductsByCategory(any()))
-            .thenThrow(tDioException());
+        when(
+          () => mockApiClient.getProductsByCategory(any(), any()),
+        ).thenThrow(tDioException());
 
         // act
-        final result = await dataSource.getProductsByCategory(tCategoryId);
+        final result = await dataSource.getProductsByCategory(
+          tCategoryId,
+          null,
+        );
 
         // assert
         expect(result, isA<Error<ProductResponseModel>>());
@@ -184,11 +191,15 @@ void main() {
       'should return Error<Exception> when a non-DioException is thrown',
       () async {
         // arrange
-        when(() => mockApiClient.getProductsByCategory(any()))
-            .thenThrow(Exception('Unknown error'));
+        when(
+          () => mockApiClient.getProductsByCategory(any(), any()),
+        ).thenThrow(Exception('Unknown error'));
 
         // act
-        final result = await dataSource.getProductsByCategory(tCategoryId);
+        final result = await dataSource.getProductsByCategory(
+          tCategoryId,
+          null,
+        );
 
         // assert
         expect(result, isA<Error<ProductResponseModel>>());
@@ -206,15 +217,105 @@ void main() {
           message: 'Timeout exceeded',
           type: DioExceptionType.connectionTimeout,
         );
-        when(() => mockApiClient.getProductsByCategory(any())).thenThrow(dio);
+        when(
+          () => mockApiClient.getProductsByCategory(any(), any()),
+        ).thenThrow(dio);
 
         // act
-        final result = await dataSource.getProductsByCategory(tCategoryId);
+        final result = await dataSource.getProductsByCategory(
+          tCategoryId,
+          null,
+        );
 
         // assert
         final error = result as Error<ProductResponseModel>;
         final failure = error.exception as ServerFailure;
         expect(failure.errorMessage, 'Timeout exceeded');
+      },
+    );
+  });
+
+  group('sort option', () {
+    const tSortOption = '-price';
+    const tCategoryId = 'cat-123';
+    test('should pass sort option to API client and return Success', () async {
+      // arrange
+      when(
+        () => mockApiClient.getProductsByCategory(tCategoryId, tSortOption),
+      ).thenAnswer((_) async => tProductResponse());
+
+      // act
+      final result = await dataSource.getProductsByCategory(
+        tCategoryId,
+        tSortOption,
+      );
+
+      // assert
+      expect(result, isA<Success<ProductResponseModel>>());
+
+      verify(
+        () => mockApiClient.getProductsByCategory(tCategoryId, tSortOption),
+      ).called(1);
+    });
+
+    test('should pass null categoryId and sort option to API client', () async {
+      // arrange
+      when(
+        () => mockApiClient.getProductsByCategory(null, tSortOption),
+      ).thenAnswer((_) async => tProductResponse());
+
+      // act
+      final result = await dataSource.getProductsByCategory(null, tSortOption);
+
+      // assert
+      expect(result, isA<Success<ProductResponseModel>>());
+
+      verify(
+        () => mockApiClient.getProductsByCategory(null, tSortOption),
+      ).called(1);
+    });
+
+    test(
+      'should return ServerFailure when DioException occurs with sort option',
+      () async {
+        // arrange
+        when(
+          () => mockApiClient.getProductsByCategory(tCategoryId, tSortOption),
+        ).thenThrow(tDioException());
+
+        // act
+        final result = await dataSource.getProductsByCategory(
+          tCategoryId,
+          tSortOption,
+        );
+
+        // assert
+        expect(result, isA<Error<ProductResponseModel>>());
+
+        final error = result as Error<ProductResponseModel>;
+        expect(error.exception, isA<ServerFailure>());
+      },
+    );
+
+    test(
+      'should return Exception when non DioException occurs with sort option',
+      () async {
+        // arrange
+        when(
+          () => mockApiClient.getProductsByCategory(tCategoryId, tSortOption),
+        ).thenThrow(Exception('Unknown error'));
+
+        // act
+        final result = await dataSource.getProductsByCategory(
+          tCategoryId,
+          tSortOption,
+        );
+
+        // assert
+        expect(result, isA<Error<ProductResponseModel>>());
+
+        final error = result as Error<ProductResponseModel>;
+        expect(error.exception, isA<Exception>());
       },
     );
   });

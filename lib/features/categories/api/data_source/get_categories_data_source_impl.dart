@@ -27,9 +27,15 @@ class GetCategoriesDataSourceImpl implements GetCategoriesDataSourceContract {
   }
 
   @override
-  Future<Result<ProductResponseModel>> getProductsByCategory(String? categoryId) async {
+  Future<Result<ProductResponseModel>> getProductsByCategory(
+    String? categoryId,
+    String? sortOption,
+  ) async {
     try {
-      final response = await _apiClient.getProductsByCategory(categoryId);
+      final response = await _apiClient.getProductsByCategory(
+        categoryId,
+        sortOption,
+      );
       return Success(data: response);
     } catch (e) {
       if (e is DioException) {

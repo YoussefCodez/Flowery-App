@@ -140,5 +140,11 @@
   "current_password": "Current Password",
   "incorrect_password" : "Incorrect old password",
   "password_changed_success" : "Password has been changed successfully",
-  "success" : "Success"
+  "success" : "Success",
+  "lowest_price" : "Lowest Price",
+  "highest_price" : "Highest Price",
+  "new_products" :"New",
+  "old_products" : "Old",
+  "filter" : "Filter",
+  "sort_by" : "Sort by"
 }

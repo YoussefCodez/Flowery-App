@@ -4,5 +4,5 @@ import '../entities/product_entity.dart';
 
 abstract interface class GetCategoriesContract {
   Future<Result<List<CategoryEntity>>> getAllCategories();
-  Future<Result<List<ProductEntity>>> getProductsByCategory(String? categoryId);
+  Future<Result<List<ProductEntity>>> getProductsByCategory(String? categoryId, String? sortOption);
 }
