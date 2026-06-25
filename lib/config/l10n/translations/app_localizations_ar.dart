@@ -194,4 +194,28 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get an_error_occurred => 'حدث خطأ';
+
+  @override
+  String get my_orders => 'طلباتي';
+
+  @override
+  String get active => 'نشط';
+
+  @override
+  String get completed => 'مكتمل';
+
+  @override
+  String egp_price(String price) => 'ج.م $price';
+
+  @override
+  String order_number(String id) => 'رقم الطلب# $id';
+
+  @override
+  String delivered_on(String day, String month, String year) => 'تم التوصيل في $day $month $year';
+
+  @override
+  String get track_order => 'تتبع الطلب';
+
+  @override
+  String get reorder => 'إعادة الطلب';
 }

@@ -463,6 +463,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'An error occurred'**
   String get an_error_occurred;
+
+  /// No description provided for @my_orders.
+  ///
+  /// In en, this message translates to:
+  /// **'My Orders'**
+  String get my_orders;
+
+  /// No description provided for @active.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get active;
+
+  /// No description provided for @completed.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get completed;
+
+  /// No description provided for @egp_price.
+  ///
+  /// In en, this message translates to:
+  /// **'EGP {price}'**
+  String egp_price(String price);
+
+  /// No description provided for @order_number.
+  ///
+  /// In en, this message translates to:
+  /// **'Order number# {id}'**
+  String order_number(String id);
+
+  /// No description provided for @delivered_on.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered on {day} {month} {year}'**
+  String delivered_on(String day, String month, String year);
+
+  /// No description provided for @track_order.
+  ///
+  /// In en, this message translates to:
+  /// **'Track order'**
+  String get track_order;
+
+  /// No description provided for @reorder.
+  ///
+  /// In en, this message translates to:
+  /// **'Reorder'**
+  String get reorder;
 }
 
 class _AppLocalizationsDelegate
