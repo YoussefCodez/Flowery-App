@@ -10,11 +10,11 @@ MyOrderResponseModel _$MyOrderResponseModelFromJson(
   Map<String, dynamic> json,
 ) => MyOrderResponseModel(
   message: json['message'] as String?,
-  order: json['order'] == null
-      ? null
-      : Order.fromJson(json['order'] as Map<String, dynamic>),
+  orders: (json['orders'] as List<dynamic>?)
+      ?.map((e) => Order.fromJson(e as Map<String, dynamic>))
+      .toList(),
 );
 
 Map<String, dynamic> _$MyOrderResponseModelToJson(
   MyOrderResponseModel instance,
-) => <String, dynamic>{'message': instance.message, 'order': instance.order};
+) => <String, dynamic>{'message': instance.message, 'orders': instance.orders};

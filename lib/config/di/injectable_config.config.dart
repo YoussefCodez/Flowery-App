@@ -27,6 +27,8 @@ import '../../featuers/my_order/domain/repo/my_order_repo_contract.dart'
     as _i1036;
 import '../../featuers/my_order/domain/use_case/get_my_order_data.dart'
     as _i647;
+import '../../featuers/my_order/presentation/view_model/my_order_bloc.dart'
+    as _i846;
 import '../api/app_interceptors.dart' as _i781;
 import '../general_cubit/local_cubit.dart' as _i794;
 import '../helpers/shared_pref.dart' as _i42;
@@ -84,6 +86,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i647.GetMyOrderData>(
       () => _i647.GetMyOrderData(gh<_i1036.MyOrderRepoContract>()),
+    );
+    gh.factory<_i846.MyOrderBloc>(
+      () => _i846.MyOrderBloc(gh<_i647.GetMyOrderData>()),
     );
     return this;
   }

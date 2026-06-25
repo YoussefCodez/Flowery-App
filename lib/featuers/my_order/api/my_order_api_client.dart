@@ -11,7 +11,8 @@ part 'my_order_api_client.g.dart';
 abstract class MyOrderApiClient {
   @factoryMethod
   factory MyOrderApiClient(Dio dio) = _MyOrderApiClient;
-  
+
   @GET(AppEndPoints.my_order)
+
   Future<MyOrderResponseModel>getMyOrderData();
 }

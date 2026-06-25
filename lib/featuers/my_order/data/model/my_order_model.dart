@@ -5,12 +5,12 @@ part 'my_order_model.g.dart';
 class MyOrderResponseModel {
   @JsonKey(name: "message")
   String? message;
-  @JsonKey(name: "order")
-  Order? order;
+  @JsonKey(name: "orders")
+  List<Order>? orders;
 
   MyOrderResponseModel({
     this.message,
-    this.order,
+    this.orders,
   });
 
   factory MyOrderResponseModel.fromJson(Map<String, dynamic> json) => _$MyOrderResponseModelFromJson(json);

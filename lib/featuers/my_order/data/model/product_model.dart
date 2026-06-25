@@ -79,7 +79,7 @@ class Product {
     slug: slug ?? '',
     description: description ?? '',
     imgCover: imgCover ?? '',
-    images: images ?? [],            // ✅ was: images??''  (String is wrong type)
+    images: images ?? [],
     price: price ?? 0.0,
     priceAfterDiscount: priceAfterDiscount ?? 0.0,
     discount: discount ?? 0.0,
@@ -90,8 +90,8 @@ class Product {
     category: category ?? '',
     occasion: occasion ?? '',
     isSuperAdmin: isSuperAdmin ?? false,
-    createdAt: createdAt ?? DateTime.now(),   // ✅ was: createdAt  (nullable, not safe)
-    updatedAt: updatedAt ?? DateTime.now(),   // ✅ was: updatedAt  (nullable, not safe)
-    productId: productId ?? '',      // ✅ was: productId??0  (int is wrong type)
+    createdAt: createdAt ?? DateTime.now(),
+    updatedAt: updatedAt ?? DateTime.now(),
+    productId: productId ?? '',
   );
 }

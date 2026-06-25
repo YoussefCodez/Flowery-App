@@ -4,5 +4,5 @@ import '../../../../config/base_response/base_response.dart';
 
 abstract class RemoteDataSourceContract {
 
-  Future<Result<MyOrderResponseModel>>getMyOrderData();
+  Future<Result<MyOrderResponseModel>> getMyOrderData();
 }
