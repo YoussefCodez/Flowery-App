@@ -9,18 +9,18 @@ import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_generator.dart';
 import 'package:flowery/core/theme/app_theme.dart';
 import 'package:flowery/config/general_cubit/cart_manager/cart_manager.dart';
-import 'package:flowery/features/fcm_service/firebase_notification_service.dart';
+import 'package:flowery/config/firebase/firebase_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core/firebase_core.dart' hide FirebaseService;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   Bloc.observer = MyBlocObserver();
   await configureDependencies();
-  await getIt<FirebaseNotificationService>().initialize();
+  await getIt<FirebaseService>().initialize();
   runApp(
     MultiBlocProvider(
       providers: [
