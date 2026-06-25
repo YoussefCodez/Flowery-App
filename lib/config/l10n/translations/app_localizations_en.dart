@@ -197,4 +197,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get an_error_occurred => 'An error occurred';
+
+  @override
+  String get my_orders => 'My Orders';
+
+  @override
+  String get active => 'Active';
+
+  @override
+  String get completed => 'Completed';
+
+  @override
+  String egp_price(String price) => 'EGP $price';
+
+  @override
+  String order_number(String id) => 'Order number# $id';
+
+  @override
+  String delivered_on(String day, String month, String year) => 'Delivered on $day $month $year';
+
+  @override
+  String get track_order => 'Track order';
+
+  @override
+  String get reorder => 'Reorder';
 }
