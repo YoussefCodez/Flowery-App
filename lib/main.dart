@@ -34,7 +34,7 @@ class DriverApp extends StatelessWidget {
         return BlocBuilder<LocaleThemeCubit, LocaleThemeState>(
           builder: (context, state) {
             return MaterialApp(
-              title: 'Driver-App',
+              title: 'Flowery-App',
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               supportedLocales: AppLocalizations.supportedLocales,
               locale: state.locale,
