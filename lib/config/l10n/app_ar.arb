@@ -140,5 +140,12 @@
   "current_password": "كلمة المرور الحالية",
   "incorrect_password" : "كلمة المرور القديمة غير صحيحة",
   "password_changed_success" : "تم تغيير كلمة المرور بنجاح",
-  "success" : "نجحت"
+  "success" : "نجحت",
+  "enter_the_address" : "اضف العنوان",
+  "address" : "العنوان",
+  "recipient_name" : "اسم المستلم",
+  "enter_the_recipient_name": "اضف اسم المستلم",
+  "enter_the_the_phone_number" : "اضف رقم الهاتف",
+  "city" : "المدينة",
+  "area" : "المكان"
 }

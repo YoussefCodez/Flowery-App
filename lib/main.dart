@@ -9,6 +9,7 @@ import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_generator.dart';
 import 'package:flowery/core/theme/app_theme.dart';
 import 'package:flowery/config/general_cubit/cart_manager/cart_manager.dart';
+import 'package:flowery/features/address_details/presentation/screens/address_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -52,9 +53,10 @@ class FloweryApp extends StatelessWidget {
               onGenerateRoute: RouteGenerator.getRoute,
               debugShowCheckedModeBanner: false,
               theme: AppTheme.lightTheme,
-              initialRoute: isRememberMe == "true"
-                  ? AppRoutes.mainLayout
-                  : AppRoutes.login,
+              home:  AddressDetailsScreen(),
+              // initialRoute: isRememberMe == "true"
+              //     ? AppRoutes.mainLayout
+              //     : AppRoutes.login,
             );
           },
         );

@@ -140,5 +140,12 @@
   "current_password": "Current Password",
   "incorrect_password" : "Incorrect old password",
   "password_changed_success" : "Password has been changed successfully",
-  "success" : "Success"
+  "success" : "Success",
+  "enter_the_address" : "Enter The Address",
+  "address" : "Address",
+  "recipient_name" : "Recipient Name",
+  "enter_the_recipient_name" : "Enter the recipient name",
+  "enter_the_the_phone_number" : "Enter the phone number",
+  "city" : "City",
+  "area" : "Area"
 }
