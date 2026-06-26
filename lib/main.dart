@@ -12,14 +12,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'featuers/notification/notification_service/notification_service.dart';
+import 'featuers/notification_service/notification_service.dart';
 import 'firebase_options.dart';
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  print('📨 إشعار وصل والتطبيق مقفول: ${message.messageId}');
 }
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

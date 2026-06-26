@@ -15,7 +15,6 @@ class NotificationService {
     importance: Importance.high,
   );
 
-  // 1. طلب صلاحية الإشعارات
   Future<void> requestPermission() async {
     NotificationSettings settings = await _firebaseMessaging.requestPermission(
       alert: true,
@@ -24,11 +23,11 @@ class NotificationService {
     );
 
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      print('✅ المستخدم وافق على الإشعارات');
+      print(' المستخدم وافق على الإشعارات');
     } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
-      print('⚠️ صلاحية مؤقتة (iOS فقط)');
+      print(' صلاحية مؤقتة (iOS فقط)');
     } else {
-      print('❌ المستخدم رفض الإشعارات');
+      print(' المستخدم رفض الإشعارات');
     }
   }
 
@@ -54,19 +53,18 @@ class NotificationService {
         .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(_channel);
 
-    print('🔔 Local notifications initialized');
+    print(' Local notifications initialized');
   }
 
-  // 4. عرض إشعار محلي يدويًا (يُستخدم جوه onMessage)
   int _notificationId = 0;
 
   Future<void> _showLocalNotification(RemoteMessage message) async {
     RemoteNotification? notification = message.notification;
 
     if (notification != null) {
-      print('🎨 جاري رسم الإشعار محليًا: ${notification.title}');
+      print(' جاري رسم الإشعار محليًا: ${notification.title}');
       await _localNotifications.show(
-        id: _notificationId++, // ⬅️ named parameter
+        id: _notificationId++,
         title: notification.title,
         body: notification.body,
         notificationDetails: NotificationDetails(
@@ -80,26 +78,24 @@ class NotificationService {
         ),
       );
     } else {
-      print('⚠️ الرسالة وصلت بدون notification payload (data-only message)');
+      print(' الرسالة وصلت بدون notification_service payload (data-only message)');
     }
   }
 
   // 5. استقبال الإشعارات والتطبيق فاتح (Foreground)
   void listenToForegroundMessages() {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print('📩 إشعار وصل والتطبيق فاتح: ${message.notification?.title}');
+      print(' إشعار وصل والتطبيق فاتح: ${message.notification?.title}');
       _showLocalNotification(message);
     });
   }
 
-  // 6. لما المستخدم يدوس على الإشعار (والتطبيق كان في الخلفية)
   void listenToBackgroundTap() {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print('👆 المستخدم دوس على الإشعار: ${message.data}');
+      print(' المستخدم دوس على الإشعار: ${message.data}');
     });
   }
 
-  // 7. تجميع كل الـ Listeners
   void initListeners() {
     listenToForegroundMessages();
     listenToBackgroundTap();
