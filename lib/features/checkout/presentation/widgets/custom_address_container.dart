@@ -1,16 +1,18 @@
+import 'package:flowery/features/checkout/presentation/view_model/cubit/checkout_view_model.dart';
+import 'package:flowery/features/checkout/presentation/view_model/events/checkout_events.dart';
+import 'package:flowery/features/checkout/presentation/view_model/state/checkout_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomAddressContainer extends StatelessWidget {
   final String addressTitle;
   final String addressDetails;
-  final bool selectedAddress;
 
   const CustomAddressContainer({
     super.key,
     required this.addressTitle,
     required this.addressDetails,
-    required this.selectedAddress,
   });
 
   @override
@@ -41,14 +43,22 @@ class CustomAddressContainer extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    RadioMenuButton(
-                      value: true,
-                      groupValue: selectedAddress,
-                      onChanged: (_) {},
-                      child: Text(
-                        addressTitle,
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
+                    BlocBuilder<CheckoutViewModel, CheckoutState>(
+                      builder: (context, state) {
+                        return RadioMenuButton(
+                          value: addressTitle,
+                          groupValue: state.selectedAddress,
+                          onChanged: (value) {
+                            context.read<CheckoutViewModel>().doEvent(
+                              SelectAddressEvent(value),
+                            );
+                          },
+                          child: Text(
+                            addressTitle,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        );
+                      },
                     ),
                     SizedBox(height: 4.h),
                     Row(

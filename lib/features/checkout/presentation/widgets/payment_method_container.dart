@@ -7,13 +7,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class PaymentMethodContainer extends StatelessWidget {
   final String paymentMethodName;
   final bool selectedMethod;
-  final bool isCreditCard;
+  final bool isThisCreditCardContainer;
 
   const PaymentMethodContainer({
     super.key,
+    required this.isThisCreditCardContainer,
     required this.paymentMethodName,
     required this.selectedMethod,
-    required this.isCreditCard,
   });
 
   @override
@@ -51,13 +51,13 @@ class PaymentMethodContainer extends StatelessWidget {
                   ),
                 ),
                 RadioMenuButton(
-                  value: true,
+                  value: isThisCreditCardContainer,
                   groupValue: selectedMethod,
                   onChanged: (_) {
                     context.read<CheckoutViewModel>().doEvent(
-                      isCreditCard
-                          ? CheckoutUsingCreditCardEvent()
-                          : CheckoutUsingCashEvent(),
+                      ChangePaymentMethodEvent(
+                        isThisCreditCardContainer == true ? true : false,
+                      ),
                     );
                   },
                   child: Text(""),

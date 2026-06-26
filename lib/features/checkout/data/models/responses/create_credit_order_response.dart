@@ -1,28 +1,28 @@
-import 'package:flowery/features/checkout/domain/entities/checkout_entity.dart';
+import 'package:flowery/features/checkout/domain/entities/credit_order_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'dart:convert';
 
-part 'checkout_session_response_model.g.dart';
+part 'create_credit_order_response.g.dart';
 
-CheckoutSessionResponseModel checkoutSessionResponseModelFromJson(String str) => CheckoutSessionResponseModel.fromJson(json.decode(str));
+CreateCreditOrderResponse createCreditOrderResponseFromJson(String str) => CreateCreditOrderResponse.fromJson(json.decode(str));
 
-String checkoutSessionResponseModelToJson(CheckoutSessionResponseModel data) => json.encode(data.toJson());
+String createCreditOrderResponseToJson(CreateCreditOrderResponse data) => json.encode(data.toJson());
 
 @JsonSerializable()
-class CheckoutSessionResponseModel {
+class CreateCreditOrderResponse {
     @JsonKey(name: "message")
     String? message;
     @JsonKey(name: "session")
     Session? session;
 
-    CheckoutSessionResponseModel({
+    CreateCreditOrderResponse({
         this.message,
         this.session,
     });
 
-    factory CheckoutSessionResponseModel.fromJson(Map<String, dynamic> json) => _$CheckoutSessionResponseModelFromJson(json);
+    factory CreateCreditOrderResponse.fromJson(Map<String, dynamic> json) => _$CreateCreditOrderResponseFromJson(json);
 
-    Map<String, dynamic> toJson() => _$CheckoutSessionResponseModelToJson(this);
+    Map<String, dynamic> toJson() => _$CreateCreditOrderResponseToJson(this);
 }
 
 @JsonSerializable()
@@ -218,5 +218,5 @@ class Session {
 
     Map<String, dynamic> toJson() => _$SessionToJson(this);
 
-    CheckoutEntity toDomain ()=> CheckoutEntity(url: url);
+    CreditOrderEntity toDomain ()=> CreditOrderEntity(url: url);
 }

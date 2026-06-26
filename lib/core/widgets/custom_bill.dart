@@ -9,16 +9,14 @@ class CustomBill extends StatefulWidget {
   final int? subtotal;
   final int? discount;
   final int? subtotalAfterDiscount;
-  final int? deliveryFee;
   final bool? isItPlaceOrder;
-  int get total => (subtotalAfterDiscount ?? 0) + (deliveryFee ?? 0);
+  int get total => (subtotalAfterDiscount ?? 0);
   int get discountMoney => (subtotalAfterDiscount ?? 0) - (subtotal ?? 0);
   const CustomBill({
     super.key,
     required this.subtotal,
     required this.discount,
     required this.subtotalAfterDiscount,
-    required this.deliveryFee,
     this.isItPlaceOrder,
   });
 
@@ -110,27 +108,6 @@ class _CustomBillState extends State<CustomBill> {
             ],
           ),
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                localizations.delivery_fee,
-                style: textTheme.labelSmall?.copyWith(
-                  color: AppColors.grayColor,
-                  decoration: TextDecoration.none,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              Text(
-                "${widget.deliveryFee.toString()} ${localizations.egp}",
-                style: textTheme.labelSmall?.copyWith(
-                  color: AppColors.grayColor,
-                  decoration: TextDecoration.none,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ],
-          ),
           Divider(color: AppColors.grayColor, thickness: 0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -161,7 +138,6 @@ class _CustomBillState extends State<CustomBill> {
                       subtotal: widget.subtotal ?? 0,
                       discount: widget.discount ?? 0,
                       subtotalAfterDiscount: widget.subtotalAfterDiscount ?? 0,
-                      deliveryFee: widget.deliveryFee ?? 0,
                     ),
                   ),
                   child: Text(localizations.checkout),
@@ -177,12 +153,10 @@ class TransferBill {
   final int subtotal;
   final int discount;
   final int subtotalAfterDiscount;
-  final int deliveryFee;
 
   TransferBill({
     required this.subtotal,
     required this.discount,
     required this.subtotalAfterDiscount,
-    required this.deliveryFee,
   });
 }

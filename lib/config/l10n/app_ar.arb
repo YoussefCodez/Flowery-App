@@ -154,5 +154,6 @@
   "enter_the_phone_number" : "ادخل رقم الهاتف",
   "your_order_has_been_placed" : "تم تسجيل طلبك بنجاح",
   "go_to_home" : "العودة للصفحة الرئيسية",
-  "arrive_by" : "يصل بحلول"
+  "arrive_by" : "يصل بحلول",
+  "please_select_an_address" : "من فضلك اختر عنوان الاستلام"
 }

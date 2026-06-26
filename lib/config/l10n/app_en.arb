@@ -154,5 +154,6 @@
   "enter_the_phone_number" : "Enter the phone number",
   "your_order_has_been_placed" : "Your order has been placed successfully.",
   "go_to_home" : "Go to Home",
-  "arrive_by" : "Arrive by,"
+  "arrive_by" : "Arrive by,",
+  "please_select_an_address" : "Please select the delivery address"
 }

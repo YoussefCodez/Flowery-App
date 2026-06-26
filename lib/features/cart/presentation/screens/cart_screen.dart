@@ -98,7 +98,6 @@ class _CartScreenState extends State<CartScreen> {
                     subtotal: state.cart?.totalPriceBeforeDiscount,
                     discount: state.cart?.discount,
                     subtotalAfterDiscount: state.cart?.totalPriceAfterDiscount,
-                    deliveryFee: 50,
                   );
                 } else {
                   return const SizedBox.shrink();

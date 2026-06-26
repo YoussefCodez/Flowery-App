@@ -42,7 +42,6 @@ class RouteGenerator {
             subtotal: args.subtotal,
             discount: args.discount,
             subtotalAfterDiscount: args.subtotalAfterDiscount,
-            deliveryFee: args.deliveryFee,
           ),
         );
 
