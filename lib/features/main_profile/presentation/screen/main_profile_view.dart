@@ -7,7 +7,6 @@ import 'package:flowery/core/const/app_svgs.dart';
 import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flowery/features/app_language_logout/presntation/widgets/language_tile.dart';
 import 'package:flowery/features/app_language_logout/presntation/widgets/logout_button.dart';
-import 'package:flowery/config/firebase/firebase_service.dart';
 import 'package:flowery/features/main_profile/domain/entity/profile_entity.dart';
 import 'package:flowery/features/main_profile/presentation/view_model/profile_cubit.dart';
 import 'package:flowery/features/main_profile/presentation/view_model/profile_event.dart';

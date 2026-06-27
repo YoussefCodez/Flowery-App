@@ -10,6 +10,7 @@ import 'package:flowery/config/helpers/bloc/bloc_observer.dart';
 import 'package:flowery/config/helpers/shared_pref.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/config/remote_config_service/remote_config_service.dart';
+import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_generator.dart';
 import 'package:flowery/core/theme/app_theme.dart';
 import 'package:flowery/config/general_cubit/cart_manager/cart_manager.dart';
@@ -62,10 +63,9 @@ class FloweryApp extends StatelessWidget {
               onGenerateRoute: RouteGenerator.getRoute,
               debugShowCheckedModeBanner: false,
               theme: AppTheme.lightTheme,
-              home: CartScreen(),
-              // initialRoute: isRememberMe == "true"
-              //     ? AppRoutes.mainLayout
-              //     : AppRoutes.login,
+              initialRoute: isRememberMe == "true"
+                  ? AppRoutes.mainLayout
+                  : AppRoutes.login,
             );
           },
         );

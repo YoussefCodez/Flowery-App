@@ -17,6 +17,24 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
     as _i161;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
+import '../../features/address_details/api/api_client/address_details_api_client.dart'
+    as _i740;
+import '../../features/address_details/api/data_source/address_details_data_source_impl.dart'
+    as _i64;
+import '../../features/address_details/data/data_source/address_details_data_source_contract.dart'
+    as _i128;
+import '../../features/address_details/data/repo/address_details_repo_impl.dart'
+    as _i55;
+import '../../features/address_details/domain/repo/address_details_repo_contract.dart'
+    as _i1047;
+import '../../features/address_details/domain/use_case/address_details_use_case.dart'
+    as _i96;
+import '../../features/address_details/domain/use_case/delete_address_use_case.dart'
+    as _i902;
+import '../../features/address_details/domain/use_case/get_saved_addresses_use_case.dart'
+    as _i531;
+import '../../features/address_details/presentation/view_model/cubit/address_details_view_model.dart'
+    as _i123;
 import '../../features/app_language_logout/api/logout_api_service.dart'
     as _i884;
 import '../../features/app_language_logout/data/data_sources/logout_remote_data_source.dart'
@@ -215,6 +233,8 @@ import '../../features/register/domain/use_case/register_use_case.dart'
     as _i217;
 import '../../features/register/presentation/cubit/register_cubit.dart'
     as _i266;
+import '../../features/save_address/presentation/view_model/cubit/saved_addresses_view_model.dart'
+    as _i548;
 import '../../features/search/api/search_api_client.dart' as _i265;
 import '../../features/search/data/repo_impl/search_repo_impl.dart' as _i790;
 import '../../features/search/data/search_remote_data/search_remote_data_contract.dart'
@@ -229,6 +249,8 @@ import '../../features/search/presentation/view_model/search_cubit.dart'
     as _i794;
 import '../api/app_interceptors.dart' as _i781;
 import '../firebase/firebase_service.dart' as _i842;
+import '../general_cubit/address_view_model/cubit/address_status_cubit.dart'
+    as _i43;
 import '../general_cubit/cart_manager/cart_manager.dart' as _i431;
 import '../general_cubit/local_cubit.dart' as _i794;
 import '../helpers/shared_pref.dart' as _i42;
@@ -267,6 +289,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i884.LogoutApiService>(
       () => coreInjectableModule.logoutApiService(gh<_i361.Dio>()),
+    );
+    gh.factory<_i740.AddressDetailsApiClient>(
+      () => _i740.AddressDetailsApiClient(gh<_i361.Dio>()),
     );
     gh.factory<_i618.BestSellerApiClient>(
       () => _i618.BestSellerApiClient(gh<_i361.Dio>()),
@@ -450,9 +475,19 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i920.VerifyEmailUseCase>(
       () => _i920.VerifyEmailUseCase(gh<_i308.ForgetPasswordRepoContract>()),
     );
+    gh.factory<_i128.AddressDetailsDataSourceContract>(
+      () => _i64.AddressDetailsDataSourceImpl(
+        apiClient: gh<_i740.AddressDetailsApiClient>(),
+      ),
+    );
     gh.factory<_i63.CartRepoContract>(
       () => _i234.CartRepoImpl(
         remoteDataSource: gh<_i447.CartRemoteDataSourceContract>(),
+      ),
+    );
+    gh.factory<_i1047.AddressDetailsRepoContract>(
+      () => _i55.AddressDetailsRepoImpl(
+        dataSource: gh<_i128.AddressDetailsDataSourceContract>(),
       ),
     );
     gh.factory<_i125.GetLoggedUserUseCase>(
@@ -513,6 +548,21 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i217.RegisterUseCase>(
       () => _i217.RegisterUseCase(gh<_i668.RegisterRepository>()),
+    );
+    gh.factory<_i96.AddressDetailsUseCase>(
+      () => _i96.AddressDetailsUseCase(
+        repo: gh<_i1047.AddressDetailsRepoContract>(),
+      ),
+    );
+    gh.factory<_i902.DeleteAddressUseCase>(
+      () => _i902.DeleteAddressUseCase(
+        repo: gh<_i1047.AddressDetailsRepoContract>(),
+      ),
+    );
+    gh.factory<_i531.GetSavedAddressesUseCase>(
+      () => _i531.GetSavedAddressesUseCase(
+        repo: gh<_i1047.AddressDetailsRepoContract>(),
+      ),
     );
     gh.factory<_i516.OccasionViewModel>(
       () => _i516.OccasionViewModel(
@@ -576,6 +626,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i252.UploadUserPhotoUseCase>(),
       ),
     );
+    gh.singleton<_i43.AddressStatusCubit>(
+      () => _i43.AddressStatusCubit(gh<_i531.GetSavedAddressesUseCase>()),
+    );
     gh.factory<_i266.RegisterCubit>(
       () => _i266.RegisterCubit(gh<_i217.RegisterUseCase>()),
     );
@@ -597,8 +650,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i794.SearchViewModel>(
       () => _i794.SearchViewModel(gh<_i463.SearchProductsUseCase>()),
     );
+    gh.factory<_i548.SavedAddressesViewModel>(
+      () => _i548.SavedAddressesViewModel(
+        gh<_i531.GetSavedAddressesUseCase>(),
+        gh<_i902.DeleteAddressUseCase>(),
+      ),
+    );
     gh.factory<_i773.LogoutCubit>(
       () => _i773.LogoutCubit(gh<_i443.LogoutUseCase>()),
+    );
+    gh.factory<_i123.AddressDetailsViewModel>(
+      () => _i123.AddressDetailsViewModel(
+        gh<_i96.AddressDetailsUseCase>(),
+        gh<_i902.DeleteAddressUseCase>(),
+      ),
     );
     gh.factory<_i573.GetBestSellerProductsUseCase>(
       () => _i573.GetBestSellerProductsUseCase(
