@@ -1,5 +1,6 @@
-import 'package:firebase_core/firebase_core.dart' hide FirebaseService;
 import 'package:flowery/config/api/api_keys.dart';
+import 'package:firebase_core/firebase_core.dart' hide FirebaseService;
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flowery/config/di/injectable_config.dart';
 import 'package:flowery/config/general_cubit/general_state.dart';
 import 'package:flowery/config/general_cubit/local_cubit.dart';
@@ -18,13 +19,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
   Bloc.observer = MyBlocObserver();
   await configureDependencies();
   await Firebase.initializeApp();
-
   await RemoteConfigService.init();
   await getIt<FirebaseService>().initialize();
+
   runApp(
     MultiBlocProvider(
       providers: [
