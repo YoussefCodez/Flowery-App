@@ -1,5 +1,6 @@
 import 'package:flowery/features/address_details/data/models/location/city_model.dart';
 import 'package:flowery/features/address_details/data/models/location/governorate_model.dart';
+import 'package:flowery/features/address_details/domain/entities/address_details_dto_entity.dart';
 
 sealed class AddressDetailsEvents {}
 
@@ -37,6 +38,11 @@ class SelectLocationOnMapEvent extends AddressDetailsEvents {
   final double latitude;
   final double longitude;
   SelectLocationOnMapEvent({required this.latitude, required this.longitude});
+}
+
+class LoadAddressForEditEvent extends AddressDetailsEvents {
+  final AddressDetailsDtoEntity address;
+  LoadAddressForEditEvent(this.address);
 }
 
 class SaveAddressDetailsEvent extends AddressDetailsEvents {}

@@ -11,15 +11,37 @@ class AddressDetailsRepoImpl implements AddressDetailsRepoContract {
   final AddressDetailsDataSourceContract dataSource;
   AddressDetailsRepoImpl({required this.dataSource});
   @override
-  Future<Result<AddressDetailsEntity>> updateAddressDetails(AddressDetailsRequest request)async {
+  Future<Result<AddressDetailsEntity>> updateAddressDetails(
+    AddressDetailsRequest request,
+  ) async {
     final response = await dataSource.updateAddressDetails(request);
     switch (response) {
       case Success<AddressDetailsResponce>():
-        return Success<AddressDetailsEntity>(
-            data: response.data?.toDomain());
+        return Success<AddressDetailsEntity>(data: response.data?.toDomain());
       case Error<AddressDetailsResponce>():
         return Error<AddressDetailsEntity>(exception: response.exception);
     }
-    
+  }
+
+  @override
+  Future<Result<AddressDetailsEntity>> getSavedAddresses() async {
+    final response = await dataSource.getSavedAddresses();
+    switch (response) {
+      case Success<AddressDetailsEntity>():
+        return Success<AddressDetailsEntity>(data: response.data);
+      case Error<AddressDetailsEntity>():
+        return Error<AddressDetailsEntity>(exception: response.exception);
+    }
+  }
+
+  @override
+  Future<Result<AddressDetailsEntity>> deleteAddress(String addressId) async {
+    final response = await dataSource.deleteAddress(addressId);
+    switch (response) {
+      case Success<AddressDetailsResponce>():
+        return Success<AddressDetailsEntity>(data: response.data?.toDomain());
+      case Error<AddressDetailsResponce>():
+        return Error<AddressDetailsEntity>(exception: response.exception);
+    }
   }
 }

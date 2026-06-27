@@ -1,6 +1,9 @@
+import 'package:flowery/config/general_cubit/address_view_model/cubit/address_status_cubit.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/core/theme/app_colors.dart';
+import 'package:flowery/features/save_address/presentation/screens/saved_addresses_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomBill extends StatefulWidget {
@@ -150,7 +153,32 @@ class _CustomBillState extends State<CustomBill> {
             ],
           ),
 
-          ElevatedButton(onPressed: () {}, child: Text(localizations.checkout)),
+          ElevatedButton(
+            onPressed: () {
+              final hasAddress = context
+                  .read<AddressStatusCubit>()
+                  .state
+                  .hasAddress;
+
+              if (!hasAddress) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Please add a delivery address first'),
+                  ),
+                );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const SavedAddressesScreen(),
+                  ),
+                );
+                return;
+              }
+
+              //  TODO: كود الانتقال الفعلي لصفحة الـCheckout
+            },
+            child: Text(localizations.checkout),
+          ),
         ],
       ),
     );

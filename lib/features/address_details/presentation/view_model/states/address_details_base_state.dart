@@ -27,6 +27,7 @@ class AddressDetailsBaseState extends Equatable {
 
   final String governorateName;
   final String cityName;
+  final String? editingAddressId;
 
   final AddressDetailsEntity? address;
 
@@ -49,6 +50,7 @@ class AddressDetailsBaseState extends Equatable {
     this.currentDeviceLongitude,
     this.governorateName = "",
     this.cityName = "",
+    this.editingAddressId,
     this.address,
     this.errorMessage = "",
   });
@@ -70,6 +72,7 @@ class AddressDetailsBaseState extends Equatable {
     double? currentDeviceLongitude,
     String? governorateName,
     String? cityName,
+    Object? editingAddressId = _noChange,
     AddressDetailsEntity? address,
     String? errorMessage,
   }) {
@@ -99,6 +102,9 @@ class AddressDetailsBaseState extends Equatable {
           currentDeviceLongitude ?? this.currentDeviceLongitude,
       governorateName: governorateName ?? this.governorateName,
       cityName: cityName ?? this.cityName,
+      editingAddressId: editingAddressId == _noChange
+          ? this.editingAddressId
+          : editingAddressId as String?,
       address: address ?? this.address,
       errorMessage: errorMessage ?? this.errorMessage,
     );
@@ -122,6 +128,7 @@ class AddressDetailsBaseState extends Equatable {
     currentDeviceLongitude,
     governorateName,
     cityName,
+    editingAddressId,
     address,
     errorMessage,
   ];

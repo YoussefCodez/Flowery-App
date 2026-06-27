@@ -81,7 +81,9 @@ class _MapWidgetState extends State<MapWidget> {
             ),
             children: [
               TileLayer(
-                urlTemplate: 'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                urlTemplate:
+                    'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+                subdomains: const ['a', 'b', 'c', 'd'],
                 userAgentPackageName: 'com.example.flowery',
               ),
               if (selectedLocation != null)

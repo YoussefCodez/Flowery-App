@@ -3,10 +3,12 @@ import 'package:flowery/core/widgets/custom_text_field.dart';
 import 'package:flowery/features/address_details/data/models/location/city_model.dart';
 import 'package:flowery/features/address_details/data/models/location/governorate_model.dart';
 import 'package:flowery/features/address_details/data/models/request/address_details_request.dart';
+import 'package:flowery/features/address_details/domain/entities/address_details_dto_entity.dart';
 import 'package:flowery/features/address_details/presentation/view_model/cubit/address_details_view_model.dart';
 import 'package:flowery/features/address_details/presentation/view_model/events/address_details_events.dart';
 import 'package:flowery/features/address_details/presentation/view_model/states/address_details_base_state.dart';
 import 'package:flowery/features/address_details/presentation/widgets/map_widget.dart';
+import 'package:flowery/features/save_address/presentation/screens/saved_addresses_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +17,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:latlong2/latlong.dart';
 
 class AddressDetailsBody extends StatefulWidget {
-  const AddressDetailsBody({super.key});
+  final AddressDetailsDtoEntity? addressToEdit;
+  const AddressDetailsBody({super.key, this.addressToEdit});
 
   @override
   State<AddressDetailsBody> createState() => _AddressDetailsBodyState();
@@ -30,14 +33,15 @@ class _AddressDetailsBodyState extends State<AddressDetailsBody> {
   final TextEditingController _areaController = TextEditingController();
 
   late AppLocalizations localizations;
-  bool _isFormValid(AddressDetailsBaseState state) {
-    return _addressController.text.trim().isNotEmpty &&
-        _phoneController.text.trim().isNotEmpty &&
-        _recipientNameController.text.trim().isNotEmpty &&
-        state.selectedGovernorate != null &&
-        state.selectedCity != null &&
-        state.latitude != null &&
-        state.longitude != null;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.addressToEdit != null) {
+      _addressController.text = widget.addressToEdit!.street ?? '';
+      _phoneController.text = widget.addressToEdit!.phone ?? '';
+      _recipientNameController.text = widget.addressToEdit!.username ?? '';
+    }
   }
 
   @override
@@ -48,6 +52,16 @@ class _AddressDetailsBodyState extends State<AddressDetailsBody> {
     _cityController.dispose();
     _areaController.dispose();
     super.dispose();
+  }
+
+  bool _isFormValid(AddressDetailsBaseState state) {
+    return _addressController.text.trim().isNotEmpty &&
+        _phoneController.text.trim().isNotEmpty &&
+        _recipientNameController.text.trim().isNotEmpty &&
+        state.selectedGovernorate != null &&
+        state.selectedCity != null &&
+        state.latitude != null &&
+        state.longitude != null;
   }
 
   @override
@@ -65,7 +79,10 @@ class _AddressDetailsBodyState extends State<AddressDetailsBody> {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Address saved successfully')),
             );
-            Navigator.pop(context);
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => const SavedAddressesScreen()),
+            );
           } else if (state.errorMessage.isNotEmpty) {
             ScaffoldMessenger.of(
               context,
@@ -254,7 +271,11 @@ class _AddressDetailsBodyState extends State<AddressDetailsBody> {
                                   color: Colors.white,
                                 ),
                               )
-                            : const Text('Save Address'),
+                            : Text(
+                                state.editingAddressId != null
+                                    ? 'Update Address'
+                                    : 'Save Address',
+                              ),
                       ),
                     );
                   },

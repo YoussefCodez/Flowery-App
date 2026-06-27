@@ -3,5 +3,10 @@ import 'package:flowery/features/address_details/data/models/request/address_det
 import 'package:flowery/features/address_details/domain/entities/address_details_entity.dart';
 
 abstract interface class AddressDetailsRepoContract {
-  Future<Result<AddressDetailsEntity>> updateAddressDetails(AddressDetailsRequest request);
+  Future<Result<AddressDetailsEntity>> updateAddressDetails(
+    AddressDetailsRequest request,
+  );
+  Future<Result<AddressDetailsEntity>> getSavedAddresses();
+
+  Future<Result<AddressDetailsEntity>> deleteAddress(String addressId);
 }
