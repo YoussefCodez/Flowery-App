@@ -159,7 +159,7 @@ class _CustomProductCardState extends State<CustomProductCard> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  BlocBuilder<CartManager, CartState>(
+                  BlocConsumer<CartManager, CartState>(
                     builder: (context, state) {
                       if (state.isAddingToCart == true &&
                           state.itemId == widget.id) {
@@ -178,11 +178,35 @@ class _CustomProductCardState extends State<CustomProductCard> {
                           Icon(Icons.shopping_cart_outlined, size: 16.sp),
                           SizedBox(width: 4.w),
                           Text(
-                            AppStrings.addToCart,
+                            localizations.add_to_cart,
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
                         ],
                       );
+                    },
+                    listener: (context, state) {
+                      // if (state.isAddedSuccessfully) {
+                      //   showDialog(
+                      //     context: context,
+                      //     builder: (context) {
+                      //       return AlertDialog(
+                      //         title: Text(localizations.success),
+                      //         content: Text(
+                      //           localizations.the_item_has_been_added,
+                      //         ),
+                      //         actions: [
+                      //           ElevatedButton(
+                      //             onPressed: () {
+                      //               // close dialog
+                      //               context.pop();
+                      //             },
+                      //             child: Text(localizations.ok),
+                      //           ),
+                      //         ],
+                      //       );
+                      //     },
+                      //   );
+                      // }
                     },
                   ),
                 ],

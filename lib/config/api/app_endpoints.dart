@@ -19,4 +19,7 @@ abstract class AppEndPoints {
   static const String editUserProfile = "auth/editProfile";
   static const String uploadPhoto = "auth/upload-photo";
   static const String changePassword = "auth/change-password";
+  static const String checkoutSession =
+      "orders/checkout?url=http://localhost:3000";
+  static const String createCashOrder = "orders";
 }

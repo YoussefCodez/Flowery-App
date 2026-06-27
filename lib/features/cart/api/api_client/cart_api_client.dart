@@ -18,6 +18,9 @@ abstract class CartApiClient {
   @DELETE("${AppEndPoints.cart}/{id}")
   Future<CartResponseModel> deleteSpecificItem(@Path("id") String cartItemId);
 
+  @DELETE(AppEndPoints.cart)
+  Future<CartResponseModel> deleteUserCart();
+
   @PUT("${AppEndPoints.cart}/{id}")
   Future<CartResponseModel> updateCartProductQuantity(@Path("id") String cartItemId ,@Body() Map<String, int> body);
 

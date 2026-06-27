@@ -2,7 +2,7 @@ import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flowery/config/general_cubit/cart_manager/cart_manager.dart';
 import 'package:flowery/config/general_cubit/cart_manager/cart_state.dart';
-import 'package:flowery/features/cart/presentation/widgets/custom_bill.dart';
+import 'package:flowery/core/widgets/custom_bill.dart';
 import 'package:flowery/core/widgets/custom_location.dart';
 import 'package:flowery/features/cart/presentation/widgets/custom_order_container.dart';
 import 'package:flutter/material.dart';
@@ -98,7 +98,6 @@ class _CartScreenState extends State<CartScreen> {
                     subtotal: state.cart?.totalPriceBeforeDiscount,
                     discount: state.cart?.discount,
                     subtotalAfterDiscount: state.cart?.totalPriceAfterDiscount,
-                    deliveryFee: 50,
                   );
                 } else {
                   return const SizedBox.shrink();

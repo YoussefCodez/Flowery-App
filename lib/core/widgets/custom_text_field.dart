@@ -8,6 +8,7 @@ class MainTextField extends StatelessWidget {
   final TextEditingController controller;
   final TextInputType keyboardType;
   final bool obscureText;
+  final bool enabled;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final String? Function(String?)? validator;
@@ -21,11 +22,13 @@ class MainTextField extends StatelessWidget {
     this.suffixIcon,
     this.prefixIcon,
     this.validator,
+    this.enabled = true,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: enabled,
       validator: validator,
       keyboardType: keyboardType,
       obscureText: obscureText,

@@ -43,7 +43,8 @@ dependencies:
   shared_preferences: ^2.5.4
   shimmer: ^3.0.0
   syncfusion_flutter_pdfviewer: 33.1.44
-
+  firebase_core: 
+  firebase_remote_config: 
  
 
   url_launcher: ^6.3.2

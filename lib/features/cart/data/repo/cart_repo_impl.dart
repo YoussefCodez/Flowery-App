@@ -62,4 +62,15 @@ class CartRepoImpl implements CartRepoContract {
         return Error<CartEntity>(exception: response.exception);
     }
   }
+  
+  @override
+  Future<Result<CartEntity>> deleteUserCart() async{
+    final response = await remoteDataSource.deleteUserCart();
+    switch (response) {
+      case Success<CartResponseModel>():
+        return Success<CartEntity>(data: response.data?.cart?.toDomain());
+      case Error<CartResponseModel>():
+        return Error<CartEntity>(exception: response.exception);
+    }
+  }
 }
