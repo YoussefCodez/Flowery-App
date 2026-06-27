@@ -1,7 +1,6 @@
 import 'package:flowery/core/const/app_strings.dart';
 import 'package:flowery/core/widgets/custom_bill.dart';
 import 'package:flowery/core/widgets/main_layout.dart';
-import 'package:flowery/features/web_view/presentation/screen/test_term_screen.dart';
 import 'package:flowery/features/web_view/presentation/screen/web_view_screen.dart';
 import 'package:flowery/features/change_password/presentation/screens/change_password_screen.dart';
 import 'package:flowery/features/checkout/presentation/screens/checkout_screen.dart';

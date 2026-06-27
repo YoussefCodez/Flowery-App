@@ -160,12 +160,13 @@ class _MainProfileViewState extends State<MainProfileView> {
         CustomProfile(
           title: l10n.about_us,
           trailingWidget: Icon(Icons.chevron_right, color: AppColors.grayColor),
-          onTap: () {},
+          onTap: () => Navigator.pushNamed(context, AppRoutes.aboutUs),
         ),
         CustomProfile(
           title: l10n.terms_and_conditions,
           trailingWidget: Icon(Icons.chevron_right, color: AppColors.grayColor),
-          onTap: () {},
+          onTap: () =>
+              Navigator.pushNamed(context, AppRoutes.termsAndConditions),
         ),
         const Divider(height: 1, thickness: 1, color: AppColors.dividerColor),
         LogoutButton(),
