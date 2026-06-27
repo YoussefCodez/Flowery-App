@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
-import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flowery/config/general_cubit/cart_manager/cart_manager.dart';
 import 'package:flowery/config/general_cubit/cart_manager/cart_state.dart';
