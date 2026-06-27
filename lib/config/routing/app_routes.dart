@@ -17,4 +17,7 @@ abstract class AppRoutes {
   static const String editProfile = "/edit-profile";
   static const String changePassword = "/change-password";
   static const String checkout = "/checkout";
+  static const String termsAndConditions = "/terms-and-conditions";
+  static const String aboutUs = "/about-us";
+  static const String testTerm = "/test-term";
 }

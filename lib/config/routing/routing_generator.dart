@@ -1,6 +1,8 @@
 import 'package:flowery/core/const/app_strings.dart';
 import 'package:flowery/core/widgets/custom_bill.dart';
 import 'package:flowery/core/widgets/main_layout.dart';
+import 'package:flowery/featuers/web_view/presentation/screen/test_term_screen.dart';
+import 'package:flowery/featuers/web_view/presentation/screen/web_view_screen.dart';
 import 'package:flowery/features/change_password/presentation/screens/change_password_screen.dart';
 import 'package:flowery/features/checkout/presentation/screens/checkout_screen.dart';
 import 'package:flowery/features/edit_profile/presentation/screens/edit_profile_screen.dart';
@@ -136,6 +138,22 @@ class RouteGenerator {
 
       case AppRoutes.changePassword:
         return MaterialPageRoute(builder: (_) => const ChangePasswordScreen());
+
+                case AppRoutes.termsAndConditions:
+          return MaterialPageRoute(
+            builder: (_) => const WebViewScreen(
+              url: 'https://elevate-flutter-team.github.io/flower_app_web_views/terms.html',
+              title: 'Terms & Conditions',
+            ),
+          );
+
+        case AppRoutes.aboutUs:
+          return MaterialPageRoute(
+            builder: (_) => const WebViewScreen(
+              url: 'https://elevate-flutter-team.github.io/flower_app_web_views/about.html',
+              title: 'About Us',
+            ),
+          );
       default:
         return unDefinedRoute();
     }
