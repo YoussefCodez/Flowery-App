@@ -482,4 +482,25 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get please_select_an_address => 'من فضلك اختر عنوان الاستلام';
+
+  @override
+  String get enter_the_address => 'اضف العنوان';
+
+  @override
+  String get address => 'العنوان';
+
+  @override
+  String get recipient_name => 'اسم المستلم';
+
+  @override
+  String get enter_the_recipient_name => 'اضف اسم المستلم';
+
+  @override
+  String get enter_the_the_phone_number => 'اضف رقم الهاتف';
+
+  @override
+  String get city => 'المدينة';
+
+  @override
+  String get area => 'المكان';
 }

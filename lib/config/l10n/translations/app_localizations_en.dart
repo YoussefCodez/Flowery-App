@@ -489,4 +489,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get please_select_an_address => 'Please select the delivery address';
+
+  @override
+  String get enter_the_address => 'Enter The Address';
+
+  @override
+  String get address => 'Address';
+
+  @override
+  String get recipient_name => 'Recipient Name';
+
+  @override
+  String get enter_the_recipient_name => 'Enter the recipient name';
+
+  @override
+  String get enter_the_the_phone_number => 'Enter the phone number';
+
+  @override
+  String get city => 'City';
+
+  @override
+  String get area => 'Area';
 }

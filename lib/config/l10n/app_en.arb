@@ -161,5 +161,12 @@
   "your_order_has_been_placed" : "Your order has been placed successfully.",
   "go_to_home" : "Go to Home",
   "arrive_by" : "Arrive by,",
-  "please_select_an_address" : "Please select the delivery address"
+  "please_select_an_address" : "Please select the delivery address",
+    "enter_the_address" : "Enter The Address",
+  "address" : "Address",
+  "recipient_name" : "Recipient Name",
+  "enter_the_recipient_name" : "Enter the recipient name",
+  "enter_the_the_phone_number" : "Enter the phone number",
+  "city" : "City",
+  "area" : "Area"
 }

@@ -22,4 +22,5 @@ abstract class AppEndPoints {
   static const String checkoutSession =
       "orders/checkout?url=http://localhost:3000";
   static const String createCashOrder = "orders";
+  static const String addressDetails = "addresses";
 }

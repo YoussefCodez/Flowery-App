@@ -1,8 +1,11 @@
+import 'package:flowery/config/general_cubit/address_view_model/cubit/address_status_cubit.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flowery/core/theme/app_colors.dart';
+import 'package:flowery/features/save_address/presentation/screens/saved_addresses_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomBill extends StatefulWidget {
@@ -132,14 +135,35 @@ class _CustomBillState extends State<CustomBill> {
           ),
           widget.isItPlaceOrder == null
               ? ElevatedButton(
-                  onPressed: () => context.pushNamed(
+                  onPressed: () {
+              final hasAddress = context
+                  .read<AddressStatusCubit>()
+                  .state
+                  .hasAddress;
+
+              if (!hasAddress) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Please add a delivery address first'),
+                  ),
+                );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const SavedAddressesScreen(),
+                  ),
+                );
+                return;
+              }
+
+              context.pushNamed(
                     AppRoutes.checkout,
                     arguments: TransferBill(
                       subtotal: widget.subtotal ?? 0,
                       discount: widget.discount ?? 0,
                       subtotalAfterDiscount: widget.subtotalAfterDiscount ?? 0,
-                    ),
-                  ),
+                    ));
+            },
                   child: Text(localizations.checkout),
                 )
               : SizedBox.shrink(),

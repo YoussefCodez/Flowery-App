@@ -1033,6 +1033,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please select the delivery address'**
   String get please_select_an_address;
+
+  /// No description provided for @enter_the_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter The Address'**
+  String get enter_the_address;
+
+  /// No description provided for @address.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get address;
+
+  /// No description provided for @recipient_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipient Name'**
+  String get recipient_name;
+
+  /// No description provided for @enter_the_recipient_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the recipient name'**
+  String get enter_the_recipient_name;
+
+  /// No description provided for @enter_the_the_phone_number.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the phone number'**
+  String get enter_the_the_phone_number;
+
+  /// No description provided for @city.
+  ///
+  /// In en, this message translates to:
+  /// **'City'**
+  String get city;
+
+  /// No description provided for @area.
+  ///
+  /// In en, this message translates to:
+  /// **'Area'**
+  String get area;
 }
 
 class _AppLocalizationsDelegate

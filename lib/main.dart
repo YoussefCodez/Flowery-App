@@ -2,13 +2,14 @@ import 'package:flowery/config/api/api_keys.dart';
 import 'package:firebase_core/firebase_core.dart' hide FirebaseService;
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flowery/config/di/injectable_config.dart';
+import 'package:flowery/config/general_cubit/address_view_model/cubit/address_status_cubit.dart';
+import 'package:flowery/config/general_cubit/address_view_model/events/address_status_events.dart';
 import 'package:flowery/config/general_cubit/general_state.dart';
 import 'package:flowery/config/general_cubit/local_cubit.dart';
 import 'package:flowery/config/helpers/bloc/bloc_observer.dart';
 import 'package:flowery/config/helpers/shared_pref.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/config/remote_config_service/remote_config_service.dart';
-import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_generator.dart';
 import 'package:flowery/core/theme/app_theme.dart';
 import 'package:flowery/config/general_cubit/cart_manager/cart_manager.dart';
@@ -30,6 +31,10 @@ void main() async {
       providers: [
         BlocProvider(create: (_) => getIt<LocaleThemeCubit>()),
         BlocProvider(create: (_) => getIt<CartManager>()..loadCart()),
+        BlocProvider(
+          create: (_) =>
+              getIt<AddressStatusCubit>()..doEvent(CheckAddressStatusEvent()),
+        ),
       ],
       child: const FloweryApp(),
     ),
@@ -57,9 +62,10 @@ class FloweryApp extends StatelessWidget {
               onGenerateRoute: RouteGenerator.getRoute,
               debugShowCheckedModeBanner: false,
               theme: AppTheme.lightTheme,
-              initialRoute: isRememberMe == "true"
-                  ? AppRoutes.mainLayout
-                  : AppRoutes.login,
+              home: CartScreen(),
+              // initialRoute: isRememberMe == "true"
+              //     ? AppRoutes.mainLayout
+              //     : AppRoutes.login,
             );
           },
         );
