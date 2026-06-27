@@ -54,6 +54,7 @@ import '../../features/cart/domain/use_cases/add_to_cart_use_case.dart'
     as _i252;
 import '../../features/cart/domain/use_cases/delete_specific_cart_item_use_case.dart'
     as _i933;
+import '../../features/cart/domain/use_cases/delete_user_cart.dart' as _i501;
 import '../../features/cart/domain/use_cases/get_user_cart_products_use_case.dart'
     as _i807;
 import '../../features/cart/domain/use_cases/update_specific_cart_item_quantity_use_case.dart'
@@ -92,6 +93,21 @@ import '../../features/change_password/presentation/view_model/cubit/change_pass
     as _i939;
 import '../../features/change_password/presentation/view_model/states/change_password_base_state.dart'
     as _i797;
+import '../../features/checkout/api/api_client/checkout_api_client.dart'
+    as _i832;
+import '../../features/checkout/api/data_sources/checkout_remote_data_source_impl.dart'
+    as _i149;
+import '../../features/checkout/data/data_sources/checkout_remote_data_source_contract.dart'
+    as _i486;
+import '../../features/checkout/data/repo/checkout_repo_impl.dart' as _i351;
+import '../../features/checkout/domain/repo/checkout_repo_contract.dart'
+    as _i506;
+import '../../features/checkout/domain/use_cases/checkout_cash_order_use_case.dart'
+    as _i624;
+import '../../features/checkout/domain/use_cases/checkout_credit_card_order_use_case.dart'
+    as _i3;
+import '../../features/checkout/presentation/view_model/cubit/checkout_view_model.dart'
+    as _i970;
 import '../../features/edit_profile/api/api_client/edit_profile_api_client.dart'
     as _i690;
 import '../../features/edit_profile/api/data_sources/edit_profile_remote_data_sources_impl.dart'
@@ -110,6 +126,8 @@ import '../../features/edit_profile/domain/use_cases/upload_user_photo_use_case.
     as _i252;
 import '../../features/edit_profile/presentation/view_model/cubit/edit_profile_view_model.dart'
     as _i70;
+import '../../features/filter/presentation/view_model/cubit/filter_view_model.dart'
+    as _i27;
 import '../../features/forget_password/api/forget_password_client.dart'
     as _i730;
 import '../../features/forget_password/data/data_source/forget_password_data_source_contract.dart'
@@ -228,6 +246,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => coreInjectableModule.prefs(),
       preResolve: true,
     );
+    gh.factory<_i27.FilterViewModel>(() => _i27.FilterViewModel());
     gh.singleton<_i361.Dio>(() => coreInjectableModule.dio());
     gh.lazySingleton<_i558.FlutterSecureStorage>(
       () => coreInjectableModule.secureStorage(),
@@ -254,6 +273,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i244.ChangePasswordApiClient>(
       () => _i244.ChangePasswordApiClient(gh<_i361.Dio>()),
     );
+    gh.factory<_i832.CheckoutApiClient>(
+      () => _i832.CheckoutApiClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i690.EditProfileApiClient>(
       () => _i690.EditProfileApiClient(gh<_i361.Dio>()),
     );
@@ -278,6 +300,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i764.GetCategoriesDataSourceContract>(
       () => _i587.GetCategoriesDataSourceImpl(gh<_i612.CategoriesApiClient>()),
+    );
+    gh.factory<_i486.CheckoutRemoteDataSourceContract>(
+      () => _i149.CheckoutRemoteDataSourceImpl(gh<_i832.CheckoutApiClient>()),
     );
     gh.factory<_i251.LoginDataSourcesLocalContract>(
       () => _i797.LoginDataSourcesLocalImpl(
@@ -332,6 +357,10 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i243.SearchRemoteDataSourceContract>(
       () => _i390.SearchRemoteDataSourceImpl(gh<_i265.SearchApiClient>()),
+    );
+    gh.factory<_i506.CheckoutRepoContract>(
+      () =>
+          _i351.CheckoutRepoImpl(gh<_i486.CheckoutRemoteDataSourceContract>()),
     );
     gh.factory<_i668.RegisterRepository>(
       () => _i897.RegisterRepositoryImpl(gh<_i984.RegisterDataSource>()),
@@ -392,6 +421,13 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i157.UserHelper>(),
       ),
     );
+    gh.factory<_i624.CheckoutCashOrderUseCase>(
+      () => _i624.CheckoutCashOrderUseCase(gh<_i506.CheckoutRepoContract>()),
+    );
+    gh.factory<_i3.CheckoutCreditCardOrderUseCase>(
+      () =>
+          _i3.CheckoutCreditCardOrderUseCase(gh<_i506.CheckoutRepoContract>()),
+    );
     gh.factory<_i817.HomeRepoContract>(
       () => _i886.HomeRepoImpl(gh<_i936.HomeRemoteDataSourceContract>()),
     );
@@ -442,6 +478,12 @@ extension GetItInjectableX on _i174.GetIt {
         repo: gh<_i405.OccasionsRepoContract>(),
       ),
     );
+    gh.factory<_i970.CheckoutViewModel>(
+      () => _i970.CheckoutViewModel(
+        gh<_i3.CheckoutCreditCardOrderUseCase>(),
+        gh<_i624.CheckoutCashOrderUseCase>(),
+      ),
+    );
     gh.factory<_i443.LogoutUseCase>(
       () => _i443.LogoutUseCase(gh<_i122.LogoutRepository>()),
     );
@@ -452,6 +494,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i933.DeleteSpecificCartItemUseCase(
         repo: gh<_i63.CartRepoContract>(),
       ),
+    );
+    gh.factory<_i501.DeleteUserCart>(
+      () => _i501.DeleteUserCart(repo: gh<_i63.CartRepoContract>()),
     );
     gh.factory<_i807.GetUserCartProductsUseCase>(
       () => _i807.GetUserCartProductsUseCase(repo: gh<_i63.CartRepoContract>()),
@@ -493,14 +538,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i705.LoginViewModel>(
       () => _i705.LoginViewModel(gh<_i191.LoginUseCase>()),
-    );
-    gh.singleton<_i431.CartManager>(
-      () => _i431.CartManager(
-        gh<_i807.GetUserCartProductsUseCase>(),
-        gh<_i933.DeleteSpecificCartItemUseCase>(),
-        gh<_i93.UpdateSpecificCartItemQuantityUseCase>(),
-        gh<_i252.AddToCartUseCase>(),
-      ),
     );
     gh.factory<_i939.ChangePasswordViewModel>(
       () => _i939.ChangePasswordViewModel(gh<_i874.ChangePasswordUseCase>()),
@@ -544,6 +581,15 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i806.CategoriesCubit(
         gh<_i126.GetAllCategoriesUseCase>(),
         gh<_i584.GetProductsByCategoryUseCase>(),
+      ),
+    );
+    gh.singleton<_i431.CartManager>(
+      () => _i431.CartManager(
+        gh<_i807.GetUserCartProductsUseCase>(),
+        gh<_i933.DeleteSpecificCartItemUseCase>(),
+        gh<_i93.UpdateSpecificCartItemQuantityUseCase>(),
+        gh<_i252.AddToCartUseCase>(),
+        gh<_i501.DeleteUserCart>(),
       ),
     );
     gh.factory<_i794.SearchViewModel>(

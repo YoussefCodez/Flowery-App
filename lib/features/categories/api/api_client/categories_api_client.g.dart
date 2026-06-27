@@ -47,9 +47,15 @@ class _CategoriesApiClient implements CategoriesApiClient {
   }
 
   @override
-  Future<ProductResponseModel> getProductsByCategory(String? categoryId) async {
+  Future<ProductResponseModel> getProductsByCategory(
+    String? categoryId,
+    String? sortOption,
+  ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'category': categoryId};
+    final queryParameters = <String, dynamic>{
+      r'category': categoryId,
+      r'sort': sortOption,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;

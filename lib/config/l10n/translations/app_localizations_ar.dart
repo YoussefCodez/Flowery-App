@@ -437,4 +437,49 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get sort_by => 'فرز حسب';
+
+  @override
+  String get delivery_time => 'وقت التوصيل';
+
+  @override
+  String get instant => 'فوري';
+
+  @override
+  String get delivery_address => 'عنوان التوصيل';
+
+  @override
+  String get payment_method => 'طريقة الدفع';
+
+  @override
+  String get cash_on_delivery => 'الدفع عند الاستلام';
+
+  @override
+  String get credit_card => 'بطاقة ائتمانية';
+
+  @override
+  String get it_is_a_gift => 'إنها هدية';
+
+  @override
+  String get place_order => 'إتمام الطلب';
+
+  @override
+  String get add_new => 'اضف عنوان جديد';
+
+  @override
+  String get enter_the_name => 'ادخل الاسم';
+
+  @override
+  String get enter_the_phone_number => 'ادخل رقم الهاتف';
+
+  @override
+  String get your_order_has_been_placed => 'تم تسجيل طلبك بنجاح';
+
+  @override
+  String get go_to_home => 'العودة للصفحة الرئيسية';
+
+  @override
+  String get arrive_by => 'يصل بحلول';
+
+  @override
+  String get please_select_an_address => 'من فضلك اختر عنوان الاستلام';
 }
