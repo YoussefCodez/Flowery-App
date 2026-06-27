@@ -7,6 +7,7 @@ import 'package:flowery/core/const/app_svgs.dart';
 import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flowery/features/app_language_logout/presntation/widgets/language_tile.dart';
 import 'package:flowery/features/app_language_logout/presntation/widgets/logout_button.dart';
+import 'package:flowery/config/firebase/firebase_service.dart';
 import 'package:flowery/features/main_profile/domain/entity/profile_entity.dart';
 import 'package:flowery/features/main_profile/presentation/view_model/profile_cubit.dart';
 import 'package:flowery/features/main_profile/presentation/view_model/profile_event.dart';
@@ -27,8 +28,6 @@ class MainProfileView extends StatefulWidget {
 }
 
 class _MainProfileViewState extends State<MainProfileView> {
-  bool _notificationsEnabled = true;
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -146,14 +145,26 @@ class _MainProfileViewState extends State<MainProfileView> {
           onTap: () {},
         ),
         const Divider(height: 1, thickness: 1, color: AppColors.dividerColor),
-        CustomProfile(
-          leadingIcon: CupertinoSwitch(
-            value: _notificationsEnabled,
-            activeTrackColor: AppColors.primaryColor,
-            onChanged: (val) => setState(() => _notificationsEnabled = val),
-          ),
-          title: l10n.notification,
-          trailingWidget: Icon(Icons.chevron_right, color: AppColors.grayColor),
+        BlocBuilder<ProfileCubit, ProfileState>(
+          builder: (BuildContext context, ProfileState state) {
+            return CustomProfile(
+              leadingIcon: CupertinoSwitch(
+                value: state.isNotificationOn,
+                activeTrackColor: AppColors.primaryColor,
+                onChanged: (val) {
+                  context.read<ProfileCubit>().doEvent(
+                    ToggleNotificationEvent(value: val),
+                  );
+                },
+              ),
+              title: l10n.notification,
+              trailingWidget: Icon(
+                Icons.chevron_right,
+                color: AppColors.grayColor,
+              ),
+            );
+          },
+
         ),
         const Divider(height: 1, thickness: 1, color: AppColors.dividerColor),
         LanguageTile(),
