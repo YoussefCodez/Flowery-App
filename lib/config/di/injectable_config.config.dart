@@ -228,6 +228,7 @@ import '../../features/search/domain/search_use_case/search_use_case.dart'
 import '../../features/search/presentation/view_model/search_cubit.dart'
     as _i794;
 import '../api/app_interceptors.dart' as _i781;
+import '../firebase/firebase_service.dart' as _i842;
 import '../general_cubit/cart_manager/cart_manager.dart' as _i431;
 import '../general_cubit/local_cubit.dart' as _i794;
 import '../helpers/shared_pref.dart' as _i42;
@@ -248,6 +249,7 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i27.FilterViewModel>(() => _i27.FilterViewModel());
     gh.singleton<_i361.Dio>(() => coreInjectableModule.dio());
+    gh.singleton<_i842.FirebaseService>(() => _i842.FirebaseService());
     gh.lazySingleton<_i558.FlutterSecureStorage>(
       () => coreInjectableModule.secureStorage(),
     );
@@ -603,15 +605,18 @@ extension GetItInjectableX on _i174.GetIt {
         repo: gh<_i949.BestSellerRepoContract>(),
       ),
     );
+    gh.factory<_i576.ProfileCubit>(
+      () => _i576.ProfileCubit(
+        gh<_i979.GetProfileDataUseCase>(),
+        gh<_i842.FirebaseService>(),
+      ),
+    );
     gh.factory<_i940.HomeViewModel>(
       () => _i940.HomeViewModel(
         gh<_i834.GetCategoriesUseCase>(),
         gh<_i839.GetBestSellerUseCase>(),
         gh<_i925.GetOccasionsUseCase>(),
       ),
-    );
-    gh.factory<_i576.ProfileCubit>(
-      () => _i576.ProfileCubit(gh<_i979.GetProfileDataUseCase>()),
     );
     gh.factory<_i935.BestSellerViewModel>(
       () => _i935.BestSellerViewModel(gh<_i573.GetBestSellerProductsUseCase>()),
