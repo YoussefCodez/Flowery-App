@@ -1,4 +1,4 @@
-import 'package:flowery/featuers/web_view/presentation/view_model/web_view_state.dart';
+import 'package:flowery/features/web_view/presentation/view_model/web_view_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
