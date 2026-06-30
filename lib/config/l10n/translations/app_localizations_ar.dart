@@ -194,4 +194,25 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get an_error_occurred => 'حدث خطأ';
+
+  @override
+  String get egp => 'EGP';
+
+  @override
+  String get status_in_stock => 'الحالة: متوفر في المخزون';
+
+  @override
+  String get all_prices_include_tax => 'جميع الأسعار تشمل الضريبة';
+
+  @override
+  String get bouquet => 'Bouquet';
+
+  @override
+  String get description => 'الوصف';
+
+  @override
+  String get bouquet_include => 'تشمل الباقة';
+
+  @override
+  String get add_to_cart => 'اضف الى العربة';
 }
