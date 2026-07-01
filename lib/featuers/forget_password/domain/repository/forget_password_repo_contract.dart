@@ -7,12 +7,12 @@ import '../../data/model/reqest_models/verify_reset_password_request.dart';
 import '../../data/model/response_model/reset_password_response.dart';
 import '../../data/model/response_model/verify_email_response.dart';
 
-abstract class ForgetPasswordRepoContract {
+abstract interface class ForgetPasswordRepoContract {
   Future<Result<ForgetPasswordResponse>> forgetPassword(
     ForgetPasswordRequest request,
   );
 
-  Future<Result<VerifyEmailResponse>> verifyEmail(VerifyResetPassword request);
+  Future<Result<VerifyEmailResponse>> verifyEmail(VerifyResetPasswordRequest request);
 
   Future<Result<ResetPasswordResponse>> resetPassword(
     ResetPasswordRequest request,

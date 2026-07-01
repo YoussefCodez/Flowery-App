@@ -15,7 +15,7 @@ import '../../../data/model/response_model/reset_password_response.dart';
 import '../../../data/model/response_model/verify_email_response.dart';
 import '../../../domain/use_case/forget_password_use_case.dart';
 import '../../../domain/use_case/reset_password_use_case.dart';
-import '../../../domain/use_case/verfy_email_use_case.dart';
+import '../../../domain/use_case/verify_email_use_case.dart';
 import '../event/forget_password_event.dart';
 import '../state/forget_password_status.dart';
 
@@ -92,7 +92,7 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
   Future<void> _updateOtp(String otp) async {
     emit(state.copyWith(otpValue: otp, hasError: false));
     if (otp.length == 6) {
-      await _verifyEmail(VerifyResetPassword(resetCode: otp));
+      await _verifyEmail(VerifyResetPasswordRequest(resetCode: otp));
     }
   }
 
@@ -136,7 +136,7 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
     }
   }
 
-  Future<void> _verifyEmail(VerifyResetPassword request) async {
+  Future<void> _verifyEmail(VerifyResetPasswordRequest request) async {
     emit(
       state.copyWith(
         hasError: false, // ✅ نمسح الخطأ عند كل محاولة

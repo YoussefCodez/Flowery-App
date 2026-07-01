@@ -13,7 +13,7 @@ class SendEmailEvent extends ForgetPasswordEvent {
 }
 
 class VerifyEmailEvent extends ForgetPasswordEvent {
-  final VerifyResetPassword request;
+  final VerifyResetPasswordRequest request;
 
    VerifyEmailEvent({
     required this.request,

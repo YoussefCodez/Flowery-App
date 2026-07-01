@@ -10,13 +10,13 @@ import '../data/model/response_model/forget_password_response.dart';
 import '../data/model/response_model/reset_password_response.dart';
 import '../data/model/response_model/verify_email_response.dart';
 
-part 'forget_password_client.g.dart';
+part 'forget_password_api_client.g.dart';
 
 @RestApi()
 @injectable
-abstract class ForgetPasswordClient {
+abstract class ForgetPasswordApiClient {
   @factoryMethod
-  factory ForgetPasswordClient(Dio dio) = _ForgetPasswordClient;
+  factory ForgetPasswordApiClient(Dio dio) = _ForgetPasswordApiClient;
 
   @POST(AppEndPoints.forgetPassword)
   Future<ForgetPasswordResponse> forgetPassword(
@@ -24,7 +24,7 @@ abstract class ForgetPasswordClient {
   );
 
   @POST(AppEndPoints.verifyResetPassword)
-  Future<VerifyEmailResponse> verifyEmail(@Body() VerifyResetPassword request);
+  Future<VerifyEmailResponse> verifyEmail(@Body() VerifyResetPasswordRequest request);
 
   @PUT(AppEndPoints.resetPassword)
   Future<ResetPasswordResponse> resetPassword(@Body() ResetPasswordRequest request);

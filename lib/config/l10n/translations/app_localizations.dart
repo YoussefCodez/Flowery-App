@@ -541,6 +541,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Invalid code, please try again'**
   String get invalid_code;
+
+  /// No description provided for @loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading'**
+  String get loading;
 }
 
 class _AppLocalizationsDelegate

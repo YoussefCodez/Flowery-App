@@ -9,7 +9,7 @@ import 'package:flowery/featuers/forget_password/data/model/response_model/reset
 import 'package:flowery/featuers/forget_password/data/model/response_model/verify_email_response.dart';
 import 'package:flowery/featuers/forget_password/domain/use_case/forget_password_use_case.dart';
 import 'package:flowery/featuers/forget_password/domain/use_case/reset_password_use_case.dart';
-import 'package:flowery/featuers/forget_password/domain/use_case/verfy_email_use_case.dart';
+import 'package:flowery/featuers/forget_password/domain/use_case/verify_email_use_case.dart';
 import 'package:flowery/featuers/forget_password/presentation/view_model/cubit/forget_password_view_model.dart';
 import 'package:flowery/featuers/forget_password/presentation/view_model/event/forget_password_event.dart';
 import 'package:flowery/featuers/forget_password/presentation/view_model/state/forget_password_status.dart';

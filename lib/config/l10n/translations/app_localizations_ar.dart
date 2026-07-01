@@ -236,4 +236,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get invalid_code => 'الكود غير صحيح، يرجى المحاولة مرة أخرى';
+
+  @override
+  String get loading => 'تحميل ...';
 }

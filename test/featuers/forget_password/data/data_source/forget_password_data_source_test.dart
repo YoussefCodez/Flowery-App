@@ -1,5 +1,5 @@
 import 'package:flowery/config/base_response/base_response.dart';
-import 'package:flowery/featuers/forget_password/api/forget_password_client.dart';
+import 'package:flowery/featuers/forget_password/api/forget_password_api_client.dart';
 import 'package:flowery/featuers/forget_password/data/data_source/forget_password_data_source_impl.dart';
 import 'package:flowery/featuers/forget_password/data/model/reqest_models/forget_password_request.dart';
 import 'package:flowery/featuers/forget_password/data/model/reqest_models/reset_password_request.dart';

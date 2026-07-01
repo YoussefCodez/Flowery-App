@@ -239,4 +239,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get invalid_code => 'Invalid code, please try again';
+
+  @override
+  String get loading => 'Loading';
 }

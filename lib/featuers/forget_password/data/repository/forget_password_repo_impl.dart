@@ -18,27 +18,15 @@ class ForgetPasswordRepoImpl implements ForgetPasswordRepoContract {
 
   @override
   Future<Result<ForgetPasswordResponse>> forgetPassword(
-    ForgetPasswordRequest request,
-  ) async {
-    final response = await dataSource.forgetPassword(request);
-    switch (response) {
-      case Success<ForgetPasswordResponse>():
-        return Success<ForgetPasswordResponse>(data: response.data);
-      case Error<ForgetPasswordResponse>(:final exception):
-        return Error<ForgetPasswordResponse>(exception: exception);
-    }
+      ForgetPasswordRequest request,
+      ) {
+    return dataSource.forgetPassword(request);
   }
 
   @override
-  Future<Result<VerifyEmailResponse>> verifyEmail(VerifyResetPassword request) async {
-    final response = await dataSource.verifyEmail(request);
-    switch (response) {
-      case Success<VerifyEmailResponse>():
-        return response;
+  Future<Result<VerifyEmailResponse>> verifyEmail(VerifyResetPasswordRequest request) async {
+    return await dataSource.verifyEmail(request);
 
-      case Error<VerifyEmailResponse>():
-        return response;
-    }
   }
 
 
@@ -46,14 +34,8 @@ class ForgetPasswordRepoImpl implements ForgetPasswordRepoContract {
   Future<Result<ResetPasswordResponse>> resetPassword(
       ResetPasswordRequest request,
       ) async {
-    final response = await dataSource.resetPassword(request);
-    switch (response) {
-      case Success<ResetPasswordResponse>():
-        return Success<ResetPasswordResponse>(data: response.data);
-      case Error<ResetPasswordResponse>(:final exception):
-        return Error<ResetPasswordResponse>(exception: exception);
-      
-    }
+    return  await dataSource.resetPassword(request);
+
   }
 
 

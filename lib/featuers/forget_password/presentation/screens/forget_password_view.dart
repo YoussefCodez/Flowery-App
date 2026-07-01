@@ -160,7 +160,7 @@ class _ForgetPasswordViewState
 
                     CustomButton(
                       text: isLoading
-                          ? "Loading..."
+                          ? l10n.loading
                           : l10n.confirm,
 
                       backgroundColor:
