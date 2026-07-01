@@ -30,6 +30,7 @@ class MainTextField extends StatelessWidget {
       keyboardType: keyboardType,
       obscureText: obscureText,
       controller: controller,
+      validator: validator,
       decoration: InputDecoration(
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(4.r)),
         enabledBorder: OutlineInputBorder(

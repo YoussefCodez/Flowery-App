@@ -208,9 +208,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get an_error_occurred => 'حدث خطأ';
 
   @override
-<<<<<<< HEAD
-  String get best_seller => 'الأكثر مبيعًا';
-=======
   String get occasion => 'المناسبة';
 >>>>>>> origin/dev
 
@@ -219,4 +216,5 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get no_products => 'لا يوجد منتجات';
+>>>>>>> dev
 }

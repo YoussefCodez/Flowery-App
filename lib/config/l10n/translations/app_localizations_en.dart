@@ -212,7 +212,30 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
 <<<<<<< HEAD
+<<<<<<< HEAD
+  String get reset_password => 'Reset Password';
+
+  @override
+  String get current_password => 'Current Password';
+
+  @override
+  String get new_password => 'New Password';
+
+  @override
+  String get update => 'Update';
+
+  @override
+  String get incorrect_password => 'Incorrect old password';
+
+  @override
+  String get password_changed_success =>
+      'Password has been changed successfully';
+
+  @override
+  String get success => 'Success';
+=======
   String get best_seller => 'Best Seller';
+>>>>>>> 8ae691131aa0293688411992b0e9603ece9daf33
 =======
   String get occasion => 'Occasion';
 >>>>>>> origin/dev
@@ -222,4 +245,5 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get no_products => 'No Products';
+>>>>>>> dev
 }

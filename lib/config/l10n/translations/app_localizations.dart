@@ -489,11 +489,55 @@ abstract class AppLocalizations {
   String get an_error_occurred;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+  /// No description provided for @reset_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Password'**
+  String get reset_password;
+
+  /// No description provided for @current_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Password'**
+  String get current_password;
+
+  /// No description provided for @new_password.
+  ///
+  /// In en, this message translates to:
+  /// **'New Password'**
+  String get new_password;
+
+  /// No description provided for @update.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get update;
+
+  /// No description provided for @incorrect_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect old password'**
+  String get incorrect_password;
+
+  /// No description provided for @password_changed_success.
+  ///
+  /// In en, this message translates to:
+  /// **'Password has been changed successfully'**
+  String get password_changed_success;
+
+  /// No description provided for @success.
+  ///
+  /// In en, this message translates to:
+  /// **'Success'**
+  String get success;
+=======
   /// No description provided for @best_seller.
   ///
   /// In en, this message translates to:
   /// **'Best Seller'**
   String get best_seller;
+>>>>>>> 8ae691131aa0293688411992b0e9603ece9daf33
 =======
   /// No description provided for @occasion.
   ///
@@ -513,6 +557,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No Products'**
   String get no_products;
+>>>>>>> dev
 }
 
 class _AppLocalizationsDelegate

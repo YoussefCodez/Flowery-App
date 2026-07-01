@@ -56,4 +56,3 @@ class DriverApp extends StatelessWidget {
     );
   }
 }
-
