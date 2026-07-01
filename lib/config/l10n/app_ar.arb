@@ -74,5 +74,12 @@
   "occasion": "المناسبة",
   "best_seller_title": "تألقي مع أفضل منتجاتنا مبيعًا",
   "best_seller": "الأكثر مبيعًا",
-  "no_products": "لا يوجد منتجات"
+  "no_products": "لا يوجد منتجات",
+  "lowest_price" : "ارخص ثمن",
+  "highest_price" : "اغلي ثمن",
+  "new_products" :"جديد",
+  "old_products" : "قديم",
+  "filter" : "فلتر",
+  "sort_by" : "فرز حسب",
+  "discount" : "خصم"
 }

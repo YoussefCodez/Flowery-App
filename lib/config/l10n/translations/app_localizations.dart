@@ -553,6 +553,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No Products'**
   String get no_products;
+
+  /// No description provided for @lowest_price.
+  ///
+  /// In en, this message translates to:
+  /// **'Lowest Price'**
+  String get lowest_price;
+
+  /// No description provided for @highest_price.
+  ///
+  /// In en, this message translates to:
+  /// **'Highest Price'**
+  String get highest_price;
+
+  /// No description provided for @new_products.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get new_products;
+
+  /// No description provided for @old_products.
+  ///
+  /// In en, this message translates to:
+  /// **'Old'**
+  String get old_products;
+
+  /// No description provided for @filter.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter'**
+  String get filter;
+
+  /// No description provided for @sort_by.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort by'**
+  String get sort_by;
+
+  /// No description provided for @discount.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount'**
+  String get discount;
 }
 
 class _AppLocalizationsDelegate

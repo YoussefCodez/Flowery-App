@@ -75,5 +75,12 @@
   "best_seller": "Best Seller",
   "best_seller_title": "Bloom with our exquisite best sellers",
   "no_products": "No Products",
-  "occasion": "Occasion"
+  "occasion": "Occasion",
+  "lowest_price" : "Lowest Price",
+  "highest_price" : "Highest Price",
+  "new_products" :"New",
+  "old_products" : "Old",
+  "filter" : "Filter",
+  "sort_by" : "Sort by",
+  "discount" : "Discount"
 }
