@@ -104,6 +104,30 @@ abstract class AppLocalizations {
   /// **'Login'**
   String get login;
 
+  /// No description provided for @remember_me.
+  ///
+  /// In en, this message translates to:
+  /// **'Remember me'**
+  String get remember_me;
+
+  /// No description provided for @sign_up.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get sign_up;
+
+  /// No description provided for @enter_your_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email'**
+  String get enter_your_email;
+
+  /// No description provided for @enter_your_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your password'**
+  String get enter_your_password;
+
   /// No description provided for @name_is_required.
   ///
   /// In en, this message translates to:
@@ -125,7 +149,7 @@ abstract class AppLocalizations {
   /// No description provided for @email_is_not_valid.
   ///
   /// In en, this message translates to:
-  /// **'This email is not valid'**
+  /// **'This Email is not valid'**
   String get email_is_not_valid;
 
   /// No description provided for @password_is_required.

@@ -1,7 +1,8 @@
+import 'package:flowery/config/api/api_keys.dart';
 import 'package:flowery/config/di/injectable_config.dart';
 import 'package:flowery/config/general_cubit/general_state.dart';
 import 'package:flowery/config/general_cubit/local_cubit.dart';
-import 'package:flowery/config/helpers/bloc/bloc_observer.dart';
+import 'package:flowery/config/helpers/shared_pref.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_generator.dart';
@@ -27,6 +28,9 @@ class DriverApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isRememberMe =
+        getIt<SharedPrefHelper>().getData(key: Apikeys.userId) as String?;
+
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
@@ -42,9 +46,9 @@ class DriverApp extends StatelessWidget {
               onGenerateRoute: RouteGenerator.getRoute,
               debugShowCheckedModeBanner: false,
               theme: AppTheme.lightTheme,
-              //  darkTheme: AppTheme.darkTheme,
-              // themeMode: state.themeMode,
-              initialRoute: AppRoutes.occasions,
+              initialRoute: isRememberMe == "true"
+                  ? AppRoutes.home
+                  : AppRoutes.login,
             );
           },
         );
@@ -52,3 +56,4 @@ class DriverApp extends StatelessWidget {
     );
   }
 }
+
