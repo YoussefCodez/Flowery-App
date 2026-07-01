@@ -1,6 +1,8 @@
 abstract class AppRoutes {
   static const String login = "/login";
-  static const String productDetails = "/productDetails";
+  static const String register = "/register";
+
+  static const String productDetails = "/product-details";
   static const String home = "/home";
   static const String occasions = "/occasions";
   static const String bestSeller = "/best-seller";
