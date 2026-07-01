@@ -48,7 +48,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => coreInjectableModule.prefs(),
       preResolve: true,
     );
-    gh.factory<_i794.LocaleThemeCubit>(() => _i794.LocaleThemeCubit());
     gh.singleton<_i361.Dio>(() => coreInjectableModule.dio());
     gh.lazySingleton<_i558.FlutterSecureStorage>(
       () => coreInjectableModule.secureStorage(),
@@ -65,8 +64,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i656.RegisterApiClient>(
       () => _i656.RegisterApiClient(gh<_i361.Dio>()),
     );
-    gh.singleton<_i781.AppInterceptors>(
-      () => _i781.AppInterceptors(
+    gh.singleton<_i781.AuthInterceptor>(
+      () => _i781.AuthInterceptor(
         dio: gh<_i361.Dio>(),
         fss: gh<_i558.FlutterSecureStorage>(),
       ),
@@ -75,6 +74,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i495.RegisterDataSourceImpl(
         registerApiClient: gh<_i656.RegisterApiClient>(),
       ),
+    );
+    gh.factory<_i794.LocaleThemeCubit>(
+      () => _i794.LocaleThemeCubit(gh<_i42.SharedPrefHelper>()),
     );
     gh.factory<_i668.RegisterRepository>(
       () => _i897.RegisterRepositoryImpl(gh<_i984.RegisterDataSource>()),

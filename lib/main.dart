@@ -1,6 +1,7 @@
 import 'package:flowery/config/di/injectable_config.dart';
 import 'package:flowery/config/general_cubit/general_state.dart';
 import 'package:flowery/config/general_cubit/local_cubit.dart';
+import 'package:flowery/config/helpers/bloc/bloc_observer.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_generator.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = MyBlocObserver();
   await configureDependencies();
   runApp(
     BlocProvider(
@@ -41,10 +43,7 @@ class FloweryApp extends StatelessWidget {
               onGenerateRoute: RouteGenerator.getRoute,
               debugShowCheckedModeBanner: false,
               theme: AppTheme.lightTheme,
-              home: const RegisterScreen(),
               //  darkTheme: AppTheme.darkTheme,
-              // themeMode: state.themeMode,
-              //  initialRoute: Routes.splashRoute,
             );
           },
         );
