@@ -11,12 +11,13 @@ abstract class AppTheme {
       secondary: AppColors.lightPinkColor,
       error: AppColors.redColor,
       surface: AppColors.whiteColor,
-      onSurface: AppColors.greenColor,
+      onSurface: AppColors.blackColor,
       onPrimary: AppColors.grayColor,
       onSecondary: AppColors.hintGrayColor,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
+        elevation: 0.0,
         padding: EdgeInsets.symmetric(vertical: 14.h),
         backgroundColor: AppColors.primaryColor,
         foregroundColor: AppColors.whiteColor,

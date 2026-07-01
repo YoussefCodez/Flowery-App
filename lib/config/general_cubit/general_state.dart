@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LocaleThemeState {
-  final Locale locale;
+  final Locale    locale;
   final bool isDark;
 
   LocaleThemeState({required this.locale, required this.isDark});
