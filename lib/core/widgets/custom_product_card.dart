@@ -4,8 +4,6 @@ import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flowery/core/const/app_strings.dart';
 import 'package:flowery/core/theme/app_colors.dart';
-import 'package:flowery/config/general_cubit/cart_manager/cart_manager.dart';
-import 'package:flowery/config/general_cubit/cart_manager/cart_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -151,40 +149,40 @@ class _CustomProductCardState extends State<CustomProductCard> {
               ],
             ),
             SizedBox(height: 8.h),
-            ElevatedButton(
-              onPressed: () {
-                context.read<CartManager>().addToCart(widget.id, 1);
-                context.read<CartManager>().getCartUseCase();
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  BlocConsumer<CartManager, CartState>(
-                    builder: (context, state) {
-                      if (state.isAddingToCart == true &&
-                          state.itemId == widget.id) {
-                        return Center(
-                          child: SizedBox(
-                            height: 15.h,
-                            width: 15.w,
-                            child: CircularProgressIndicator(
-                              color: AppColors.whiteColor,
-                            ),
-                          ),
-                        );
-                      }
-                      return Row(
-                        children: [
-                          Icon(Icons.shopping_cart_outlined, size: 16.sp),
-                          SizedBox(width: 4.w),
-                          Text(
-                            localizations.add_to_cart,
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                        ],
-                      );
-                    },
-                    listener: (context, state) {
+            // ElevatedButton(
+            //   onPressed: () {
+            //     context.read<CartManager>().addToCart(widget.id, 1);
+            //     context.read<CartManager>().getCartUseCase();
+            //   },
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //       BlocConsumer<CartManager, CartState>(
+            //         builder: (context, state) {
+            //           if (state.isAddingToCart == true &&
+            //               state.itemId == widget.id) {
+            //             return Center(
+            //               child: SizedBox(
+            //                 height: 15.h,
+            //                 width: 15.w,
+            //                 child: CircularProgressIndicator(
+            //                   color: AppColors.whiteColor,
+            //                 ),
+            //               ),
+            //             );
+            //           }
+            //           return Row(
+            //             children: [
+            //               Icon(Icons.shopping_cart_outlined, size: 16.sp),
+            //               SizedBox(width: 4.w),
+            //               Text(
+            //                 localizations.add_to_cart,
+            //                 style: Theme.of(context).textTheme.titleLarge,
+            //               ),
+            //             ],
+            //           );
+            //         },
+            //         listener: (context, state) {
                       // if (state.isAddedSuccessfully) {
                       //   showDialog(
                       //     context: context,
@@ -207,11 +205,11 @@ class _CustomProductCardState extends State<CustomProductCard> {
                       //     },
                       //   );
                       // }
-                    },
-                  ),
-                ],
-              ),
-            ),
+            //         },
+            //       ),
+            //     ],
+            //   ),
+            // ),
           ],
         ),
       ),

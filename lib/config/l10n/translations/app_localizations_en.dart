@@ -211,6 +211,27 @@ class AppLocalizationsEn extends AppLocalizations {
   String get an_error_occurred => 'An error occurred';
 
   @override
+  String get egp => 'EGP';
+
+  @override
+  String get status_in_stock => 'Status:In Stock';
+
+  @override
+  String get all_prices_include_tax => 'All Prices Include Tax';
+
+  @override
+  String get bouquet => 'Bouquet';
+
+  @override
+  String get description => 'Description';
+
+  @override
+  String get bouquet_include => 'Bouquet include';
+
+  @override
+  String get add_to_cart => 'Add To Cart';
+
+  @override
   String get reset_password => 'Reset Password';
 
   @override
@@ -233,9 +254,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get success => 'Success';
 
   @override
-  String get occasion => 'Occasion';
-
-  @override
   String get best_seller => 'Best Seller';
 
   @override
@@ -243,6 +261,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get no_products => 'No Products';
+
+  @override
+  String get occasion => 'Occasion';
 
   @override
   String get lowest_price => 'Lowest Price';

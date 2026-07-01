@@ -488,6 +488,48 @@ abstract class AppLocalizations {
   /// **'An error occurred'**
   String get an_error_occurred;
 
+  /// No description provided for @egp.
+  ///
+  /// In en, this message translates to:
+  /// **'EGP'**
+  String get egp;
+
+  /// No description provided for @status_in_stock.
+  ///
+  /// In en, this message translates to:
+  /// **'Status:In Stock'**
+  String get status_in_stock;
+
+  /// No description provided for @all_prices_include_tax.
+  ///
+  /// In en, this message translates to:
+  /// **'All Prices Include Tax'**
+  String get all_prices_include_tax;
+
+  /// No description provided for @bouquet.
+  ///
+  /// In en, this message translates to:
+  /// **'Bouquet'**
+  String get bouquet;
+
+  /// No description provided for @description.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get description;
+
+  /// No description provided for @bouquet_include.
+  ///
+  /// In en, this message translates to:
+  /// **'Bouquet include'**
+  String get bouquet_include;
+
+  /// No description provided for @add_to_cart.
+  ///
+  /// In en, this message translates to:
+  /// **'Add To Cart'**
+  String get add_to_cart;
+
   /// No description provided for @reset_password.
   ///
   /// In en, this message translates to:
@@ -530,12 +572,6 @@ abstract class AppLocalizations {
   /// **'Success'**
   String get success;
 
-  /// No description provided for @occasion.
-  ///
-  /// In en, this message translates to:
-  /// **'Occasion'**
-  String get occasion;
-
   /// No description provided for @best_seller.
   ///
   /// In en, this message translates to:
@@ -553,6 +589,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No Products'**
   String get no_products;
+
+  /// No description provided for @occasion.
+  ///
+  /// In en, this message translates to:
+  /// **'Occasion'**
+  String get occasion;
 
   /// No description provided for @lowest_price.
   ///

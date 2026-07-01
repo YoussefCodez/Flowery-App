@@ -208,6 +208,27 @@ class AppLocalizationsAr extends AppLocalizations {
   String get an_error_occurred => 'حدث خطأ';
 
   @override
+  String get egp => 'EGP';
+
+  @override
+  String get status_in_stock => 'الحالة: متوفر في المخزون';
+
+  @override
+  String get all_prices_include_tax => 'جميع الأسعار تشمل الضريبة';
+
+  @override
+  String get bouquet => 'Bouquet';
+
+  @override
+  String get description => 'الوصف';
+
+  @override
+  String get bouquet_include => 'تشمل الباقة';
+
+  @override
+  String get add_to_cart => 'اضف الى العربة';
+
+  @override
   String get reset_password => 'إعادة تعيين كلمة المرور';
 
   @override
@@ -229,9 +250,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get success => 'نجحت';
 
   @override
-  String get occasion => 'المناسبة';
-
-  @override
   String get best_seller => 'الأكثر مبيعًا';
 
   @override
@@ -239,6 +257,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get no_products => 'لا يوجد منتجات';
+
+  @override
+  String get occasion => 'المناسبة';
 
   @override
   String get lowest_price => 'ارخص ثمن';
