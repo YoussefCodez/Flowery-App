@@ -26,22 +26,23 @@ class MainTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: validator,
       keyboardType: keyboardType,
       obscureText: obscureText,
       controller: controller,
       validator: validator,
       decoration: InputDecoration(
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.r)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(4.r)),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(5.r),
+          borderRadius: BorderRadius.circular(4.r),
           borderSide: BorderSide(color: AppColors.blackColor),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(5.r),
+          borderRadius: BorderRadius.circular(4.r),
           borderSide: BorderSide(color: AppColors.primaryColor),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16.r),
+          borderRadius: BorderRadius.circular(4.r),
           borderSide: BorderSide(color: AppColors.redColor),
         ),
         hintText: hintText,

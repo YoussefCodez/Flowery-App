@@ -1,5 +1,9 @@
 {
   "login": "تسجيل الدخول",
+  "remember_me": "تذكرني",
+  "sign_up": "انشاء حساب",
+  "enter_your_email": "ادخل البريد الإلكتروني",
+  "enter_your_password": "ادخل كلمة المرور",
   "name_is_required": "الاسم مطلوب!",
   "name_is_not_valid": "الاسم غير صحيح",
   "email_is_required": "البريد الإلكتروني مطلوب!",
@@ -66,5 +70,8 @@
   "update": "تحديث",
   "incorrect_password" : "كلمة المرور القديمة غير صحيحة",
   "password_changed_success" : "تم تغيير كلمة المرور بنجاح",
-  "success" : "نجحت"
+  "success" : "نجحت",
+  "occasion": "المناسبة",
+  "best_seller_title": "تألقي مع أفضل منتجاتنا مبيعًا",
+  "no_products": "لا يوجد منتجات"
 }

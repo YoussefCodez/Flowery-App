@@ -12,6 +12,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get login => 'تسجيل الدخول';
 
   @override
+  String get remember_me => 'تذكرني';
+
+  @override
+  String get sign_up => 'انشاء حساب';
+
+  @override
+  String get enter_your_email => 'ادخل البريد الإلكتروني';
+
+  @override
+  String get enter_your_password => 'ادخل كلمة المرور';
+
+  @override
   String get name_is_required => 'الاسم مطلوب!';
 
   @override
@@ -196,6 +208,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get an_error_occurred => 'حدث خطأ';
 
   @override
+<<<<<<< HEAD
   String get reset_password => 'إعادة تعيين كلمة المرور';
 
   @override
@@ -215,4 +228,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get success => 'نجحت';
+=======
+  String get occasion => 'المناسبة';
+
+  @override
+  String get best_seller_title => 'تألقي مع أفضل منتجاتنا مبيعًا';
+
+  @override
+  String get no_products => 'لا يوجد منتجات';
+>>>>>>> dev
 }

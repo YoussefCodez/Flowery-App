@@ -1,9 +1,13 @@
 {
   "login": "Login",
+  "remember_me": "Remember me",
+  "sign_up": "Sign Up",
+  "enter_your_email": "Enter your email",
+  "enter_your_password": "Enter your password",
   "name_is_required": "Name is required!",
   "name_is_not_valid": "This name is not valid",
   "email_is_required": "Email is required!",
-  "email_is_not_valid": "This email is not valid",
+  "email_is_not_valid": "This Email is not valid",
   "password_is_required": "Password is required!",
   "password_is_not_valid": "This password is not valid",
   "password_must_be_at_least_6_characters": "Password must be at least 6 characters",
@@ -66,5 +70,8 @@
   "update": "Update",
   "incorrect_password" : "Incorrect old password",
   "password_changed_success" : "Password has been changed successfully",
-  "success" : "Success"
+  "success" : "Success",
+  "occasion": "Occasion",
+  "best_seller_title": "Bloom with our exquisite best sellers",
+  "no_products": "No Products"
 }
