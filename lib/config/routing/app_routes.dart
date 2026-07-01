@@ -3,6 +3,7 @@ abstract class AppRoutes {
   static const String register = "/register";
 
   static const String productDetails = "/product-details";
+  static const String languagepage = "/language-page";
   static const String home = "/home";
   static const String occasions = "/occasions";
   static const String bestSeller = "/best-seller";

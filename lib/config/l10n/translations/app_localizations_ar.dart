@@ -208,6 +208,24 @@ class AppLocalizationsAr extends AppLocalizations {
   String get an_error_occurred => 'حدث خطأ';
 
   @override
+  String get language => 'اللغة';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get confirm_logout => 'تأكيد تسجيل الخروج!!';
+
+  @override
+  String get change_language => 'تغيير اللغة';
+
+  @override
+  String get arabic => 'العربية';
+
+  @override
+  String get english => 'الإنجليزية';
+
+  @override
   String get enterFirstName => 'ادخل الاسم الاول';
 
   @override

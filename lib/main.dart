@@ -46,9 +46,9 @@ class DriverApp extends StatelessWidget {
               onGenerateRoute: RouteGenerator.getRoute,
               debugShowCheckedModeBanner: false,
               theme: AppTheme.lightTheme,
-              initialRoute: isRememberMe == "true"
-                  ? AppRoutes.home
-                  : AppRoutes.login,
+              //  darkTheme: AppTheme.darkTheme,
+              // themeMode: state.themeMode,
+              initialRoute: AppRoutes.languagepage,
             );
           },
         );

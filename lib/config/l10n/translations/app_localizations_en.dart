@@ -211,6 +211,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get an_error_occurred => 'An error occurred';
 
   @override
+  String get language => 'Language';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get confirm_logout => 'Confirm logout!!';
+
+  @override
+  String get change_language => 'Change Language';
+
+  @override
+  String get arabic => 'Arabic';
+
+  @override
+  String get english => 'English';
+
+  @override
   String get enterFirstName => 'Enter first Name';
 
   @override
