@@ -1,7 +1,6 @@
 import 'package:flowery/config/di/injectable_config.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/config/routing/routing_extensions.dart';
-import 'package:flowery/core/const/occasions_values.dart';
 import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flowery/core/widgets/custom_grid_view.dart';
 import 'package:flowery/features/occasions/presentation/view_model/cubit/occasion_view_model.dart';

@@ -13,7 +13,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Bloc.observer = MyBlocObserver();
   await configureDependencies();
   runApp(
     MultiBlocProvider(
@@ -29,7 +28,7 @@ class DriverApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isRememberMe =
-        getIt<SharedPrefHelper>().getData(key: Apikeys.userId) as String?;
+        getIt<SharedPrefHelper>().getString(Apikeys.userId);
 
     return ScreenUtilInit(
       designSize: const Size(375, 812),
