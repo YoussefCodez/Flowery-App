@@ -1,18 +1,14 @@
+import 'package:flowery/features/login/presentation/screens/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'app_routes.dart';
+
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
-    try {
-      switch (settings.name) {
-        // case AppRoutes.login:
-        //   return MaterialPageRoute(
-        //     builder: (_) => const LoginScreen(),
-        //   );
-
-        default:
-          return unDefinedRoute();
-      }
-    } catch (e) {
-      return errorRoute(e.toString());
+    switch (settings.name) {
+      case AppRoutes.login:
+        return MaterialPageRoute(builder: (_) => LoginScreen());
+      default:
+        return unDefinedRoute();
     }
   }
 
