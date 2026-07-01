@@ -212,6 +212,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
 <<<<<<< HEAD
+<<<<<<< HEAD
   String get reset_password => 'Reset Password';
 
   @override
@@ -233,7 +234,11 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get success => 'Success';
 =======
+  String get best_seller => 'Best Seller';
+>>>>>>> 8ae691131aa0293688411992b0e9603ece9daf33
+=======
   String get occasion => 'Occasion';
+>>>>>>> origin/dev
 
   @override
   String get best_seller_title => 'Bloom with our exquisite best sellers';

@@ -489,6 +489,7 @@ abstract class AppLocalizations {
   String get an_error_occurred;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   /// No description provided for @reset_password.
   ///
   /// In en, this message translates to:
@@ -531,11 +532,19 @@ abstract class AppLocalizations {
   /// **'Success'**
   String get success;
 =======
+  /// No description provided for @best_seller.
+  ///
+  /// In en, this message translates to:
+  /// **'Best Seller'**
+  String get best_seller;
+>>>>>>> 8ae691131aa0293688411992b0e9603ece9daf33
+=======
   /// No description provided for @occasion.
   ///
   /// In en, this message translates to:
   /// **'Occasion'**
   String get occasion;
+>>>>>>> origin/dev
 
   /// No description provided for @best_seller_title.
   ///
