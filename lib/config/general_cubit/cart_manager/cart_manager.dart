@@ -1,4 +1,5 @@
-import 'package:flowery/features/cart/presentation/cart_manager/cart_state.dart';
+import 'package:flowery/config/general_cubit/cart_manager/cart_events.dart';
+import 'package:flowery/config/general_cubit/cart_manager/cart_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flowery/config/base_response/base_response.dart';
 import 'package:flowery/features/cart/domain/entities/cart_entity.dart';
@@ -22,19 +23,27 @@ class CartManager extends Cubit<CartState> {
     this.addToCartUseCase,
   ) : super(const CartState());
 
-  Future<void> loadCart() async {
+  void doEvent(CartEvents event) {
+    switch (event) {
+      case GetUserCartProductsEvent():
+        _loadCart();
+      case DeleteSpecificCartItemEvent():
+        _deleteItem(event.productId);
+      case UpdateSpecificCartItemEvent():
+        _updateQuantity(event.productId, event.quantity);
+      case AddToCartEvent():
+        _addToCart(event.productId, event.quantity);
+    }
+  }
+
+  Future<void> _loadCart() async {
     emit(state.copyWith(isLoading: true));
 
     final response = await getCartUseCase();
 
     switch (response) {
       case Success<CartEntity>():
-        emit(
-          state.copyWith(
-            isLoading: false,
-            cart: response.data,
-          ),
-        );
+        emit(state.copyWith(isLoading: false, cart: response.data));
 
       case Error<CartEntity>():
         emit(
@@ -46,79 +55,39 @@ class CartManager extends Cubit<CartState> {
     }
   }
 
-  Future<void> addToCart(
-    String productId,
-    int quantity,
-  ) async {
-    final response = await addToCartUseCase(
-      productId,
-      quantity,
-    );
+  Future<void> _addToCart(String productId, int quantity) async {
+    final response = await addToCartUseCase(productId, quantity);
 
     switch (response) {
       case Success<CartEntity>():
-        emit(
-          state.copyWith(
-            cart: response.data,
-          ),
-        );
+        emit(state.copyWith(cart: response.data));
 
       case Error<CartEntity>():
-        emit(
-          state.copyWith(
-            errorMessage: response.exception.toString(),
-          ),
-        );
+        emit(state.copyWith(errorMessage: response.exception.toString()));
     }
   }
 
-  Future<void> deleteItem(
-    String cartItemId,
-  ) async {
-    final response = await deleteUseCase(
-      cartItemId,
-    );
+  Future<void> _deleteItem(String productId) async {
+    final response = await deleteUseCase(productId);
 
     switch (response) {
       case Success<CartEntity>():
-        emit(
-          state.copyWith(
-            cart: response.data,
-          ),
-        );
+        emit(state.copyWith(cart: response.data));
 
       case Error<CartEntity>():
-        emit(
-          state.copyWith(
-            errorMessage: response.exception.toString(),
-          ),
-        );
+        emit(state.copyWith(errorMessage: response.exception.toString()));
     }
   }
 
-  Future<void> updateQuantity(
-    String cartItemId,
-    int quantity,
-  ) async {
-    final response = await updateUseCase(
-      cartItemId,
-      quantity,
-    );
+  Future<void> _updateQuantity(String productId, int quantity) async {
+    final response = await updateUseCase(productId, quantity);
 
     switch (response) {
       case Success<CartEntity>():
-        emit(
-          state.copyWith(
-            cart: response.data,
-          ),
-        );
+        emit(state.copyWith(cart: response.data));
 
       case Error<CartEntity>():
-        emit(
-          state.copyWith(
-            errorMessage: response.exception.toString(),
-          ),
-        );
+        emit(state.copyWith(errorMessage: response.exception.toString()));
     }
   }
 }

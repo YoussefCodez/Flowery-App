@@ -22,8 +22,8 @@ class CartRepoImpl implements CartRepoContract {
   }
 
   @override
-  Future<Result<CartEntity>> deleteSpecificItem(String cartItemId) async {
-    final response = await remoteDataSource.deleteSpecificItem(cartItemId);
+  Future<Result<CartEntity>> deleteSpecificItem(String productId) async {
+    final response = await remoteDataSource.deleteSpecificItem(productId);
     switch (response) {
       case Success<CartResponseModel>():
         return Success<CartEntity>(data: response.data?.cart?.toDomain());
@@ -34,11 +34,11 @@ class CartRepoImpl implements CartRepoContract {
 
   @override
   Future<Result<CartEntity>> updateCartProductQuantity(
-    String cartItemId,
+    String productId,
     int quantity,
   ) async {
     final response = await remoteDataSource.updateCartProductQuantity(
-      cartItemId,
+      productId,
       quantity,
     );
     switch (response) {
@@ -50,9 +50,9 @@ class CartRepoImpl implements CartRepoContract {
   }
 
   @override
-  Future<Result<CartEntity>> addToCart(String cartItemId, int quantity) async {
+  Future<Result<CartEntity>> addToCart(String productId, int quantity) async {
     final response = await remoteDataSource.addToCart(
-      cartItemId,
+      productId,
       quantity,
     );
     switch (response) {

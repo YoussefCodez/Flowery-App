@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flowery/config/general_cubit/cart_manager/cart_events.dart';
+import 'package:flowery/config/general_cubit/cart_manager/cart_manager.dart';
+import 'package:flowery/config/general_cubit/cart_manager/cart_state.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flowery/features/cart/domain/entities/cart_item_entity.dart';
-import 'package:flowery/features/cart/presentation/view_model/cubit/cart_view_model.dart';
-import 'package:flowery/features/cart/presentation/view_model/events/cart_events.dart';
-import 'package:flowery/features/cart/presentation/view_model/states/cart_base_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,10 +38,12 @@ class _CustomOrderContainerState extends State<CustomOrderContainer> {
         borderRadius: BorderRadius.circular(7.r),
         border: Border.all(width: 0.5.w, color: AppColors.grayColor),
       ),
-      child: BlocBuilder<CartViewModel, CartBaseState>(
+      child: BlocBuilder<CartManager, CartState>(
         builder: (context, state) {
-          if (state.isDeletingCartItem == true &&
-              state.itemId == widget.cartItem.product?.productId) {
+          if (state.isLoading == true 
+          // &&
+          //     state.itemId == widget.cartItem.product?.productId
+              ) {
             return Center(
               child: SizedBox(
                 width: 50.w,
@@ -124,9 +126,10 @@ class _CustomOrderContainerState extends State<CustomOrderContainer> {
                   children: [
                     IconButton(
                       onPressed: () {
-                        context.read<CartViewModel>().doEvent(
-                          DeleteSpecificCartItemEvent(),
-                          cartItemId: widget.cartItem.product?.productId ?? "",
+                        context.read<CartManager>().doEvent(
+                          DeleteSpecificCartItemEvent(
+                            productId: widget.cartItem.product?.productId ?? "",
+                          ),
                         );
                       },
                       icon: Icon(Icons.delete_forever_rounded, size: 30),
@@ -140,11 +143,12 @@ class _CustomOrderContainerState extends State<CustomOrderContainer> {
                       children: [
                         IconButton(
                           onPressed: () {
-                            context.read<CartViewModel>().doEvent(
-                              UpdateSpecificCartItemEvent(),
-                              cartItemId:
-                                  widget.cartItem.product?.productId ?? "",
-                              quantity: widget.cartItem.quantity! - 1,
+                            context.read<CartManager>().doEvent(
+                              UpdateSpecificCartItemEvent(
+                                productId:
+                                    widget.cartItem.product?.productId ?? "",
+                                quantity: widget.cartItem.quantity! - 1,
+                              ),
                             );
                           },
                           icon: Icon(
@@ -154,11 +158,13 @@ class _CustomOrderContainerState extends State<CustomOrderContainer> {
                           ),
                           color: AppColors.blackColor,
                         ),
-                        BlocBuilder<CartViewModel, CartBaseState>(
-                          builder: (BuildContext context, CartBaseState state) {
-                            if (state.isUpdatingCartItem == true &&
-                                state.itemId ==
-                                    widget.cartItem.product?.productId) {
+                        BlocBuilder<CartManager, CartState>(
+                          builder: (context, state) {
+                            if (state.isLoading == true
+                            // &&
+                            //     state.itemId ==
+                            //         widget.cartItem.product?.productId
+                            ) {
                               return Center(
                                 child: SizedBox(
                                   width: 10.w,
@@ -181,11 +187,12 @@ class _CustomOrderContainerState extends State<CustomOrderContainer> {
                         ),
                         IconButton(
                           onPressed: () {
-                            context.read<CartViewModel>().doEvent(
-                              UpdateSpecificCartItemEvent(),
-                              cartItemId:
-                                  widget.cartItem.product?.productId ?? "",
-                              quantity: widget.cartItem.quantity! + 1,
+                            context.read<CartManager>().doEvent(
+                              UpdateSpecificCartItemEvent(
+                                productId:
+                                    widget.cartItem.product?.productId ?? "",
+                                quantity: widget.cartItem.quantity! + 1,
+                              ),
                             );
                           },
                           icon: Icon(

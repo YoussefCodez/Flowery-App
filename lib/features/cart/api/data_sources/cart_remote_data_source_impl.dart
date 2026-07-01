@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flowery/config/base_response/base_response.dart';
-import 'package:flowery/core/const/cart_values.dart';
+import 'package:flowery/config/error/failures.dart';
+import 'package:flowery/config/l10n/translations/app_localizations_en.dart';
 import 'package:flowery/features/cart/api/api_client/cart_api_client.dart';
 import 'package:flowery/features/cart/data/data_sources/cart_remote_data_source_contract.dart';
+import 'package:flowery/features/cart/data/models/requests/cart_request_model.dart';
 import 'package:flowery/features/cart/data/models/responses/cart_response_model.dart';
 import 'package:injectable/injectable.dart';
 
@@ -18,53 +20,68 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSourceContract {
       return Success<CartResponseModel>(data: response);
     } on DioException catch (e) {
       return Error<CartResponseModel>(
-        exception: Exception(e.response?.data[CartValues.error]),
+        exception: ServerFailure.fromDioException(
+          dioException: e,
+          lang: AppLocalizationsEn(),
+        ),
       );
     }
   }
 
   @override
   Future<Result<CartResponseModel>> deleteSpecificItem(
-    String cartItemId,
+    String productId,
   ) async {
     try {
-      final response = await apiClient.deleteSpecificItem(cartItemId);
+      final response = await apiClient.deleteSpecificItem(productId);
       return Success<CartResponseModel>(data: response);
     } on DioException catch (e) {
       return Error<CartResponseModel>(
-        exception: Exception(e.response?.data[CartValues.error]),
+        exception: ServerFailure.fromDioException(
+          dioException: e,
+          lang: AppLocalizationsEn(),
+        ),
       );
     }
   }
 
   @override
   Future<Result<CartResponseModel>> updateCartProductQuantity(
-    String cartItemId,
+    String productId,
     int quantity,
   ) async {
     try {
-      final response = await apiClient.updateCartProductQuantity(cartItemId, {
-        CartValues.quantity: quantity,
-      });
+      final response = await apiClient.updateCartProductQuantity(
+        productId,
+        CartRequestModel(quantity: quantity),
+      );
       return Success<CartResponseModel>(data: response);
     } on DioException catch (e) {
       return Error<CartResponseModel>(
-        exception: Exception(e.response?.data[CartValues.error]),
+        exception: ServerFailure.fromDioException(
+          dioException: e,
+          lang: AppLocalizationsEn(),
+        ),
       );
     }
   }
-  
+
   @override
-  Future<Result<CartResponseModel>> addToCart(String cartItemId, int quantity) async {
+  Future<Result<CartResponseModel>> addToCart(
+    String productId,
+    int quantity,
+  ) async {
     try {
-      final response = await apiClient.addToCart({
-        CartValues.product: cartItemId,
-        CartValues.quantity: quantity,
-      });
+      final response = await apiClient.addToCart(
+        CartRequestModel(productId: productId, quantity: quantity),
+      );
       return Success<CartResponseModel>(data: response);
     } on DioException catch (e) {
       return Error<CartResponseModel>(
-        exception: Exception(e.response?.data[CartValues.error]),
+        exception: ServerFailure.fromDioException(
+          dioException: e,
+          lang: AppLocalizationsEn(),
+        ),
       );
     }
   }
