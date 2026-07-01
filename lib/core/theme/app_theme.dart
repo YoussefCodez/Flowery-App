@@ -17,6 +17,7 @@ abstract class AppTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
+        elevation: 0.0,
         padding: EdgeInsets.symmetric(vertical: 14.h),
         backgroundColor: AppColors.primaryColor,
         foregroundColor: AppColors.whiteColor,

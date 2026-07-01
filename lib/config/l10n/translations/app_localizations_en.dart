@@ -12,6 +12,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get login => 'Login';
 
   @override
+  String get remember_me => 'Remember me';
+
+  @override
+  String get sign_up => 'Sign Up';
+
+  @override
+  String get enter_your_email => 'Enter your email';
+
+  @override
+  String get enter_your_password => 'Enter your password';
+
+  @override
   String get name_is_required => 'Name is required!';
 
   @override
@@ -21,7 +33,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get email_is_required => 'Email is required!';
 
   @override
-  String get email_is_not_valid => 'This email is not valid';
+  String get email_is_not_valid => 'This Email is not valid';
 
   @override
   String get password_is_required => 'Password is required!';
@@ -237,4 +249,80 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get termsAndConditions => 'Terms&Conditions';
+
+  @override
+  String get egp => 'EGP';
+
+  @override
+  String get status_in_stock => 'Status:In Stock';
+
+  @override
+  String get all_prices_include_tax => 'All Prices Include Tax';
+
+  @override
+  String get bouquet => 'Bouquet';
+
+  @override
+  String get description => 'Description';
+
+  @override
+  String get bouquet_include => 'Bouquet include';
+
+  @override
+  String get add_to_cart => 'Add To Cart';
+
+  @override
+  String get reset_password => 'Reset Password';
+
+  @override
+  String get current_password => 'Current Password';
+
+  @override
+  String get new_password => 'New Password';
+
+  @override
+  String get update => 'Update';
+
+  @override
+  String get incorrect_password => 'Incorrect old password';
+
+  @override
+  String get password_changed_success =>
+      'Password has been changed successfully';
+
+  @override
+  String get success => 'Success';
+
+  @override
+  String get best_seller => 'Best Seller';
+
+  @override
+  String get best_seller_title => 'Bloom with our exquisite best sellers';
+
+  @override
+  String get no_products => 'No Products';
+
+  @override
+  String get occasion => 'Occasion';
+
+  @override
+  String get lowest_price => 'Lowest Price';
+
+  @override
+  String get highest_price => 'Highest Price';
+
+  @override
+  String get new_products => 'New';
+
+  @override
+  String get old_products => 'Old';
+
+  @override
+  String get filter => 'Filter';
+
+  @override
+  String get sort_by => 'Sort by';
+
+  @override
+  String get discount => 'Discount';
 }
