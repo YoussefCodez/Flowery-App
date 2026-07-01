@@ -1,5 +1,6 @@
 import 'package:flowery/config/api/api_keys.dart';
 import 'package:flowery/config/di/injectable_config.dart';
+import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/general_cubit/general_state.dart';
 import 'package:flowery/config/general_cubit/local_cubit.dart';
 import 'package:flowery/config/helpers/shared_pref.dart';
@@ -48,7 +49,7 @@ class DriverApp extends StatelessWidget {
               theme: AppTheme.lightTheme,
               //  darkTheme: AppTheme.darkTheme,
               // themeMode: state.themeMode,
-              initialRoute: AppRoutes.languagepage,
+              initialRoute: AppRoutes.appSection,
             );
           },
         );
