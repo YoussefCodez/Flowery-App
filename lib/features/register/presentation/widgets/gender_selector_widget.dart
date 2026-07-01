@@ -1,5 +1,5 @@
+import 'package:flowery/config/general_cubit/constants.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
-import 'package:flowery/config/utils/constants.dart';
 import 'package:flowery/features/register/presentation/cubit/register_cubit.dart';
 import 'package:flowery/features/register/presentation/cubit/register_events.dart';
 import 'package:flowery/features/register/presentation/cubit/register_states.dart';

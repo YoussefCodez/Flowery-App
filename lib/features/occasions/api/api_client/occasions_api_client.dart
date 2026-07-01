@@ -18,6 +18,6 @@ abstract class OccasionsApiClient {
 
   @GET(AppEndPoints.products)
   Future<OccasionProductsResponseModel> getProductsOfSpecificOccasion(
-    @Query(AppEndPoints.occasion) String occasionId,
+    @Query(AppEndPoints.occasions) String occasionId,
   );
 }

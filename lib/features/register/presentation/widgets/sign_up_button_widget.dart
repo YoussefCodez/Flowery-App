@@ -1,4 +1,4 @@
-import 'package:flowery/config/utils/constants.dart';
+import 'package:flowery/config/general_cubit/constants.dart';
 import 'package:flutter/material.dart';
 
 class SignUpButtonWidget extends StatelessWidget {

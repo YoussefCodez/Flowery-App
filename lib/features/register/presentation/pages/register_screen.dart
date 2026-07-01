@@ -1,8 +1,8 @@
 import 'package:flowery/config/di/injectable_config.dart';
+import 'package:flowery/config/general_cubit/constants.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_extensions.dart';
-import 'package:flowery/config/utils/constants.dart';
 import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flowery/core/widgets/custom_text_field.dart';
 import 'package:flowery/features/register/presentation/cubit/register_cubit.dart';
