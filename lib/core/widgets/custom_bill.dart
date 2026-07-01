@@ -136,34 +136,29 @@ class _CustomBillState extends State<CustomBill> {
           widget.isItPlaceOrder == null
               ? ElevatedButton(
                   onPressed: () {
-              final hasAddress = context
-                  .read<AddressStatusCubit>()
-                  .state
-                  .hasAddress;
+                    final hasAddress = context
+                        .read<AddressStatusCubit>()
+                        .state
+                        .hasAddress;
 
-              if (!hasAddress) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Please add a delivery address first'),
-                  ),
-                );
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => const SavedAddressesScreen(),
-                  ),
-                );
-                return;
-              }
-
-              context.pushNamed(
-                    AppRoutes.checkout,
-                    arguments: TransferBill(
-                      subtotal: widget.subtotal ?? 0,
-                      discount: widget.discount ?? 0,
-                      subtotalAfterDiscount: widget.subtotalAfterDiscount ?? 0,
-                    ));
-            },
+                    if (!hasAddress) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please add a delivery address first'),
+                        ),
+                      );
+                    } else {
+                      context.pushNamed(
+                        AppRoutes.checkout,
+                        arguments: TransferBill(
+                          subtotal: widget.subtotal ?? 0,
+                          discount: widget.discount ?? 0,
+                          subtotalAfterDiscount:
+                              widget.subtotalAfterDiscount ?? 0,
+                        ),
+                      );
+                    }
+                  },
                   child: Text(localizations.checkout),
                 )
               : SizedBox.shrink(),

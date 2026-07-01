@@ -1,3 +1,5 @@
+import 'package:flowery/config/general_cubit/address_view_model/cubit/address_status_cubit.dart';
+import 'package:flowery/config/general_cubit/address_view_model/events/address_status_events.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/core/widgets/custom_text_field.dart';
 import 'package:flowery/features/address_details/data/models/location/city_model.dart';
@@ -260,6 +262,10 @@ class _AddressDetailsBodyState extends State<AddressDetailsBody> {
                                 context.read<AddressDetailsViewModel>().doEvent(
                                   SaveAddressDetailsEvent(),
                                   request: request,
+                                );
+
+                                context.read<AddressStatusCubit>().doEvent(
+                                  CheckAddressStatusEvent(),
                                 );
                               },
                         child: state.isSavingAddress

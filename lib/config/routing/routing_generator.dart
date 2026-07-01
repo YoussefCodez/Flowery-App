@@ -1,6 +1,7 @@
 import 'package:flowery/core/const/app_strings.dart';
 import 'package:flowery/core/widgets/custom_bill.dart';
 import 'package:flowery/core/widgets/main_layout.dart';
+import 'package:flowery/features/save_address/presentation/screens/saved_addresses_screen.dart';
 import 'package:flowery/features/web_view/presentation/screen/web_view_screen.dart';
 import 'package:flowery/features/change_password/presentation/screens/change_password_screen.dart';
 import 'package:flowery/features/checkout/presentation/screens/checkout_screen.dart';
@@ -32,6 +33,9 @@ class RouteGenerator {
     switch (settings.name) {
       case AppRoutes.login:
         return MaterialPageRoute(builder: (_) => LoginScreen());
+
+      case AppRoutes.savedAddress:
+        return MaterialPageRoute(builder: (_) => SavedAddressesScreen());
 
       case AppRoutes.register:
         return MaterialPageRoute(builder: (_) => RegisterScreen());

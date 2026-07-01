@@ -20,4 +20,5 @@ abstract class AppRoutes {
   static const String termsAndConditions = "/terms-and-conditions";
   static const String aboutUs = "/about-us";
   static const String testTerm = "/test-term";
+  static const String savedAddress = "/saved-address";
 }

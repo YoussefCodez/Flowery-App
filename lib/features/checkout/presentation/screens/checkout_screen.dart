@@ -5,6 +5,7 @@ import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/config/remote_config_service/remote_config_service.dart';
 import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flowery/core/theme/app_colors.dart';
+import 'package:flowery/core/widgets/address_picker_sheet.dart';
 import 'package:flowery/core/widgets/custom_bill.dart';
 import 'package:flowery/core/widgets/custom_text_field.dart';
 import 'package:flowery/features/checkout/data/models/requests/create_cash_order_request.dart';
@@ -121,6 +122,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     ),
 
                     // Delivery address
+                    // AddressPickerSheet(),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

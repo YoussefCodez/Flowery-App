@@ -141,7 +141,7 @@ class _MainProfileViewState extends State<MainProfileView> {
           ),
           title: l10n.saved_address,
           trailingWidget: Icon(Icons.chevron_right, color: AppColors.grayColor),
-          onTap: () {},
+          onTap: () => context.pushNamed(AppRoutes.savedAddress),
         ),
         const Divider(height: 1, thickness: 1, color: AppColors.dividerColor),
         BlocBuilder<ProfileCubit, ProfileState>(
@@ -163,7 +163,6 @@ class _MainProfileViewState extends State<MainProfileView> {
               ),
             );
           },
-
         ),
         const Divider(height: 1, thickness: 1, color: AppColors.dividerColor),
         LanguageTile(),

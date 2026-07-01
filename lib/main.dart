@@ -20,9 +20,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Bloc.observer = MyBlocObserver();
-  await configureDependencies();
+
   await Firebase.initializeApp();
+
+  await configureDependencies();
+
+  Bloc.observer = MyBlocObserver();
+
   await RemoteConfigService.init();
   await getIt<FirebaseService>().initialize();
 

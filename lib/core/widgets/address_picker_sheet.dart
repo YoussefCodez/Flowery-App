@@ -2,7 +2,6 @@ import 'package:flowery/config/general_cubit/address_view_model/cubit/address_st
 import 'package:flowery/config/general_cubit/address_view_model/events/address_status_events.dart';
 import 'package:flowery/config/general_cubit/address_view_model/states/address_status_state.dart';
 import 'package:flowery/features/address_details/presentation/screens/address_details_screen.dart';
-import 'package:flowery/features/save_address/presentation/screens/saved_addresses_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,18 +34,23 @@ class AddressPickerSheet extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Choose delivery address',
-                        style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold)),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => const SavedAddressesScreen()),
-                        );
-                      },
-                      child: const Text('Manage'),
+                    Text(
+                      'Choose delivery address',
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
+                    // TextButton(
+                    //   onPressed: () {
+                    //     Navigator.pop(context);
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(builder: (_) => const SavedAddressesScreen()),
+                    //     );
+                    //   },
+                    //   child: const Text('Manage'),
+                    // ),
                   ],
                 ),
                 SizedBox(height: 8.h),
@@ -64,19 +68,28 @@ class AddressPickerSheet extends StatelessWidget {
                       separatorBuilder: (_, __) => Divider(height: 1.h),
                       itemBuilder: (context, index) {
                         final address = state.addresses[index];
-                        final isSelected = state.currentAddress?.id == address.id;
+                        final isSelected =
+                            state.currentAddress?.id == address.id;
 
                         return ListTile(
                           contentPadding: EdgeInsets.zero,
                           leading: Icon(
-                            isSelected ? Icons.radio_button_checked : Icons.radio_button_off,
-                            color: isSelected ? Theme.of(context).primaryColor : Colors.grey,
+                            isSelected
+                                ? Icons.radio_button_checked
+                                : Icons.radio_button_off,
+                            color: isSelected
+                                ? Theme.of(context).primaryColor
+                                : Colors.grey,
                           ),
-                          title: Text('${address.street ?? ''} - ${address.city ?? ''}'),
+                          title: Text(
+                            '${address.street ?? ''} - ${address.city ?? ''}',
+                          ),
                           subtitle: Text(address.phone ?? ''),
                           onTap: () {
-                            context.read<AddressStatusCubit>().doEvent(SelectAddressEvent(address));
-                            Navigator.pop(context);
+                            context.read<AddressStatusCubit>().doEvent(
+                              SelectAddressEvent(address),
+                            );
+                            // Navigator.pop(context);
                           },
                         );
                       },
@@ -92,7 +105,9 @@ class AddressPickerSheet extends StatelessWidget {
                       Navigator.pop(context);
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_) => const AddressDetailsScreen()),
+                        MaterialPageRoute(
+                          builder: (_) => const AddressDetailsScreen(),
+                        ),
                       );
                     },
                   ),
