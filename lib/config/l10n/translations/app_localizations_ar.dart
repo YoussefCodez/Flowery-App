@@ -12,6 +12,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get login => 'تسجيل الدخول';
 
   @override
+  String get remember_me => 'تذكرني';
+
+  @override
+  String get sign_up => 'انشاء حساب';
+
+  @override
+  String get enter_your_email => 'ادخل البريد الإلكتروني';
+
+  @override
+  String get enter_your_password => 'ادخل كلمة المرور';
+
+  @override
   String get name_is_required => 'الاسم مطلوب!';
 
   @override
@@ -212,4 +224,118 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get english => 'الإنجليزية';
+
+  @override
+  String get enterFirstName => 'ادخل الاسم الاول';
+
+  @override
+  String get firstName => 'الاسم الاول';
+
+  @override
+  String get enterLastName => 'ادخل الاسم الاخير';
+
+  @override
+  String get lastName => 'الاسم الاخير';
+
+  @override
+  String get enterYourEmail => 'ادخل ايميلك';
+
+  @override
+  String get enterPassword => 'ادخل الرقم السري';
+
+  @override
+  String get enterPhoneNumber => 'ادخل رقم الهاتف';
+
+  @override
+  String get phoneNumber => 'رقم الهاتف';
+
+  @override
+  String get gender => 'الجنس';
+
+  @override
+  String get female => 'انثي';
+
+  @override
+  String get male => 'رجل';
+
+  @override
+  String get creatingAccountAgreement => 'بإنشاء حساب، فإنك توافق على شروطنا';
+
+  @override
+  String get termsAndConditions => 'الشروط والأحكام';
+
+  @override
+  String get egp => 'EGP';
+
+  @override
+  String get status_in_stock => 'الحالة: متوفر في المخزون';
+
+  @override
+  String get all_prices_include_tax => 'جميع الأسعار تشمل الضريبة';
+
+  @override
+  String get bouquet => 'Bouquet';
+
+  @override
+  String get description => 'الوصف';
+
+  @override
+  String get bouquet_include => 'تشمل الباقة';
+
+  @override
+  String get add_to_cart => 'اضف الى العربة';
+
+  @override
+  String get reset_password => 'إعادة تعيين كلمة المرور';
+
+  @override
+  String get current_password => 'كلمة المرور الحالية';
+
+  @override
+  String get new_password => 'كلمة المرور الجديدة';
+
+  @override
+  String get update => 'تحديث';
+
+  @override
+  String get incorrect_password => 'كلمة المرور القديمة غير صحيحة';
+
+  @override
+  String get password_changed_success => 'تم تغيير كلمة المرور بنجاح';
+
+  @override
+  String get success => 'نجحت';
+
+  @override
+  String get best_seller => 'الأكثر مبيعًا';
+
+  @override
+  String get best_seller_title => 'تألقي مع أفضل منتجاتنا مبيعًا';
+
+  @override
+  String get no_products => 'لا يوجد منتجات';
+
+  @override
+  String get occasion => 'المناسبة';
+
+  @override
+  String get lowest_price => 'ارخص ثمن';
+
+  @override
+  String get highest_price => 'اغلي ثمن';
+
+  @override
+  String get new_products => 'جديد';
+
+  @override
+  String get old_products => 'قديم';
+
+  @override
+  String get filter => 'فلتر';
+
+  @override
+  String get sort_by => 'فرز حسب';
+
+  @override
+  String get discount => 'خصم';
 }

@@ -31,6 +31,7 @@ dependencies:
   internet_connection_checker_plus: ^2.9.1+2
   json_annotation: ^4.11.0
   logger: ^2.6.2
+  mocktail: ^1.0.5
   open_file: 3.5.11
   path_provider: 2.1.5
   permission_handler: 12.0.1
@@ -39,12 +40,10 @@ dependencies:
   shared_preferences: ^2.5.4
   shimmer: ^3.0.0
   syncfusion_flutter_pdfviewer: 33.1.44
-  mocktail: ^1.0.5
-
- 
-
   url_launcher: ^6.3.2
   carousel_slider: ^5.1.2
+
+
 
   flutter_svg: ^2.3.0
 dev_dependencies:
