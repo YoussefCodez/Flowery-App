@@ -124,7 +124,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               if (value == null || value.isEmpty) {
                                 return localizations.password_is_required;
                               }
-                              // TODO: check if the old password is wrong
                               return null;
                             },
                           ),

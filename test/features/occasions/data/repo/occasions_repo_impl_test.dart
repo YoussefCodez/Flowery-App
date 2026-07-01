@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flowery/config/base_response/base_response.dart';
 import 'package:flowery/features/occasions/data/data_sources/occasions_data_sources_contract.dart';
 import 'package:flowery/features/occasions/data/models/response/meta_data_model.dart';
