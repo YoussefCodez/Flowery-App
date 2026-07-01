@@ -1,46 +1,62 @@
 import 'dart:ui';
-
-import 'package:flowery/config/di/injectable_config.dart';
 import 'package:flowery/config/general_cubit/general_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import '../helpers/shared_pref.dart';
-import '../utils/constants.dart';
+import 'constants.dart';
 
 @injectable
 class LocaleThemeCubit extends Cubit<LocaleThemeState> {
-  LocaleThemeCubit()
+  final SharedPrefHelper sharedPrefHelper;
+
+  LocaleThemeCubit(this.sharedPrefHelper)
       : super(
           LocaleThemeState(
             locale: Locale(
-              getIt<SharedPrefHelper>()
-                      .getData(key: AppConstants.languageCode) as String? ??
+              sharedPrefHelper.getString(
+                    AppConstants.languageCode,
+                  ) ??
                   AppConstants.enKey,
             ),
-            isDark: getIt<SharedPrefHelper>()
-                    .getData(key: AppConstants.isDark) as bool? ??
-                false,
+            isDark:
+                sharedPrefHelper.getBool(
+                      AppConstants.isDark,
+                    ) ??
+                    false,
           ),
         );
 
   void changeLocale() {
     final lanCode = state.locale.languageCode;
-    if (lanCode == AppConstants.enKey) {
-      getIt<SharedPrefHelper>()
-          .saveData(key: AppConstants.languageCode, val: AppConstants.arKey);
-      emit(state.copyWith(locale: const Locale(AppConstants.arKey)));
-    } else {
-      getIt<SharedPrefHelper>()
-          .saveData(key: AppConstants.languageCode, val: AppConstants.enKey);
-      emit(state.copyWith(locale: const Locale(AppConstants.enKey)));
-    }
+
+    final newLocale =
+        lanCode == AppConstants.enKey
+            ? AppConstants.arKey
+            : AppConstants.enKey;
+
+    sharedPrefHelper.saveString(
+      key: AppConstants.languageCode,
+      value: newLocale,
+    );
+
+    emit(
+      state.copyWith(
+        locale: Locale(newLocale),
+      ),
+    );
   }
 
   void toggleTheme() {
     final newTheme = !state.isDark;
-    getIt<SharedPrefHelper>()
-        .saveData(key: AppConstants.isDark, val: newTheme);
-    emit(state.copyWith(isDark: newTheme));
+
+    sharedPrefHelper.saveBool(
+      key: AppConstants.isDark,
+      value: newTheme,
+    );
+
+    emit(
+      state.copyWith(isDark: newTheme),
+    );
   }
 }
