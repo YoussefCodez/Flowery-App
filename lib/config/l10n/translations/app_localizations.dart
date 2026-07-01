@@ -488,11 +488,19 @@ abstract class AppLocalizations {
   /// **'An error occurred'**
   String get an_error_occurred;
 
+<<<<<<< HEAD
+  /// No description provided for @best_seller.
+  ///
+  /// In en, this message translates to:
+  /// **'Best Seller'**
+  String get best_seller;
+=======
   /// No description provided for @occasion.
   ///
   /// In en, this message translates to:
   /// **'Occasion'**
   String get occasion;
+>>>>>>> origin/dev
 
   /// No description provided for @best_seller_title.
   ///

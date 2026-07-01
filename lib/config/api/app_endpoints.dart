@@ -5,4 +5,5 @@ abstract class AppEndPoints {
   static const String products = 'products';
   static const String refreshToken = '$baseUrl/refresh-token';
   static const String login = 'auth/signin';
+  static const String bestSeller = 'best-seller';
 }

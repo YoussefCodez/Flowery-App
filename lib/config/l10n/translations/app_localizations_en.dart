@@ -211,7 +211,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get an_error_occurred => 'An error occurred';
 
   @override
+<<<<<<< HEAD
+  String get best_seller => 'Best Seller';
+=======
   String get occasion => 'Occasion';
+>>>>>>> origin/dev
 
   @override
   String get best_seller_title => 'Bloom with our exquisite best sellers';

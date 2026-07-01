@@ -208,7 +208,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String get an_error_occurred => 'حدث خطأ';
 
   @override
+<<<<<<< HEAD
+  String get best_seller => 'الأكثر مبيعًا';
+=======
   String get occasion => 'المناسبة';
+>>>>>>> origin/dev
 
   @override
   String get best_seller_title => 'تألقي مع أفضل منتجاتنا مبيعًا';

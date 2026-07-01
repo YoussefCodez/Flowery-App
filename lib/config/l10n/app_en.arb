@@ -64,7 +64,8 @@
   "register_success": "Successfully",
   "connectButton": "Connect",
   "an_error_occurred": "An error occurred",
-  "occasion": "Occasion",
+  "best_seller": "Best Seller",
   "best_seller_title": "Bloom with our exquisite best sellers",
-  "no_products": "No Products"
+  "no_products": "No Products",
+  "occasion": "Occasion"
 }
