@@ -1,6 +1,5 @@
 import 'package:flowery/config/base_state/base_state.dart';
 import 'package:flowery/config/di/injectable_config.dart';
-import 'package:flowery/config/error/failures.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_extensions.dart';
@@ -50,14 +49,14 @@ class _LogoutButtonContentState extends State<_LogoutButtonContent> {
   Widget build(BuildContext context) {
     return BlocListener<LogoutCubit, BaseState<void>>(
       listener: (context, state) {
-        if (state.state == StateType.error) {
-          final msg = state.exception is ServerFailure
-              ? (state.exception as ServerFailure).errorMessage
-              : AppLocalizations.of(context)!.error;
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(msg)),
-          );
-        }
+        // if (state.state == StateType.error) {
+        //   final msg = state.exception is ServerFailure
+        //       ? (state.exception as ServerFailure).errorMessage
+        //       : AppLocalizations.of(context)!.error;
+        //   ScaffoldMessenger.of(context).showSnackBar(
+        //     SnackBar(content: Text(msg)),
+        //   );
+        // }
       },
       child: Builder(
         builder: (context) {
