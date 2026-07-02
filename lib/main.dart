@@ -1,4 +1,5 @@
 import 'package:flowery/config/di/injectable_config.dart';
+import 'package:flowery/config/general_cubit/cart_manager/cart_events.dart';
 import 'package:flowery/config/general_cubit/general_state.dart';
 import 'package:flowery/config/general_cubit/local_cubit.dart';
 import 'package:flowery/config/helpers/bloc/bloc_observer.dart';
@@ -20,12 +21,10 @@ void main() async {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (_) => getIt<LocaleThemeCubit>(),
-        ),
+        BlocProvider(create: (_) => getIt<LocaleThemeCubit>()),
 
         BlocProvider.value(
-          value: getIt<CartManager>(),
+          value: getIt<CartManager>()..doEvent(GetUserCartProductsEvent()),
         ),
       ],
       child: const FloweryApp(),
@@ -55,7 +54,7 @@ class FloweryApp extends StatelessWidget {
               theme: AppTheme.lightTheme,
               //  darkTheme: AppTheme.darkTheme,
               // themeMode: state.themeMode,
-               initialRoute: AppRoutes.cart,
+              initialRoute: AppRoutes.cart,
             );
           },
         );

@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'cart_request_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class CartRequestModel {
   final String? productId;
   final int? quantity;

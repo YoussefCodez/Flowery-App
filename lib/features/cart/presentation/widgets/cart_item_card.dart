@@ -1,23 +1,23 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flowery/config/general_cubit/cart_manager/cart_events.dart';
-import 'package:flowery/config/general_cubit/cart_manager/cart_manager.dart';
-import 'package:flowery/config/general_cubit/cart_manager/cart_state.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flowery/features/cart/domain/entities/cart_item_entity.dart';
+import 'package:flowery/config/general_cubit/cart_manager/cart_manager.dart';
+import 'package:flowery/config/general_cubit/cart_manager/cart_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CustomOrderContainer extends StatefulWidget {
+class CartItemCard extends StatefulWidget {
   final CartItemEntity cartItem;
-  const CustomOrderContainer({super.key, required this.cartItem});
+  const CartItemCard({super.key, required this.cartItem});
 
   @override
-  State<CustomOrderContainer> createState() => _CustomOrderContainerState();
+  State<CartItemCard> createState() => _CartItemCardState();
 }
 
-class _CustomOrderContainerState extends State<CustomOrderContainer> {
+class _CartItemCardState extends State<CartItemCard> {
   late TextTheme textTheme;
   late AppLocalizations localizations;
 
@@ -40,10 +40,8 @@ class _CustomOrderContainerState extends State<CustomOrderContainer> {
       ),
       child: BlocBuilder<CartManager, CartState>(
         builder: (context, state) {
-          if (state.isLoading == true 
-          // &&
-          //     state.itemId == widget.cartItem.product?.productId
-              ) {
+          if (state.isDeletingCartItem == true &&
+              state.itemId == widget.cartItem.product?.productId) {
             return Center(
               child: SizedBox(
                 width: 50.w,
@@ -160,11 +158,9 @@ class _CustomOrderContainerState extends State<CustomOrderContainer> {
                         ),
                         BlocBuilder<CartManager, CartState>(
                           builder: (context, state) {
-                            if (state.isLoading == true
-                            // &&
-                            //     state.itemId ==
-                            //         widget.cartItem.product?.productId
-                            ) {
+                            if (state.isUpdatingCartItem == true &&
+                                state.itemId ==
+                                    widget.cartItem.product?.productId) {
                               return Center(
                                 child: SizedBox(
                                   width: 10.w,

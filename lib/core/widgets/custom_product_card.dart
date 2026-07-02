@@ -52,9 +52,7 @@ class CustomProductCard extends StatelessWidget {
       ),
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(
-            color: Theme.of(context).colorScheme.onSecondary,
-          ),
+          border: Border.all(color: Theme.of(context).colorScheme.onSecondary),
           borderRadius: BorderRadius.circular(8.r),
         ),
         padding: REdgeInsets.all(8),
@@ -135,7 +133,7 @@ class CustomProductCard extends StatelessWidget {
                   SizedBox(width: 4.w),
                   BlocBuilder<CartManager, CartState>(
                     builder: (context, state) {
-                      if (state.isLoading == true) {
+                      if (state.isAddingToCart == true && state.itemId == id) {
                         return Center(child: CircularProgressIndicator());
                       } else {
                         return Text(

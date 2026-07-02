@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/theme/app_colors.dart';
+import '../theme/app_colors.dart';
 
 class CustomLocation extends StatelessWidget {
   const CustomLocation({super.key});
@@ -17,7 +17,7 @@ class CustomLocation extends StatelessWidget {
         ),
         Text(
           "2XVP+XC - Sheikh Zayed.....",
-          style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
+          style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500),
         ),
         Icon(
           Icons.keyboard_arrow_down_sharp,
