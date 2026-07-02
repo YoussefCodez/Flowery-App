@@ -9,7 +9,9 @@ import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_generator.dart';
 import 'package:flowery/core/theme/app_theme.dart';
 import 'package:flowery/config/general_cubit/cart_manager/cart_manager.dart';
-import 'package:flowery/config/firebase/firebase_service.dart';
+import 'package:flowery/config/firebase/firebase_services.dart';
+import 'package:flowery/features/main_profile/presentation/view_model/profile_cubit.dart';
+import 'package:flowery/features/main_profile/presentation/view_model/profile_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,10 +22,13 @@ void main() async {
   await Firebase.initializeApp();
   Bloc.observer = MyBlocObserver();
   await configureDependencies();
-  await getIt<FirebaseService>().initialize();
+  await getIt<FirebaseServices>().fcm.requestPermission();
   runApp(
     MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (_) => getIt<ProfileCubit>()..doEvent(GetProfileDate()),
+        ),
         BlocProvider(create: (_) => getIt<LocaleThemeCubit>()),
         BlocProvider(create: (_) => getIt<CartManager>()..loadCart()),
       ],

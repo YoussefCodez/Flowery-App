@@ -7,7 +7,6 @@ import 'package:flowery/core/const/app_svgs.dart';
 import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flowery/features/app_language_logout/presntation/widgets/language_tile.dart';
 import 'package:flowery/features/app_language_logout/presntation/widgets/logout_button.dart';
-import 'package:flowery/config/firebase/firebase_service.dart';
 import 'package:flowery/features/main_profile/domain/entity/profile_entity.dart';
 import 'package:flowery/features/main_profile/presentation/view_model/profile_cubit.dart';
 import 'package:flowery/features/main_profile/presentation/view_model/profile_event.dart';
@@ -28,23 +27,47 @@ class MainProfileView extends StatefulWidget {
 }
 
 class _MainProfileViewState extends State<MainProfileView> {
+  late final AppLifecycleListener _listener;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _listener = AppLifecycleListener(
+      onResume: () {
+        if (!mounted) return;
+
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (!mounted) return;
+
+          context.read<ProfileCubit>().doEvent(
+            RefreshNotificationPermissionEvent(),
+          );
+        });
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _listener.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => getIt<ProfileCubit>()..doEvent(GetProfileDate()),
-      child: Scaffold(
-        backgroundColor: AppColors.whiteColor,
-        body: SafeArea(
-          child: BlocBuilder<ProfileCubit, ProfileState>(
-            builder: (context, state) {
-              return state.getProfileDate.when(
-                initial: () => const SizedBox.shrink(),
-                loading: () => const Center(child: CircularProgressIndicator()),
-                success: (profile) => _buildContent(context, profile),
-                error: (e) => Center(child: Text(e.toString())),
-              );
-            },
-          ),
+    return Scaffold(
+      backgroundColor: AppColors.whiteColor,
+      body: SafeArea(
+        child: BlocBuilder<ProfileCubit, ProfileState>(
+          builder: (context, state) {
+            return state.getProfileDate.when(
+              initial: () => const SizedBox.shrink(),
+              loading: () => const Center(child: CircularProgressIndicator()),
+              success: (profile) => _buildContent(context, profile),
+              error: (e) => Center(child: Text(e.toString())),
+            );
+          },
         ),
       ),
     );
@@ -153,7 +176,7 @@ class _MainProfileViewState extends State<MainProfileView> {
                 activeTrackColor: AppColors.primaryColor,
                 onChanged: (val) {
                   context.read<ProfileCubit>().doEvent(
-                    ToggleNotificationEvent(value: val),
+                    OpenAppNotificationsSettingsEvent(),
                   );
                 },
               ),
@@ -164,7 +187,6 @@ class _MainProfileViewState extends State<MainProfileView> {
               ),
             );
           },
-
         ),
         const Divider(height: 1, thickness: 1, color: AppColors.dividerColor),
         LanguageTile(),
