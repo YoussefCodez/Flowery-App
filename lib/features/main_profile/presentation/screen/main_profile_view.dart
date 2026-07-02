@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flowery/config/di/injectable_config.dart';
 import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flowery/core/const/app_strings.dart';
@@ -27,33 +26,6 @@ class MainProfileView extends StatefulWidget {
 }
 
 class _MainProfileViewState extends State<MainProfileView> {
-  late final AppLifecycleListener _listener;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _listener = AppLifecycleListener(
-      onResume: () {
-        if (!mounted) return;
-
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (!mounted) return;
-
-          context.read<ProfileCubit>().doEvent(
-            RefreshNotificationPermissionEvent(),
-          );
-        });
-      },
-    );
-  }
-
-  @override
-  void dispose() {
-    _listener.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -174,9 +146,9 @@ class _MainProfileViewState extends State<MainProfileView> {
               leadingIcon: CupertinoSwitch(
                 value: state.isNotificationOn,
                 activeTrackColor: AppColors.primaryColor,
-                onChanged: (val) {
+                onChanged: (value) {
                   context.read<ProfileCubit>().doEvent(
-                    OpenAppNotificationsSettingsEvent(),
+                    ToggleNotificationEvent(profile.id ?? "", value),
                   );
                 },
               ),

@@ -2,8 +2,8 @@ import 'package:flowery/config/base_response/base_response.dart';
 import 'package:flowery/config/base_state/base_state.dart';
 import 'package:flowery/features/main_profile/domain/entity/profile_entity.dart';
 import 'package:flowery/features/main_profile/domain/use_case/get_notification_state_use_case.dart';
-import 'package:flowery/features/main_profile/domain/use_case/open_notification_settings_use_case.dart';
 import 'package:flowery/features/main_profile/domain/use_case/profile_use_case.dart';
+import 'package:flowery/features/main_profile/domain/use_case/toggle_notification_use_case.dart';
 import 'package:flowery/features/main_profile/presentation/view_model/profile_event.dart';
 import 'package:flowery/features/main_profile/presentation/view_model/profile_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,11 +13,11 @@ import 'package:injectable/injectable.dart';
 class ProfileCubit extends Cubit<ProfileState> {
   final GetProfileDataUseCase _getProfileDataUseCase;
   final GetNotificationStateUseCase _getNotificationStateUseCase;
-  final OpenNotificationSettingsUseCase _openNotificationSettingsUseCase;
+  final ToggleNotificationUseCase _toggleNotificationUseCase;
   ProfileCubit(
     this._getProfileDataUseCase,
     this._getNotificationStateUseCase,
-    this._openNotificationSettingsUseCase,
+    this._toggleNotificationUseCase,
   ) : super(ProfileState());
 
   void doEvent(ProfileEvent event) {
@@ -25,21 +25,19 @@ class ProfileCubit extends Cubit<ProfileState> {
       case GetProfileDate():
         _getProfileData();
         break;
-
-      case OpenAppNotificationsSettingsEvent():
-        _openAppNotificationsSettings();
-
-      case RefreshNotificationPermissionEvent():
-        _refreshNotificationPermission();
+      case ToggleNotificationEvent():
+        _toggleNotification(event);
     }
   }
 
-  Future<void> _refreshNotificationPermission() async {
-    emit(state.copyWith(isNotificationOn: _getNotificationStateUseCase.call()));
-  }
-
-  Future<void> _openAppNotificationsSettings() async {
-    await _openNotificationSettingsUseCase.call();
+  Future<void> _toggleNotification(ToggleNotificationEvent event) async {
+    if (event.value == true) {
+      emit(state.copyWith(isNotificationOn: true));
+      _toggleNotificationUseCase.call(event.userId, true);
+    } else {
+      emit(state.copyWith(isNotificationOn: false));
+      _toggleNotificationUseCase.call(event.userId, false);
+    }
   }
 
   Future<void> _getProfileData() async {

@@ -2,6 +2,9 @@ sealed class ProfileEvent {}
 
 class GetProfileDate extends ProfileEvent {}
 
-class OpenAppNotificationsSettingsEvent extends ProfileEvent {}
+class ToggleNotificationEvent extends ProfileEvent {
+  final String userId;
+  final bool value;
 
-class RefreshNotificationPermissionEvent extends ProfileEvent {}
+  ToggleNotificationEvent(this.userId,this.value);
+}

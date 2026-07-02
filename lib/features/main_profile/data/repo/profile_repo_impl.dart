@@ -51,4 +51,21 @@ class ProfileRepoImpl implements ProfileRepoContract {
       );
     }
   }
+
+  @override
+  void toggleNotificationInFireStore(
+    String userId,
+    bool isNotificationOn,
+  ) async {
+    if (isNotificationOn) {
+      final fcmToken = await firebase.fcm.getFCMToken();
+      await firebase.firestore.saveTokenToFirestore(
+        userId: userId,
+        token: fcmToken,
+      );
+      return;
+    }
+    await firebase.firestore.saveTokenToFirestore(userId: userId, token: null);
+    return;
+  }
 }
