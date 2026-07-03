@@ -1,3 +1,4 @@
+import 'package:flowery/config/api/api_keys.dart';
 import 'package:flowery/config/base_response/base_response.dart';
 import 'package:flowery/config/firebase/firebase_services.dart';
 import 'package:flowery/features/main_profile/data/model/user_response_model.dart';
@@ -24,7 +25,7 @@ class ProfileRepoImpl implements ProfileRepoContract {
 
             // Handling the FCM Token null state
             if (fcmToken == null) {
-              throw Exception("FCM token is null");
+              throw Exception(Apikeys.fcmTokenisNull);
             }
 
             // In case the FCM token is not null then save it to firestore

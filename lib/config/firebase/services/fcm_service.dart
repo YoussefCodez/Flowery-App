@@ -6,9 +6,12 @@ import 'package:permission_handler/permission_handler.dart';
 @lazySingleton
 class FcmService {
   final FirestoreService _firestore;
-  FcmService(this._firestore);
-  // FCM service instance
-  final FirebaseMessaging _messaging = FirebaseMessaging.instance;
+  final FirebaseMessaging _messaging;
+
+  FcmService(
+    this._firestore,
+    this._messaging,
+  );
   // App Notification instance
   late NotificationSettings _settings;
 
