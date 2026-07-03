@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-Content \"g:\\\\projectwork\\\\Flowery-App\\\\lib\\\\features\\\\app_language_logout\\\\presntation\\\\demo_logout_language.dart\")",
+      "Bash(Get-ChildItem -Path \"g:\\\\projectwork\\\\Flowery-App\" -Directory)",
+      "Bash(Select-Object Name)",
+      "Bash(xargs grep -l \"@RestApi\")",
+      "Bash(xargs grep -l \"retrofit\")",
+      "Bash(xargs grep -l \"class.*Repository\\\\|class.*Service\")"
+    ]
+  }
+}
