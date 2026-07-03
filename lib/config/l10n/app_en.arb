@@ -109,5 +109,14 @@
   "old_products" : "Old",
   "filter" : "Filter",
   "sort_by" : "Sort by",
-  "discount" : "Discount"
+  "cart": "Cart",
+  "items": "items",
+  "sub_total": "Sub Total",
+  "delivery_fee": "Delivery Fee",
+  "total": "Total",
+  "checkout": "Checkout",
+  "egp":"EGP",
+  "discount": "Discount",
+  "sub_total_after_discount": "Subtotal After Discount",
+  "your_cart_is_empty" : "Your Cart is Empty"
 }

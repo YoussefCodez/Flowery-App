@@ -9,4 +9,5 @@ abstract class AppEndPoints {
   static const String changePassword = "auth/change-password";
   static const String bestSeller = 'best-seller';
   static const String register = 'auth/signup';
+  static const String cart = 'cart';
 }

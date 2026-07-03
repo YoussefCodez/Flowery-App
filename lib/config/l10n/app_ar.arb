@@ -109,5 +109,14 @@
   "old_products" : "قديم",
   "filter" : "فلتر",
   "sort_by" : "فرز حسب",
-  "discount" : "خصم"
+  "discount" : "خصم",
+  "cart": "السلة",
+  "items": "العناصر",
+  "sub_total": "المجموع الفرعي",
+  "delivery_fee": "رسوم التوصيل",
+  "total": "الإجمالي",
+  "checkout": "إتمام الطلب",
+  "egp":"جنيه",
+  "sub_total_after_discount": "المجموع الفرعي بعد الخصم",
+  "your_cart_is_empty" : "سلتك فارغة"
 }
