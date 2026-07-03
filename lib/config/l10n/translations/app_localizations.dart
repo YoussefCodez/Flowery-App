@@ -653,7 +653,7 @@ abstract class AppLocalizations {
   /// No description provided for @add_to_cart.
   ///
   /// In en, this message translates to:
-  /// **'Add To Cart'**
+  /// **'Add to Cart'**
   String get add_to_cart;
 
   /// No description provided for @reset_password.
@@ -805,6 +805,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your Cart is Empty'**
   String get your_cart_is_empty;
+
+  /// No description provided for @the_item_has_been_added.
+  ///
+  /// In en, this message translates to:
+  /// **'The item has been added Successfully'**
+  String get the_item_has_been_added;
+
+  /// No description provided for @my_orders.
+  ///
+  /// In en, this message translates to:
+  /// **'My orders'**
+  String get my_orders;
+
+  /// No description provided for @saved_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved address'**
+  String get saved_address;
+
+  /// No description provided for @notification.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification'**
+  String get notification;
+
+  /// No description provided for @about_us.
+  ///
+  /// In en, this message translates to:
+  /// **'About us'**
+  String get about_us;
+
+  /// No description provided for @terms_and_conditions.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms & conditions'**
+  String get terms_and_conditions;
+
+  /// No description provided for @search_for_any_product_you_want.
+  ///
+  /// In en, this message translates to:
+  /// **'Search For Any Product You Want'**
+  String get search_for_any_product_you_want;
+
+  /// No description provided for @edit_profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile'**
+  String get edit_profile;
+
+  /// No description provided for @first_name.
+  ///
+  /// In en, this message translates to:
+  /// **'First name'**
+  String get first_name;
+
+  /// No description provided for @last_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Last name'**
+  String get last_name;
+
+  /// No description provided for @phone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number'**
+  String get phone;
+
+  /// No description provided for @change.
+  ///
+  /// In en, this message translates to:
+  /// **'Change'**
+  String get change;
+
+  /// No description provided for @stars.
+  ///
+  /// In en, this message translates to:
+  /// **'★★★★★★'**
+  String get stars;
+
+  /// No description provided for @first_name_is_required.
+  ///
+  /// In en, this message translates to:
+  /// **'First name is required'**
+  String get first_name_is_required;
+
+  /// No description provided for @last_name_is_required.
+  ///
+  /// In en, this message translates to:
+  /// **'Last name is required'**
+  String get last_name_is_required;
+
+  /// No description provided for @phone_is_required.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone is required'**
+  String get phone_is_required;
 }
 
 class _AppLocalizationsDelegate

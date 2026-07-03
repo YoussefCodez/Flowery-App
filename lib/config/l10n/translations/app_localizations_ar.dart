@@ -289,7 +289,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get bouquet_include => 'تشمل الباقة';
 
   @override
-  String get add_to_cart => 'اضف الى العربة';
+  String get add_to_cart => 'اضف الي السلة';
 
   @override
   String get reset_password => 'إعادة تعيين كلمة المرور';
@@ -365,4 +365,52 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get your_cart_is_empty => 'سلتك فارغة';
+
+  @override
+  String get the_item_has_been_added => 'تم اضافة العنصر بنجاح الي سلتك';
+
+  @override
+  String get my_orders => 'طلباتي';
+
+  @override
+  String get saved_address => 'العناوين المحفوظة';
+
+  @override
+  String get notification => 'الإشعارات';
+
+  @override
+  String get about_us => 'عن التطبيق';
+
+  @override
+  String get terms_and_conditions => 'الشروط والأحكام';
+
+  @override
+  String get search_for_any_product_you_want => 'ابحث عن اي منتج تريد';
+
+  @override
+  String get edit_profile => 'تعديل الملف الشخصي';
+
+  @override
+  String get first_name => 'الاسم الأول';
+
+  @override
+  String get last_name => 'اسم العائلة';
+
+  @override
+  String get phone => 'رقم الموبيل';
+
+  @override
+  String get change => 'تغيير';
+
+  @override
+  String get stars => '★★★★★★';
+
+  @override
+  String get first_name_is_required => 'الاسم الأول مطلوب';
+
+  @override
+  String get last_name_is_required => 'اسم العائلة مطلوب';
+
+  @override
+  String get phone_is_required => 'رقم الهاتف مطلوب';
 }

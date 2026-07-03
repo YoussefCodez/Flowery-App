@@ -293,7 +293,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bouquet_include => 'Bouquet include';
 
   @override
-  String get add_to_cart => 'Add To Cart';
+  String get add_to_cart => 'Add to Cart';
 
   @override
   String get reset_password => 'Reset Password';
@@ -370,4 +370,53 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get your_cart_is_empty => 'Your Cart is Empty';
+
+  @override
+  String get the_item_has_been_added => 'The item has been added Successfully';
+
+  @override
+  String get my_orders => 'My orders';
+
+  @override
+  String get saved_address => 'Saved address';
+
+  @override
+  String get notification => 'Notification';
+
+  @override
+  String get about_us => 'About us';
+
+  @override
+  String get terms_and_conditions => 'Terms & conditions';
+
+  @override
+  String get search_for_any_product_you_want =>
+      'Search For Any Product You Want';
+
+  @override
+  String get edit_profile => 'Edit profile';
+
+  @override
+  String get first_name => 'First name';
+
+  @override
+  String get last_name => 'Last name';
+
+  @override
+  String get phone => 'Phone number';
+
+  @override
+  String get change => 'Change';
+
+  @override
+  String get stars => '★★★★★★';
+
+  @override
+  String get first_name_is_required => 'First name is required';
+
+  @override
+  String get last_name_is_required => 'Last name is required';
+
+  @override
+  String get phone_is_required => 'Phone is required';
 }
