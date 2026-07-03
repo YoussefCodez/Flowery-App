@@ -1,16 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flowery/config/general_cubit/cart_manager/cart_events.dart';
-import 'package:flowery/config/general_cubit/cart_manager/cart_manager.dart';
-import 'package:flowery/config/general_cubit/cart_manager/cart_state.dart';
+import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flowery/core/const/app_strings.dart';
 import 'package:flowery/core/theme/app_colors.dart';
+import 'package:flowery/config/general_cubit/cart_manager/cart_manager.dart';
+import 'package:flowery/config/general_cubit/cart_manager/cart_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CustomProductCard extends StatelessWidget {
+class CustomProductCard extends StatefulWidget {
   final String id;
   final String title;
   final String image;
@@ -21,6 +21,7 @@ class CustomProductCard extends StatelessWidget {
   final int sold;
   final int quantity;
   final List<String> images;
+  final String description;
   const CustomProductCard({
     super.key,
     required this.title,
@@ -33,7 +34,20 @@ class CustomProductCard extends StatelessWidget {
     required this.quantity,
     required this.images,
     required this.id,
+    required this.description,
   });
+
+  @override
+  State<CustomProductCard> createState() => _CustomProductCardState();
+}
+
+class _CustomProductCardState extends State<CustomProductCard> {
+  late AppLocalizations localizations;
+  @override
+  void didChangeDependencies() {
+    localizations = AppLocalizations.of(context)!;
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,13 +55,15 @@ class CustomProductCard extends StatelessWidget {
       onTap: () => context.pushNamed(
         AppRoutes.productDetails,
         arguments: <String, dynamic>{
-          AppStrings.title: title,
-          AppStrings.image: image,
-          AppStrings.price: price,
-          AppStrings.discount: discount,
-          AppStrings.sold: sold,
-          AppStrings.quantity: quantity,
-          AppStrings.images: images,
+          AppStrings.title: widget.title,
+          AppStrings.image: widget.image,
+          AppStrings.price: widget.price,
+          AppStrings.discount: widget.discount,
+          AppStrings.sold: widget.sold,
+          AppStrings.quantity: widget.quantity,
+          AppStrings.images: widget.images,
+          AppStrings.id: widget.id,
+          AppStrings.description: widget.description,
         },
       ),
       child: Container(
@@ -61,7 +77,7 @@ class CustomProductCard extends StatelessWidget {
           children: [
             Expanded(
               child: CachedNetworkImage(
-                imageUrl: image,
+                imageUrl: widget.image,
                 height: 130.h,
                 width: double.infinity,
                 fit: BoxFit.cover,
@@ -81,40 +97,53 @@ class CustomProductCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  title,
+                  widget.title,
                   style: Theme.of(
                     context,
                   ).textTheme.labelLarge?.copyWith(fontSize: 12.sp),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  spacing: 7.sp,
                   children: [
-                    Text(
-                      "EGP $price",
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        fontWeight: .w500,
-                        fontSize: 14.sp,
+                    Flexible(
+                      child: Text(
+                        "${localizations.egp} ${widget.price}",
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14.sp,
+                        ),
                       ),
                     ),
-                    Text(
-                      "$oldPrice",
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        decoration: TextDecoration.lineThrough,
-                        decorationColor: Theme.of(
-                          context,
-                        ).colorScheme.onSecondary,
-                        decorationThickness: 1.w,
-                        color: Theme.of(context).colorScheme.onSecondary,
-                        fontSize: 12.sp,
+                    SizedBox(width: 7.w),
+
+                    Flexible(
+                      child: Text(
+                        "${widget.oldPrice}",
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          decoration: TextDecoration.lineThrough,
+                          decorationColor: Theme.of(
+                            context,
+                          ).colorScheme.onSecondary,
+                          decorationThickness: 1.w,
+                          color: Theme.of(context).colorScheme.onSecondary,
+                          fontSize: 12.sp,
+                        ),
                       ),
                     ),
-                    Text(
-                      "$discount%",
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        fontWeight: .w400,
-                        color: AppColors.greenColor,
-                        fontSize: 12.sp,
+                    SizedBox(width: 7.w),
+
+                    Flexible(
+                      child: Text(
+                        "${widget.discount}%",
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.greenColor,
+                          fontSize: 12.sp,
+                        ),
                       ),
                     ),
                   ],
@@ -123,24 +152,61 @@ class CustomProductCard extends StatelessWidget {
             ),
             SizedBox(height: 8.h),
             ElevatedButton(
-              onPressed: () =>
-                  context.read<CartManager>()
-                    ..doEvent(AddToCartEvent(productId: id, quantity: 1)),
+              onPressed: () {
+                context.read<CartManager>().addToCart(widget.id, 1);
+                context.read<CartManager>().getCartUseCase();
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.shopping_cart_outlined, size: 16.sp),
-                  SizedBox(width: 4.w),
-                  BlocBuilder<CartManager, CartState>(
+                  BlocConsumer<CartManager, CartState>(
                     builder: (context, state) {
-                      if (state.isAddingToCart == true && state.itemId == id) {
-                        return Center(child: CircularProgressIndicator());
-                      } else {
-                        return Text(
-                          AppStrings.addToCart,
-                          style: Theme.of(context).textTheme.titleLarge,
+                      if (state.isAddingToCart == true &&
+                          state.itemId == widget.id) {
+                        return Center(
+                          child: SizedBox(
+                            height: 15.h,
+                            width: 15.w,
+                            child: CircularProgressIndicator(
+                              color: AppColors.whiteColor,
+                            ),
+                          ),
                         );
                       }
+                      return Row(
+                        children: [
+                          Icon(Icons.shopping_cart_outlined, size: 16.sp),
+                          SizedBox(width: 4.w),
+                          Text(
+                            localizations.add_to_cart,
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                        ],
+                      );
+                    },
+                    listener: (context, state) {
+                      // if (state.isAddedSuccessfully) {
+                      //   showDialog(
+                      //     context: context,
+                      //     builder: (context) {
+                      //       return AlertDialog(
+                      //         title: Text(localizations.success),
+                      //         content: Text(
+                      //           localizations.the_item_has_been_added,
+                      //         ),
+                      //         actions: [
+                      //           ElevatedButton(
+                      //             onPressed: () {
+                      //               // close dialog
+                      //               context.pop();
+                      //             },
+                      //             child: Text(localizations.ok),
+                      //           ),
+                      //         ],
+                      //       );
+                      //     },
+                      //   );
+                      // }
                     },
                   ),
                 ],

@@ -104,6 +104,30 @@ abstract class AppLocalizations {
   /// **'Login'**
   String get login;
 
+  /// No description provided for @remember_me.
+  ///
+  /// In en, this message translates to:
+  /// **'Remember me'**
+  String get remember_me;
+
+  /// No description provided for @sign_up.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get sign_up;
+
+  /// No description provided for @enter_your_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email'**
+  String get enter_your_email;
+
+  /// No description provided for @enter_your_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your password'**
+  String get enter_your_password;
+
   /// No description provided for @name_is_required.
   ///
   /// In en, this message translates to:
@@ -125,7 +149,7 @@ abstract class AppLocalizations {
   /// No description provided for @email_is_not_valid.
   ///
   /// In en, this message translates to:
-  /// **'This email is not valid'**
+  /// **'This Email is not valid'**
   String get email_is_not_valid;
 
   /// No description provided for @password_is_required.
@@ -463,6 +487,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'An error occurred'**
   String get an_error_occurred;
+
+  /// No description provided for @reset_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Password'**
+  String get reset_password;
+
+  /// No description provided for @current_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Password'**
+  String get current_password;
+
+  /// No description provided for @new_password.
+  ///
+  /// In en, this message translates to:
+  /// **'New Password'**
+  String get new_password;
+
+  /// No description provided for @update.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get update;
+
+  /// No description provided for @incorrect_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect old password'**
+  String get incorrect_password;
+
+  /// No description provided for @password_changed_success.
+  ///
+  /// In en, this message translates to:
+  /// **'Password has been changed successfully'**
+  String get password_changed_success;
+
+  /// No description provided for @success.
+  ///
+  /// In en, this message translates to:
+  /// **'Success'**
+  String get success;
+
+  /// No description provided for @occasion.
+  ///
+  /// In en, this message translates to:
+  /// **'Occasion'**
+  String get occasion;
+
+  /// No description provided for @best_seller.
+  ///
+  /// In en, this message translates to:
+  /// **'Best Seller'**
+  String get best_seller;
+
+  /// No description provided for @best_seller_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Bloom with our exquisite best sellers'**
+  String get best_seller_title;
+
+  /// No description provided for @no_products.
+  ///
+  /// In en, this message translates to:
+  /// **'No Products'**
+  String get no_products;
+
+  /// No description provided for @lowest_price.
+  ///
+  /// In en, this message translates to:
+  /// **'Lowest Price'**
+  String get lowest_price;
+
+  /// No description provided for @highest_price.
+  ///
+  /// In en, this message translates to:
+  /// **'Highest Price'**
+  String get highest_price;
+
+  /// No description provided for @new_products.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get new_products;
+
+  /// No description provided for @old_products.
+  ///
+  /// In en, this message translates to:
+  /// **'Old'**
+  String get old_products;
+
+  /// No description provided for @filter.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter'**
+  String get filter;
+
+  /// No description provided for @sort_by.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort by'**
+  String get sort_by;
+
+  /// No description provided for @discount.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount'**
+  String get discount;
 }
 
 class _AppLocalizationsDelegate
