@@ -1,52 +1,57 @@
-// To parse this JSON data, do
-//
-//     final createCashOrderRequest = createCashOrderRequestFromJson(jsonString);
+import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
-import 'dart:convert';
 
 part 'create_cash_order_request.g.dart';
 
-CreateCashOrderRequest createCashOrderRequestFromJson(String str) => CreateCashOrderRequest.fromJson(json.decode(str));
+CreateCashOrderRequest createCashOrderRequestFromJson(String str) =>
+    CreateCashOrderRequest.fromJson(json.decode(str));
 
-String createCashOrderRequestToJson(CreateCashOrderRequest data) => json.encode(data.toJson());
+String createCashOrderRequestToJson(CreateCashOrderRequest data) =>
+    json.encode(data.toJson());
 
 @JsonSerializable()
 class CreateCashOrderRequest {
-    @JsonKey(name: "shippingAddress")
-    ShippingAddress? shippingAddress;
+  @JsonKey(name: 'shippingAddress')
+  final ShippingAddress shippingAddress;
 
-    CreateCashOrderRequest({
-        this.shippingAddress,
-    });
+  CreateCashOrderRequest({
+    required this.shippingAddress,
+  });
 
-    factory CreateCashOrderRequest.fromJson(Map<String, dynamic> json) => _$CreateCashOrderRequestFromJson(json);
+  factory CreateCashOrderRequest.fromJson(Map<String, dynamic> json) =>
+      _$CreateCashOrderRequestFromJson(json);
 
-    Map<String, dynamic> toJson() => _$CreateCashOrderRequestToJson(this);
+  Map<String, dynamic> toJson() => _$CreateCashOrderRequestToJson(this);
 }
 
 @JsonSerializable()
 class ShippingAddress {
-    @JsonKey(name: "street")
-    String? street;
-    @JsonKey(name: "phone")
-    String? phone;
-    @JsonKey(name: "city")
-    String? city;
-    @JsonKey(name: "lat")
-    String? lat;
-    @JsonKey(name: "long")
-    String? long;
+  @JsonKey(name: 'street')
+  final String street;
 
-    ShippingAddress({
-        this.street,
-        this.phone,
-        this.city,
-        this.lat,
-        this.long,
-    });
+  @JsonKey(name: 'phone')
+  final String phone;
 
-    factory ShippingAddress.fromJson(Map<String, dynamic> json) => _$ShippingAddressFromJson(json);
+  @JsonKey(name: 'city')
+  final String city;
 
-    Map<String, dynamic> toJson() => _$ShippingAddressToJson(this);
+  @JsonKey(name: 'lat')
+  final String lat;
+
+  @JsonKey(name: 'long')
+  final String long;
+
+  ShippingAddress({
+    required this.street,
+    required this.phone,
+    required this.city,
+    required this.lat,
+    required this.long,
+  });
+
+  factory ShippingAddress.fromJson(Map<String, dynamic> json) =>
+      _$ShippingAddressFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ShippingAddressToJson(this);
 }

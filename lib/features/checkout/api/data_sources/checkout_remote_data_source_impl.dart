@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flowery/config/base_response/base_response.dart';
+import 'package:flowery/config/error/handle_errors.dart';
 import 'package:flowery/core/const/checkout_values.dart';
 import 'package:flowery/features/checkout/api/api_client/checkout_api_client.dart';
 import 'package:flowery/features/checkout/data/data_sources/checkout_remote_data_source_contract.dart';
@@ -20,7 +21,7 @@ class CheckoutRemoteDataSourceImpl implements CheckoutRemoteDataSourceContract {
       return Success<CreateCreditOrderResponse>(data: response);
     } on DioException catch (e) {
       return Error<CreateCreditOrderResponse>(
-        exception: Exception(e.response!.data[CheckoutValues.error]),
+        exception: Exception(handleError(e, null)),
       );
     }
   }
@@ -30,11 +31,11 @@ class CheckoutRemoteDataSourceImpl implements CheckoutRemoteDataSourceContract {
     CreateCashOrderRequest request,
   ) async {
     try {
-      final response = await apiClient.createCashOrder(request.toJson());
+      final response = await apiClient.createCashOrder(request);
       return Success<CreateCashOrderResponse>(data: response);
     } on DioException catch (e) {
       return Error<CreateCashOrderResponse>(
-        exception: Exception(e.response!.data[CheckoutValues.error]),
+        exception: Exception(handleError(e, null)),
       );
     }
   }

@@ -1,8 +1,12 @@
+import 'package:flowery/config/di/injectable_config.dart';
+import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/core/const/app_strings.dart';
 import 'package:flowery/core/widgets/custom_bill.dart';
 import 'package:flowery/core/widgets/main_layout.dart';
 import 'package:flowery/features/change_password/presentation/screens/change_password_screen.dart';
 import 'package:flowery/features/checkout/presentation/screens/checkout_screen.dart';
+import 'package:flowery/features/checkout/presentation/screens/web_view_screen.dart';
+import 'package:flowery/features/checkout/presentation/widgets/place_order_button.dart';
 import 'package:flowery/features/edit_profile/presentation/screens/edit_profile_screen.dart';
 import 'package:flowery/features/main_profile/presentation/screen/main_profile_view.dart';
 import 'package:flowery/features/search/presentation/screen/search_view.dart';
@@ -15,16 +19,14 @@ import 'package:flowery/features/register/presentation/pages/register_screen.dar
 import 'package:flowery/features/home/presentation/screens/home_view.dart';
 import 'package:flowery/features/categories/presentation/screens/categories_screen.dart';
 import 'package:flowery/features/occasions/presentation/screens/occasions_screen.dart';
-import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/features/best_seller/presentation/screens/best_seller_screen.dart';
 import 'package:flowery/features/app_language_logout/presntation/demo_logout_language.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../features/forget_password/presentation/screens/email_verification_view.dart';
-import '../../features/forget_password/presentation/screens/reset_new_password_view.dart';
-import '../../features/home/presentation/view_model/home_cubit.dart';
-import '../../features/home/presentation/view_model/home_event.dart';
-import '../di/injectable_config.dart';
+import '../../../../features/forget_password/presentation/screens/email_verification_view.dart';
+import '../../../../features/forget_password/presentation/screens/reset_new_password_view.dart';
+import '../../../../features/home/presentation/view_model/home_cubit.dart';
+import '../../../../features/home/presentation/view_model/home_event.dart';
 
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
@@ -136,6 +138,17 @@ class RouteGenerator {
 
       case AppRoutes.changePassword:
         return MaterialPageRoute(builder: (_) => const ChangePasswordScreen());
+
+      case AppRoutes.credit:
+        final args = settings.arguments as CreditWebViewArgs;
+
+        return MaterialPageRoute(
+          builder: (_) => WebViewScreen(
+            url: args.url,
+            title: args.title,
+            localizations: args.localizations,
+          ),
+        );
       default:
         return unDefinedRoute();
     }

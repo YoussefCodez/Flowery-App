@@ -4,15 +4,15 @@ import 'package:flowery/features/checkout/domain/entities/credit_order_entity.da
 import 'package:flowery/features/checkout/domain/use_cases/checkout_cash_order_use_case.dart';
 import 'package:flowery/features/checkout/domain/use_cases/checkout_credit_card_order_use_case.dart';
 import 'package:flowery/features/checkout/presentation/view_model/events/checkout_events.dart';
-import 'package:flowery/features/checkout/presentation/view_model/state/checkout_state.dart';
+import 'package:flowery/features/checkout/presentation/view_model/states/checkout_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class CheckoutViewModel extends Cubit<CheckoutState> {
+class CheckoutCubit extends Cubit<CheckoutState> {
   final CheckoutCreditCardOrderUseCase _creditOrderUseCase;
   final CheckoutCashOrderUseCase _cashOrderUseCase;
-  CheckoutViewModel(this._creditOrderUseCase, this._cashOrderUseCase)
+  CheckoutCubit(this._creditOrderUseCase, this._cashOrderUseCase)
     : super(CheckoutState());
 
   void doEvent(CheckoutEvents event) {

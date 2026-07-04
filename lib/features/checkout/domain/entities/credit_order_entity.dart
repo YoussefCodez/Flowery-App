@@ -1,4 +1,9 @@
-class CreditOrderEntity {
+import 'package:equatable/equatable.dart';
+
+class CreditOrderEntity extends Equatable{
   final String? url;
-  CreditOrderEntity({required this.url});
+  const CreditOrderEntity({required this.url});
+  
+  @override
+  List<Object?> get props => [url];
 }

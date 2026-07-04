@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flowery/config/api/app_endpoints.dart';
+import 'package:flowery/features/checkout/data/models/requests/create_cash_order_request.dart';
 import 'package:flowery/features/checkout/data/models/responses/create_cash_order_response.dart';
 import 'package:flowery/features/checkout/data/models/responses/create_credit_order_response.dart';
 import 'package:injectable/injectable.dart';
@@ -17,5 +18,5 @@ abstract class CheckoutApiClient {
   Future<CreateCreditOrderResponse> createCreditOrder();
 
   @POST(AppEndPoints.createCashOrder)
-  Future<CreateCashOrderResponse> createCashOrder(@Body() Map<String, dynamic> body);
+  Future<CreateCashOrderResponse> createCashOrder(@Body() CreateCashOrderRequest body);
 }

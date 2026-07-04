@@ -1,5 +1,10 @@
-class CashOrderEntity {
+import 'package:equatable/equatable.dart';
+
+class CashOrderEntity extends Equatable {
   final String? message;
 
-  CashOrderEntity({this.message});
+  const CashOrderEntity({this.message});
+
+  @override
+  List<Object?> get props => [message];
 }

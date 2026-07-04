@@ -1,15 +1,15 @@
-import 'package:flowery/features/checkout/presentation/view_model/cubit/checkout_view_model.dart';
+import 'package:flowery/features/checkout/presentation/view_model/cubit/checkout_cubit.dart';
 import 'package:flowery/features/checkout/presentation/view_model/events/checkout_events.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class PaymentMethodContainer extends StatelessWidget {
+class PaymentMethodCard extends StatelessWidget {
   final String paymentMethodName;
   final bool selectedMethod;
   final bool isThisCreditCardContainer;
 
-  const PaymentMethodContainer({
+  const PaymentMethodCard({
     super.key,
     required this.isThisCreditCardContainer,
     required this.paymentMethodName,
@@ -54,7 +54,7 @@ class PaymentMethodContainer extends StatelessWidget {
                   value: isThisCreditCardContainer,
                   groupValue: selectedMethod,
                   onChanged: (_) {
-                    context.read<CheckoutViewModel>().doEvent(
+                    context.read<CheckoutCubit>().doEvent(
                       ChangePaymentMethodEvent(
                         isThisCreditCardContainer == true ? true : false,
                       ),
