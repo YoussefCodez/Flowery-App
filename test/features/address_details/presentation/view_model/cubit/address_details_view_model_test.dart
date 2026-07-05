@@ -6,7 +6,6 @@ import 'package:flowery/features/address_details/data/models/request/address_det
 import 'package:flowery/features/address_details/domain/entities/address_details_dto_entity.dart';
 import 'package:flowery/features/address_details/domain/entities/address_details_entity.dart';
 import 'package:flowery/features/address_details/domain/use_case/address_details_use_case.dart';
-import 'package:flowery/features/address_details/domain/use_case/delete_address_use_case.dart';
 import 'package:flowery/features/address_details/presentation/view_model/cubit/address_details_view_model.dart';
 import 'package:flowery/features/address_details/presentation/view_model/events/address_details_events.dart';
 import 'package:flowery/features/address_details/presentation/view_model/states/address_details_base_state.dart';
