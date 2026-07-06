@@ -1,6 +1,8 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flowery/config/base_response/base_response.dart';
-import 'package:flowery/core/const/edit_profile_values.dart';
+import 'package:flowery/config/error/handle_errors.dart';
 import 'package:flowery/features/edit_profile/api/api_client/edit_profile_api_client.dart';
 import 'package:flowery/features/edit_profile/data/data_sources/edit_profile_remote_data_sources_contract.dart';
 import 'package:flowery/features/edit_profile/data/models/requests/edit_user_model.dart';
@@ -22,33 +24,35 @@ class EditProfileRemoteDataSourcesImpl
       return Success<GetUserResponseModel>(data: response);
     } on DioException catch (e) {
       return Error<GetUserResponseModel>(
-        exception: Exception(e.response?.data[EditProfileValues.error]),
+        exception: Exception(handleError(e, null)),
       );
     }
   }
 
   @override
-  Future<Result<GetUserResponseModel>> editUserProfile({
-    EditUserModel? editUser,
-  }) async {
+  Future<Result<GetUserResponseModel>> editUserProfile(
+    EditUserModel editUser,
+  ) async {
     try {
-      final response = await apiClient.editCurrentUserProfile(newEdits: editUser?.toJson() ?? {});
+      final response = await apiClient.editCurrentUserProfile(
+        newEdits: editUser,
+      );
       return Success<GetUserResponseModel>(data: response);
     } on DioException catch (e) {
       return Error<GetUserResponseModel>(
-        exception: Exception(e.response?.data[EditProfileValues.error]),
+        exception: Exception(handleError(e, null)),
       );
     }
   }
-  
+
   @override
-  Future<Result<GetUserResponseModel>> uploadUserPhoto({FormData? photo}) async{
-        try {
-      final response = await apiClient.uploadPhoto(photo: photo);
+  Future<Result<GetUserResponseModel>> uploadUserPhoto(File photo) async {
+    try {
+      final response = await apiClient.uploadPhoto(photo);
       return Success<GetUserResponseModel>(data: response);
     } on DioException catch (e) {
       return Error<GetUserResponseModel>(
-        exception: Exception(e.response?.data[EditProfileValues.error]),
+        exception: Exception(handleError(e, null)),
       );
     }
   }

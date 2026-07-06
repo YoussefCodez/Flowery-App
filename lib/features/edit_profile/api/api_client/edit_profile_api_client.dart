@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
+import 'package:flowery/config/api/api_keys.dart';
 import 'package:flowery/config/api/app_endpoints.dart';
+import 'package:flowery/features/edit_profile/data/models/requests/edit_user_model.dart';
 import 'package:flowery/features/edit_profile/data/models/responses/get_user_response_model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
@@ -16,8 +20,11 @@ abstract class EditProfileApiClient {
   Future<GetUserResponseModel> getCurrentUser();
 
   @PUT(AppEndPoints.editUserProfile)
-  Future<GetUserResponseModel> editCurrentUserProfile({@Body() required Map<String, dynamic> newEdits});
+  Future<GetUserResponseModel> editCurrentUserProfile({@Body() required EditUserModel newEdits});
 
-    @PUT(AppEndPoints.uploadPhoto)
-  Future<GetUserResponseModel> uploadPhoto({@Body() required FormData? photo});
+@PUT(AppEndPoints.uploadPhoto)
+@MultiPart()
+Future<GetUserResponseModel> uploadPhoto(
+  @Part(name: Apikeys.photo) File photo,
+);
 }
