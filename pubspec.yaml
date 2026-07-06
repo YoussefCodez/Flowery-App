@@ -46,6 +46,8 @@ dependencies:
   fake_cloud_firestore: ^4.1.1
   flutter_svg: ^2.3.0
   firebase_messaging: ^16.4.1
+  firebase_remote_config: ^6.5.3
+  webview_flutter: ^4.14.0
 dev_dependencies:
   build_runner: ^2.11.1
   flutter_lints: ^6.0.0
