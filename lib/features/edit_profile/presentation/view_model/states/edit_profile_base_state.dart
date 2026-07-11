@@ -1,32 +1,34 @@
 import 'package:equatable/equatable.dart';
+import 'package:flowery/config/base_state/base_state.dart';
 import 'package:flowery/features/edit_profile/domain/entities/user_entity.dart';
-import 'package:flutter/material.dart';
 
-@immutable
 class EditProfileBaseState extends Equatable {
-  final bool? isLoadingProfile;
-
-  final String? errorMessage;
-
-  final UserEntity? user;
+  final BaseState<UserEntity> getProfileState;
+  final BaseState<UserEntity> updateProfileState;
+  final BaseState<UserEntity> uploadNewPhotoState;
 
   const EditProfileBaseState({
-    this.isLoadingProfile,
-    this.errorMessage,
-    this.user,
+    this.getProfileState = const BaseState.initial(),
+    this.updateProfileState = const BaseState.initial(),
+    this.uploadNewPhotoState = const BaseState.initial(),
   });
 
   EditProfileBaseState copyWith({
-    bool? isLoadingProfile,
-    String? errorMessage,
-    UserEntity? user,
-    String? newGender,
-  }) => EditProfileBaseState(
-    isLoadingProfile: isLoadingProfile ?? this.isLoadingProfile,
-    errorMessage: errorMessage ?? this.errorMessage,
-    user: user ?? this.user,
-  );
+    BaseState<UserEntity>? getProfileState,
+    BaseState<UserEntity>? updateProfileState,
+    BaseState<UserEntity>? uploadNewPhotoState,
+  }) {
+    return EditProfileBaseState(
+      getProfileState: getProfileState ?? this.getProfileState,
+      updateProfileState: updateProfileState ?? this.updateProfileState,
+      uploadNewPhotoState: uploadNewPhotoState ?? this.uploadNewPhotoState,
+    );
+  }
 
   @override
-  List<Object?> get props => [isLoadingProfile, errorMessage, user];
+  List<Object?> get props => [
+    getProfileState,
+    updateProfileState,
+    uploadNewPhotoState,
+  ];
 }

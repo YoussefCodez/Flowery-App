@@ -1,119 +1,272 @@
-import 'package:dio/dio.dart';
+import 'dart:io';
+
+import 'package:flutter_test/flutter_test.dart';
 import 'package:flowery/config/base_response/base_response.dart';
-import 'package:flowery/features/edit_profile/api/api_client/edit_profile_api_client.dart';
-import 'package:flowery/features/edit_profile/api/data_sources/edit_profile_remote_data_sources_impl.dart';
+import 'package:flowery/features/edit_profile/data/data_sources/edit_profile_remote_data_sources_contract.dart';
 import 'package:flowery/features/edit_profile/data/models/requests/edit_user_model.dart';
 import 'package:flowery/features/edit_profile/data/models/responses/get_user_response_model.dart';
 import 'package:flowery/features/edit_profile/data/models/responses/user_model.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:flowery/features/edit_profile/data/repo/edit_profile_repo_impl.dart';
+import 'package:flowery/features/edit_profile/domain/entities/user_entity.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 
-class MockEditProfileApiClient extends Mock implements EditProfileApiClient {}
+import 'edit_profile_repo_impl_test.mocks.dart';
 
+@GenerateMocks([EditProfileRemoteDataSourcesContract])
 void main() {
-  late EditProfileRemoteDataSourcesImpl dataSource;
-  late MockEditProfileApiClient apiClient;
-
-  final userModel = User(
-    firstName: "John",
-    lastName: "Doe",
-    email: "john@test.com",
-    phone: "123",
-    gender: "male",
-    photo: "img.jpg",
+  provideDummy<Result<GetUserResponseModel>>(
+    Success<GetUserResponseModel>(
+      data: GetUserResponseModel(),
+    ),
   );
+  late MockEditProfileRemoteDataSourcesContract mockRemoteDataSource;
+  late EditProfileRepoImpl repo;
 
-  final responseModel = GetUserResponseModel(
-    message: "success",
-    user: userModel,
-  );
-
-  final editUserModel = EditUserModel(
-    firstName: "John",
-    lastName: "Doe",
-    email: "john@test.com",
-    phone: "123",
-  );
-
-  final errorMessage = "Error";
+  late GetUserResponseModel responseModel;
+  late UserEntity userEntity;
 
   setUp(() {
-    apiClient = MockEditProfileApiClient();
-    dataSource = EditProfileRemoteDataSourcesImpl(apiClient: apiClient);
+    mockRemoteDataSource = MockEditProfileRemoteDataSourcesContract();
+
+    repo = EditProfileRepoImpl(
+      remoteDataSource: mockRemoteDataSource,
+    );
+
+    responseModel = GetUserResponseModel(
+      message: "success",
+      user: User(
+        firstName: "Abdelrahman",
+        lastName: "Ayoub",
+        email: "test@test.com",
+        phone: "01012345678",
+        gender: "male",
+        photo: "photo.png",
+      ),
+    );
+
+    userEntity = responseModel.user!.toDomain();
   });
 
-  group("Edit Profile Data Source Tests", () {
-    test("Get user success", () async {
+  group("getLoggedUserInfo", () {
+    test("should return Success<UserEntity>", () async {
       when(
-        () => apiClient.getCurrentUser(),
-      ).thenAnswer((_) async => responseModel);
-
-      final result = await dataSource.getCurrentLoggedUser();
-
-      expect(result, isA<Success<GetUserResponseModel>>());
-
-      verify(() => apiClient.getCurrentUser()).called(1);
-    });
-
-    test("Get user failure", () async {
-      when(() => apiClient.getCurrentUser()).thenThrow(
-        DioException(requestOptions: RequestOptions(), error: errorMessage),
+        mockRemoteDataSource.getCurrentLoggedUser(),
+      ).thenAnswer(
+        (_) async => Success<GetUserResponseModel>(
+          data: responseModel,
+        ),
       );
 
-      final result = await dataSource.getCurrentLoggedUser();
+      final result = await repo.getLoggedUserInfo();
 
-      expect(result, isA<Error<GetUserResponseModel>>());
+      expect(result, isA<Success<UserEntity>>());
 
-      verify(() => apiClient.getCurrentUser()).called(1);
+      final success = result as Success<UserEntity>;
+
+      expect(success.data, userEntity);
+
+      verify(
+        mockRemoteDataSource.getCurrentLoggedUser(),
+      ).called(1);
+
+      verifyNoMoreInteractions(mockRemoteDataSource);
     });
 
-    test("Edit profile success", () async {
+    test("should return Error<UserEntity>", () async {
+      final exception = Exception("error");
+
       when(
-        () =>
-            apiClient.editCurrentUserProfile(newEdits: any(named: "newEdits")),
-      ).thenAnswer((_) async => responseModel);
-
-      final result = await dataSource.editUserProfile(editUser: editUserModel);
-
-      expect(result, isA<Success<GetUserResponseModel>>());
-
-      verify(() => apiClient.editCurrentUserProfile(newEdits: any(named: "newEdits"))).called(1);
-    });
-
-    test("Edit profile failure", () async {
-      when(() => apiClient.editCurrentUserProfile(newEdits: any(named: "newEdits"))).thenThrow(
-        DioException(requestOptions: RequestOptions(), error: errorMessage),
+        mockRemoteDataSource.getCurrentLoggedUser(),
+      ).thenAnswer(
+        (_) async => Error<GetUserResponseModel>(
+          exception: exception,
+        ),
       );
 
-      final result = await dataSource.editUserProfile(editUser: editUserModel);
+      final result = await repo.getLoggedUserInfo();
 
-      expect(result, isA<Error<GetUserResponseModel>>());
+      expect(result, isA<Error<UserEntity>>());
 
-      verify(() => apiClient.editCurrentUserProfile(newEdits: any(named: "newEdits"))).called(1);
+      final error = result as Error<UserEntity>;
+
+      expect(error.exception, exception);
+
+      verify(
+        mockRemoteDataSource.getCurrentLoggedUser(),
+      ).called(1);
     });
+  });
 
-    test("Upload photo success", () async {
+  group("editUserProfile", () {
+    final editUser = EditUserModel(
+      firstName: "New",
+      lastName: "User",
+      email: "new@test.com",
+      phone: "01000000000",
+    );
+
+    test("should return Success<UserEntity>", () async {
       when(
-        () => apiClient.uploadPhoto(photo: any(named: "photo")),
-      ).thenAnswer((_) async => responseModel);
-
-      final result = await dataSource.uploadUserPhoto(photo: FormData());
-
-      expect(result, isA<Success<GetUserResponseModel>>());
-
-      verify(() => apiClient.uploadPhoto(photo: any(named: "photo"))).called(1);
-    });
-
-    test("Upload photo failure", () async {
-      when(() => apiClient.uploadPhoto(photo: any(named: "photo"))).thenThrow(
-        DioException(requestOptions: RequestOptions(), error: errorMessage),
+        mockRemoteDataSource.editUserProfile(editUser),
+      ).thenAnswer(
+        (_) async => Success<GetUserResponseModel>(
+          data: responseModel,
+        ),
       );
 
-      final result = await dataSource.uploadUserPhoto(photo: FormData());
+      final result = await repo.editUserProfile(editUser);
 
-      expect(result, isA<Error<GetUserResponseModel>>());
+      expect(result, isA<Success<UserEntity>>());
 
-      verify(() => apiClient.uploadPhoto(photo: any(named: "photo"))).called(1);
+      final success = result as Success<UserEntity>;
+
+      expect(success.data, userEntity);
+
+      verify(
+        mockRemoteDataSource.editUserProfile(editUser),
+      ).called(1);
+
+      verifyNoMoreInteractions(mockRemoteDataSource);
     });
+
+    test("should return Error<UserEntity>", () async {
+      final exception = Exception();
+
+      when(
+        mockRemoteDataSource.editUserProfile(editUser),
+      ).thenAnswer(
+        (_) async => Error<GetUserResponseModel>(
+          exception: exception,
+        ),
+      );
+
+      final result = await repo.editUserProfile(editUser);
+
+      expect(result, isA<Error<UserEntity>>());
+
+      final error = result as Error<UserEntity>;
+
+      expect(error.exception, exception);
+
+      verify(
+        mockRemoteDataSource.editUserProfile(editUser),
+      ).called(1);
+    });
+  });
+
+  group("uploadProfilePhoto", () {
+    final photo = File("dummy.png");
+
+    test(
+      "should upload photo then fetch user and return Success<UserEntity>",
+      () async {
+        when(
+          mockRemoteDataSource.uploadUserPhoto(photo),
+        ).thenAnswer(
+          (_) async => Success<GetUserResponseModel>(
+            data: responseModel,
+          ),
+        );
+
+        when(
+          mockRemoteDataSource.getCurrentLoggedUser(),
+        ).thenAnswer(
+          (_) async => Success<GetUserResponseModel>(
+            data: responseModel,
+          ),
+        );
+
+        final result = await repo.uploadProfilePhoto(photo);
+
+        expect(result, isA<Success<UserEntity>>());
+
+        final success = result as Success<UserEntity>;
+
+        expect(success.data, userEntity);
+
+        verify(
+          mockRemoteDataSource.uploadUserPhoto(photo),
+        ).called(1);
+
+        verify(
+          mockRemoteDataSource.getCurrentLoggedUser(),
+        ).called(1);
+
+        verifyNoMoreInteractions(mockRemoteDataSource);
+      },
+    );
+
+    test(
+      "should return upload error if upload fails",
+      () async {
+        final exception = Exception("upload failed");
+
+        when(
+          mockRemoteDataSource.uploadUserPhoto(photo),
+        ).thenAnswer(
+          (_) async => Error<GetUserResponseModel>(
+            exception: exception,
+          ),
+        );
+
+        final result = await repo.uploadProfilePhoto(photo);
+
+        expect(result, isA<Error<UserEntity>>());
+
+        final error = result as Error<UserEntity>;
+
+        expect(error.exception, exception);
+
+        verify(
+          mockRemoteDataSource.uploadUserPhoto(photo),
+        ).called(1);
+
+        verifyNever(
+          mockRemoteDataSource.getCurrentLoggedUser(),
+        );
+      },
+    );
+
+    test(
+      "should return error when fetching user fails after successful upload",
+      () async {
+        final exception = Exception("fetch failed");
+
+        when(
+          mockRemoteDataSource.uploadUserPhoto(photo),
+        ).thenAnswer(
+          (_) async => Success<GetUserResponseModel>(
+            data: responseModel,
+          ),
+        );
+
+        when(
+          mockRemoteDataSource.getCurrentLoggedUser(),
+        ).thenAnswer(
+          (_) async => Error<GetUserResponseModel>(
+            exception: exception,
+          ),
+        );
+
+        final result = await repo.uploadProfilePhoto(photo);
+
+        expect(result, isA<Error<UserEntity>>());
+
+        final error = result as Error<UserEntity>;
+
+        expect(error.exception, exception);
+
+        verify(
+          mockRemoteDataSource.uploadUserPhoto(photo),
+        ).called(1);
+
+        verify(
+          mockRemoteDataSource.getCurrentLoggedUser(),
+        ).called(1);
+
+        verifyNoMoreInteractions(mockRemoteDataSource);
+      },
+    );
   });
 }

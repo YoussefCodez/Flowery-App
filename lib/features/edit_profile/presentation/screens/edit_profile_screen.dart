@@ -49,30 +49,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             getIt.get<EditProfileViewModel>()..doEvent(GetLoggedUserEvent()),
         child: BlocBuilder<EditProfileViewModel, EditProfileBaseState>(
           builder: (context, state) {
-            print("SCREEN PHOTO = ${state.user?.photo}");
-            if (state.isLoadingProfile == true) {
-              return Center(
+            return state.getProfileState.when(
+              initial: () => const SizedBox(),
+              loading: () => Center(
                 child: SizedBox(
                   height: 50.h,
                   width: 50.w,
                   child: CircularProgressIndicator(),
                 ),
-              );
-            } else {
-              if (state.errorMessage != null) {
-                return Center(child: Text(localizations.an_error_occurred));
-              }
-              return Center(
+              ),
+              success: (user) => Center(
                 child: ProfileForm(
-                  photo: state.user?.photo,
-                  firstName: state.user?.firstName,
-                  lastName: state.user?.lastName,
-                  email: state.user?.email,
-                  phone: state.user?.phone,
-                  gender: state.user?.gender,
+                  user: state.getProfileState.data!,
+                  localizations: localizations,
                 ),
-              );
-            }
+              ),
+              error: (e) => Center(child: Text(e.toString())),
+            );
           },
         ),
       ),

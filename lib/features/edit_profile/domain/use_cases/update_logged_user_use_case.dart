@@ -9,7 +9,7 @@ class UpdateLoggedUserUseCase {
   final EditProfileRepoContract repo;
   UpdateLoggedUserUseCase({required this.repo});
 
-  Future<Result<UserEntity>> call(EditUserModel? editUser) {
-    return repo.editUserProfile(editUser: editUser);
+  Future<Result<UserEntity>> call(EditUserModel editUser) {
+    return repo.editUserProfile(editUser);
   }
 }

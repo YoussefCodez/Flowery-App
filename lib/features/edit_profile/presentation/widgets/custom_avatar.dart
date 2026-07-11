@@ -1,25 +1,24 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flowery/core/const/edit_profile_values.dart';
 import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flowery/features/edit_profile/presentation/view_model/cubit/edit_profile_view_model.dart';
 import 'package:flowery/features/edit_profile/presentation/view_model/events/edit_profile_events.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:dio/dio.dart';
+import 'dart:io';
+import 'package:file_picker/file_picker.dart';
 
 class CustomAvatar extends StatelessWidget {
   final String? photo;
-  CustomAvatar({super.key, this.photo});
-  final picker = ImagePicker();
+  const CustomAvatar({super.key, this.photo});
 
   @override
   Widget build(BuildContext context) {
-    print("AVATAR PHOTO = $photo");
     return Stack(
       alignment: Alignment.bottomRight,
       children: [
+
+        // Image Avatar
         CachedNetworkImage(
           imageUrl: photo ?? "",
           imageBuilder: (context, imageProvider) => CircleAvatar(
@@ -41,6 +40,8 @@ class CustomAvatar extends StatelessWidget {
             child: Icon(Icons.person),
           ),
         ),
+
+        // Change Photo Button
         Container(
           height: 24.h,
           width: 24.w,
@@ -50,25 +51,12 @@ class CustomAvatar extends StatelessWidget {
           ),
           child: IconButton(
             onPressed: () async {
-              final viewModel = context.read<EditProfileViewModel>();
-
-              // Pick an image.
-              final XFile? image = await picker.pickImage(
-                source: ImageSource.gallery,
-              );
-
-              if (image == null) {
-                return;
+              final pickedFile = await pickImage();
+              if (pickedFile != null) {
+                context.read<EditProfileViewModel>().doEvent(
+                  UploadProfilePhotoEvent(pickedFile),
+                );
               }
-
-              FormData formData = FormData.fromMap({
-                EditProfileValues.photo: await MultipartFile.fromFile(
-                  image.path,
-                  filename: EditProfileValues.imagePng,
-                ),
-              });
-
-              viewModel.doEvent(UploadProfilePhotoEvent(), photo: formData);
             },
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(),
@@ -82,4 +70,10 @@ class CustomAvatar extends StatelessWidget {
       ],
     );
   }
+}
+
+Future<File?> pickImage() async {
+  final result = await FilePicker.platform.pickFiles(type: FileType.image);
+  if (result == null) return null;
+  return File(result.files.single.path!);
 }

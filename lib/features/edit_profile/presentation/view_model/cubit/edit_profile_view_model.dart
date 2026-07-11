@@ -1,5 +1,6 @@
-import 'package:dio/dio.dart';
+import 'dart:io';
 import 'package:flowery/config/base_response/base_response.dart';
+import 'package:flowery/config/base_state/base_state.dart';
 import 'package:flowery/features/edit_profile/data/models/requests/edit_user_model.dart';
 import 'package:flowery/features/edit_profile/domain/entities/user_entity.dart';
 import 'package:flowery/features/edit_profile/domain/use_cases/get_logged_user_use_case.dart';
@@ -21,77 +22,65 @@ class EditProfileViewModel extends Cubit<EditProfileBaseState> {
     this._uploadUserPhotoUseCase,
   ) : super(EditProfileBaseState());
 
-  void doEvent(
-    EditProfileEvents event, {
-    String? newGender,
-    EditUserModel? user,
-    FormData? photo,
-  }) {
+  void doEvent(EditProfileEvents event) {
     switch (event) {
       case GetLoggedUserEvent():
         _getLoggedUser();
-      case ChangeGenderEvent():
-        _changeGender(newGender);
       case UpdateLoggedUserEvent():
-        _updateLoggedUser(user);
+        _updateLoggedUser(event.user);
       case UploadProfilePhotoEvent():
-        _uploadPhoto(photo);
+        _uploadPhoto(event.photo);
     }
   }
 
-  void _changeGender(String? newGender) {
-    emit(state.copyWith(newGender: newGender));
-  }
-
   Future<void> _getLoggedUser() async {
-    emit(state.copyWith(isLoadingProfile: true));
+    emit(state.copyWith(getProfileState: const BaseState.loading()));
 
     final response = await _getLoggedUserUseCase.call();
 
     switch (response) {
       case Success<UserEntity>():
-        emit(state.copyWith(isLoadingProfile: false, user: response.data));
+        emit(state.copyWith(getProfileState: BaseState.success(response.data)));
       case Error<UserEntity>():
         emit(
-          state.copyWith(
-            isLoadingProfile: false,
-            errorMessage: response.exception.toString(),
-          ),
+          state.copyWith(getProfileState: BaseState.error(response.exception)),
         );
     }
   }
 
-  Future<void> _updateLoggedUser(EditUserModel? user) async {
-    emit(state.copyWith(isLoadingProfile: true));
+  Future<void> _updateLoggedUser(EditUserModel user) async {
+    emit(state.copyWith(updateProfileState: const BaseState.loading()));
 
     final response = await _updateLoggedUserUseCase.call(user);
 
     switch (response) {
       case Success<UserEntity>():
-        emit(state.copyWith(isLoadingProfile: false, user: response.data));
+        emit(
+          state.copyWith(updateProfileState: BaseState.success(response.data)),
+        );
       case Error<UserEntity>():
         emit(
           state.copyWith(
-            isLoadingProfile: false,
-            errorMessage: response.exception.toString(),
+            updateProfileState: BaseState.error(response.exception),
           ),
         );
     }
   }
 
-  Future<void> _uploadPhoto(FormData? photo) async {
-    emit(state.copyWith(isLoadingProfile: true));
+  Future<void> _uploadPhoto(File photo) async {
+    emit(state.copyWith(uploadNewPhotoState: const BaseState.loading()));
 
     final response = await _uploadUserPhotoUseCase.call(photo);
 
     switch (response) {
       case Success<UserEntity>():
-        await _getLoggedUser();
+        emit(
+          state.copyWith(uploadNewPhotoState: BaseState.success(response.data)),
+        );
       case Error<UserEntity>():
         emit(
           state.copyWith(
-            isLoadingProfile: false,
-            errorMessage: response.exception.toString(),
+            uploadNewPhotoState: BaseState.error(response.exception),
           ),
         );
     }
