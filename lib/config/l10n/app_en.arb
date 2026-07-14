@@ -152,5 +152,19 @@
   "new_products" :"New",
   "old_products" : "Old",
   "filter" : "Filter",
-  "sort_by" : "Sort by"
+  "sort_by" : "Sort by",
+  "edit_profile": "Edit profile",
+  "first_name": "First name",
+  "last_name": "Last name",
+  "phone": "Phone number",
+  "change": "Change",
+  "gender": "Gender",
+  "male": "Male",
+  "female": "Female",
+  "update": "Update",
+  "stars" : "★★★★★★",
+  "first_name_is_required" : "First name is required",
+  "last_name_is_required" : "Last name is required",
+  "email_is_required" : "Email is required",
+  "phone_is_required" : "Phone is required"
 }
