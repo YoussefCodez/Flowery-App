@@ -34,8 +34,8 @@ class AddressDto {
       _$AddressDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$AddressDtoToJson(this);
-  AddressDetailsDtoEntity toDomain() {
-    return AddressDetailsDtoEntity(
+  AddressEntity toDomain() {
+    return AddressEntity(
       street: street,
       phone: phone,
       city: city,

@@ -1,3 +1,5 @@
+import 'package:flowery/config/l10n/translations/app_localizations.dart';
+import 'package:flowery/core/const/address_details_values.dart';
 import 'package:flowery/features/address_details/presentation/view_model/cubit/address_details_view_model.dart';
 import 'package:flowery/features/address_details/presentation/view_model/events/address_details_events.dart';
 import 'package:flowery/features/address_details/presentation/view_model/states/address_details_base_state.dart';
@@ -26,9 +28,10 @@ class _MapWidgetState extends State<MapWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Map'),
+        title:  Text(localization.map),
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back),
@@ -36,6 +39,11 @@ class _MapWidgetState extends State<MapWidget> {
       ),
       body: BlocConsumer<AddressDetailsViewModel, AddressDetailsBaseState>(
         listenWhen: (previous, current) =>
+            previous.currentDeviceLatitude != current.currentDeviceLatitude ||
+            previous.currentDeviceLongitude != current.currentDeviceLongitude,
+        buildWhen: (previous, current) =>
+            previous.latitude != current.latitude ||
+            previous.longitude != current.longitude ||
             previous.currentDeviceLatitude != current.currentDeviceLatitude ||
             previous.currentDeviceLongitude != current.currentDeviceLongitude,
         listener: (context, state) {
@@ -81,8 +89,8 @@ class _MapWidgetState extends State<MapWidget> {
             ),
             children: [
               TileLayer(
-                urlTemplate: 'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                userAgentPackageName: 'com.example.flowery',
+                urlTemplate: AddressDetailsValues.urlTemplate,
+                userAgentPackageName: AddressDetailsValues.userAgentPackageName,
               ),
               if (selectedLocation != null)
                 MarkerLayer(

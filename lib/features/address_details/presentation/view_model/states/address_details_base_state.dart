@@ -28,7 +28,7 @@ class AddressDetailsBaseState extends Equatable {
   final String governorateName;
   final String cityName;
 
-  final AddressDetailsEntity? address;
+  final AddressDetailsResponseEntity? address;
 
   final String errorMessage;
 
@@ -70,7 +70,7 @@ class AddressDetailsBaseState extends Equatable {
     double? currentDeviceLongitude,
     String? governorateName,
     String? cityName,
-    AddressDetailsEntity? address,
+    AddressDetailsResponseEntity? address,
     String? errorMessage,
   }) {
     return AddressDetailsBaseState(

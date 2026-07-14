@@ -30,9 +30,9 @@ void main() {
 
   final errorMessage = "An error has occured";
 
-  late List<AddressDetailsDtoEntity> addresses;
-  late AddressDetailsEntity addressesEntity;
-  late AddressDetailsEntity addressesEntityAfterDelete;
+  late List<AddressEntity> addresses;
+  late AddressDetailsResponseEntity addressesEntity;
+  late AddressDetailsResponseEntity addressesEntityAfterDelete;
 
   setUpAll(() {
     registerFallbackValue(CheckAddressStatusEvent());
@@ -56,7 +56,7 @@ void main() {
     );
 
     addresses = const [
-      AddressDetailsDtoEntity(
+      AddressEntity(
         street: "street1",
         phone: "01000000001",
         city: "city1",
@@ -65,7 +65,7 @@ void main() {
         username: "user1",
         id: "addressId1",
       ),
-      AddressDetailsDtoEntity(
+      AddressEntity(
         street: "street2",
         phone: "01000000002",
         city: "city2",
@@ -76,12 +76,12 @@ void main() {
       ),
     ];
 
-    addressesEntity = AddressDetailsEntity(
+    addressesEntity = AddressDetailsResponseEntity(
       message: "success",
       address: addresses,
     );
 
-    addressesEntityAfterDelete = AddressDetailsEntity(
+    addressesEntityAfterDelete = AddressDetailsResponseEntity(
       message: "success",
       address: [addresses[1]],
     );
@@ -99,7 +99,8 @@ void main() {
 
       setUp: () {
         when(() => mockGetSavedAddressesUseCase.call()).thenAnswer(
-          (_) async => Success<AddressDetailsEntity>(data: addressesEntity),
+          (_) async =>
+              Success<AddressDetailsResponseEntity>(data: addressesEntity),
         );
       },
       build: () => viewModel,
@@ -123,8 +124,9 @@ void main() {
 
       setUp: () {
         when(() => mockGetSavedAddressesUseCase.call()).thenAnswer(
-          (_) async =>
-              Error<AddressDetailsEntity>(exception: Exception(errorMessage)),
+          (_) async => Error<AddressDetailsResponseEntity>(
+            exception: Exception(errorMessage),
+          ),
         );
       },
       build: () => viewModel,
@@ -153,8 +155,9 @@ void main() {
 
       setUp: () {
         when(() => mockDeleteAddressUseCase.call("addressId1")).thenAnswer(
-          (_) async =>
-              Success<AddressDetailsEntity>(data: addressesEntityAfterDelete),
+          (_) async => Success<AddressDetailsResponseEntity>(
+            data: addressesEntityAfterDelete,
+          ),
         );
       },
       build: () => viewModel,
@@ -186,8 +189,9 @@ void main() {
 
       setUp: () {
         when(() => mockDeleteAddressUseCase.call("addressId1")).thenAnswer(
-          (_) async =>
-              Error<AddressDetailsEntity>(exception: Exception(errorMessage)),
+          (_) async => Error<AddressDetailsResponseEntity>(
+            exception: Exception(errorMessage),
+          ),
         );
       },
       build: () => viewModel,

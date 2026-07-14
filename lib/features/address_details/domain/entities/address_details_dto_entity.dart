@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class AddressDetailsDtoEntity extends Equatable {
+class AddressEntity extends Equatable {
   final String? street;
   final String? phone;
   final String? city;
@@ -9,7 +9,7 @@ class AddressDetailsDtoEntity extends Equatable {
   final String? username;
   final String? id;
 
-  const AddressDetailsDtoEntity({
+  const AddressEntity({
     this.street,
     this.phone,
     this.city,

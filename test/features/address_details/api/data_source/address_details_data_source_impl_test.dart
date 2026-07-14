@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flowery/config/base_response/base_response.dart';
 import 'package:flowery/core/const/address_details_values.dart';
 import 'package:flowery/features/address_details/api/api_client/address_details_api_client.dart';
-import 'package:flowery/features/address_details/api/data_source/address_details_data_source_impl.dart';
+import 'package:flowery/features/address_details/api/data_source/address_details_data_source_remote_impl.dart';
 import 'package:flowery/features/address_details/data/models/request/address_details_request.dart';
 import 'package:flowery/features/address_details/data/models/responce/address_details_dto_responce.dart';
 import 'package:flowery/features/address_details/data/models/responce/address_details_responce.dart';
@@ -15,7 +15,7 @@ class MockAddressDetailsApiClient extends Mock
     implements AddressDetailsApiClient {}
 
 void main() {
-  late AddressDetailsDataSourceImpl dataSource;
+  late AddressDetailsDataSourceRemoteImpl dataSource;
   late MockAddressDetailsApiClient mockApiClient;
 
   final errorMessage = "An error has occured";
@@ -26,7 +26,7 @@ void main() {
 
   setUp(() {
     mockApiClient = MockAddressDetailsApiClient();
-    dataSource = AddressDetailsDataSourceImpl(apiClient: mockApiClient);
+    dataSource = AddressDetailsDataSourceRemoteImpl(apiClient: mockApiClient);
 
     request = AddressDetailsRequest(
       street: "street",
@@ -97,9 +97,9 @@ void main() {
 
       final result = await dataSource.getSavedAddresses();
 
-      expect(result, isA<Success<AddressDetailsEntity>>());
+      expect(result, isA<Success<AddressDetailsResponseEntity>>());
       expect(
-        (result as Success<AddressDetailsEntity>).data,
+        (result as Success<AddressDetailsResponseEntity>).data,
         getAddressesResponce.toDomain(),
       );
       verify(() => mockApiClient.getSavedAddresses()).called(1);
@@ -118,9 +118,9 @@ void main() {
 
       final result = await dataSource.getSavedAddresses();
 
-      expect(result, isA<Error<AddressDetailsEntity>>());
+      expect(result, isA<Error<AddressDetailsResponseEntity>>());
       expect(
-        (result as Error<AddressDetailsEntity>).exception.toString(),
+        (result as Error<AddressDetailsResponseEntity>).exception.toString(),
         "Exception: $errorMessage",
       );
       verify(() => mockApiClient.getSavedAddresses()).called(1);

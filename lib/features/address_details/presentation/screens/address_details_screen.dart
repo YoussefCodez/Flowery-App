@@ -1,4 +1,5 @@
 import 'package:flowery/config/di/injectable_config.dart';
+import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/features/address_details/presentation/view_model/cubit/address_details_view_model.dart';
 import 'package:flowery/features/address_details/presentation/view_model/events/address_details_events.dart';
 import 'package:flowery/features/address_details/presentation/widgets/address_details_body.dart';
@@ -10,6 +11,7 @@ class AddressDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
     return BlocProvider(
       create: (_) => getIt<AddressDetailsViewModel>()
         ..doEvent(LoadGovernoratesEvent())
@@ -25,7 +27,7 @@ class AddressDetailsScreen extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          title: const Text('Address'),
+          title:  Text(localization.address),
         ),
         body: const AddressDetailsBody(),
       ),

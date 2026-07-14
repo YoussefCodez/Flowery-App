@@ -17,8 +17,8 @@ class AddressDetailsResponce {
       _$AddressDetailsResponceFromJson(json);
 
   Map<String, dynamic> toJson() => _$AddressDetailsResponceToJson(this);
-  AddressDetailsEntity toDomain() {
-    return AddressDetailsEntity(
+  AddressDetailsResponseEntity toDomain() {
+    return AddressDetailsResponseEntity(
       message: message,
       address: address?.map((e) => e.toDomain()).toList(),
     );

@@ -1,29 +1,29 @@
 import 'package:flowery/config/base_response/base_response.dart';
-import 'package:flowery/features/address_details/data/data_source/address_details_data_source_contract.dart';
+import 'package:flowery/features/address_details/data/data_source/address_details_data_source_remote_contract.dart';
 import 'package:flowery/features/address_details/data/models/request/address_details_request.dart';
 import 'package:flowery/features/address_details/data/models/responce/address_details_dto_responce.dart';
 import 'package:flowery/features/address_details/data/models/responce/address_details_responce.dart';
-import 'package:flowery/features/address_details/data/repo/address_details_repo_impl.dart';
+import 'package:flowery/features/address_details/data/repo/address_details_repo_remote_impl.dart';
 import 'package:flowery/features/address_details/domain/entities/address_details_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockAddressDetailsDataSourceContract extends Mock
-    implements AddressDetailsDataSourceContract {}
+    implements AddressDetailsDataSourceRemoteContract {}
 
 void main() {
-  late AddressDetailsRepoImpl repo;
+  late AddressDetailsRepoRemoteImpl repo;
   late MockAddressDetailsDataSourceContract mockDataSource;
 
   final errorMessage = "An error has occured";
 
   late AddressDetailsRequest request;
   late AddressDetailsResponce responce;
-  late AddressDetailsEntity entity;
+  late AddressDetailsResponseEntity entity;
 
   setUp(() {
     mockDataSource = MockAddressDetailsDataSourceContract();
-    repo = AddressDetailsRepoImpl(dataSource: mockDataSource);
+    repo = AddressDetailsRepoRemoteImpl(dataSource: mockDataSource);
 
     request = AddressDetailsRequest(
       street: "street",
@@ -59,8 +59,8 @@ void main() {
       final result = await repo.updateAddressDetails(request);
 
       // Assert
-      expect(result, isA<Success<AddressDetailsEntity>>());
-      expect((result as Success<AddressDetailsEntity>).data, entity);
+      expect(result, isA<Success<AddressDetailsResponseEntity>>());
+      expect((result as Success<AddressDetailsResponseEntity>).data, entity);
       verify(() => mockDataSource.updateAddressDetails(request)).called(1);
     });
 
@@ -72,9 +72,9 @@ void main() {
 
       final result = await repo.updateAddressDetails(request);
 
-      expect(result, isA<Error<AddressDetailsEntity>>());
+      expect(result, isA<Error<AddressDetailsResponseEntity>>());
       expect(
-        (result as Error<AddressDetailsEntity>).exception.toString(),
+        (result as Error<AddressDetailsResponseEntity>).exception.toString(),
         "Exception: $errorMessage",
       );
       verify(() => mockDataSource.updateAddressDetails(request)).called(1);
@@ -84,27 +84,28 @@ void main() {
   group("Testing getSavedAddresses", () {
     test("Success in getting saved addresses", () async {
       when(() => mockDataSource.getSavedAddresses()).thenAnswer(
-        (_) async => Success<AddressDetailsEntity>(data: entity),
+        (_) async => Success<AddressDetailsResponseEntity>(data: entity),
       );
 
       final result = await repo.getSavedAddresses();
 
-      expect(result, isA<Success<AddressDetailsEntity>>());
-      expect((result as Success<AddressDetailsEntity>).data, entity);
+      expect(result, isA<Success<AddressDetailsResponseEntity>>());
+      expect((result as Success<AddressDetailsResponseEntity>).data, entity);
       verify(() => mockDataSource.getSavedAddresses()).called(1);
     });
 
     test("Error getting saved addresses", () async {
       when(() => mockDataSource.getSavedAddresses()).thenAnswer(
-        (_) async =>
-            Error<AddressDetailsEntity>(exception: Exception(errorMessage)),
+        (_) async => Error<AddressDetailsResponseEntity>(
+          exception: Exception(errorMessage),
+        ),
       );
 
       final result = await repo.getSavedAddresses();
 
-      expect(result, isA<Error<AddressDetailsEntity>>());
+      expect(result, isA<Error<AddressDetailsResponseEntity>>());
       expect(
-        (result as Error<AddressDetailsEntity>).exception.toString(),
+        (result as Error<AddressDetailsResponseEntity>).exception.toString(),
         "Exception: $errorMessage",
       );
       verify(() => mockDataSource.getSavedAddresses()).called(1);
@@ -119,8 +120,8 @@ void main() {
 
       final result = await repo.deleteAddress("addressId");
 
-      expect(result, isA<Success<AddressDetailsEntity>>());
-      expect((result as Success<AddressDetailsEntity>).data, entity);
+      expect(result, isA<Success<AddressDetailsResponseEntity>>());
+      expect((result as Success<AddressDetailsResponseEntity>).data, entity);
       verify(() => mockDataSource.deleteAddress("addressId")).called(1);
     });
 
@@ -132,9 +133,9 @@ void main() {
 
       final result = await repo.deleteAddress("addressId");
 
-      expect(result, isA<Error<AddressDetailsEntity>>());
+      expect(result, isA<Error<AddressDetailsResponseEntity>>());
       expect(
-        (result as Error<AddressDetailsEntity>).exception.toString(),
+        (result as Error<AddressDetailsResponseEntity>).exception.toString(),
         "Exception: $errorMessage",
       );
       verify(() => mockDataSource.deleteAddress("addressId")).called(1);

@@ -153,5 +153,7 @@
   "enter_the_recipient_name" : "Enter the recipient name",
   "enter_the_the_phone_number" : "Enter the phone number",
   "city" : "City",
-  "area" : "Area"
+  "area" : "Area",
+  "map": "Map",
+  "address_saved_successfully": "Address Address Saved Successfully"
 }

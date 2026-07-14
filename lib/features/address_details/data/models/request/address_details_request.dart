@@ -6,25 +6,25 @@ part 'address_details_request.g.dart';
 @JsonSerializable()
 class AddressDetailsRequest {
     @JsonKey(name: "street")
-    String? street;
+    String street;
     @JsonKey(name: "phone")
-    String? phone;
+    String phone;
     @JsonKey(name: "city")
-    String? city;
+    String city;
     @JsonKey(name: "lat")
-    String? lat;
+    String lat;
     @JsonKey(name: "long")
-    String? long;
+    String long;
     @JsonKey(name: "username")
-    String? username;
+    String username;
 
     AddressDetailsRequest({
-        this.street,
-        this.phone,
-        this.city,
-        this.lat,
-        this.long,
-        this.username,
+      required this.street,
+      required this.phone,
+      required this.city,
+      required this.lat,
+      required this.long,
+      required this.username,
     });
 
     factory AddressDetailsRequest.fromJson(Map<String, dynamic> json) => _$AddressDetailsRequestFromJson(json);

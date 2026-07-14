@@ -153,5 +153,7 @@
   "enter_the_recipient_name": "اضف اسم المستلم",
   "enter_the_the_phone_number" : "اضف رقم الهاتف",
   "city" : "المدينة",
-  "area" : "المكان"
+  "area" : "المكان",
+  "map": "الخرائط",
+  "address_saved_successfully": "تم حفظ العنوان بنجاح"
 }

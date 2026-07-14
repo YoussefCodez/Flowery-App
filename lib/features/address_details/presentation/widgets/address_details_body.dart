@@ -1,4 +1,5 @@
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
+import 'package:flowery/core/const/address_details_values.dart';
 import 'package:flowery/core/widgets/custom_text_field.dart';
 import 'package:flowery/features/address_details/data/models/location/city_model.dart';
 import 'package:flowery/features/address_details/data/models/location/governorate_model.dart';
@@ -63,7 +64,7 @@ class _AddressDetailsBodyState extends State<AddressDetailsBody> {
 
           if (state.address != null) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Address saved successfully')),
+               SnackBar(content: Text(localizations.address_saved_successfully)),
             );
             Navigator.pop(context);
           } else if (state.errorMessage.isNotEmpty) {
@@ -110,9 +111,9 @@ class _AddressDetailsBodyState extends State<AddressDetailsBody> {
                           children: [
                             TileLayer(
                               urlTemplate:
-                                  'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+                                  AddressDetailsValues.urlTemplateCartocdn,
                               subdomains: const ['a', 'b', 'c', 'd'],
-                              userAgentPackageName: 'com.example.flowery',
+                              userAgentPackageName: AddressDetailsValues.userAgentPackageName,
                             ),
                             if (state.latitude != null &&
                                 state.longitude != null)
@@ -165,8 +166,8 @@ class _AddressDetailsBodyState extends State<AddressDetailsBody> {
                     Expanded(
                       child: DropdownButtonFormField<GovernorateModel>(
                         value: state.selectedGovernorate,
-                        decoration: const InputDecoration(
-                          labelText: 'City',
+                        decoration:  InputDecoration(
+                          labelText: localizations.city,
                           border: OutlineInputBorder(),
                         ),
                         items: state.governorates
@@ -190,8 +191,8 @@ class _AddressDetailsBodyState extends State<AddressDetailsBody> {
                     Expanded(
                       child: DropdownButtonFormField<CityModel>(
                         value: state.selectedCity,
-                        decoration: const InputDecoration(
-                          labelText: 'Area',
+                        decoration:  InputDecoration(
+                          labelText: localizations.area,
                           border: OutlineInputBorder(),
                         ),
                         items: state.filteredCities
@@ -254,7 +255,7 @@ class _AddressDetailsBodyState extends State<AddressDetailsBody> {
                                   color: Colors.white,
                                 ),
                               )
-                            : const Text('Save Address'),
+                            :  Text(localizations.saved_address),
                       ),
                     );
                   },

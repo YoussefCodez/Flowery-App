@@ -1,13 +1,13 @@
-import 'dart:convert';
 import 'package:flowery/config/base_response/base_response.dart';
 import 'package:flowery/features/address_details/data/models/location/city_model.dart';
 import 'package:flowery/features/address_details/data/models/location/governorate_model.dart';
 import 'package:flowery/features/address_details/data/models/request/address_details_request.dart';
 import 'package:flowery/features/address_details/domain/entities/address_details_entity.dart';
-import 'package:flowery/features/address_details/domain/use_case/address_details_use_case.dart';
+import 'package:flowery/features/address_details/domain/use_case/address_details_use_case_remote.dart';
+import 'package:flowery/features/address_details/domain/use_case/get_cities_use_case_local.dart';
+import 'package:flowery/features/address_details/domain/use_case/get_governorates_use_case_local.dart';
 import 'package:flowery/features/address_details/presentation/view_model/events/address_details_events.dart';
 import 'package:flowery/features/address_details/presentation/view_model/states/address_details_base_state.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -15,10 +15,15 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class AddressDetailsViewModel extends Cubit<AddressDetailsBaseState> {
-  final AddressDetailsUseCase _addressDetailsUseCase;
+  final UpdateAddressDetailsUseCaseRemote _addressDetailsUseCase;
+  final GetGovernoratesUseCaseLocal _getGovernoratesUseCase;
+  final GetCitiesUseCaseLocal _getCitiesUseCase;
 
-  AddressDetailsViewModel(this._addressDetailsUseCase)
-    : super(const AddressDetailsBaseState());
+  AddressDetailsViewModel(
+    this._addressDetailsUseCase,
+    this._getGovernoratesUseCase,
+    this._getCitiesUseCase,
+  ) : super(const AddressDetailsBaseState());
 
   void doEvent(AddressDetailsEvents event, {AddressDetailsRequest? request}) {
     switch (event) {
@@ -52,15 +57,9 @@ class AddressDetailsViewModel extends Cubit<AddressDetailsBaseState> {
 
   Future<void> _loadGovernorates() async {
     emit(state.copyWith(isLoadingGovernorates: true));
+
     try {
-      final jsonString = await rootBundle.loadString('assets/json/cities.json');
-      final List data = jsonDecode(jsonString);
-      final governoratesTable = data.firstWhere(
-        (element) => element['name'] == 'governorates',
-      );
-      final governorates = (governoratesTable['data'] as List)
-          .map((e) => GovernorateModel.fromJson(e))
-          .toList();
+      final governorates = await _getGovernoratesUseCase();
 
       emit(
         state.copyWith(
@@ -80,15 +79,9 @@ class AddressDetailsViewModel extends Cubit<AddressDetailsBaseState> {
 
   Future<void> _loadCities() async {
     emit(state.copyWith(isLoadingCities: true));
+
     try {
-      final jsonString = await rootBundle.loadString('assets/json/states.json');
-      final List data = jsonDecode(jsonString);
-      final citiesTable = data.firstWhere(
-        (element) => element['name'] == 'cities',
-      );
-      final cities = (citiesTable['data'] as List)
-          .map((e) => CityModel.fromJson(e))
-          .toList();
+      final cities = await _getCitiesUseCase();
 
       emit(state.copyWith(isLoadingCities: false, allCities: cities));
     } catch (e) {
@@ -244,10 +237,10 @@ class AddressDetailsViewModel extends Cubit<AddressDetailsBaseState> {
     final response = await _addressDetailsUseCase.call(request);
 
     switch (response) {
-      case Success<AddressDetailsEntity>():
+      case Success<AddressDetailsResponseEntity>():
         emit(state.copyWith(isSavingAddress: false, address: response.data));
 
-      case Error<AddressDetailsEntity>():
+      case Error<AddressDetailsResponseEntity>():
         emit(
           state.copyWith(
             isSavingAddress: false,
