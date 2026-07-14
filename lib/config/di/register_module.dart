@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flowery/config/api/app_endpoints.dart';
+import 'package:flowery/features/app_language_logout/api/logout_api_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
@@ -14,11 +15,8 @@ abstract class CoreInjectableModule {
   @preResolve
   Future<SharedPreferences> prefs() => SharedPreferences.getInstance();
 
-  static AndroidOptions _getAndroidOptions() =>
-      const AndroidOptions(encryptedSharedPreferences: true);
   @lazySingleton
-  FlutterSecureStorage secureStorage() =>
-      FlutterSecureStorage(aOptions: _getAndroidOptions());
+  FlutterSecureStorage secureStorage() => FlutterSecureStorage();
 
   @singleton
   Dio dio() {
@@ -50,4 +48,7 @@ abstract class CoreInjectableModule {
 
   @lazySingleton
   InternetConnection internetConnection() => InternetConnection();
+
+  @lazySingleton
+  LogoutApiService logoutApiService(Dio dio) => LogoutApiService(dio);
 }

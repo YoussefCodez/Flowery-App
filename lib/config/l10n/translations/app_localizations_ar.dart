@@ -12,6 +12,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get login => 'تسجيل الدخول';
 
   @override
+  String get remember_me => 'تذكرني';
+
+  @override
+  String get sign_up => 'انشاء حساب';
+
+  @override
+  String get enter_your_email => 'ادخل البريد الإلكتروني';
+
+  @override
+  String get enter_your_password => 'ادخل كلمة المرور';
+
+  @override
   String get name_is_required => 'الاسم مطلوب!';
 
   @override
@@ -135,6 +147,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get home => 'الرئيسية';
 
   @override
+  String get categories => 'الفئات';
+
+  @override
+  String get cart => 'السلة';
+
+  @override
   String get profile => 'الملف الشخصي';
 
   @override
@@ -194,4 +212,205 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get an_error_occurred => 'حدث خطأ';
+
+  @override
+  String get language => 'اللغة';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get confirm_logout => 'تأكيد تسجيل الخروج!!';
+
+  @override
+  String get change_language => 'تغيير اللغة';
+
+  @override
+  String get arabic => 'العربية';
+
+  @override
+  String get english => 'الإنجليزية';
+
+  @override
+  String get enterFirstName => 'ادخل الاسم الاول';
+
+  @override
+  String get firstName => 'الاسم الاول';
+
+  @override
+  String get enterLastName => 'ادخل الاسم الاخير';
+
+  @override
+  String get lastName => 'الاسم الاخير';
+
+  @override
+  String get enterYourEmail => 'ادخل ايميلك';
+
+  @override
+  String get enterPassword => 'ادخل الرقم السري';
+
+  @override
+  String get enterPhoneNumber => 'ادخل رقم الهاتف';
+
+  @override
+  String get phoneNumber => 'رقم الهاتف';
+
+  @override
+  String get gender => 'الجنس';
+
+  @override
+  String get female => 'انثي';
+
+  @override
+  String get male => 'رجل';
+
+  @override
+  String get creatingAccountAgreement => 'بإنشاء حساب، فإنك توافق على شروطنا';
+
+  @override
+  String get termsAndConditions => 'الشروط والأحكام';
+
+  @override
+  String get egp => 'جنيه';
+
+  @override
+  String get status_in_stock => 'الحالة: متوفر في المخزون';
+
+  @override
+  String get all_prices_include_tax => 'جميع الأسعار تشمل الضريبة';
+
+  @override
+  String get bouquet => 'Bouquet';
+
+  @override
+  String get description => 'الوصف';
+
+  @override
+  String get bouquet_include => 'تشمل الباقة';
+
+  @override
+  String get add_to_cart => 'اضف الي السلة';
+
+  @override
+  String get reset_password => 'إعادة تعيين كلمة المرور';
+
+  @override
+  String get current_password => 'كلمة المرور الحالية';
+
+  @override
+  String get new_password => 'كلمة المرور الجديدة';
+
+  @override
+  String get update => 'تحديث';
+
+  @override
+  String get incorrect_password => 'كلمة المرور القديمة غير صحيحة';
+
+  @override
+  String get password_changed_success => 'تم تغيير كلمة المرور بنجاح';
+
+  @override
+  String get success => 'نجحت';
+
+  @override
+  String get best_seller => 'الأكثر مبيعًا';
+
+  @override
+  String get best_seller_title => 'تألقي مع أفضل منتجاتنا مبيعًا';
+
+  @override
+  String get no_products => 'لا يوجد منتجات';
+
+  @override
+  String get occasion => 'المناسبة';
+
+  @override
+  String get lowest_price => 'ارخص ثمن';
+
+  @override
+  String get highest_price => 'اغلي ثمن';
+
+  @override
+  String get new_products => 'جديد';
+
+  @override
+  String get old_products => 'قديم';
+
+  @override
+  String get filter => 'فلتر';
+
+  @override
+  String get sort_by => 'فرز حسب';
+
+  @override
+  String get items => 'العناصر';
+
+  @override
+  String get sub_total => 'المجموع الفرعي';
+
+  @override
+  String get delivery_fee => 'رسوم التوصيل';
+
+  @override
+  String get total => 'الإجمالي';
+
+  @override
+  String get checkout => 'إتمام الطلب';
+
+  @override
+  String get discount => 'خصم';
+
+  @override
+  String get sub_total_after_discount => 'المجموع الفرعي بعد الخصم';
+
+  @override
+  String get your_cart_is_empty => 'سلتك فارغة';
+
+  @override
+  String get the_item_has_been_added => 'تم اضافة العنصر بنجاح الي سلتك';
+
+  @override
+  String get my_orders => 'طلباتي';
+
+  @override
+  String get saved_address => 'العناوين المحفوظة';
+
+  @override
+  String get notification => 'الإشعارات';
+
+  @override
+  String get about_us => 'عن التطبيق';
+
+  @override
+  String get terms_and_conditions => 'الشروط والأحكام';
+
+  @override
+  String get search_for_any_product_you_want => 'ابحث عن اي منتج تريد';
+
+  @override
+  String get edit_profile => 'تعديل الملف الشخصي';
+
+  @override
+  String get first_name => 'الاسم الأول';
+
+  @override
+  String get last_name => 'اسم العائلة';
+
+  @override
+  String get phone => 'رقم الموبيل';
+
+  @override
+  String get change => 'تغيير';
+
+  @override
+  String get stars => '★★★★★★';
+
+  @override
+  String get first_name_is_required => 'الاسم الأول مطلوب';
+
+  @override
+  String get last_name_is_required => 'اسم العائلة مطلوب';
+
+  @override
+  String get phone_is_required => 'رقم الهاتف مطلوب';
 }
