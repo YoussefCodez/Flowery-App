@@ -1,6 +1,8 @@
+import 'package:equatable/equatable.dart';
+
 import 'order_item_entity.dart';
 
-class OrderEntity {
+class OrderEntity extends Equatable {
   final String id;
   final String orderNumber;
   final double totalPrice;
@@ -22,4 +24,17 @@ class OrderEntity {
     required this.orderItems,
     required this.createdAt,
   });
+
+  @override
+  List<Object?> get props => [
+    id,
+    orderNumber,
+    totalPrice,
+    paymentType,
+    isPaid,
+    isDelivered,
+    state,
+    orderItems,
+    createdAt,
+  ];
 }

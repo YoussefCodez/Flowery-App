@@ -205,13 +205,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get completed => 'مكتمل';
 
   @override
-  String egp_price(String price) => 'ج.م $price';
+  String egp_price(String price) {
+    return 'ج.م $price';
+  }
 
   @override
-  String order_number(String id) => 'رقم الطلب# $id';
+  String order_number(String id) {
+    return 'رقم الطلب# $id';
+  }
 
   @override
-  String delivered_on(String day, String month, String year) => 'تم التوصيل في $day $month $year';
+  String delivered_on(String day, String month, String year) {
+    return 'تم التوصيل في $day $month $year';
+  }
 
   @override
   String get track_order => 'تتبع الطلب';

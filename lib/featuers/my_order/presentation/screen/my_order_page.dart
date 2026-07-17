@@ -29,13 +29,19 @@ class MyOrderPage extends StatelessWidget {
                   index: 1,
                   title: Tab(child: Text(l10n.active)),
                   content: state.activeOrdersState.when(
-                    success: (data) => ListView.builder(
+                    success: (data) {
+                        if (data.isEmpty) {
+                          return const Center(
+                            child: Text('No active orders'),
+                          );
+                        }
+                    return ListView.builder(
                       itemCount: data.length,
                       itemBuilder: (context, index) => CustomProductCard2(
                         orderItem: data[index],
                         isActive: true,
                       ),
-                    ),
+                    );},
                     loading: () => const Center(child: CircularProgressIndicator()),
                     error: (e) => Center(child: Text(e.toString())),
                     initial: () => const SizedBox(),
@@ -47,13 +53,20 @@ class MyOrderPage extends StatelessWidget {
                   content: state.completedOrdersState.when(
                     initial: () => const SizedBox(),
                     loading: () => const Center(child: CircularProgressIndicator()),
-                    success: (data) => ListView.builder(
+                    success: (data) {
+            if (data.isEmpty) {
+            return const Center(
+            child: Text('No active orders'),
+            );
+            }
+                      return ListView.builder(
                       itemCount: data.length,
-                      itemBuilder: (context, index) => CustomProductCard2(
-                        orderItem: data[index],
-                        isActive: false,
-                      ),
-                    ),
+            itemBuilder: (context, index) => CustomProductCard2(
+            orderItem: data[index],
+            isActive: false,
+            ));
+
+            } ,
                     error: (e) => Center(child: Text(e.toString())),
                   ),
                 ),

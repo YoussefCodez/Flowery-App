@@ -1,6 +1,7 @@
+import 'package:equatable/equatable.dart';
 import 'package:flowery/featuers/my_order/domain/entity/product_entity.dart';
 
-class OrderItemEntity {
+class OrderItemEntity  extends Equatable{
   final ProductEntity product;
   final double price;
   final int quantity;
@@ -11,4 +12,13 @@ class OrderItemEntity {
     required this.price,
     required this.quantity, required this.id,
   });
+
+  @override
+  List<Object?> get props => [
+    product,
+    price,
+    quantity,
+    id,
+
+  ];
 }

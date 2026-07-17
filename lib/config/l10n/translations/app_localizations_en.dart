@@ -208,13 +208,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get completed => 'Completed';
 
   @override
-  String egp_price(String price) => 'EGP $price';
+  String egp_price(String price) {
+    return 'EGP $price';
+  }
 
   @override
-  String order_number(String id) => 'Order number# $id';
+  String order_number(String id) {
+    return 'Order number# $id';
+  }
 
   @override
-  String delivered_on(String day, String month, String year) => 'Delivered on $day $month $year';
+  String delivered_on(String day, String month, String year) {
+    return 'Delivered on $day $month $year';
+  }
 
   @override
   String get track_order => 'Track order';

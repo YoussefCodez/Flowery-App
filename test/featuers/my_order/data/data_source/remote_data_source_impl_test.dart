@@ -30,22 +30,17 @@ void main() {
 
     });
     test('should return Error with correct exception when api call fails', () async {
-      // 1. Arrange
       final expectedException = Exception('Network error');
 
       when(mockMyOrderApiClient.getMyOrderData())
           .thenThrow(expectedException);
 
-      // 2. Act
       final result = await dataSource.getMyOrderData();
 
-      // 3. Assert (تأكيدات قوية وتفصيلية)
       expect(result, isA<Error<MyOrderResponseModel>>());
 
-      // بنحول النتيجة لنوع Error عشان نقدر نقرأ الـ exception اللي جواه
       final errorResult = result as Error<MyOrderResponseModel>;
 
-      // بنتأكد إن الرسالة أو الـ Exception هو هو اللي احنا رميناه فوق
       expect(errorResult.exception.toString(), contains('Network error'));
     });
   });
