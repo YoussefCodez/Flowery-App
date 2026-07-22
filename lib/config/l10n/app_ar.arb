@@ -59,5 +59,13 @@
   "login_success": "تم تسجيل الدخول بنجاح",
   "register_success": "تم التسجيل بنجاح",
   "connectButton": "ربط",
-  "an_error_occurred": "حدث خطأ"
+  "an_error_occurred": "حدث خطأ",
+  "notifications": "الإشعارات",
+  "no_notifications": "لا توجد إشعارات",
+  "language": "اللغة",
+  "cancel": "إلغاء",
+  "confirm_logout": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+  "change_language": "تغيير اللغة",
+  "arabic": "العربية",
+  "english": "الإنجليزية"
 }

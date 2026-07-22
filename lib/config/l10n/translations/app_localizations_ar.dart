@@ -194,4 +194,28 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get an_error_occurred => 'حدث خطأ';
+
+  @override
+  String get notifications => 'الإشعارات';
+
+  @override
+  String get no_notifications => 'لا توجد إشعارات';
+
+  @override
+  String get language => 'اللغة';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get confirm_logout => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
+
+  @override
+  String get change_language => 'تغيير اللغة';
+
+  @override
+  String get arabic => 'العربية';
+
+  @override
+  String get english => 'الإنجليزية';
 }

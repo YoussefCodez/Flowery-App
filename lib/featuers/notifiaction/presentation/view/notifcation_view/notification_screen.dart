@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flowery/core/theme/app_colors.dart';
+import 'package:flowery/config/l10n/translations/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../config/di/injectable_config.dart';
 import '../../view_model/notifcation_bloc.dart';
 import '../../view_model/notifcation_event.dart';
 import '../../view_model/notifcation_state.dart';
+
+String _formatDate(String? raw) {
+  if (raw == null || raw.isEmpty) return '';
+  try {
+    final dt = DateTime.parse(raw).toLocal();
+    final date = DateFormat('d MMM yyyy').format(dt);
+    final time = DateFormat('h:mm a').format(dt);
+    return '$date  •  $time';
+  } catch (_) {
+    return raw;
+  }
+}
 
 class NotificationPage extends StatelessWidget {
   NotificationPage({super.key});
@@ -14,11 +29,13 @@ class NotificationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return BlocProvider(
       create: (_) => cubit,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Notifications"),
+          title: Text(l10n.notifications),
           centerTitle: true,
         ),
         body: BlocBuilder<NotificationCubit, NotificationState>(
@@ -27,7 +44,7 @@ class NotificationPage extends StatelessWidget {
               initial: () => const SizedBox(),
 
               loading: () =>
-              const Center(child: CircularProgressIndicator()),
+                  const Center(child: CircularProgressIndicator()),
 
               error: (exception) => Center(
                 child: Text(exception.toString()),
@@ -35,67 +52,61 @@ class NotificationPage extends StatelessWidget {
 
               success: (notifications) {
                 if (notifications.isEmpty) {
-                  return const Center(
-                    child: Text("No Notifications"),
+                  return Center(
+                    child: Text(l10n.no_notifications),
                   );
                 }
 
                 return ListView.separated(
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(16.w),
                   itemCount: notifications.length,
-                  separatorBuilder: (_, __) =>
-                  const SizedBox(height: 12),
+                  separatorBuilder: (_, _) => SizedBox(height: 12.h),
                   itemBuilder: (context, index) {
                     final notification = notifications[index];
+                    final body = (notification.body ?? '')
+                        .trimRight()
+                        .replaceAll(RegExp(r'\.$'), '');
 
                     return Card(
                       elevation: 2,
-                      color: notification.isRead == true
-                          ? Colors.white
-                          : Colors.green.shade50,
+                      color: AppColors.whiteColor,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
+                        borderRadius: BorderRadius.circular(16.r),
                       ),
                       child: ListTile(
                         leading: CircleAvatar(
                           backgroundColor: AppColors.primaryColor,
-                          child: const Icon(
+                          child: Icon(
                             Icons.notifications,
-                            color: Colors.white,
+                            color: AppColors.whiteColor,
+                            size: 20.r,
                           ),
                         ),
                         title: Text(
-                          notification.title ?? "",
-                          style: const TextStyle(
+                          notification.title ?? '',
+                          style: TextStyle(
                             fontWeight: FontWeight.bold,
+                            fontSize: 14.sp,
                           ),
                         ),
                         subtitle: Column(
-                          crossAxisAlignment:
-                          CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(height: 4),
-                            Text(notification.body ?? ""),
-                            const SizedBox(height: 8),
+                            SizedBox(height: 4.h),
                             Text(
-                              notification.createdAt ?? "",
+                              body,
+                              style: TextStyle(fontSize: 13.sp),
+                            ),
+                            SizedBox(height: 8.h),
+                            Text(
+                              _formatDate(notification.createdAt),
                               style: TextStyle(
-                                color: Colors.grey.shade600,
-                                fontSize: 12,
+                                color: AppColors.lightGrayColor,
+                                fontSize: 12.sp,
                               ),
                             ),
                           ],
                         ),
-                        trailing: notification.isRead == false
-                            ? Container(
-                          width: 10,
-                          height: 10,
-                          decoration: const BoxDecoration(
-                            color: Colors.red,
-                            shape: BoxShape.circle,
-                          ),
-                        )
-                            : null,
                       ),
                     );
                   },
