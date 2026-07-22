@@ -1,12 +1,14 @@
 import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flutter/material.dart';
 
+import '../../featuers/notifiaction/presentation/view/notifcation_view/notification_screen.dart';
+
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     try {
       switch (settings.name) {
-        // case AppRoutes.mainProfile:
-        //   return MaterialPageRoute(builder: (_) => const MainProfileView());
+        case AppRoutes.notifiaction:
+          return MaterialPageRoute(builder: (_) =>  NotificationPage());
 
         default:
           return unDefinedRoute();

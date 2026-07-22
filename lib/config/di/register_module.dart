@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flowery/config/api/app_endpoints.dart';
 import 'package:flutter/foundation.dart';
@@ -19,7 +20,9 @@ abstract class CoreInjectableModule {
   @lazySingleton
   FlutterSecureStorage secureStorage() =>
       FlutterSecureStorage(aOptions: _getAndroidOptions());
-
+  @lazySingleton
+  FirebaseFirestore get firebaseFirestore =>
+      FirebaseFirestore.instance;
   @singleton
   Dio dio() {
     final dio = Dio(

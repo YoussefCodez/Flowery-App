@@ -9,6 +9,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
 import 'package:dio/dio.dart' as _i361;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
 import 'package:get_it/get_it.dart' as _i174;
@@ -17,6 +18,17 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
     as _i161;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
+import '../../featuers/notifiaction/data/data_source/notification_remote_data_source_contract.dart'
+    as _i595;
+import '../../featuers/notifiaction/data/data_source/notification_remote_data_source_impl.dart'
+    as _i300;
+import '../../featuers/notifiaction/data/repo_impl/repo_impl.dart' as _i257;
+import '../../featuers/notifiaction/domain/repo_contract/repo_contract.dart'
+    as _i188;
+import '../../featuers/notifiaction/domain/use_case/noifaction_use_case.dart'
+    as _i853;
+import '../../featuers/notifiaction/presentation/view_model/notifcation_bloc.dart'
+    as _i894;
 import '../../featuers/notification_service/notification_service.dart' as _i447;
 import '../api/app_interceptors.dart' as _i781;
 import '../general_cubit/local_cubit.dart' as _i794;
@@ -38,6 +50,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i361.Dio>(() => coreInjectableModule.dio());
     gh.singleton<_i447.NotificationService>(() => _i447.NotificationService());
+    gh.lazySingleton<_i974.FirebaseFirestore>(
+      () => coreInjectableModule.firebaseFirestore,
+    );
     gh.lazySingleton<_i558.FlutterSecureStorage>(
       () => coreInjectableModule.secureStorage(),
     );
@@ -59,11 +74,26 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i794.LocaleThemeCubit>(
       () => _i794.LocaleThemeCubit(gh<_i42.SharedPrefHelper>()),
     );
+    gh.factory<_i595.NotificationRemoteDataSource>(
+      () =>
+          _i300.NotificationRemoteDataSourceImpl(gh<_i974.FirebaseFirestore>()),
+    );
     gh.factory<_i157.UserHelper>(
       () => _i157.UserHelper(
         gh<_i460.SharedPreferences>(),
         gh<_i558.FlutterSecureStorage>(),
       ),
+    );
+    gh.factory<_i188.NotificationRepository>(
+      () => _i257.NotificationRepositoryImpl(
+        gh<_i595.NotificationRemoteDataSource>(),
+      ),
+    );
+    gh.factory<_i853.GetNotificationsUseCase>(
+      () => _i853.GetNotificationsUseCase(gh<_i188.NotificationRepository>()),
+    );
+    gh.factory<_i894.NotificationCubit>(
+      () => _i894.NotificationCubit(gh<_i853.GetNotificationsUseCase>()),
     );
     return this;
   }
