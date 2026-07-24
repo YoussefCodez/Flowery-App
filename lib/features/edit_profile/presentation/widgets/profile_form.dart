@@ -26,9 +26,6 @@ class ProfileForm extends StatefulWidget {
   State<ProfileForm> createState() => _ProfileFormState();
 }
 
-@override
-State<ProfileForm> createState() => _ProfileFormState();
-
 class _ProfileFormState extends State<ProfileForm> {
   final _formKey = GlobalKey<FormState>();
   late TextEditingController firstNameController;
@@ -88,11 +85,11 @@ class _ProfileFormState extends State<ProfileForm> {
                       hintText: widget.localizations.first_name,
                       labelText: widget.localizations.first_name,
                       controller: firstNameController,
-validator: (value) =>
-    EditProfileValidators.validateFirstName(
-      value,
-      widget.localizations,
-    ),
+                      validator: (value) =>
+                          EditProfileValidators.validateFirstName(
+                            value,
+                            widget.localizations,
+                          ),
                     ),
                   ),
                   SizedBox(width: 16.w),
@@ -101,11 +98,11 @@ validator: (value) =>
                       hintText: widget.localizations.last_name,
                       labelText: widget.localizations.last_name,
                       controller: lastNameController,
-validator: (value) =>
-    EditProfileValidators.validateLastName(
-      value,
-      widget.localizations,
-    ),
+                      validator: (value) =>
+                          EditProfileValidators.validateLastName(
+                            value,
+                            widget.localizations,
+                          ),
                     ),
                   ),
                 ],
@@ -117,11 +114,10 @@ validator: (value) =>
                 hintText: widget.localizations.email,
                 labelText: widget.localizations.email,
                 controller: emailController,
-validator: (value) =>
-    EditProfileValidators.validateEmail(
-      value,
-      widget.localizations,
-    ),
+                validator: (value) => EditProfileValidators.validateEmail(
+                  value,
+                  widget.localizations,
+                ),
               ),
               SizedBox(height: 20.h),
 
@@ -130,11 +126,10 @@ validator: (value) =>
                 hintText: widget.localizations.phone,
                 labelText: widget.localizations.phone,
                 controller: phoneController,
-validator: (value) =>
-    EditProfileValidators.validatePhone(
-      value,
-      widget.localizations,
-    ),
+                validator: (value) => EditProfileValidators.validatePhone(
+                  value,
+                  widget.localizations,
+                ),
               ),
               SizedBox(height: 20.h),
 
