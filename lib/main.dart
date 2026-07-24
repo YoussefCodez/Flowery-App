@@ -1,5 +1,7 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flowery/config/api/api_keys.dart';
 import 'package:flowery/config/di/injectable_config.dart';
+import 'package:flowery/config/firebase/services/fcm_service.dart';
 import 'package:flowery/config/general_cubit/general_state.dart';
 import 'package:flowery/config/general_cubit/local_cubit.dart';
 import 'package:flowery/config/helpers/bloc/bloc_observer.dart';
@@ -9,20 +11,18 @@ import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_generator.dart';
 import 'package:flowery/core/theme/app_theme.dart';
 import 'package:flowery/config/general_cubit/cart_manager/cart_manager.dart';
-import 'package:flowery/config/firebase/firebase_services.dart';
 import 'package:flowery/features/main_profile/presentation/view_model/profile_cubit.dart';
 import 'package:flowery/features/main_profile/presentation/view_model/profile_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:firebase_core/firebase_core.dart' hide FirebaseService;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   Bloc.observer = MyBlocObserver();
   await configureDependencies();
-  await getIt<FirebaseServices>().fcm.requestPermission();
+  await getIt<FcmService>().requestPermission();
   runApp(
     MultiBlocProvider(
       providers: [

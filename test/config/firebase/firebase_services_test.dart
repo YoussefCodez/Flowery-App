@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:flowery/config/firebase/firebase_services.dart';
+import 'package:flowery/config/firebase/firebase_module.dart';
 import 'package:flowery/config/firebase/services/fcm_service.dart';
 import 'package:flowery/config/firebase/services/firestore_service.dart';
 

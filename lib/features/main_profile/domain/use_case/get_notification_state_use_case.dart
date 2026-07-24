@@ -1,10 +1,10 @@
-import 'package:flowery/config/firebase/firebase_services.dart';
+import 'package:flowery/config/firebase/services/fcm_service.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
 class GetNotificationStateUseCase {
-  final FirebaseServices firebase;
-  GetNotificationStateUseCase(this.firebase);
+  final FcmService fcmService;
+  GetNotificationStateUseCase(this.fcmService);
 
-  bool call() => firebase.fcm.isNotificationPermissionAccepted();
+  bool call() => fcmService.isNotificationPermissionAccepted();
 }

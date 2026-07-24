@@ -1,6 +1,7 @@
 import 'package:flowery/config/api/api_keys.dart';
 import 'package:flowery/config/base_response/base_response.dart';
-import 'package:flowery/config/firebase/firebase_services.dart';
+import 'package:flowery/config/firebase/services/fcm_service.dart';
+import 'package:flowery/config/firebase/services/firestore_service.dart';
 import 'package:flowery/features/main_profile/data/model/user_response_model.dart';
 import 'package:flowery/features/main_profile/domain/entity/profile_entity.dart';
 import 'package:flowery/features/main_profile/domain/profile_repo/profile_repo_contract.dart';
@@ -10,9 +11,10 @@ import '../data_sources/remote_data_source/remote_data_sources_contract.dart';
 
 @Injectable(as: ProfileRepoContract)
 class ProfileRepoImpl implements ProfileRepoContract {
-  final FirebaseServices firebase;
+  final FcmService fcmService;
+  final FirestoreService firestoreService;
   final ProfileRemoteDataSourceContract remoteDataSource;
-  ProfileRepoImpl(this.remoteDataSource, this.firebase);
+  ProfileRepoImpl(this.remoteDataSource, this.fcmService, this.firestoreService,);
   @override
   Future<Result<ProfileEntity>> getProfileData() async {
     try {
@@ -20,8 +22,8 @@ class ProfileRepoImpl implements ProfileRepoContract {
 
       switch (response) {
         case Success<User>():
-          if (firebase.fcm.isNotificationPermissionAccepted()) {
-            final fcmToken = await firebase.fcm.getFCMToken();
+          if (fcmService.isNotificationPermissionAccepted()) {
+            final fcmToken = await fcmService.getFCMToken();
 
             // Handling the FCM Token null state
             if (fcmToken == null) {
@@ -29,15 +31,15 @@ class ProfileRepoImpl implements ProfileRepoContract {
             }
 
             // In case the FCM token is not null then save it to firestore
-            await firebase.firestore.saveTokenToFirestore(
+            await firestoreService.saveTokenToFirestore(
               userId: response.data?.id ?? "",
               token: fcmToken,
             );
 
             // Listen for any FCM token refresh
-            firebase.fcm.listenForFCMTokenRefresh(response.data?.id ?? "");
+            fcmService.listenForFCMTokenRefresh(response.data?.id ?? "");
           } else {
-            await firebase.firestore.saveTokenToFirestore(
+            await firestoreService.saveTokenToFirestore(
               userId: response.data?.id ?? "",
               token: null,
             );
@@ -59,14 +61,14 @@ class ProfileRepoImpl implements ProfileRepoContract {
     bool isNotificationOn,
   ) async {
     if (isNotificationOn) {
-      final fcmToken = await firebase.fcm.getFCMToken();
-      await firebase.firestore.saveTokenToFirestore(
+      final fcmToken = await fcmService.getFCMToken();
+      await firestoreService.saveTokenToFirestore(
         userId: userId,
         token: fcmToken,
       );
       return;
     }
-    await firebase.firestore.saveTokenToFirestore(userId: userId, token: null);
+    await firestoreService.saveTokenToFirestore(userId: userId, token: null);
     return;
   }
 }
