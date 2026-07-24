@@ -8,7 +8,6 @@ import 'package:flowery/features/occasions/presentation/screens/occasions_screen
 import 'package:flowery/features/products_details/presentation/pages/products_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flowery/features/app_section/presentation/view/app_section_view.dart';
-import 'app_routes.dart';
 
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
@@ -17,14 +16,11 @@ class RouteGenerator {
         case AppRoutes.appSection:
           return MaterialPageRoute(builder: (_) => const AppSectionView());
 
-        // case AppRoutes.login:
-        //   return MaterialPageRoute(
-        //     builder: (_) => const LoginScreen(),
-        //   );
         case AppRoutes.languagepage:
           return MaterialPageRoute(
             builder: (_) => const DemoLogoutLanguagePage(),
           );
+          
         case AppRoutes.login:
           return MaterialPageRoute(builder: (_) => LoginScreen());
 

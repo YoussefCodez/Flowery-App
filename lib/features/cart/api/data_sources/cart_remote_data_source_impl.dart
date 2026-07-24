@@ -1,8 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flowery/config/base_response/base_response.dart';
-import 'package:flowery/config/error/failures.dart';
 import 'package:flowery/config/error/handle_errors.dart';
-import 'package:flowery/config/l10n/translations/app_localizations_en.dart';
 import 'package:flowery/features/cart/api/api_client/cart_api_client.dart';
 import 'package:flowery/features/cart/data/data_sources/cart_remote_data_source_contract.dart';
 import 'package:flowery/features/cart/data/models/requests/cart_request_model.dart';

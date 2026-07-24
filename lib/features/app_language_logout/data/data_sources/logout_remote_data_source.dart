@@ -18,7 +18,7 @@ class LogoutRemoteDataSourceImpl implements LogoutRemoteDataSource {
       await _apiService.logout();
     } on DioException catch (e) {
       final data = e.response?.data;
-      final message = data is Map
+      data is Map
           ? (data['error'] ?? data['message'] ?? 'An error occurred')
           : 'An error occurred';
       // throw ServerFailure(errorMessage: message.toString());

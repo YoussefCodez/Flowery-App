@@ -1,3 +1,4 @@
+import 'package:flowery/config/general_cubit/cart_manager/cart_events.dart';
 import 'package:flowery/config/general_cubit/cart_manager/cart_manager.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/config/routing/app_routes.dart';
@@ -33,8 +34,8 @@ class WebViewScreen extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(localizations.your_order_has_been_placed)),
             );
-            context.read<CartManager>().loadCart();
-            context.pushNamed(AppRoutes.mainLayout);
+            context.read<CartManager>().doEvent(GetUserCartProductsEvent());
+            context.pushNamed(AppRoutes.home);
           }
           if (state is PaymentFailed) {
             // show snackBar of failure

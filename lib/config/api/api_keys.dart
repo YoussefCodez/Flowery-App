@@ -7,4 +7,6 @@ abstract class Apikeys {
   static const String bearer = 'Bearer';
   static const String fcmToken = 'fcmToken';
   static const String fcmTokenisNull = "FCM token is null";
+  static const String successPayment = '/allOrders';
+  static const String goBacktoCart = "/cart";
 }

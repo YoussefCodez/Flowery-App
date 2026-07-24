@@ -1,3 +1,4 @@
+import 'package:flowery/config/general_cubit/cart_manager/cart_events.dart';
 import 'package:flowery/config/general_cubit/cart_manager/cart_manager.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/config/routing/app_routes.dart';
@@ -64,8 +65,8 @@ class PlaceOrderButton extends StatelessWidget {
                       ),
                     );
                     // load the cart again then go back
-                    context.read<CartManager>().loadCart();
-                    context.pushNamed(AppRoutes.mainLayout);
+                    context.read<CartManager>().doEvent(GetUserCartProductsEvent());
+                    context.pushNamed(AppRoutes.home);
                   }
                 },
                 builder: (context, state) {

@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flowery/config/base_response/base_response.dart';
 import 'package:flowery/config/error/handle_errors.dart';
-import 'package:flowery/core/const/checkout_values.dart';
 import 'package:flowery/features/checkout/api/api_client/checkout_api_client.dart';
 import 'package:flowery/features/checkout/data/data_sources/checkout_remote_data_source_contract.dart';
 import 'package:flowery/features/checkout/data/models/requests/create_cash_order_request.dart';
