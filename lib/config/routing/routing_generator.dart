@@ -6,7 +6,6 @@ import 'package:flowery/features/change_password/presentation/screens/change_pas
 import 'package:flowery/features/login/presentation/screens/login_screen.dart';
 import 'package:flowery/features/occasions/presentation/screens/occasions_screen.dart';
 import 'package:flowery/features/products_details/presentation/pages/products_details_screen.dart';
-import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/features/edit_profile/presentation/screens/edit_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flowery/features/app_section/presentation/view/app_section_view.dart';
@@ -73,8 +72,6 @@ class RouteGenerator {
       builder: (_) => Scaffold(
         appBar: AppBar(title: const Text('No Route Found')),
         body: const Center(child: Text('No Route Found')),
-        appBar: AppBar(title: const Text('No Route Found')),
-        body: const Center(child: Text('No Route Found')),
       ),
     );
   }
@@ -82,8 +79,6 @@ class RouteGenerator {
   static Route<dynamic> errorRoute(String error) {
     return MaterialPageRoute(
       builder: (_) => Scaffold(
-        appBar: AppBar(title: const Text('Route Error')),
-        body: Center(child: Text(error)),
         appBar: AppBar(title: const Text('Route Error')),
         body: Center(child: Text(error)),
       ),

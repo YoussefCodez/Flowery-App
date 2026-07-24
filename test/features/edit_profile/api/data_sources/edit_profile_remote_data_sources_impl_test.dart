@@ -11,7 +11,7 @@ import 'package:flowery/features/edit_profile/data/models/responses/user_model.d
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'edit_profile_remote_data_sources_impl_test.mocks.dart';
+class MockEditProfileApiClient extends Mock implements EditProfileApiClient {}
 
 @GenerateMocks([EditProfileApiClient])
 void main() {
@@ -23,9 +23,7 @@ void main() {
   setUp(() {
     mockApiClient = MockEditProfileApiClient();
 
-    dataSource = EditProfileRemoteDataSourcesImpl(
-      apiClient: mockApiClient,
-    );
+    dataSource = EditProfileRemoteDataSourcesImpl(apiClient: mockApiClient);
 
     responseModel = GetUserResponseModel(
       message: "Success",
@@ -59,11 +57,9 @@ void main() {
     });
 
     test('should return Error when api throws DioException', () async {
-      when(mockApiClient.getCurrentUser()).thenThrow(
-        DioException(
-          requestOptions: RequestOptions(path: ''),
-        ),
-      );
+      when(
+        mockApiClient.getCurrentUser(),
+      ).thenThrow(DioException(requestOptions: RequestOptions(path: '')));
 
       final result = await dataSource.getCurrentLoggedUser();
 
@@ -83,9 +79,7 @@ void main() {
 
     test('should return Success when api succeeds', () async {
       when(
-        mockApiClient.editCurrentUserProfile(
-          newEdits: editUser,
-        ),
+        mockApiClient.editCurrentUserProfile(newEdits: editUser),
       ).thenAnswer((_) async => responseModel);
 
       final result = await dataSource.editUserProfile(editUser);
@@ -97,9 +91,7 @@ void main() {
       expect(success.data, responseModel);
 
       verify(
-        mockApiClient.editCurrentUserProfile(
-          newEdits: editUser,
-        ),
+        mockApiClient.editCurrentUserProfile(newEdits: editUser),
       ).called(1);
 
       verifyNoMoreInteractions(mockApiClient);
@@ -107,23 +99,15 @@ void main() {
 
     test('should return Error when api throws DioException', () async {
       when(
-        mockApiClient.editCurrentUserProfile(
-          newEdits: editUser,
-        ),
-      ).thenThrow(
-        DioException(
-          requestOptions: RequestOptions(path: ''),
-        ),
-      );
+        mockApiClient.editCurrentUserProfile(newEdits: editUser),
+      ).thenThrow(DioException(requestOptions: RequestOptions(path: '')));
 
       final result = await dataSource.editUserProfile(editUser);
 
       expect(result, isA<Error<GetUserResponseModel>>());
 
       verify(
-        mockApiClient.editCurrentUserProfile(
-          newEdits: editUser,
-        ),
+        mockApiClient.editCurrentUserProfile(newEdits: editUser),
       ).called(1);
     });
   });
@@ -144,9 +128,7 @@ void main() {
 
       expect(success.data, responseModel);
 
-      verify(
-        mockApiClient.uploadPhoto(photo),
-      ).called(1);
+      verify(mockApiClient.uploadPhoto(photo)).called(1);
 
       verifyNoMoreInteractions(mockApiClient);
     });
@@ -154,19 +136,13 @@ void main() {
     test('should return Error when upload throws DioException', () async {
       when(
         mockApiClient.uploadPhoto(photo),
-      ).thenThrow(
-        DioException(
-          requestOptions: RequestOptions(path: ''),
-        ),
-      );
+      ).thenThrow(DioException(requestOptions: RequestOptions(path: '')));
 
       final result = await dataSource.uploadUserPhoto(photo);
 
       expect(result, isA<Error<GetUserResponseModel>>());
 
-      verify(
-        mockApiClient.uploadPhoto(photo),
-      ).called(1);
+      verify(mockApiClient.uploadPhoto(photo)).called(1);
     });
   });
 }
