@@ -3,7 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:injectable/injectable.dart';
 
 @module
-class FirebaseModule  {
+abstract class FirebaseModule  {
   @lazySingleton
   FirebaseFirestore get firestore => FirebaseFirestore.instance;
 

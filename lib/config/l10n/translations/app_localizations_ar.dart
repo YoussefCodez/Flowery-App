@@ -280,7 +280,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get all_prices_include_tax => 'جميع الأسعار تشمل الضريبة';
 
   @override
-  String get bouquet => 'Bouquet';
+  String get bouquet => 'الباقة';
 
   @override
   String get description => 'الوصف';
