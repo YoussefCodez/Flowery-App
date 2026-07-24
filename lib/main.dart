@@ -1,6 +1,6 @@
 import 'package:flowery/config/api/api_keys.dart';
 import 'package:flowery/config/di/injectable_config.dart';
-import 'package:flowery/config/firebase/firebase_services.dart';
+import 'package:flowery/config/firebase/services/fcm_service.dart';
 import 'package:flowery/config/general_cubit/cart_manager/cart_events.dart';
 import 'package:flowery/config/general_cubit/general_state.dart';
 import 'package:flowery/config/general_cubit/local_cubit.dart';
@@ -21,7 +21,7 @@ void main() async {
   await Firebase.initializeApp();
   Bloc.observer = MyBlocObserver();
   await configureDependencies();
-  await getIt<FirebaseServices>().fcm.requestPermission();
+  await getIt<FcmService>().requestPermission();
   runApp(
     MultiBlocProvider(
       providers: [

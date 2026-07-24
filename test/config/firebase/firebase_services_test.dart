@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:flowery/config/firebase/firebase_services.dart';
+import 'package:flowery/config/firebase/firebase_module.dart';
 import 'package:flowery/config/firebase/services/fcm_service.dart';
 import 'package:flowery/config/firebase/services/firestore_service.dart';
 
@@ -18,12 +18,9 @@ void main() {
   });
 
   test('should initialize FirebaseServices correctly', () {
-    final firebaseServices = FirebaseServices(
-      firestoreService,
-      fcmService,
-    );
+    final firebaseServices = FirebaseModule();
 
     expect(firebaseServices.firestore, firestoreService);
-    expect(firebaseServices.fcm, fcmService);
+    expect(firebaseServices.messaging, fcmService);
   });
 }
