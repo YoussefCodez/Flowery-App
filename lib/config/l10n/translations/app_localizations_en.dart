@@ -419,4 +419,57 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get phone_is_required => 'Phone is required';
+
+  @override
+  String get delivery_time => 'Delivery time';
+
+  @override
+  String get instant => 'Instant';
+
+  @override
+  String get delivery_address => 'Delivery address';
+
+  @override
+  String get payment_method => 'Payment method';
+
+  @override
+  String get cash_on_delivery => 'Cash on delivery';
+
+  @override
+  String get credit_card => 'Credit card';
+
+  @override
+  String get it_is_a_gift => 'It is a gift';
+
+  @override
+  String get place_order => 'Place order';
+
+  @override
+  String get add_new => 'Add new';
+
+  @override
+  String get enter_the_name => 'Enter the name';
+
+  @override
+  String get enter_the_phone_number => 'Enter the phone number';
+
+  @override
+  String get your_order_has_been_placed =>
+      'Your order has been placed successfully.';
+
+  @override
+  String get go_to_home => 'Go to Home';
+
+  @override
+  String get arrive_by => 'Arrive by,';
+
+  @override
+  String get please_select_an_address => 'Please select the delivery address';
+
+  @override
+  String get online_payment => 'Online Payment';
+
+  @override
+  String get your_order_is_not_completed =>
+      'Your order isn\'t completed yet, please retry';
 }
