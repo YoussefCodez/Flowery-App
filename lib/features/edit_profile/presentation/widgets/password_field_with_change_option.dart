@@ -27,7 +27,6 @@ class PasswordFieldWithChangeOption extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
             onTap: () {
-              // TODO: Navigate To Change Password Screen
             },
             child: Text(
               localizations.change,

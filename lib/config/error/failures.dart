@@ -51,8 +51,9 @@ class ServerFailure extends Failures {
           errorMessage:  lang.unknown,
         );
       case DioExceptionType.transformTimeout:
-        // TODO: Handle this case.
-        throw UnimplementedError();
+                return ServerFailure(
+          errorMessage:  lang.sendTimeout,
+        );
     }
   }
 

@@ -38,7 +38,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              // TODO: Navigate to the notifications screen
             },
             icon: Icon(Icons.notifications_none),
           ),

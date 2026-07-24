@@ -30,7 +30,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get name_is_not_valid => 'This name is not valid';
 
   @override
-  String get email_is_required => 'Email is required!';
+  String get email_is_required => 'Email is required';
 
   @override
   String get email_is_not_valid => 'This Email is not valid';

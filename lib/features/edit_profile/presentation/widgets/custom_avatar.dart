@@ -53,6 +53,7 @@ class CustomAvatar extends StatelessWidget {
             onPressed: () async {
               final pickedFile = await pickImage();
               if (pickedFile != null) {
+                // ignore: use_build_context_synchronously
                 context.read<EditProfileViewModel>().doEvent(
                   UploadProfilePhotoEvent(pickedFile),
                 );

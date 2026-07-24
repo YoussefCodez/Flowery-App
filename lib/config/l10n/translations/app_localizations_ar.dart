@@ -30,7 +30,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get name_is_not_valid => 'الاسم غير صحيح';
 
   @override
-  String get email_is_required => 'البريد الإلكتروني مطلوب!';
+  String get email_is_required => 'البريد الإلكتروني مطلوب';
 
   @override
   String get email_is_not_valid => 'البريد الإلكتروني غير صحيح';
@@ -256,13 +256,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get phoneNumber => 'رقم الهاتف';
 
   @override
-  String get gender => 'الجنس';
+  String get gender => 'النوع';
 
   @override
-  String get female => 'انثي';
+  String get female => 'أنثى';
 
   @override
-  String get male => 'رجل';
+  String get male => 'ذكر';
 
   @override
   String get creatingAccountAgreement => 'بإنشاء حساب، فإنك توافق على شروطنا';

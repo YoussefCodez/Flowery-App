@@ -143,7 +143,7 @@ abstract class AppLocalizations {
   /// No description provided for @email_is_required.
   ///
   /// In en, this message translates to:
-  /// **'Email is required!'**
+  /// **'Email is required'**
   String get email_is_required;
 
   /// No description provided for @email_is_not_valid.
