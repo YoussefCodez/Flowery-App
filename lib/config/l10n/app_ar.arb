@@ -169,5 +169,19 @@
   "arrive_by" : "يصل بحلول",
   "please_select_an_address" : "من فضلك اختر عنوان الاستلام",
   "online_payment" : "الدفع الالكتروني",
-  "your_order_is_not_completed" : "طلبك لم يكتمل بعد, اعد المحاولة"
+  "your_order_is_not_completed" : "طلبك لم يكتمل بعد, اعد المحاولة",
+  "edit_profile": "تعديل الملف الشخصي",
+  "first_name": "الاسم الأول",
+  "last_name": "اسم العائلة",
+  "phone": "رقم الموبيل",
+  "change": "تغيير",
+  "gender": "النوع",
+  "male": "ذكر",
+  "female": "أنثى",
+  "update": "تحديث",
+  "stars" : "★★★★★★",
+  "first_name_is_required": "الاسم الأول مطلوب",
+  "last_name_is_required": "اسم العائلة مطلوب",
+  "email_is_required": "البريد الإلكتروني مطلوب",
+  "phone_is_required": "رقم الهاتف مطلوب"
 }
