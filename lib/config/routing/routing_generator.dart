@@ -1,3 +1,4 @@
+import 'package:flowery/config/di/injectable_config.dart';
 import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/features/app_language_logout/presntation/demo_logout_language.dart';
 import 'package:flowery/features/best_seller/presentation/screens/best_seller_screen.dart';
@@ -5,16 +6,41 @@ import 'package:flowery/features/cart/presentation/screens/cart_screen.dart';
 import 'package:flowery/features/change_password/presentation/screens/change_password_screen.dart';
 import 'package:flowery/features/login/presentation/screens/login_screen.dart';
 import 'package:flowery/features/occasions/presentation/screens/occasions_screen.dart';
+import 'package:flowery/features/order_tracking/presentation/screens/order_tracking_map_screen.dart';
+import 'package:flowery/features/order_tracking/presentation/screens/order_tracking_screen.dart';
+import 'package:flowery/features/order_tracking/presentation/view_model/cubit/order_tracking_cubit.dart';
+import 'package:flowery/features/order_tracking/presentation/view_model/events/order_tracking_events.dart';
 import 'package:flowery/features/products_details/presentation/pages/products_details_screen.dart';
 import 'package:flowery/features/edit_profile/presentation/screens/edit_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flowery/features/app_section/presentation/view/app_section_view.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     try {
       switch (settings.name) {
+        case AppRoutes.orderTracking:
+          // final orderId = settings.arguments as String?;
+          final orderId = "6a578d053be1266dec7b633a";
+          return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+              create: (context) => getIt<OrderTrackingCubit>()
+                ..doEvent(GetOrderInforamtionEvent(orderId: orderId))
+                ..doEvent(GetOrderStatusEvent(orderId: orderId)),
+              child: const OrderTrackingScreen(),
+            ),
+          );
+
+        case AppRoutes.orderTrackingMap:
+          final trackingCubit = settings.arguments as OrderTrackingCubit;
+          return MaterialPageRoute(
+            builder: (context) => BlocProvider.value(
+              value: trackingCubit,
+              child: const OrderTrackingMapScreen(),
+            ),
+          );
+
         case AppRoutes.appSection:
           return MaterialPageRoute(builder: (_) => const AppSectionView());
 
@@ -22,7 +48,7 @@ class RouteGenerator {
           return MaterialPageRoute(
             builder: (_) => const DemoLogoutLanguagePage(),
           );
-          
+
         case AppRoutes.login:
           return MaterialPageRoute(builder: (_) => LoginScreen());
 
@@ -85,4 +111,3 @@ class RouteGenerator {
     );
   }
 }
-

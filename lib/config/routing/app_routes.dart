@@ -12,4 +12,6 @@ abstract class AppRoutes {
   static const String checkout = "/checkout";
   static const String credit = "credit";
   static const String editProfile = "/edit-profile";
+  static const String orderTracking = "/order-tracking";
+  static const String orderTrackingMap = "/order-tracking-map";
 }

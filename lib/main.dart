@@ -1,11 +1,11 @@
-import 'package:flowery/config/api/api_keys.dart';
+// import 'package:flowery/config/api/api_keys.dart';
 import 'package:flowery/config/di/injectable_config.dart';
 import 'package:flowery/config/firebase/services/fcm_service.dart';
 import 'package:flowery/config/general_cubit/cart_manager/cart_events.dart';
 import 'package:flowery/config/general_cubit/general_state.dart';
 import 'package:flowery/config/general_cubit/local_cubit.dart';
 import 'package:flowery/config/helpers/bloc/bloc_observer.dart';
-import 'package:flowery/config/helpers/shared_pref.dart';
+// import 'package:flowery/config/helpers/shared_pref.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/config/routing/app_routes.dart';
 import 'package:flowery/config/routing/routing_generator.dart';
@@ -38,7 +38,7 @@ class FloweryApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isRememberMe = getIt<SharedPrefHelper>().getString(Apikeys.userId);
+    // final isRememberMe = getIt<SharedPrefHelper>().getString(Apikeys.userId);
 
     return ScreenUtilInit(
       designSize: const Size(375, 812),
@@ -55,9 +55,7 @@ class FloweryApp extends StatelessWidget {
               onGenerateRoute: RouteGenerator.getRoute,
               debugShowCheckedModeBanner: false,
               theme: AppTheme.lightTheme,
-              initialRoute: isRememberMe == "true"
-                  ? AppRoutes.home
-                  : AppRoutes.login,
+              initialRoute: AppRoutes.orderTracking
             );
           },
         );

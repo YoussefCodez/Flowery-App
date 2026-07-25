@@ -464,4 +464,40 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get your_order_is_not_completed => 'طلبك لم يكتمل بعد, اعد المحاولة';
+
+  @override
+  String get track_order => 'تتبع الطلب';
+
+  @override
+  String get estimated_arrival => 'موعد الوصول المتوقع';
+
+  @override
+  String get received_your_order => 'تم استلام طلبك';
+
+  @override
+  String get preparing_your_order => 'جارٍ تحضير طلبك';
+
+  @override
+  String get out_for_delivery => 'خرج الطلب للتوصيل';
+
+  @override
+  String get delivered => 'تم التسليم';
+
+  @override
+  String get show_map => 'عرض الخريطة';
+
+  @override
+  String get order_delivered => 'تم تسليم الطلب';
+
+  @override
+  String get order_details => 'تفاصيل الطلب';
+
+  @override
+  String get delivery_hero_for_today => 'هو مندوب التوصيل الخاص بك اليوم';
+
+  @override
+  String get apartment => 'الشقة';
+
+  @override
+  String get arrived => 'وصل';
 }
