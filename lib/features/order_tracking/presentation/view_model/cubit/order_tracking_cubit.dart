@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:flowery/config/api/api_keys.dart';
 import 'package:flowery/config/base_response/base_response.dart';
 import 'package:flowery/config/base_state/base_state.dart';
+import 'package:flowery/features/order_tracking/data/models/coordinates_information.dart';
 import 'package:flowery/features/order_tracking/data/models/order_information.dart';
 import 'package:flowery/features/order_tracking/domain/use_cases/get_order_information_use_case.dart';
 import 'package:flowery/features/order_tracking/domain/use_cases/get_order_status_use_case.dart';
+import 'package:flowery/features/order_tracking/domain/use_cases/get_user_and_driver_coordinations_use_case.dart';
 import 'package:flowery/features/order_tracking/presentation/view_model/events/order_tracking_events.dart';
 import 'package:flowery/features/order_tracking/presentation/view_model/state/order_tracking_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,12 +16,16 @@ import 'package:injectable/injectable.dart';
 @injectable
 class OrderTrackingCubit extends Cubit<OrderTrackingState> {
   final GetOrderStatusUseCase _getOrderStatusUseCase;
+  final GetUserAndDriverCoordinationsUseCase
+  _getUserAndDriverCoordinationsUseCase;
   final GetOrderInformationUseCase _getOrderInformationUseCase;
   OrderTrackingCubit(
     this._getOrderStatusUseCase,
     this._getOrderInformationUseCase,
+    this._getUserAndDriverCoordinationsUseCase,
   ) : super(OrderTrackingState());
   StreamSubscription<Result<String?>>? _orderStatusSubscription;
+  StreamSubscription<Result<CoordinatesInformation?>>? _coordsSubscription;
 
   void doEvent(OrderTrackingEvents event) {
     switch (event) {
@@ -28,6 +34,10 @@ class OrderTrackingCubit extends Cubit<OrderTrackingState> {
         break;
       case GetOrderInforamtionEvent():
         _getOrderInformation(event);
+        break;
+      case GetUserAndDriverCoordsEvent():
+        _getUserAndDriverCoords(event);
+        break;
     }
   }
 
@@ -36,10 +46,18 @@ class OrderTrackingCubit extends Cubit<OrderTrackingState> {
     final response = await _getOrderInformationUseCase.call(event.orderId);
     switch (response) {
       case Success<OrderInformation>():
-        emit(state.copyWith(orderInfoState: BaseState<OrderInformation>.success(response.data)));
+        emit(
+          state.copyWith(
+            orderInfoState: BaseState<OrderInformation>.success(response.data),
+          ),
+        );
       case Error<OrderInformation>():
         emit(
-          state.copyWith(orderInfoState: BaseState<OrderInformation>.error(response.exception)),
+          state.copyWith(
+            orderInfoState: BaseState<OrderInformation>.error(
+              response.exception,
+            ),
+          ),
         );
     }
   }
@@ -60,6 +78,39 @@ class OrderTrackingCubit extends Cubit<OrderTrackingState> {
 
               case Error<String?>():
                 emit(state.copyWith(errorMessage: result.exception.toString()));
+                break;
+            }
+          },
+          onError: (error) {
+            emit(state.copyWith(errorMessage: error.toString()));
+          },
+        );
+  }
+
+  void _getUserAndDriverCoords(GetUserAndDriverCoordsEvent event) {
+    // Cancel any existing active stream listener to prevent multiple subscriptions
+    _coordsSubscription?.cancel();
+
+    _coordsSubscription = _getUserAndDriverCoordinationsUseCase
+        .call(event.orderId)
+        .listen(
+          (result) {
+            switch (result) {
+              case Success<CoordinatesInformation?>():
+                emit(
+                  state.copyWith(
+                    coordsInfoState: BaseState.success(result.data),
+                    errorMessage: "",
+                  ),
+                );
+                break;
+
+              case Error<CoordinatesInformation?>():
+                emit(
+                  state.copyWith(
+                    coordsInfoState: BaseState.error(result.exception),
+                  ),
+                );
                 break;
             }
           },

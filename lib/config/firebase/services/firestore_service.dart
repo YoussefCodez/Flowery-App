@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flowery/config/api/api_keys.dart';
+import 'package:flowery/features/order_tracking/data/models/coordinates_information.dart';
 import 'package:flowery/features/order_tracking/data/models/order_information.dart';
 import 'package:injectable/injectable.dart';
 
@@ -29,6 +30,51 @@ class FirestoreService {
           }
           return null;
         });
+  }
+
+  Stream<CoordinatesInformation?> getCoordinatesOfUserAndDriver(
+    String? orderId,
+  ) async* {
+    if (orderId == null) {
+      yield null;
+      return;
+    }
+
+    // Get driverId and user lat and long and they are static
+    final orderSnapshot = await FirebaseFirestore.instance
+        .collection(Apikeys.acceptedOrders)
+        .doc(orderId)
+        .get();
+    final orderData = orderSnapshot.data();
+
+    final driverId = orderData![Apikeys.driverId] as String;
+    final userLat = double.parse(
+      orderData[Apikeys.userAddress][Apikeys.lat].toString(),
+    );
+    final userLong = double.parse(
+      orderData[Apikeys.userAddress][Apikeys.long].toString(),
+    );
+
+    // Stream snapshots for the driver coords
+    await for (final driverSnapshots
+        in FirebaseFirestore.instance
+            .collection(Apikeys.driverLocations)
+            .doc(driverId)
+            .snapshots()) {
+      if (!driverSnapshots.exists || driverSnapshots.data() == null) {
+        yield null;
+        continue;
+      }
+
+      final driverData = driverSnapshots.data()!;
+
+      yield CoordinatesInformation(
+        userLat: userLat,
+        userLong: userLong,
+        driverLat: (driverData[Apikeys.lat] as num).toDouble(),
+        driverLong: (driverData[Apikeys.long] as num).toDouble(),
+      );
+    }
   }
 
   Future<OrderInformation> getOrderInformation(String? orderId) async {

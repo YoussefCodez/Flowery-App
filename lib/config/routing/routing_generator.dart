@@ -27,7 +27,8 @@ class RouteGenerator {
             builder: (context) => BlocProvider(
               create: (context) => getIt<OrderTrackingCubit>()
                 ..doEvent(GetOrderInforamtionEvent(orderId: orderId))
-                ..doEvent(GetOrderStatusEvent(orderId: orderId)),
+                ..doEvent(GetOrderStatusEvent(orderId: orderId))
+                ..doEvent(GetUserAndDriverCoordsEvent(orderId: orderId)),
               child: const OrderTrackingScreen(),
             ),
           );
