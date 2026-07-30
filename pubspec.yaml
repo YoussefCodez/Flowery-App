@@ -25,7 +25,8 @@ dependencies:
   flutter_screenutil: ^5.9.3
   flutter_secure_storage: ^10.0.0
   fluttertoast: ^9.0.0
-  font_awesome_flutter: ^10.12.0
+  font_awesome_flutter: ^11.0.0
+  timelines_plus: ^2.0.0
   get_it: ^9.2.1
   google_fonts: ^8.0.2
   injectable: ^2.7.1+4
@@ -50,6 +51,10 @@ dependencies:
   firebase_remote_config: ^6.5.3
   webview_flutter: ^4.14.0
   firebase_core: ^4.12.1
+  intl: ^0.20.2
+  flutter_map: ^8.3.1
+  latlong2: ^0.10.1
+  routing_client_dart: ^1.0.8
 dev_dependencies:
   build_runner: ^2.11.1
   flutter_lints: ^6.0.0
@@ -67,3 +72,4 @@ flutter:
   generate: true
   assets:
     - assets/svgs/
+    - assets/tracking/

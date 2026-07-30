@@ -472,4 +472,40 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get your_order_is_not_completed =>
       'Your order isn\'t completed yet, please retry';
+
+  @override
+  String get track_order => 'Track order';
+
+  @override
+  String get estimated_arrival => 'Estimated arrival';
+
+  @override
+  String get received_your_order => 'Received your order';
+
+  @override
+  String get preparing_your_order => 'Preparing your order';
+
+  @override
+  String get out_for_delivery => 'Out for delivery';
+
+  @override
+  String get delivered => 'Delivered';
+
+  @override
+  String get show_map => 'Show map';
+
+  @override
+  String get order_delivered => 'Order Delivered';
+
+  @override
+  String get order_details => 'Order details';
+
+  @override
+  String get delivery_hero_for_today => 'Is your delivery hero for today';
+
+  @override
+  String get apartment => 'Apartment';
+
+  @override
+  String get arrived => 'Arrived';
 }

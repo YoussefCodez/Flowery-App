@@ -1003,6 +1003,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your order isn\'t completed yet, please retry'**
   String get your_order_is_not_completed;
+
+  /// No description provided for @track_order.
+  ///
+  /// In en, this message translates to:
+  /// **'Track order'**
+  String get track_order;
+
+  /// No description provided for @estimated_arrival.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated arrival'**
+  String get estimated_arrival;
+
+  /// No description provided for @received_your_order.
+  ///
+  /// In en, this message translates to:
+  /// **'Received your order'**
+  String get received_your_order;
+
+  /// No description provided for @preparing_your_order.
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing your order'**
+  String get preparing_your_order;
+
+  /// No description provided for @out_for_delivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Out for delivery'**
+  String get out_for_delivery;
+
+  /// No description provided for @delivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered'**
+  String get delivered;
+
+  /// No description provided for @show_map.
+  ///
+  /// In en, this message translates to:
+  /// **'Show map'**
+  String get show_map;
+
+  /// No description provided for @order_delivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Delivered'**
+  String get order_delivered;
+
+  /// No description provided for @order_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Order details'**
+  String get order_details;
+
+  /// No description provided for @delivery_hero_for_today.
+  ///
+  /// In en, this message translates to:
+  /// **'Is your delivery hero for today'**
+  String get delivery_hero_for_today;
+
+  /// No description provided for @apartment.
+  ///
+  /// In en, this message translates to:
+  /// **'Apartment'**
+  String get apartment;
+
+  /// No description provided for @arrived.
+  ///
+  /// In en, this message translates to:
+  /// **'Arrived'**
+  String get arrived;
 }
 
 class _AppLocalizationsDelegate
