@@ -143,6 +143,7 @@ abstract class AppLocalizations {
   /// No description provided for @email_is_required.
   ///
   /// In en, this message translates to:
+  /// **'Email is required!'**
   /// **'Email is required'**
   String get email_is_required;
 
@@ -902,6 +903,59 @@ abstract class AppLocalizations {
   /// **'Phone is required'**
   String get phone_is_required;
 
+  /// No description provided for @enter_the_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter The Address'**
+  String get enter_the_address;
+
+  /// No description provided for @address.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get address;
+
+  /// No description provided for @recipient_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipient Name'**
+  String get recipient_name;
+
+  /// No description provided for @enter_the_recipient_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the recipient name'**
+  String get enter_the_recipient_name;
+
+  /// No description provided for @enter_the_the_phone_number.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the phone number'**
+  String get enter_the_the_phone_number;
+
+  /// No description provided for @city.
+  ///
+  /// In en, this message translates to:
+  /// **'City'**
+  String get city;
+
+  /// No description provided for @area.
+  ///
+  /// In en, this message translates to:
+  /// **'Area'**
+  String get area;
+
+  /// No description provided for @map.
+  ///
+  /// In en, this message translates to:
+  /// **'Map'**
+  String get map;
+
+  /// No description provided for @address_saved_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Address Address Saved Successfully'**
+  String get address_saved_successfully;
   /// No description provided for @delivery_time.
   ///
   /// In en, this message translates to:

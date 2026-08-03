@@ -500,4 +500,41 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get arrived => 'وصل';
+  
+  @override
+  // TODO: implement address
+  get address => throw UnimplementedError();
+  
+  @override
+  // TODO: implement address_saved_successfully
+  get address_saved_successfully => throw UnimplementedError();
+  
+  @override
+  // TODO: implement area
+  get area => throw UnimplementedError();
+  
+  @override
+  // TODO: implement city
+  get city => throw UnimplementedError();
+  
+  @override
+  // TODO: implement enter_the_address
+  get enter_the_address => throw UnimplementedError();
+  
+  @override
+  // TODO: implement enter_the_recipient_name
+  get enter_the_recipient_name => throw UnimplementedError();
+  
+  @override
+  // TODO: implement enter_the_the_phone_number
+  get enter_the_the_phone_number => throw UnimplementedError();
+  
+  @override
+  // TODO: implement map
+  get map => throw UnimplementedError();
+  
+  @override
+  // TODO: implement recipient_name
+  get recipient_name => throw UnimplementedError();
 }
+

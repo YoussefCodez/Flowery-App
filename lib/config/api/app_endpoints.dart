@@ -16,4 +16,5 @@ abstract class AppEndPoints {
   static const String getLoggedUserData = "auth/profile-data";
   static const String editUserProfile = "auth/editProfile";
   static const String uploadPhoto = "auth/upload-photo";
+  static const String addressDetails = "addresses";
 }

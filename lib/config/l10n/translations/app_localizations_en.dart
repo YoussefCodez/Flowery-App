@@ -30,7 +30,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get name_is_not_valid => 'This name is not valid';
 
   @override
-  String get email_is_required => 'Email is required';
+  String get email_is_required => 'Email is required!';
 
   @override
   String get email_is_not_valid => 'This Email is not valid';
@@ -421,91 +421,145 @@ class AppLocalizationsEn extends AppLocalizations {
   String get phone_is_required => 'Phone is required';
 
   @override
-  String get delivery_time => 'Delivery time';
+  String get enter_the_address => 'Enter The Address';
 
   @override
-  String get instant => 'Instant';
+  String get address => 'Address';
 
   @override
-  String get delivery_address => 'Delivery address';
+  String get recipient_name => 'Recipient Name';
 
   @override
-  String get payment_method => 'Payment method';
+  String get enter_the_recipient_name => 'Enter the recipient name';
 
   @override
-  String get cash_on_delivery => 'Cash on delivery';
+  String get enter_the_the_phone_number => 'Enter the phone number';
 
   @override
-  String get credit_card => 'Credit card';
+  String get city => 'City';
 
   @override
-  String get it_is_a_gift => 'It is a gift';
+  String get area => 'Area';
 
   @override
-  String get place_order => 'Place order';
+  String get map => 'Map';
 
   @override
-  String get add_new => 'Add new';
-
+  String get address_saved_successfully => 'Address Address Saved Successfully';
+  
   @override
-  String get enter_the_name => 'Enter the name';
-
+  // TODO: implement add_new
+  get add_new => throw UnimplementedError();
+  
   @override
-  String get enter_the_phone_number => 'Enter the phone number';
-
+  // TODO: implement apartment
+  get apartment => throw UnimplementedError();
+  
   @override
-  String get your_order_has_been_placed =>
-      'Your order has been placed successfully.';
-
+  // TODO: implement arrive_by
+  get arrive_by => throw UnimplementedError();
+  
   @override
-  String get go_to_home => 'Go to Home';
-
+  // TODO: implement arrived
+  get arrived => throw UnimplementedError();
+  
   @override
-  String get arrive_by => 'Arrive by,';
-
+  // TODO: implement cash_on_delivery
+  get cash_on_delivery => throw UnimplementedError();
+  
   @override
-  String get please_select_an_address => 'Please select the delivery address';
-
+  // TODO: implement credit_card
+  get credit_card => throw UnimplementedError();
+  
   @override
-  String get online_payment => 'Online Payment';
-
+  // TODO: implement delivered
+  get delivered => throw UnimplementedError();
+  
   @override
-  String get your_order_is_not_completed =>
-      'Your order isn\'t completed yet, please retry';
-
+  // TODO: implement delivery_address
+  get delivery_address => throw UnimplementedError();
+  
   @override
-  String get track_order => 'Track order';
-
+  // TODO: implement delivery_hero_for_today
+  get delivery_hero_for_today => throw UnimplementedError();
+  
   @override
-  String get estimated_arrival => 'Estimated arrival';
-
+  // TODO: implement delivery_time
+  get delivery_time => throw UnimplementedError();
+  
   @override
-  String get received_your_order => 'Received your order';
-
+  // TODO: implement enter_the_name
+  get enter_the_name => throw UnimplementedError();
+  
   @override
-  String get preparing_your_order => 'Preparing your order';
-
+  // TODO: implement enter_the_phone_number
+  get enter_the_phone_number => throw UnimplementedError();
+  
   @override
-  String get out_for_delivery => 'Out for delivery';
-
+  // TODO: implement estimated_arrival
+  get estimated_arrival => throw UnimplementedError();
+  
   @override
-  String get delivered => 'Delivered';
-
+  // TODO: implement go_to_home
+  get go_to_home => throw UnimplementedError();
+  
   @override
-  String get show_map => 'Show map';
-
+  // TODO: implement instant
+  get instant => throw UnimplementedError();
+  
   @override
-  String get order_delivered => 'Order Delivered';
-
+  // TODO: implement it_is_a_gift
+  get it_is_a_gift => throw UnimplementedError();
+  
   @override
-  String get order_details => 'Order details';
-
+  // TODO: implement online_payment
+  get online_payment => throw UnimplementedError();
+  
   @override
-  String get delivery_hero_for_today => 'Is your delivery hero for today';
-
+  // TODO: implement order_delivered
+  get order_delivered => throw UnimplementedError();
+  
   @override
-  String get apartment => 'Apartment';
-
+  // TODO: implement order_details
+  get order_details => throw UnimplementedError();
+  
   @override
-  String get arrived => 'Arrived';
+  // TODO: implement out_for_delivery
+  get out_for_delivery => throw UnimplementedError();
+  
+  @override
+  // TODO: implement payment_method
+  get payment_method => throw UnimplementedError();
+  
+  @override
+  // TODO: implement place_order
+  get place_order => throw UnimplementedError();
+  
+  @override
+  // TODO: implement please_select_an_address
+  get please_select_an_address => throw UnimplementedError();
+  
+  @override
+  // TODO: implement preparing_your_order
+  get preparing_your_order => throw UnimplementedError();
+  
+  @override
+  // TODO: implement received_your_order
+  get received_your_order => throw UnimplementedError();
+  
+  @override
+  // TODO: implement show_map
+  get show_map => throw UnimplementedError();
+  
+  @override
+  // TODO: implement track_order
+  get track_order => throw UnimplementedError();
+  
+  @override
+  // TODO: implement your_order_has_been_placed
+  get your_order_has_been_placed => throw UnimplementedError();
+  
+  @override
+  // TODO: implement your_order_is_not_completed
+  get your_order_is_not_completed => throw UnimplementedError();
 }
