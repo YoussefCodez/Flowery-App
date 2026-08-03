@@ -56,3 +56,36 @@ app.*.map.json
 lib/config/l10n/app_localizations_ar.dart
 lib/config/l10n/app_localizations_en.dart
 pubspec.lock
+
+# Flutter
+.dart_tool/
+build/
+
+# IDE
+.idea/
+.vscode/
+
+# Generated plugin files
+**/generated_plugin_registrant.dart
+**/GeneratedPluginRegistrant.java
+**/GeneratedPluginRegistrant.swift
+**/generated_plugins.cmake
+
+# Native generated
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# FVM
+.fvm/flutter_sdk
+
+# Ignore ALL generated Dart files
+**/*.g.dart
+
+# Freezed
+**/*.freezed.dart
+
+# Injectable
+**/*.config.dart
+
+# AutoRoute
+**/*.gr.dart

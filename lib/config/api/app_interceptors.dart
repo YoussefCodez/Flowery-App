@@ -21,7 +21,6 @@ class AuthInterceptor extends Interceptor {
 
     String? authToken = await fss.read(key: Apikeys.accessToken);
     if (authToken != null && authToken.isNotEmpty) {
-      options.headers['Authorization'] = '${Apikeys.bearer} $authToken';
       options.headers['Authorization'] = 'Bearer $authToken';
     }
     super.onRequest(options, handler);

@@ -30,7 +30,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get name_is_not_valid => 'الاسم غير صحيح';
 
   @override
-  String get email_is_required => 'البريد الإلكتروني مطلوب!';
+  String get email_is_required => 'البريد الإلكتروني مطلوب';
 
   @override
   String get email_is_not_valid => 'البريد الإلكتروني غير صحيح';
@@ -256,13 +256,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get phoneNumber => 'رقم الهاتف';
 
   @override
-  String get gender => 'الجنس';
+  String get gender => 'النوع';
 
   @override
-  String get female => 'انثي';
+  String get female => 'أنثى';
 
   @override
-  String get male => 'رجل';
+  String get male => 'ذكر';
 
   @override
   String get creatingAccountAgreement => 'بإنشاء حساب، فإنك توافق على شروطنا';
@@ -280,7 +280,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get all_prices_include_tax => 'جميع الأسعار تشمل الضريبة';
 
   @override
-  String get bouquet => 'Bouquet';
+  String get bouquet => 'الباقة';
 
   @override
   String get description => 'الوصف';
@@ -415,29 +415,126 @@ class AppLocalizationsAr extends AppLocalizations {
   String get phone_is_required => 'رقم الهاتف مطلوب';
 
   @override
-  String get enter_the_address => 'اضف العنوان';
+  String get delivery_time => 'وقت التوصيل';
 
   @override
-  String get address => 'العنوان';
+  String get instant => 'فوري';
 
   @override
-  String get recipient_name => 'اسم المستلم';
+  String get delivery_address => 'عنوان التوصيل';
 
   @override
-  String get enter_the_recipient_name => 'اضف اسم المستلم';
+  String get payment_method => 'طريقة الدفع';
 
   @override
-  String get enter_the_the_phone_number => 'اضف رقم الهاتف';
+  String get cash_on_delivery => 'الدفع عند الاستلام';
 
   @override
-  String get city => 'المدينة';
+  String get credit_card => 'بطاقة ائتمانية';
 
   @override
-  String get area => 'المكان';
+  String get it_is_a_gift => 'إنها هدية';
 
   @override
-  String get map => 'الخرائط';
+  String get place_order => 'إتمام الطلب';
 
   @override
-  String get address_saved_successfully => 'تم حفظ العنوان بنجاح';
+  String get add_new => 'اضف عنوان جديد';
+
+  @override
+  String get enter_the_name => 'ادخل الاسم';
+
+  @override
+  String get enter_the_phone_number => 'ادخل رقم الهاتف';
+
+  @override
+  String get your_order_has_been_placed => 'تم تسجيل طلبك بنجاح';
+
+  @override
+  String get go_to_home => 'العودة للصفحة الرئيسية';
+
+  @override
+  String get arrive_by => 'يصل بحلول';
+
+  @override
+  String get please_select_an_address => 'من فضلك اختر عنوان الاستلام';
+
+  @override
+  String get online_payment => 'الدفع الالكتروني';
+
+  @override
+  String get your_order_is_not_completed => 'طلبك لم يكتمل بعد, اعد المحاولة';
+
+  @override
+  String get track_order => 'تتبع الطلب';
+
+  @override
+  String get estimated_arrival => 'موعد الوصول المتوقع';
+
+  @override
+  String get received_your_order => 'تم استلام طلبك';
+
+  @override
+  String get preparing_your_order => 'جارٍ تحضير طلبك';
+
+  @override
+  String get out_for_delivery => 'خرج الطلب للتوصيل';
+
+  @override
+  String get delivered => 'تم التسليم';
+
+  @override
+  String get show_map => 'عرض الخريطة';
+
+  @override
+  String get order_delivered => 'تم تسليم الطلب';
+
+  @override
+  String get order_details => 'تفاصيل الطلب';
+
+  @override
+  String get delivery_hero_for_today => 'هو مندوب التوصيل الخاص بك اليوم';
+
+  @override
+  String get apartment => 'الشقة';
+
+  @override
+  String get arrived => 'وصل';
+  
+  @override
+  // TODO: implement address
+  get address => throw UnimplementedError();
+  
+  @override
+  // TODO: implement address_saved_successfully
+  get address_saved_successfully => throw UnimplementedError();
+  
+  @override
+  // TODO: implement area
+  get area => throw UnimplementedError();
+  
+  @override
+  // TODO: implement city
+  get city => throw UnimplementedError();
+  
+  @override
+  // TODO: implement enter_the_address
+  get enter_the_address => throw UnimplementedError();
+  
+  @override
+  // TODO: implement enter_the_recipient_name
+  get enter_the_recipient_name => throw UnimplementedError();
+  
+  @override
+  // TODO: implement enter_the_the_phone_number
+  get enter_the_the_phone_number => throw UnimplementedError();
+  
+  @override
+  // TODO: implement map
+  get map => throw UnimplementedError();
+  
+  @override
+  // TODO: implement recipient_name
+  get recipient_name => throw UnimplementedError();
 }
+

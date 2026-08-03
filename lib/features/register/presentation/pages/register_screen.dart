@@ -2,7 +2,6 @@ import 'package:flowery/config/di/injectable_config.dart';
 import 'package:flowery/config/general_cubit/constants.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/config/routing/app_routes.dart';
-import 'package:flowery/config/routing/routing_extensions.dart';
 import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flowery/core/widgets/custom_text_field.dart';
 import 'package:flowery/features/register/presentation/cubit/register_cubit.dart';
@@ -12,7 +11,6 @@ import 'package:flowery/features/register/presentation/widgets/gender_selector_w
 import 'package:flowery/features/register/presentation/widgets/sign_up_button_widget.dart';
 import 'package:flowery/features/register/presentation/widgets/term_and_condition_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 

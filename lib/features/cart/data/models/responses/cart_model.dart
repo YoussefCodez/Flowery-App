@@ -1,7 +1,6 @@
 import 'package:flowery/core/const/cart_values.dart';
 import 'package:flowery/features/cart/data/models/responses/cart_item_model.dart';
 import 'package:flowery/features/cart/domain/entities/cart_entity.dart';
-import 'package:flowery/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'cart_model.g.dart';

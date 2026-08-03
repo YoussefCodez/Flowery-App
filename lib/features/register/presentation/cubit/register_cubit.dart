@@ -1,10 +1,9 @@
 import 'dart:async';
-import 'package:bloc/bloc.dart';
-import 'package:flowery/config/base_state/base_state.dart';
 import 'package:flowery/features/register/data/models/request/register_request.dart';
 import 'package:flowery/features/register/domain/use_case/register_use_case.dart';
 import 'package:flowery/features/register/presentation/cubit/register_events.dart';
 import 'package:flowery/features/register/presentation/cubit/register_states.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 sealed class RegisterUiEvent {}

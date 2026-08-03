@@ -446,4 +446,120 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get address_saved_successfully => 'Address Address Saved Successfully';
+  
+  @override
+  // TODO: implement add_new
+  get add_new => throw UnimplementedError();
+  
+  @override
+  // TODO: implement apartment
+  get apartment => throw UnimplementedError();
+  
+  @override
+  // TODO: implement arrive_by
+  get arrive_by => throw UnimplementedError();
+  
+  @override
+  // TODO: implement arrived
+  get arrived => throw UnimplementedError();
+  
+  @override
+  // TODO: implement cash_on_delivery
+  get cash_on_delivery => throw UnimplementedError();
+  
+  @override
+  // TODO: implement credit_card
+  get credit_card => throw UnimplementedError();
+  
+  @override
+  // TODO: implement delivered
+  get delivered => throw UnimplementedError();
+  
+  @override
+  // TODO: implement delivery_address
+  get delivery_address => throw UnimplementedError();
+  
+  @override
+  // TODO: implement delivery_hero_for_today
+  get delivery_hero_for_today => throw UnimplementedError();
+  
+  @override
+  // TODO: implement delivery_time
+  get delivery_time => throw UnimplementedError();
+  
+  @override
+  // TODO: implement enter_the_name
+  get enter_the_name => throw UnimplementedError();
+  
+  @override
+  // TODO: implement enter_the_phone_number
+  get enter_the_phone_number => throw UnimplementedError();
+  
+  @override
+  // TODO: implement estimated_arrival
+  get estimated_arrival => throw UnimplementedError();
+  
+  @override
+  // TODO: implement go_to_home
+  get go_to_home => throw UnimplementedError();
+  
+  @override
+  // TODO: implement instant
+  get instant => throw UnimplementedError();
+  
+  @override
+  // TODO: implement it_is_a_gift
+  get it_is_a_gift => throw UnimplementedError();
+  
+  @override
+  // TODO: implement online_payment
+  get online_payment => throw UnimplementedError();
+  
+  @override
+  // TODO: implement order_delivered
+  get order_delivered => throw UnimplementedError();
+  
+  @override
+  // TODO: implement order_details
+  get order_details => throw UnimplementedError();
+  
+  @override
+  // TODO: implement out_for_delivery
+  get out_for_delivery => throw UnimplementedError();
+  
+  @override
+  // TODO: implement payment_method
+  get payment_method => throw UnimplementedError();
+  
+  @override
+  // TODO: implement place_order
+  get place_order => throw UnimplementedError();
+  
+  @override
+  // TODO: implement please_select_an_address
+  get please_select_an_address => throw UnimplementedError();
+  
+  @override
+  // TODO: implement preparing_your_order
+  get preparing_your_order => throw UnimplementedError();
+  
+  @override
+  // TODO: implement received_your_order
+  get received_your_order => throw UnimplementedError();
+  
+  @override
+  // TODO: implement show_map
+  get show_map => throw UnimplementedError();
+  
+  @override
+  // TODO: implement track_order
+  get track_order => throw UnimplementedError();
+  
+  @override
+  // TODO: implement your_order_has_been_placed
+  get your_order_has_been_placed => throw UnimplementedError();
+  
+  @override
+  // TODO: implement your_order_is_not_completed
+  get your_order_is_not_completed => throw UnimplementedError();
 }
