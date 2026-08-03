@@ -114,7 +114,7 @@ class _MainProfileViewState extends State<MainProfileView> {
           ),
         ),
         SizedBox(height: 24.h),
-        CustomProfile(
+        CustomProfileTile(
           leadingIcon: Icon(
             Icons.receipt_long_outlined,
             size: 20.sp,
@@ -124,7 +124,7 @@ class _MainProfileViewState extends State<MainProfileView> {
           trailingWidget: Icon(Icons.chevron_right, color: AppColors.grayColor),
           onTap: () {},
         ),
-        CustomProfile(
+        CustomProfileTile(
           leadingIcon: Icon(
             Icons.location_on_outlined,
             size: 20.sp,
@@ -135,7 +135,7 @@ class _MainProfileViewState extends State<MainProfileView> {
           onTap: () {},
         ),
         const Divider(height: 1, thickness: 1, color: AppColors.dividerColor),
-        CustomProfile(
+        CustomProfileTile(
           leadingIcon: CupertinoSwitch(
             value: _notificationsEnabled,
             activeTrackColor: AppColors.primaryColor,
@@ -145,7 +145,7 @@ class _MainProfileViewState extends State<MainProfileView> {
           trailingWidget: Icon(Icons.chevron_right, color: AppColors.grayColor),
         ),
         const Divider(height: 1, thickness: 1, color: AppColors.dividerColor),
-        CustomProfile(
+        CustomProfileTile(
           leadingIcon: Icon(
             Icons.translate,
             size: 20.sp,
@@ -157,18 +157,18 @@ class _MainProfileViewState extends State<MainProfileView> {
             style: TextStyle(fontSize: 14.sp, color: AppColors.primaryColor),
           ),
         ),
-        CustomProfile(
+        CustomProfileTile(
           title: l10n.about_us,
           trailingWidget: Icon(Icons.chevron_right, color: AppColors.grayColor),
           onTap: () {},
         ),
-        CustomProfile(
+        CustomProfileTile(
           title: l10n.terms_and_conditions,
           trailingWidget: Icon(Icons.chevron_right, color: AppColors.grayColor),
           onTap: () {},
         ),
         const Divider(height: 1, thickness: 1, color: AppColors.dividerColor),
-        CustomProfile(
+        CustomProfileTile(
           leadingIcon: Icon(
             Icons.exit_to_app,
             size: 20.sp,

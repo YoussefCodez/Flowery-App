@@ -10,7 +10,7 @@ import 'package:injectable/injectable.dart';
 @injectable
 class ProfileCubit  extends Cubit<ProfileState>{
   final GetProfileDataUseCase _getProfileDataUseCase;
-  ProfileCubit(this._getProfileDataUseCase) : super(ProfileState());
+  ProfileCubit(this._getProfileDataUseCase) : super(const ProfileState());
 
   void doEvent(ProfileEvent event) {
     switch (event) {

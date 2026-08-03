@@ -2,13 +2,13 @@ import 'package:flowery/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CustomProfile extends StatelessWidget {
+class CustomProfileTile extends StatelessWidget {
   final Widget? leadingIcon;
   final String title;
   final Widget? trailingWidget;
   final VoidCallback? onTap;
 
-  const CustomProfile({
+  const CustomProfileTile({
     super.key,
     this.leadingIcon,
     required this.title,

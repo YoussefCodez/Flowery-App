@@ -1,22 +1,20 @@
+import 'package:equatable/equatable.dart';
 import 'package:flowery/config/base_state/base_state.dart';
-import 'package:flowery/featuers/main_profile/data/model/user_response_model.dart';
 import 'package:flowery/featuers/main_profile/domain/entity/profile_entity.dart';
 
-class ProfileState {
+class ProfileState extends Equatable {
   final BaseState<ProfileEntity> getProfileDate;
 
-   ProfileState({
-      BaseState<ProfileEntity>? getProfileDate,
+  const ProfileState({
+    this.getProfileDate = const BaseState.initial(),
+  });
 
-   }): getProfileDate = getProfileDate ?? const BaseState.initial();
+  ProfileState copyWith({BaseState<ProfileEntity>? getProfileDatePram}) {
+    return ProfileState(
+      getProfileDate: getProfileDatePram ?? getProfileDate,
+    );
+  }
 
-   ProfileState copyWith({
-    BaseState<ProfileEntity>?getProfileDatePram
-
-}){
-     return ProfileState(
-         getProfileDate: getProfileDatePram ?? this.getProfileDate
-     );
-   }
-
+  @override
+  List<Object?> get props => [getProfileDate];
 }
