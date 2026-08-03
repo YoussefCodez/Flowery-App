@@ -1,26 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flowery/core/theme/app_colors.dart';
+import 'package:flowery/config/error/handle_errors.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
-import 'package:intl/intl.dart';
+import 'package:flowery/core/extensions/date_extension.dart';
+import 'package:flowery/core/theme/app_colors.dart';
 
 import '../../../../../config/di/injectable_config.dart';
 import '../../view_model/notifcation_bloc.dart';
 import '../../view_model/notifcation_event.dart';
 import '../../view_model/notifcation_state.dart';
-
-String _formatDate(String? raw) {
-  if (raw == null || raw.isEmpty) return '';
-  try {
-    final dt = DateTime.parse(raw).toLocal();
-    final date = DateFormat('d MMM yyyy').format(dt);
-    final time = DateFormat('h:mm a').format(dt);
-    return '$date  •  $time';
-  } catch (_) {
-    return raw;
-  }
-}
 
 class NotificationPage extends StatelessWidget {
   NotificationPage({super.key});
@@ -47,7 +36,25 @@ class NotificationPage extends StatelessWidget {
                   const Center(child: CircularProgressIndicator()),
 
               error: (exception) => Center(
-                child: Text(exception.toString()),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.error_outline,
+                      color: AppColors.redColor,
+                      size: 48.r,
+                    ),
+                    SizedBox(height: 12.h),
+                    Text(
+                      handleError(exception, l10n) ?? l10n.an_error_occurred,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: AppColors.lightGrayColor,
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                  ],
+                ),
               ),
 
               success: (notifications) {
@@ -99,7 +106,7 @@ class NotificationPage extends StatelessWidget {
                             ),
                             SizedBox(height: 8.h),
                             Text(
-                              _formatDate(notification.createdAt),
+                              notification.createdAt.toFormattedDateTime(),
                               style: TextStyle(
                                 color: AppColors.lightGrayColor,
                                 fontSize: 12.sp,

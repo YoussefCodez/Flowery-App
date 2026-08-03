@@ -75,8 +75,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i794.LocaleThemeCubit(gh<_i42.SharedPrefHelper>()),
     );
     gh.factory<_i595.NotificationRemoteDataSource>(
-      () =>
-          _i300.NotificationRemoteDataSourceImpl(gh<_i974.FirebaseFirestore>()),
+      () => _i300.NotificationRemoteDataSourceImpl(
+        gh<_i974.FirebaseFirestore>(),
+        gh<_i460.SharedPreferences>(),
+      ),
     );
     gh.factory<_i157.UserHelper>(
       () => _i157.UserHelper(
