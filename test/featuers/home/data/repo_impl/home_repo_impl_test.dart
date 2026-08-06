@@ -6,9 +6,7 @@ import 'package:flowery/featuers/home/data/models/response_model/category_model.
 import 'package:flowery/featuers/home/data/models/response_model/home_response_model.dart';
 import 'package:flowery/featuers/home/data/models/response_model/occasion_model.dart';
 import 'package:flowery/featuers/home/data/repo_impl/home_repo_impl.dart';
-import 'package:flowery/featuers/home/domain/home_enitiy/best_seller_entity.dart';
-import 'package:flowery/featuers/home/domain/home_enitiy/category_entity.dart';
-import 'package:flowery/featuers/home/domain/home_enitiy/occasion_enitity.dart';
+import 'package:flowery/featuers/home/domain/home_enitiy/home_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -29,72 +27,14 @@ void main() {
     homeRepoImpl = HomeRepoImpl(mockHomeRemoteDataSourceContract);
   });
 
-  group("BestSeller", () {
+  group("getHomeData", () {
     test("Success With Data", () async {
       // Arrange
       final fakeHomeResponse = HomeResponseModel(
+        categories: [model.Category(id: "1", name: "test", isSuperAdmin: true)],
         bestSeller: [
           BestSeller(id: '1', title: 'Rose', price: 150.0),
-          BestSeller(id: '1', title: 'Rose', price: 150.0),
-          BestSeller(id: '1', title: 'Rose', price: 150.0),
-          BestSeller(id: '1', title: 'Rose', price: 150.0),
         ],
-      );
-
-      when(mockHomeRemoteDataSourceContract.getHomeData()).thenAnswer(
-        (_) async => Success<HomeResponseModel>(data: fakeHomeResponse),
-      );
-
-      final result = await homeRepoImpl.getBestSeller();
-
-      expect(result, isA<Success<List<BestSellerEntity>>>());
-      expect((result as Success<List<BestSellerEntity>>).data, isNotEmpty);
-      expect((result).data?.length, 4);
-      expect((result).data?[0].id, '1');
-      expect((result).data?[0].title, 'Rose');
-      expect((result).data?[0].price, 150.0);
-
-      verify(mockHomeRemoteDataSourceContract.getHomeData()).called(1);
-    });
-
-    test("Success With  EmptyData", () async {
-      // Arrange
-      final fakeHomeResponse = HomeResponseModel(bestSeller: [
-          
-        ],
-      );
-
-      when(mockHomeRemoteDataSourceContract.getHomeData()).thenAnswer(
-        (_) async => Success<HomeResponseModel>(data: fakeHomeResponse),
-      );
-
-      final result = await homeRepoImpl.getBestSeller();
-
-      expect(result, isA<Success<List<BestSellerEntity>>>());
-      expect((result as Success<List<BestSellerEntity>>).data, isEmpty);
-
-      verify(mockHomeRemoteDataSourceContract.getHomeData()).called(1);
-    });
-
-    test("Error Case", () async {
-      // Arrange
-      when(mockHomeRemoteDataSourceContract.getHomeData()).thenAnswer(
-        (_) async => Error<HomeResponseModel>(exception: Exception()),
-      );
-
-      // Act
-      final result = await homeRepoImpl.getBestSeller();
-
-      // Assert
-      expect(result, isA<Error<List<BestSellerEntity>>>());
-      expect((result as Error<List<BestSellerEntity>>).exception, isNotNull);
-    });
-  });
-
-  group("Occasion", () {
-    test("Success With Data", () async {
-      // Arrange
-      final fakeHomeResponse = HomeResponseModel(
         occasions: [Occasion(id: '1', name: "test", isSuperAdmin: true)],
       );
 
@@ -102,33 +42,49 @@ void main() {
         (_) async => Success<HomeResponseModel>(data: fakeHomeResponse),
       );
 
-      final result = await homeRepoImpl.getOccasion();
+      final result = await homeRepoImpl.getHomeData();
 
-      expect(result, isA<Success<List<OccasionEntity>>>());
-      expect((result as Success<List<OccasionEntity>>).data, isNotEmpty);
-      expect((result).data?.length, 1);
-      expect((result).data?[0].id, '1');
-      expect((result).data?[0].name, 'test');
-      expect((result).data?[0].isSuperAdmin, true);
+      expect(result, isA<Success<HomeEntity>>());
+      final data = (result as Success<HomeEntity>).data!;
+
+      expect(data.categories, isNotEmpty);
+      expect(data.categories?[0].id, '1');
+      expect(data.categories?[0].name, 'test');
+      expect(data.categories?[0].isSuperAdmin, true);
+
+      expect(data.bestSeller, isNotEmpty);
+      expect(data.bestSeller?[0].id, '1');
+      expect(data.bestSeller?[0].title, 'Rose');
+      expect(data.bestSeller?[0].price, 150.0);
+
+      expect(data.occasions, isNotEmpty);
+      expect(data.occasions?[0].id, '1');
+      expect(data.occasions?[0].name, 'test');
+      expect(data.occasions?[0].isSuperAdmin, true);
 
       verify(mockHomeRemoteDataSourceContract.getHomeData()).called(1);
     });
 
-    test("Success With  EmptyData", () async {
+    test("Success With EmptyData", () async {
       // Arrange
-      final fakeHomeResponse = HomeResponseModel(occasions: [
-          
-        ],
+      final fakeHomeResponse = HomeResponseModel(
+        categories: [],
+        bestSeller: [],
+        occasions: [],
       );
 
       when(mockHomeRemoteDataSourceContract.getHomeData()).thenAnswer(
         (_) async => Success<HomeResponseModel>(data: fakeHomeResponse),
       );
 
-      final result = await homeRepoImpl.getOccasion();
+      final result = await homeRepoImpl.getHomeData();
 
-      expect(result, isA<Success<List<OccasionEntity>>>());
-      expect((result as Success<List<OccasionEntity>>).data, isEmpty);
+      expect(result, isA<Success<HomeEntity>>());
+      final data = (result as Success<HomeEntity>).data!;
+
+      expect(data.categories, isEmpty);
+      expect(data.bestSeller, isEmpty);
+      expect(data.occasions, isEmpty);
 
       verify(mockHomeRemoteDataSourceContract.getHomeData()).called(1);
     });
@@ -140,59 +96,13 @@ void main() {
       );
 
       // Act
-      final result = await homeRepoImpl.getOccasion();
+      final result = await homeRepoImpl.getHomeData();
 
       // Assert
-      expect(result, isA<Error<List<OccasionEntity>>>());
-      expect((result as Error<List<OccasionEntity>>).exception, isNotNull);
-    });
-  });
-
-  group("Category", () {
-    test("Success With Data", () async {
-      final fakeResponse = HomeResponseModel(
-        categories: [model.Category(id: "1", name: "test", isSuperAdmin: true)],
-      );
-      when(
-        mockHomeRemoteDataSourceContract.getHomeData(),
-      ).thenAnswer((_) async => Success<HomeResponseModel>(data: fakeResponse));
-      final result = await homeRepoImpl.getCategory();
-
-      expect(result, isA<Success<List<CategoryEntity>>>());
-      expect((result as Success<List<CategoryEntity>>).data, isNotEmpty);
-      expect((result).data?.length, 1);
-      expect((result).data?[0].id, '1');
-      expect((result).data?[0].name, 'test');
-      expect((result).data?[0].isSuperAdmin, true);
-    });
-    test("Success With  EmptyData", () async {
-      // Arrange
-      final fakeHomeResponse = HomeResponseModel(categories: []);
-
-      when(mockHomeRemoteDataSourceContract.getHomeData()).thenAnswer(
-        (_) async => Success<HomeResponseModel>(data: fakeHomeResponse),
-      );
-
-      final result = await homeRepoImpl.getCategory();
-
-      expect(result, isA<Success<List<CategoryEntity>>>());
-      expect((result as Success<List<CategoryEntity>>).data, isEmpty);
+      expect(result, isA<Error<HomeEntity>>());
+      expect((result as Error<HomeEntity>).exception, isNotNull);
 
       verify(mockHomeRemoteDataSourceContract.getHomeData()).called(1);
-    });
-
-    test("Error Case", () async {
-      // Arrange
-      when(mockHomeRemoteDataSourceContract.getHomeData()).thenAnswer(
-        (_) async => Error<HomeResponseModel>(exception: Exception()),
-      );
-
-      // Act
-      final result = await homeRepoImpl.getCategory();
-
-      // Assert
-      expect(result, isA<Error<List<CategoryEntity>>>());
-      expect((result as Error<List<CategoryEntity>>).exception, isNotNull);
     });
   });
 }

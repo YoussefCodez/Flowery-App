@@ -196,6 +196,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get an_error_occurred => 'حدث خطأ';
 
   @override
+  String get retry => 'إعادة المحاولة';
+
+  @override
   String get search => 'بحث';
 
   @override

@@ -1,6 +1,6 @@
+import 'package:flowery/config/base_state/base_state.dart';
 import 'package:flowery/config/l10n/translations/app_localizations.dart';
 import 'package:flowery/featuers/home/presentation/view_model/home_cubit.dart';
-import 'package:flowery/featuers/home/presentation/view_model/home_event.dart';
 import 'package:flowery/featuers/home/presentation/view_model/state_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +14,6 @@ import '../widget/categories_custom_widget.dart';
 import '../widget/header_custom_widget.dart';
 import '../widget/location_custom_widget.dart';
 import '../widget/occasion_custom_widget.dart';
-import '../widget/product_card_shimmer.dart';
 import '../widget/product_custom_widget.dart';
 
 class HomeView extends StatelessWidget {
@@ -25,12 +24,44 @@ class HomeView extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
 
     return BlocProvider(
-      create: (context) => getIt<HomeViewModel>()..doEvent(GetAllDataEvent()),
+      create: (context) => getIt<HomeViewModel>()..loadHomeData(),
       child: BlocBuilder<HomeViewModel, HomeState>(
   builder: (context, state) {
-    if (state.isLoading) {
-      return const FlowerySkeleton();
+    final hasError = state.categoryState.state == StateType.error &&
+        state.bestSellerState.state == StateType.error &&
+        state.occasionState.state == StateType.error;
+
+    if (hasError) {
+      return Scaffold(
+        body: Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.error_outline,
+                  color: AppColors.primaryColor,
+                  size: 48.w,
+                ),
+                SizedBox(height: 12.h),
+                Text(
+                  l10n.an_error_occurred,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 14.sp, color: Colors.black87),
+                ),
+                SizedBox(height: 16.h),
+                TextButton(
+                  onPressed: () => context.read<HomeViewModel>().loadHomeData(),
+                  child: Text(l10n.retry),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
     }
+
     return Scaffold(
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -88,17 +119,17 @@ class HomeView extends StatelessWidget {
                 HeaderCustomWidget(title: l10n.categories, onPressed: () {},),
                 SizedBox(height: 10.h),
 
-                CategoriesCustomWidget(),
+                CategoriesCustomWidget(categoryState: state.categoryState),
                 SizedBox(height: 15.h),
 
                 HeaderCustomWidget(title: l10n.best_seller, onPressed: () {},),
                 SizedBox(height: 10.h),
-                BestSellerCustomWidget(),
+                BestSellerCustomWidget(bestSellerState: state.bestSellerState),
                 SizedBox(height: 15.h),
 
                 HeaderCustomWidget(title: l10n.occasion, onPressed: () {},),
                 SizedBox(height: 10.h),
-                OccasionCustomWidget(),
+                OccasionCustomWidget(occasionState: state.occasionState),
               ],
             ),
           ),

@@ -199,6 +199,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get an_error_occurred => 'An error occurred';
 
   @override
+  String get retry => 'Retry';
+
+  @override
   String get search => 'Search';
 
   @override

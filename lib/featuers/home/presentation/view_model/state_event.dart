@@ -3,13 +3,15 @@ import '../../domain/home_enitiy/best_seller_entity.dart';
 import '../../domain/home_enitiy/category_entity.dart';
 import '../../domain/home_enitiy/occasion_enitity.dart';
 
-class HomeState {
+import 'package:equatable/equatable.dart';
+
+class HomeState extends Equatable {
   final bool isLoading;
   final BaseState<List<CategoryEntity>> categoryState;
   final BaseState<List<BestSellerEntity>> bestSellerState;
   final BaseState<List<OccasionEntity>> occasionState;
 
-  HomeState({
+  const HomeState({
     this.isLoading = false,
     BaseState<List<CategoryEntity>>? categoryState,
     BaseState<List<BestSellerEntity>>? bestSellerState,
@@ -31,4 +33,12 @@ class HomeState {
       occasionState: occasionState ?? this.occasionState,
     );
   }
+
+  @override
+  List<Object?> get props => [
+    isLoading,
+    categoryState,
+    bestSellerState,
+    occasionState,
+  ];
 }

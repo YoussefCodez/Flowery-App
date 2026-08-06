@@ -16,5 +16,6 @@ abstract class AppColors {
   static const Color shimmerBackground = Color(0xFFF5F5F5);
   static const Color shimmerPinkBase = Color(0xFFFCE4EC);
   static const Color shimmerPinkHighlight = Color(0xFFF8BBD0);
+  static const Color categoryIconBackground = Color(0xFFFCE4EC);
 
 }

@@ -1,51 +1,59 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../config/base_state/base_state.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../view_model/home_cubit.dart';
-import '../view_model/state_event.dart';
+import '../../../../core/widgets/shimer_box.dart';
+import '../../domain/home_enitiy/category_entity.dart';
 
 class CategoriesCustomWidget extends StatelessWidget {
-  const CategoriesCustomWidget({super.key});
+  final BaseState<List<CategoryEntity>> categoryState;
+
+  const CategoriesCustomWidget({super.key, required this.categoryState});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeViewModel, HomeState>(
-      buildWhen: (previous, current) =>
-      previous.categoryState != current.categoryState,
-      builder: (context, state) {
-        return state.categoryState.when(
-          initial: () => const SizedBox(),
-          loading: () => const Center(
-            child: CircularProgressIndicator(
-              color: AppColors.primaryColor,
-            ),
+    return categoryState.when(
+      initial: () => const SizedBox(),
+      loading: () => SizedBox(
+        height: 100.h,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          itemCount: 5,
+          separatorBuilder: (_, __) => SizedBox(width: 12.w),
+          itemBuilder: (_, __) => Column(
+            children: [
+              ShimmerBox.pink(width: 64.w, height: 64.h),
+              SizedBox(height: 8.h),
+              ShimmerBox(width: 50.w, height: 12.h),
+            ],
           ),
-          error: (exception) => Center(
-            child: Text(
-              exception.toString(),
-              style: const TextStyle(color:  AppColors.primaryColor),
-            ),
-          ),
-          success: (categories) => SizedBox(
-            height: 100.h,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: categories.length,
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              itemBuilder: (context, index) {
-                final category = categories[index];
-                return _CategoryCard(
-                  image: category.image,
-                  label: category.name ?? '',
-                  categoryId: category.id,
-                );
-              },
-            ),
-          ),
-        );
-      },
+        ),
+      ),
+      error: (exception) => Center(
+        child: Text(
+          exception.toString(),
+          style: const TextStyle(color:  AppColors.primaryColor),
+        ),
+      ),
+      success: (categories) => SizedBox(
+        height: 100.h,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: categories.length,
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          itemBuilder: (context, index) {
+            final category = categories[index];
+            return _CategoryCard(
+              image: category.image,
+              label: category.name ?? '',
+              categoryId: category.id,
+            );
+          },
+        ),
+      ),
     );
   }
 }
@@ -63,9 +71,6 @@ class _CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const pinkColor = AppColors.primaryColor;
-    const pinkBg = Color(0xFFFCE4EC);
-
     return GestureDetector(
       onTap: () {
         // context.pushNamed(AppRoutes.categoryProducts, arguments: categoryId);
@@ -79,7 +84,7 @@ class _CategoryCard extends StatelessWidget {
               width: 64.w,
               height: 64.h,
               decoration: BoxDecoration(
-                color: pinkBg,
+                color: AppColors.categoryIconBackground,
                 borderRadius: BorderRadius.circular(16.r),
               ),
               child: image != null
@@ -87,15 +92,15 @@ class _CategoryCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16.r),
                 child: Padding(
                   padding:  EdgeInsets.all(15.h),
-                  child: Image.network(
-                    image!,
+                  child: CachedNetworkImage(
+                    imageUrl: image!,
                     width: 64.w,
                     height: 64.h,
                     fit: BoxFit.contain,
-                    errorBuilder: (context, error, stackTrace) =>
+                    errorWidget: (context, url, error) =>
                     const Icon(
                       Icons.category_outlined,
-                      color: pinkColor,
+                      color: AppColors.primaryColor,
                       size: 28,
                     ),
                   ),
@@ -103,7 +108,7 @@ class _CategoryCard extends StatelessWidget {
               )
                   : const Icon(
                 Icons.category_outlined,
-                color: pinkColor,
+                color: AppColors.primaryColor,
                 size: 28,
               ),
             ),

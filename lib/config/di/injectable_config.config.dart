@@ -23,12 +23,8 @@ import '../../featuers/home/data/data_source/home_remote_data_source_contract.da
 import '../../featuers/home/data/data_source/home_remote_data_source_impl.dart'
     as _i246;
 import '../../featuers/home/data/repo_impl/home_repo_impl.dart' as _i729;
-import '../../featuers/home/domain/home_use_case/best_seller_use_case.dart'
-    as _i928;
-import '../../featuers/home/domain/home_use_case/category_use_case.dart'
-    as _i788;
-import '../../featuers/home/domain/home_use_case/occasion_use_case.dart'
-    as _i218;
+import '../../featuers/home/domain/home_use_case/get_home_data_use_case.dart'
+    as _i277;
 import '../../featuers/home/domain/repo_contract/home_repo_contract.dart'
     as _i633;
 import '../../featuers/home/presentation/view_model/home_cubit.dart' as _i4;
@@ -85,21 +81,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i633.HomeRepoContract>(
       () => _i729.HomeRepoImpl(gh<_i794.HomeRemoteDataSourceContract>()),
     );
-    gh.factory<_i928.GetBestSellerUseCase>(
-      () => _i928.GetBestSellerUseCase(gh<_i633.HomeRepoContract>()),
-    );
-    gh.factory<_i788.GetCategoriesUseCase>(
-      () => _i788.GetCategoriesUseCase(gh<_i633.HomeRepoContract>()),
-    );
-    gh.factory<_i218.GetOccasionsUseCase>(
-      () => _i218.GetOccasionsUseCase(gh<_i633.HomeRepoContract>()),
+    gh.factory<_i277.GetHomeDataUseCase>(
+      () => _i277.GetHomeDataUseCase(gh<_i633.HomeRepoContract>()),
     );
     gh.factory<_i4.HomeViewModel>(
-      () => _i4.HomeViewModel(
-        gh<_i788.GetCategoriesUseCase>(),
-        gh<_i928.GetBestSellerUseCase>(),
-        gh<_i218.GetOccasionsUseCase>(),
-      ),
+      () => _i4.HomeViewModel(gh<_i277.GetHomeDataUseCase>()),
     );
     return this;
   }

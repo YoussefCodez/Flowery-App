@@ -1,45 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../config/base_state/base_state.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/widgets/product_card_shimmer.dart';
 import '../../domain/home_enitiy/occasion_enitity.dart';
-import '../view_model/home_cubit.dart';
-import '../view_model/state_event.dart';
 
 class OccasionCustomWidget extends StatelessWidget {
-  const OccasionCustomWidget({super.key});
+  final BaseState<List<OccasionEntity>> occasionState;
+
+  const OccasionCustomWidget({super.key, required this.occasionState});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeViewModel, HomeState>(
-      buildWhen: (previous, current) =>
-      previous.occasionState != current.occasionState,
-      builder: (context, state) {
-        return state.occasionState.when(
-          initial: () => const SizedBox(),
-          loading: () => const Center(
-            child: CircularProgressIndicator(color: AppColors.primaryColor),
+    return occasionState.when(
+      initial: () => const SizedBox(),
+      loading: () => SizedBox(
+        height: 220.h,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          itemCount: 3,
+          separatorBuilder: (_, __) => SizedBox(width: 16.w),
+          itemBuilder: (_, __) => SizedBox(
+            width: 160.w,
+            child: ProductCardSkeleton(),
           ),
-          error: (exception) => Center(
-            child: Text(
-              exception.toString(),
-              style: const TextStyle(color: Colors.red),
-            ),
-          ),
-          success: (occasions) => SizedBox(
-            height: 220.h,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: occasions.length,
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              itemBuilder: (context, index) {
-                final occasion = occasions[index];
-                return _OccasionCard(occasion: occasion);
-              },
-            ),
-          ),
-        );
-      },
+        ),
+      ),
+      error: (exception) => Center(
+        child: Text(
+          exception.toString(),
+          style: const TextStyle(color: Colors.red),
+        ),
+      ),
+      success: (occasions) => SizedBox(
+        height: 220.h,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: occasions.length,
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          itemBuilder: (context, index) {
+            final occasion = occasions[index];
+            return _OccasionCard(occasion: occasion);
+          },
+        ),
+      ),
     );
   }
 }

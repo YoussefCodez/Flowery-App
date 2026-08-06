@@ -1,46 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../config/base_state/base_state.dart';
 import '../../../../config/l10n/translations/app_localizations.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/widgets/product_card_shimmer.dart';
 import '../../domain/home_enitiy/best_seller_entity.dart';
-import '../view_model/home_cubit.dart';
-import '../view_model/state_event.dart';
 
 class BestSellerCustomWidget extends StatelessWidget {
-  const BestSellerCustomWidget({super.key});
+  final BaseState<List<BestSellerEntity>> bestSellerState;
+
+  const BestSellerCustomWidget({super.key, required this.bestSellerState});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeViewModel, HomeState>(
-      buildWhen: (previous, current) =>
-      previous.bestSellerState != current.bestSellerState,
-      builder: (context, state) {
-        return state.bestSellerState.when(
-          initial: () => const SizedBox(),
-          loading: () => const Center(
-            child: CircularProgressIndicator(color: AppColors.primaryColor),
+    return bestSellerState.when(
+      initial: () => const SizedBox(),
+      loading: () => SizedBox(
+        height: 220.h,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          itemCount: 3,
+          separatorBuilder: (_, __) => SizedBox(width: 16.w),
+          itemBuilder: (_, __) => SizedBox(
+            width: 160.w,
+            child: ProductCardSkeleton(),
           ),
-          error: (exception) => Center(
-            child: Text(
-              exception.toString(),
-              style: const TextStyle(color: AppColors.redColor),
-            ),
-          ),
-          success: (products) => SizedBox(
-            height: 220.h,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: products.length,
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              itemBuilder: (context, index) {
-                final product = products[index];
-                return _BestSellerCard(product: product);
-              },
-            ),
-          ),
-        );
-      },
+        ),
+      ),
+      error: (exception) => Center(
+        child: Text(
+          exception.toString(),
+          style: const TextStyle(color: AppColors.redColor),
+        ),
+      ),
+      success: (products) => SizedBox(
+        height: 220.h,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: products.length,
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          itemBuilder: (context, index) {
+            final product = products[index];
+            return _BestSellerCard(product: product);
+          },
+        ),
+      ),
     );
   }
 }
