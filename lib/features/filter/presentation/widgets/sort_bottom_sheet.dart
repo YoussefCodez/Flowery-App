@@ -6,7 +6,6 @@ import 'package:flowery/features/filter/presentation/view_model/state/filter_bas
 import 'package:flowery/features/filter/presentation/widgets/sort_tiles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 enum SortOption {
   lowestPrice(FilterValues.lowest),
@@ -34,7 +33,7 @@ class SortBottomSheet extends StatefulWidget {
       builder: (_) {
         return MultiBlocProvider(
           providers: [
-            BlocProvider.value(value: context.read<CategoriesCubit>()),
+           // BlocProvider.value(value: context.read<CategoriesCubit>()),
             BlocProvider.value(value: context.read<FilterViewModel>()),
           ],
           child: SortBottomSheet(),
@@ -144,38 +143,38 @@ class _SortBottomSheetState extends State<SortBottomSheet> {
 
             const SizedBox(height: 20),
 
-            SizedBox(
-              width: double.infinity,
-              height: 55.h,
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  final selectedCategory = context
-                      .read<CategoriesCubit>()
-                      .state
-                      .selectedCategoryId;
+            // SizedBox(
+            //   width: double.infinity,
+            //   height: 55.h,
+            //   child: ElevatedButton.icon(
+            //     onPressed: () {
+            //       final selectedCategory = context
+            //           .read<CategoriesCubit>()
+            //           .state
+            //           .selectedCategoryId;
 
-                  context.read<CategoriesCubit>().doEvent(
-                    GetProductsByCategoryEvent(selectedCategory, selected),
-                  );
-                  Navigator.pop(context);
-                },
-                icon: const Icon(Icons.tune),
-                label: Text(
-                  localizations.filter,
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primaryColor,
-                  foregroundColor: AppColors.whiteColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                ),
-              ),
-            ),
+            //       context.read<CategoriesCubit>().doEvent(
+            //         GetProductsByCategoryEvent(selectedCategory, selected),
+            //       );
+            //       Navigator.pop(context);
+            //     },
+            //     icon: const Icon(Icons.tune),
+            //     label: Text(
+            //       localizations.filter,
+            //       style: TextStyle(
+            //         fontSize: 16.sp,
+            //         fontWeight: FontWeight.w600,
+            //       ),
+            //     ),
+            //     style: ElevatedButton.styleFrom(
+            //       backgroundColor: AppColors.primaryColor,
+            //       foregroundColor: AppColors.whiteColor,
+            //       shape: RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.circular(30),
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

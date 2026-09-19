@@ -150,6 +150,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get home => 'Home';
 
   @override
+  String get categories => 'Categories';
+
+  @override
+  String get cart => 'Cart';
+
+  @override
   String get profile => 'Profile';
 
   @override
@@ -211,6 +217,85 @@ class AppLocalizationsEn extends AppLocalizations {
   String get an_error_occurred => 'An error occurred';
 
   @override
+  String get language => 'Language';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get confirm_logout => 'Confirm logout!!';
+
+  @override
+  String get change_language => 'Change Language';
+
+  @override
+  String get arabic => 'Arabic';
+
+  @override
+  String get english => 'English';
+
+  @override
+  String get enterFirstName => 'Enter first Name';
+
+  @override
+  String get firstName => 'First name';
+
+  @override
+  String get enterLastName => 'Enter last name';
+
+  @override
+  String get lastName => 'LastName';
+
+  @override
+  String get enterYourEmail => 'Enter your email';
+
+  @override
+  String get enterPassword => 'Enter password';
+
+  @override
+  String get enterPhoneNumber => 'Enter phone number';
+
+  @override
+  String get phoneNumber => 'Phone number';
+
+  @override
+  String get gender => 'Gender';
+
+  @override
+  String get female => 'Female';
+
+  @override
+  String get male => 'Male';
+
+  @override
+  String get creatingAccountAgreement =>
+      'Creating an account, you agree to our';
+
+  @override
+  String get termsAndConditions => 'Terms&Conditions';
+
+  @override
+  String get egp => 'EGP';
+
+  @override
+  String get status_in_stock => 'Status:In Stock';
+
+  @override
+  String get all_prices_include_tax => 'All Prices Include Tax';
+
+  @override
+  String get bouquet => 'Bouquet';
+
+  @override
+  String get description => 'Description';
+
+  @override
+  String get bouquet_include => 'Bouquet include';
+
+  @override
+  String get add_to_cart => 'Add to Cart';
+
+  @override
   String get reset_password => 'Reset Password';
 
   @override
@@ -233,9 +318,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get success => 'Success';
 
   @override
-  String get occasion => 'Occasion';
-
-  @override
   String get best_seller => 'Best Seller';
 
   @override
@@ -243,6 +325,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get no_products => 'No Products';
+
+  @override
+  String get occasion => 'Occasion';
 
   @override
   String get lowest_price => 'Lowest Price';
@@ -263,5 +348,218 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sort_by => 'Sort by';
 
   @override
+  String get items => 'items';
+
+  @override
+  String get sub_total => 'Sub Total';
+
+  @override
+  String get delivery_fee => 'Delivery Fee';
+
+  @override
+  String get total => 'Total';
+
+  @override
+  String get checkout => 'Checkout';
+
+  @override
   String get discount => 'Discount';
+
+  @override
+  String get sub_total_after_discount => 'Subtotal After Discount';
+
+  @override
+  String get your_cart_is_empty => 'Your Cart is Empty';
+
+  @override
+  String get the_item_has_been_added => 'The item has been added Successfully';
+
+  @override
+  String get my_orders => 'My orders';
+
+  @override
+  String get saved_address => 'Saved address';
+
+  @override
+  String get notification => 'Notification';
+
+  @override
+  String get about_us => 'About us';
+
+  @override
+  String get terms_and_conditions => 'Terms & conditions';
+
+  @override
+  String get search_for_any_product_you_want =>
+      'Search For Any Product You Want';
+
+  @override
+  String get edit_profile => 'Edit profile';
+
+  @override
+  String get first_name => 'First name';
+
+  @override
+  String get last_name => 'Last name';
+
+  @override
+  String get phone => 'Phone number';
+
+  @override
+  String get change => 'Change';
+
+  @override
+  String get stars => '★★★★★★';
+
+  @override
+  String get first_name_is_required => 'First name is required';
+
+  @override
+  String get last_name_is_required => 'Last name is required';
+
+  @override
+  String get phone_is_required => 'Phone is required';
+
+  @override
+  String get enter_the_address => 'Enter The Address';
+
+  @override
+  String get address => 'Address';
+
+  @override
+  String get recipient_name => 'Recipient Name';
+
+  @override
+  String get enter_the_recipient_name => 'Enter the recipient name';
+
+  @override
+  String get enter_the_the_phone_number => 'Enter the phone number';
+
+  @override
+  String get city => 'City';
+
+  @override
+  String get area => 'Area';
+
+  @override
+  String get map => 'Map';
+
+  @override
+  String get address_saved_successfully => 'Address Address Saved Successfully';
+  
+  @override
+  // TODO: implement add_new
+  get add_new => throw UnimplementedError();
+  
+  @override
+  // TODO: implement apartment
+  get apartment => throw UnimplementedError();
+  
+  @override
+  // TODO: implement arrive_by
+  get arrive_by => throw UnimplementedError();
+  
+  @override
+  // TODO: implement arrived
+  get arrived => throw UnimplementedError();
+  
+  @override
+  // TODO: implement cash_on_delivery
+  get cash_on_delivery => throw UnimplementedError();
+  
+  @override
+  // TODO: implement credit_card
+  get credit_card => throw UnimplementedError();
+  
+  @override
+  // TODO: implement delivered
+  get delivered => throw UnimplementedError();
+  
+  @override
+  // TODO: implement delivery_address
+  get delivery_address => throw UnimplementedError();
+  
+  @override
+  // TODO: implement delivery_hero_for_today
+  get delivery_hero_for_today => throw UnimplementedError();
+  
+  @override
+  // TODO: implement delivery_time
+  get delivery_time => throw UnimplementedError();
+  
+  @override
+  // TODO: implement enter_the_name
+  get enter_the_name => throw UnimplementedError();
+  
+  @override
+  // TODO: implement enter_the_phone_number
+  get enter_the_phone_number => throw UnimplementedError();
+  
+  @override
+  // TODO: implement estimated_arrival
+  get estimated_arrival => throw UnimplementedError();
+  
+  @override
+  // TODO: implement go_to_home
+  get go_to_home => throw UnimplementedError();
+  
+  @override
+  // TODO: implement instant
+  get instant => throw UnimplementedError();
+  
+  @override
+  // TODO: implement it_is_a_gift
+  get it_is_a_gift => throw UnimplementedError();
+  
+  @override
+  // TODO: implement online_payment
+  get online_payment => throw UnimplementedError();
+  
+  @override
+  // TODO: implement order_delivered
+  get order_delivered => throw UnimplementedError();
+  
+  @override
+  // TODO: implement order_details
+  get order_details => throw UnimplementedError();
+  
+  @override
+  // TODO: implement out_for_delivery
+  get out_for_delivery => throw UnimplementedError();
+  
+  @override
+  // TODO: implement payment_method
+  get payment_method => throw UnimplementedError();
+  
+  @override
+  // TODO: implement place_order
+  get place_order => throw UnimplementedError();
+  
+  @override
+  // TODO: implement please_select_an_address
+  get please_select_an_address => throw UnimplementedError();
+  
+  @override
+  // TODO: implement preparing_your_order
+  get preparing_your_order => throw UnimplementedError();
+  
+  @override
+  // TODO: implement received_your_order
+  get received_your_order => throw UnimplementedError();
+  
+  @override
+  // TODO: implement show_map
+  get show_map => throw UnimplementedError();
+  
+  @override
+  // TODO: implement track_order
+  get track_order => throw UnimplementedError();
+  
+  @override
+  // TODO: implement your_order_has_been_placed
+  get your_order_has_been_placed => throw UnimplementedError();
+  
+  @override
+  // TODO: implement your_order_is_not_completed
+  get your_order_is_not_completed => throw UnimplementedError();
 }

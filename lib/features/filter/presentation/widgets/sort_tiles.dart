@@ -22,7 +22,7 @@ Widget sortTile({
       groupValue: selected,
       onChanged: (value) {
         context.read<FilterViewModel>().doEvent(
-          UpdateSortOptionEvent(sortOption: value!),
+          UpdateSortOptionEvent(value!),
         );
       },
       child: Text(title),

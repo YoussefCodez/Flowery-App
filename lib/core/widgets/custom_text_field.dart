@@ -11,6 +11,7 @@ class MainTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final String? Function(String?)? validator;
+  final bool? enabled;
   const MainTextField({
     super.key,
     required this.hintText,
@@ -21,11 +22,13 @@ class MainTextField extends StatelessWidget {
     this.suffixIcon,
     this.prefixIcon,
     this.validator,
+    this.enabled,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: enabled,
       validator: validator,
       keyboardType: keyboardType,
       obscureText: obscureText,
